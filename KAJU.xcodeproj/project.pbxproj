@@ -9,21 +9,23 @@
 /* Begin PBXBuildFile section */
 		FEBF1DCA2986BB4400FD4760 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEBF1DC92986BB4400FD4760 /* AppDelegate.swift */; };
 		FEBF1DCC2986BB4400FD4760 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEBF1DCB2986BB4400FD4760 /* SceneDelegate.swift */; };
-		FEBF1DCE2986BB4400FD4760 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEBF1DCD2986BB4400FD4760 /* ViewController.swift */; };
+		FEBF1DCE2986BB4400FD4760 /* EggTimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEBF1DCD2986BB4400FD4760 /* EggTimerViewController.swift */; };
 		FEBF1DD12986BB4400FD4760 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FEBF1DCF2986BB4400FD4760 /* Main.storyboard */; };
 		FEBF1DD32986BB4600FD4760 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FEBF1DD22986BB4600FD4760 /* Assets.xcassets */; };
 		FEBF1DD62986BB4600FD4760 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FEBF1DD42986BB4600FD4760 /* LaunchScreen.storyboard */; };
+		FEE2CDEB2989A4B0002DAA6F /* guitar_alarm_sound.wav in Resources */ = {isa = PBXBuildFile; fileRef = FEE2CDEA2989A4B0002DAA6F /* guitar_alarm_sound.wav */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		FEBF1DC62986BB4400FD4760 /* KAJU.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KAJU.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FEBF1DC92986BB4400FD4760 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FEBF1DCB2986BB4400FD4760 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		FEBF1DCD2986BB4400FD4760 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		FEBF1DCD2986BB4400FD4760 /* EggTimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EggTimerViewController.swift; sourceTree = "<group>"; };
 		FEBF1DD02986BB4400FD4760 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		FEBF1DD22986BB4600FD4760 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FEBF1DD52986BB4600FD4760 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FEBF1DD72986BB4600FD4760 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FEE2CDEA2989A4B0002DAA6F /* guitar_alarm_sound.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = guitar_alarm_sound.wav; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,15 +58,40 @@
 		FEBF1DC82986BB4400FD4760 /* KAJU */ = {
 			isa = PBXGroup;
 			children = (
+				FEE2CDE129892A5B002DAA6F /* Model */,
+				FEE2CDE229892A6B002DAA6F /* View */,
+				FEE2CDE329892A73002DAA6F /* Controller */,
 				FEBF1DC92986BB4400FD4760 /* AppDelegate.swift */,
 				FEBF1DCB2986BB4400FD4760 /* SceneDelegate.swift */,
-				FEBF1DCD2986BB4400FD4760 /* ViewController.swift */,
-				FEBF1DCF2986BB4400FD4760 /* Main.storyboard */,
 				FEBF1DD22986BB4600FD4760 /* Assets.xcassets */,
-				FEBF1DD42986BB4600FD4760 /* LaunchScreen.storyboard */,
 				FEBF1DD72986BB4600FD4760 /* Info.plist */,
+				FEE2CDEA2989A4B0002DAA6F /* guitar_alarm_sound.wav */,
 			);
 			path = KAJU;
+			sourceTree = "<group>";
+		};
+		FEE2CDE129892A5B002DAA6F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		FEE2CDE229892A6B002DAA6F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				FEBF1DCF2986BB4400FD4760 /* Main.storyboard */,
+				FEBF1DD42986BB4600FD4760 /* LaunchScreen.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		FEE2CDE329892A73002DAA6F /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				FEBF1DCD2986BB4400FD4760 /* EggTimerViewController.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -126,6 +153,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FEBF1DD62986BB4600FD4760 /* LaunchScreen.storyboard in Resources */,
+				FEE2CDEB2989A4B0002DAA6F /* guitar_alarm_sound.wav in Resources */,
 				FEBF1DD32986BB4600FD4760 /* Assets.xcassets in Resources */,
 				FEBF1DD12986BB4400FD4760 /* Main.storyboard in Resources */,
 			);
@@ -138,7 +166,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FEBF1DCE2986BB4400FD4760 /* ViewController.swift in Sources */,
+				FEBF1DCE2986BB4400FD4760 /* EggTimerViewController.swift in Sources */,
 				FEBF1DCA2986BB4400FD4760 /* AppDelegate.swift in Sources */,
 				FEBF1DCC2986BB4400FD4760 /* SceneDelegate.swift in Sources */,
 			);
