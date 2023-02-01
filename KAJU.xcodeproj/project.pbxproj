@@ -58,13 +58,13 @@
 		FEBF1DC82986BB4400FD4760 /* KAJU */ = {
 			isa = PBXGroup;
 			children = (
+				FEBF1DC92986BB4400FD4760 /* AppDelegate.swift */,
+				FEBF1DCB2986BB4400FD4760 /* SceneDelegate.swift */,
+				FEBF1DD72986BB4600FD4760 /* Info.plist */,
 				FEE2CDE129892A5B002DAA6F /* Model */,
 				FEE2CDE229892A6B002DAA6F /* View */,
 				FEE2CDE329892A73002DAA6F /* Controller */,
-				FEBF1DC92986BB4400FD4760 /* AppDelegate.swift */,
-				FEBF1DCB2986BB4400FD4760 /* SceneDelegate.swift */,
 				FEBF1DD22986BB4600FD4760 /* Assets.xcassets */,
-				FEBF1DD72986BB4600FD4760 /* Info.plist */,
 				FEE2CDEA2989A4B0002DAA6F /* guitar_alarm_sound.wav */,
 			);
 			path = KAJU;
