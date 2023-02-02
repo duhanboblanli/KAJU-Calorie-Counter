@@ -313,7 +313,7 @@
         <!--BMI Calculator-->
         <scene sceneID="q5R-fo-WqR">
             <objects>
-                <viewController id="H14-xW-eXP" userLabel="BMI Calculator" sceneMemberID="viewController">
+                <viewController id="H14-xW-eXP" userLabel="BMI Calculator" customClass="CalculatorViewController" customModule="KAJU" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="NDx-d5-wFs">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -348,10 +348,13 @@
                                             </label>
                                         </subviews>
                                     </stackView>
-                                    <slider opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="50" minValue="0.0" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="FI5-E8-tY9" userLabel="Age Horizontal Slider">
+                                    <slider opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="51" minValue="2" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="FI5-E8-tY9" userLabel="Age Horizontal Slider">
                                         <rect key="frame" x="-2" y="152.33333333333331" width="365" height="70"/>
                                         <color key="minimumTrackTintColor" red="0.4549019608" green="0.44705882349999998" blue="0.82352941180000006" alpha="0.51797945209999996" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                         <color key="thumbTintColor" red="0.4549019608" green="0.44705882349999998" blue="0.82352941180000006" alpha="0.49510380990000002" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <connections>
+                                            <action selector="ageSliderChanged:" destination="H14-xW-eXP" eventType="valueChanged" id="oWB-4d-RYR"/>
+                                        </connections>
                                     </slider>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="WFh-Ag-dIb" userLabel="Height Stack View">
                                         <rect key="frame" x="0.0" y="228.33333333333334" width="361" height="69.333333333333343"/>
@@ -370,10 +373,13 @@
                                             </label>
                                         </subviews>
                                     </stackView>
-                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1.5" minValue="0.0" maxValue="3" translatesAutoresizingMaskIntoConstraints="NO" id="FeE-aY-IAj" userLabel="Height Horizontal Slider">
+                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1.5" minValue="0.5" maxValue="2.5" translatesAutoresizingMaskIntoConstraints="NO" id="FeE-aY-IAj" userLabel="Height Horizontal Slider">
                                         <rect key="frame" x="-2" y="304.66666666666669" width="365" height="70"/>
                                         <color key="minimumTrackTintColor" red="0.4549019608" green="0.44705882349999998" blue="0.82352941180000006" alpha="0.51797945209999996" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                         <color key="thumbTintColor" red="0.4549019608" green="0.44705882349999998" blue="0.82352941180000006" alpha="0.49510380990000002" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <connections>
+                                            <action selector="hightSliderChanged:" destination="H14-xW-eXP" eventType="valueChanged" id="U0G-cK-hEd"/>
+                                        </connections>
                                     </slider>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="Elz-cp-MBg" userLabel="Weight Stack View">
                                         <rect key="frame" x="0.0" y="380.66666666666663" width="361" height="69"/>
@@ -392,10 +398,13 @@
                                             </label>
                                         </subviews>
                                     </stackView>
-                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="100" minValue="0.0" maxValue="200" translatesAutoresizingMaskIntoConstraints="NO" id="VB2-eK-jlt" userLabel="Weight Horizontal Slider">
+                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="101.5" minValue="3" maxValue="200" translatesAutoresizingMaskIntoConstraints="NO" id="VB2-eK-jlt" userLabel="Weight Horizontal Slider">
                                         <rect key="frame" x="-2" y="456.66666666666663" width="365" height="70.333333333333371"/>
                                         <color key="minimumTrackTintColor" red="0.4549019608" green="0.44705882349999998" blue="0.82352941180000006" alpha="0.49890303940000003" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                         <color key="thumbTintColor" red="0.4549019608" green="0.44705882349999998" blue="0.82352941180000006" alpha="0.50481592470000003" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <connections>
+                                            <action selector="weightSliderChanged:" destination="H14-xW-eXP" eventType="valueChanged" id="bDS-a5-T2g"/>
+                                        </connections>
                                     </slider>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xCF-wR-6Hz">
                                         <rect key="frame" x="0.0" y="533" width="361" height="69"/>
@@ -411,7 +420,8 @@
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="clipsToBounds" value="YES"/>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <segue destination="i4B-2v-mWv" kind="show" id="BOF-up-dda"/>
+                                            <action selector="calculatePressed:" destination="H14-xW-eXP" eventType="touchUpInside" id="fYh-aQ-j2a"/>
+                                            <segue destination="i4B-2v-mWv" kind="show" identifier="goToResult" id="BOF-up-dda"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -431,6 +441,14 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="BMI Calculator" id="F2h-qy-j6p"/>
+                    <connections>
+                        <outlet property="ageLabel" destination="Max-Vq-Jzn" id="2ss-vs-IUb"/>
+                        <outlet property="ageSlider" destination="FI5-E8-tY9" id="5As-4r-uYt"/>
+                        <outlet property="heightLabel" destination="6gs-Qi-L12" id="1Yv-jJ-YHo"/>
+                        <outlet property="heightSlider" destination="FeE-aY-IAj" id="k7m-Rf-wqF"/>
+                        <outlet property="weightLabel" destination="JAv-0G-KeR" id="Cix-3T-oz1"/>
+                        <outlet property="weightSlider" destination="VB2-eK-jlt" id="B3v-SE-H7F"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bHu-3a-sqe" sceneMemberID="firstResponder"/>
             </objects>
@@ -439,7 +457,7 @@
         <!--Calculator Result-->
         <scene sceneID="ltI-wM-mHD">
             <objects>
-                <viewController id="i4B-2v-mWv" userLabel="Calculator Result" sceneMemberID="viewController">
+                <viewController id="i4B-2v-mWv" userLabel="Calculator Result" customClass="CalculatorResultViewController" customModule="KAJU" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="apO-LH-ScN">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -466,9 +484,12 @@
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="clipsToBounds" value="YES"/>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="recalculatePressed:" destination="i4B-2v-mWv" eventType="touchUpInside" id="376-NP-VDw"/>
+                                </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Azg-PC-LW1">
-                                <rect key="frame" x="78" y="277" width="236" height="177.66666666666663"/>
+                                <rect key="frame" x="78.666666666666686" y="277" width="236" height="177.66666666666663"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="YOUR RESULT" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8wL-v6-V2L">
                                         <rect key="frame" x="0.0" y="0.0" width="236" height="42"/>
@@ -510,6 +531,10 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="LyQ-VR-t1E"/>
+                    <connections>
+                        <outlet property="adviceLabel" destination="MZW-5F-mal" id="Wma-8G-IHY"/>
+                        <outlet property="bmiLabel" destination="fRe-n5-i5s" id="aak-kg-jHo"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oNi-NT-RVc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
