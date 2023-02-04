@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2D4B42CA298D4583003F819D /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D4B42C9298D4583003F819D /* MainViewController.swift */; };
 		FE59984E298B0EDF002CB4DF /* CalculatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE59984D298B0EDF002CB4DF /* CalculatorViewController.swift */; };
 		FE599850298B1C55002CB4DF /* CalculatorResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE59984F298B1C55002CB4DF /* CalculatorResultViewController.swift */; };
 		FE5E92A9298C3E0B00947F7A /* CalculatorBrain.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5E92A8298C3E0B00947F7A /* CalculatorBrain.swift */; };
@@ -21,6 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2D4B42C9298D4583003F819D /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		FE59984D298B0EDF002CB4DF /* CalculatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorViewController.swift; sourceTree = "<group>"; };
 		FE59984F298B1C55002CB4DF /* CalculatorResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorResultViewController.swift; sourceTree = "<group>"; };
 		FE5E92A8298C3E0B00947F7A /* CalculatorBrain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorBrain.swift; sourceTree = "<group>"; };
@@ -102,6 +104,7 @@
 				FEBF1DCD2986BB4400FD4760 /* EggTimerViewController.swift */,
 				FE59984D298B0EDF002CB4DF /* CalculatorViewController.swift */,
 				FE59984F298B1C55002CB4DF /* CalculatorResultViewController.swift */,
+				2D4B42C9298D4583003F819D /* MainViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -178,7 +181,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FE5E92A9298C3E0B00947F7A /* CalculatorBrain.swift in Sources */,
 				FEBF1DCE2986BB4400FD4760 /* EggTimerViewController.swift in Sources */,
 				FE599850298B1C55002CB4DF /* CalculatorResultViewController.swift in Sources */,
 				FE5E92AB298D1C5400947F7A /* BMI.swift in Sources */,
@@ -331,6 +333,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = DCNVW927UZ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = KAJU/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -338,6 +341,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.7;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -358,6 +362,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = DCNVW927UZ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = KAJU/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -365,6 +370,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.7;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
