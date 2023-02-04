@@ -19,7 +19,7 @@ class EggTimerViewController: UIViewController {
     var player: AVAudioPlayer!
     
     //Rafadan,kayısı,katı yumurta haşlama süreleri: 150, 240, 360 saniye
-    let eggTimes = ["Soft": 3, "Medium": 240, "Hard": 360]
+    let eggTimes = ["Soft": 3, "Medium": 4, "Hard": 6]
     
     var secondsRemaining = 0
     var progressPercantage: Float = 0

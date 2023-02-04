@@ -9,6 +9,8 @@ import UIKit
 
 class CalculatorViewController: UIViewController {
     
+    var calculatorBrain = CalculatorBrain()
+    
     @IBOutlet weak var ageLabel: UILabel!
     @IBOutlet weak var heightLabel: UILabel!
     @IBOutlet weak var weightLabel: UILabel!
@@ -16,8 +18,6 @@ class CalculatorViewController: UIViewController {
     @IBOutlet weak var ageSlider: UISlider!
     @IBOutlet weak var heightSlider: UISlider!
     @IBOutlet weak var weightSlider: UISlider!
-    
-    var bmiString: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,12 +39,8 @@ class CalculatorViewController: UIViewController {
         let height = heightSlider.value
         let weight = weightSlider.value
         
-        let bmi = weight / pow(height,2)
-        bmiString = String(format: "%.1f", bmi)
+        calculatorBrain.calculateBMI(height,weight)
         
-        //Storyboard buttondan zaten bağlantılı
-        //self.performSegue(withIdentifier: "goToResult", sender: self)
-  
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?){
@@ -52,7 +48,9 @@ class CalculatorViewController: UIViewController {
         if segue.identifier == "goToResult" {
             // CalculatorResultVC field ve fonksiyonlara erişmek için downcasting
             let destinationVC = segue.destination as! CalculatorResultViewController
-            destinationVC.bmiValue = bmiString
+            destinationVC.bmiValue = calculatorBrain.getBMIValue()
+            destinationVC.advice = calculatorBrain.getAdvice()
+            destinationVC.color = calculatorBrain.getColor()
         }
         
     }
