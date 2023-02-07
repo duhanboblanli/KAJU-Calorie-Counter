@@ -1,23 +1,24 @@
 //
-//  LogInViewController.swift
+//  RegisterViewController.swift
 //  KAJU
 //
-//  Created by Duhan Boblanlı on 7.02.2023.
+//  Created by Duhan Boblanlı on 8.02.2023.
 //
 
 import UIKit
 
 
-class LogInViewController: UIViewController {
+class RegisterViewController: UIViewController {
     
     
-    @IBOutlet weak var logInButton: UIButton!
+    
+    @IBOutlet weak var signUpButton: UIButton!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupButtonStyle(button: logInButton, cornerRadius: 0.096)
+        setupButtonStyle(button: signUpButton, cornerRadius: 0.096)
        
     }
     
@@ -29,3 +30,4 @@ class LogInViewController: UIViewController {
     }
     
 }
+

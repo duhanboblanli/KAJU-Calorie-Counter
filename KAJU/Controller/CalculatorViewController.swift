@@ -11,6 +11,8 @@ class CalculatorViewController: UIViewController {
     
     var calculatorBrain = CalculatorBrain()
     
+    @IBOutlet weak var calculateButton: UIButton!
+    
     @IBOutlet weak var ageLabel: UILabel!
     @IBOutlet weak var heightLabel: UILabel!
     @IBOutlet weak var weightLabel: UILabel!
@@ -21,6 +23,8 @@ class CalculatorViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        setupButtonStyle(button: calculateButton, cornerRadius: 0.096)
     }
     
     // Text Label updates
@@ -53,10 +57,15 @@ class CalculatorViewController: UIViewController {
             destinationVC.color = calculatorBrain.getColor()
         }
         
+        
+        
     }
-    
-    
-    
+
+    //Kenarlardan 10,height 72 constraintsli buttonlar için ideal cornerRadius 0.096
+    func setupButtonStyle(button : UIButton,cornerRadius: Float){
+        button.layer.cornerRadius = CGFloat(cornerRadius) * button.bounds.size.width
+        button.clipsToBounds = true
+    }
     
     
     
