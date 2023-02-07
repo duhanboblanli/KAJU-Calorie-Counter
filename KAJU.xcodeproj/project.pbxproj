@@ -9,7 +9,8 @@
 /* Begin PBXBuildFile section */
 		FE08EA90298F06EC008BDC6A /* CalculatorBrain.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE08EA8F298F06EC008BDC6A /* CalculatorBrain.swift */; };
 		FE08EA92298F0798008BDC6A /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE08EA91298F0798008BDC6A /* MainViewController.swift */; };
-		FE08EA96298F0F5F008BDC6A /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE08EA95298F0F5F008BDC6A /* WelcomeViewController.swift */; };
+		FE1432662991E131000F762D /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1432652991E131000F762D /* LogInViewController.swift */; };
+		FE32926D2991AF740075A5B8 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE32926C2991AF740075A5B8 /* WelcomeViewController.swift */; };
 		FE59984E298B0EDF002CB4DF /* CalculatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE59984D298B0EDF002CB4DF /* CalculatorViewController.swift */; };
 		FE599850298B1C55002CB4DF /* CalculatorResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE59984F298B1C55002CB4DF /* CalculatorResultViewController.swift */; };
 		FE5E92AB298D1C5400947F7A /* BMI.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5E92AA298D1C5400947F7A /* BMI.swift */; };
@@ -25,7 +26,8 @@
 /* Begin PBXFileReference section */
 		FE08EA8F298F06EC008BDC6A /* CalculatorBrain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorBrain.swift; sourceTree = "<group>"; };
 		FE08EA91298F0798008BDC6A /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
-		FE08EA95298F0F5F008BDC6A /* WelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
+		FE1432652991E131000F762D /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
+		FE32926C2991AF740075A5B8 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		FE59984D298B0EDF002CB4DF /* CalculatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorViewController.swift; sourceTree = "<group>"; };
 		FE59984F298B1C55002CB4DF /* CalculatorResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorResultViewController.swift; sourceTree = "<group>"; };
 		FE5E92AA298D1C5400947F7A /* BMI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BMI.swift; sourceTree = "<group>"; };
@@ -105,9 +107,10 @@
 			children = (
 				FEBF1DCD2986BB4400FD4760 /* EggTimerViewController.swift */,
 				FE59984D298B0EDF002CB4DF /* CalculatorViewController.swift */,
-				FE08EA95298F0F5F008BDC6A /* WelcomeViewController.swift */,
 				FE59984F298B1C55002CB4DF /* CalculatorResultViewController.swift */,
 				FE08EA91298F0798008BDC6A /* MainViewController.swift */,
+				FE32926C2991AF740075A5B8 /* WelcomeViewController.swift */,
+				FE1432652991E131000F762D /* LogInViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -184,7 +187,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FE08EA96298F0F5F008BDC6A /* WelcomeViewController.swift in Sources */,
+				FE32926D2991AF740075A5B8 /* WelcomeViewController.swift in Sources */,
 				FE08EA90298F06EC008BDC6A /* CalculatorBrain.swift in Sources */,
 				FEBF1DCE2986BB4400FD4760 /* EggTimerViewController.swift in Sources */,
 				FE599850298B1C55002CB4DF /* CalculatorResultViewController.swift in Sources */,
@@ -192,6 +195,7 @@
 				FEBF1DCA2986BB4400FD4760 /* AppDelegate.swift in Sources */,
 				FE59984E298B0EDF002CB4DF /* CalculatorViewController.swift in Sources */,
 				FEBF1DCC2986BB4400FD4760 /* SceneDelegate.swift in Sources */,
+				FE1432662991E131000F762D /* LogInViewController.swift in Sources */,
 				FE08EA92298F0798008BDC6A /* MainViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -345,8 +349,8 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleDarkContent;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.7;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -374,8 +378,8 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleDarkContent;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.7;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
