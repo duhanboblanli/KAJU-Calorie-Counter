@@ -6,10 +6,14 @@
 //
 
 import UIKit
+import CLTypingLabel
 
 
 class WelcomeViewController: UIViewController {
 
+    
+    @IBOutlet weak var titleLabel: CLTypingLabel!
+    @IBOutlet weak var infoLabel: CLTypingLabel!
     @IBOutlet weak var getStartedButton: UIButton!
     @IBOutlet weak var logInButton: UIButton!
     
@@ -18,6 +22,9 @@ class WelcomeViewController: UIViewController {
         
         setupButtonStyle(button: getStartedButton, cornerRadius: 0.096)
         setupButtonStyle(button: logInButton, cornerRadius: 0.09)
+        
+        infoLabel.text = "Lose weight, build muscle or simply get healthy. We'll help you every step of the way."
+                
     }
     
     

@@ -10,16 +10,17 @@ import UIKit
 
 class RegisterViewController: UIViewController {
     
-    
-    
     @IBOutlet weak var signUpButton: UIButton!
-    
+    @IBOutlet weak var emailTextField: UITextField!
+    @IBOutlet weak var passwordTextField: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setupButtonStyle(button: signUpButton, cornerRadius: 0.096)
-       
+    }
+    
+    
+    @IBAction func signUpPressed(_ sender: UIButton) {
     }
     
     
