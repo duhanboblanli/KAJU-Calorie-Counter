@@ -23,7 +23,6 @@ class CalculatorViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setupButtonStyle(button: calculateButton, cornerRadius: 0.096)
     }
     
