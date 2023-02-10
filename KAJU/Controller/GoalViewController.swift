@@ -10,7 +10,8 @@ import UIKit
 class GoalViewController: UIViewController {
     
     var changeCalorieAmount = 0
-    
+    var ColorDarkGreen = UIColor( red: 47/255, green: 136/255, blue: 134/255, alpha: 1)
+
     @IBOutlet weak var goalNextButton: UIButton!
     @IBOutlet weak var loseWeightButton: UIButton!
     @IBOutlet weak var protectWeightButton: UIButton!
@@ -19,6 +20,8 @@ class GoalViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupButtonStyle(button: goalNextButton, cornerRadius: 0.096)
+        goalNextButton.isEnabled = false
+        goalNextButton.isHighlighted = true
         //Height 82, soft kare görünüm
         setupButtonStyle(button: loseWeightButton, cornerRadius: 0.04)
         setupButtonStyle(button: protectWeightButton, cornerRadius: 0.04)
@@ -33,16 +36,25 @@ class GoalViewController: UIViewController {
         changeCalorieAmount = -400
         protectWeightButton.isSelected = false
         gainMuscleButton.isSelected = false
+        goalNextButton.isEnabled = true
+        goalNextButton.isHighlighted = false
+        goalNextButton.backgroundColor = ColorDarkGreen
     }
     @IBAction func protectWeightPressed(_ sender: UIButton) {
         changeCalorieAmount = 0
         loseWeightButton.isSelected = false
         gainMuscleButton.isSelected = false
+        goalNextButton.isEnabled = true
+        goalNextButton.isHighlighted = false
+        goalNextButton.backgroundColor = ColorDarkGreen
     }
     @IBAction func gainMusclePressed(_ sender: UIButton) {
         changeCalorieAmount = 400
         protectWeightButton.isSelected = false
         loseWeightButton.isSelected = false
+        goalNextButton.isEnabled = true
+        goalNextButton.isHighlighted = false
+        goalNextButton.backgroundColor = ColorDarkGreen
     }
     
     //Kenarlardan 10,height 72 constraintsli buttonlar için ideal cornerRadius 0.096

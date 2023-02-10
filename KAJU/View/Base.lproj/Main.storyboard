@@ -300,7 +300,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="9" translatesAutoresizingMaskIntoConstraints="NO" id="t52-fq-oX4">
-                                <rect key="frame" x="16" y="72" width="361" height="863.33333333333337"/>
+                                <rect key="frame" x="16" y="72" width="361" height="716"/>
                                 <subviews>
                                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="yzE-eL-pR2">
                                         <rect key="frame" x="0.0" y="0.0" width="361" height="61"/>
@@ -377,16 +377,16 @@
                                         </connections>
                                     </slider>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="Elz-cp-MBg" userLabel="Weight Stack View">
-                                        <rect key="frame" x="0.0" y="393" width="361" height="312.33333333333326"/>
+                                        <rect key="frame" x="0.0" y="393" width="361" height="72"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Weight" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QRR-EA-rdj" userLabel="WeightLabel">
-                                                <rect key="frame" x="0.0" y="0.0" width="53" height="312.33333333333331"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="53" height="72"/>
                                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="100Kg" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JAv-0G-KeR" userLabel="WeightValueLabel">
-                                                <rect key="frame" x="313.66666666666669" y="0.0" width="47.333333333333314" height="312.33333333333331"/>
+                                                <rect key="frame" x="313.66666666666669" y="0.0" width="47.333333333333314" height="72"/>
                                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -397,7 +397,7 @@
                                         </constraints>
                                     </stackView>
                                     <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="101.5" minValue="3" maxValue="200" translatesAutoresizingMaskIntoConstraints="NO" id="VB2-eK-jlt" userLabel="Weight Horizontal Slider">
-                                        <rect key="frame" x="-2" y="714.33333333333337" width="365" height="73"/>
+                                        <rect key="frame" x="-2" y="474" width="365" height="166"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="72" id="w2n-qx-Bpz"/>
                                         </constraints>
@@ -408,7 +408,7 @@
                                         </connections>
                                     </slider>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xCF-wR-6Hz">
-                                        <rect key="frame" x="0.0" y="795.33333333333337" width="361" height="68"/>
+                                        <rect key="frame" x="0.0" y="648" width="361" height="68"/>
                                         <color key="backgroundColor" red="0.1843137255" green="0.53333333329999999" blue="0.52549019610000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="68" id="Wwp-jF-kzm"/>
@@ -1300,9 +1300,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2qK-wx-NcH">
+                            <button opaque="NO" contentMode="scaleToFill" highlighted="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2qK-wx-NcH">
                                 <rect key="frame" x="10" y="746" width="373" height="72"/>
-                                <color key="backgroundColor" red="0.1843137255" green="0.53333333329999999" blue="0.52549019610000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="backgroundColor" red="0.15686274510000001" green="0.2784313725" blue="0.36078431370000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="72" id="y4x-Cv-Qfr"/>
                                 </constraints>
@@ -1310,6 +1310,9 @@
                                 <state key="normal" title="Next">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <segue destination="Nng-jU-xKj" kind="show" id="C8A-bz-3HD"/>
+                                </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="ga0-Y1-ZwE">
                                 <rect key="frame" x="24" y="332" width="345" height="306"/>
@@ -1322,23 +1325,26 @@
                                         </constraints>
                                         <color key="tintColor" red="0.51764705879999995" green="0.77647058820000003" blue="0.60784313729999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" title="Lose Weight">
+                                        <buttonConfiguration key="configuration" style="plain" title="🍏 Lose Weight">
                                             <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </buttonConfiguration>
                                         <connections>
                                             <action selector="loseWeightPressed:" destination="I9V-XP-KOK" eventType="touchUpInside" id="Kcg-sd-HwE"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" changesSelectionAsPrimaryAction="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Nxh-qc-NVq">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" changesSelectionAsPrimaryAction="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hS2-Wg-DOK">
                                         <rect key="frame" x="0.0" y="112" width="345" height="82"/>
                                         <color key="backgroundColor" red="0.15686274510000001" green="0.2784313725" blue="0.36078431370000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="82" id="8Jz-Lq-BhK"/>
+                                        </constraints>
                                         <color key="tintColor" red="0.51764705879999995" green="0.77647058820000003" blue="0.60784313729999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" title="Protect Weight">
+                                        <buttonConfiguration key="configuration" style="plain" title="🧘 Protect Weight">
                                             <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </buttonConfiguration>
                                         <connections>
-                                            <action selector="protectWeightPressed:" destination="I9V-XP-KOK" eventType="touchUpInside" id="nps-Jm-jJe"/>
+                                            <action selector="protectWeightPressed:" destination="I9V-XP-KOK" eventType="touchUpInside" id="Ro1-Cd-e6d"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" changesSelectionAsPrimaryAction="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uDJ-1k-TGd">
@@ -1346,7 +1352,7 @@
                                         <color key="backgroundColor" red="0.15686274510000001" green="0.2784313725" blue="0.36078431370000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <color key="tintColor" red="0.51764705879999995" green="0.77647058820000003" blue="0.60784313729999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" title="Gain Muscle">
+                                        <buttonConfiguration key="configuration" style="plain" title="💪 Gain Muscle">
                                             <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </buttonConfiguration>
                                         <connections>
@@ -1400,12 +1406,149 @@
                         <outlet property="gainMuscleButton" destination="uDJ-1k-TGd" id="80x-BC-s7O"/>
                         <outlet property="goalNextButton" destination="2qK-wx-NcH" id="VBH-Nr-yI6"/>
                         <outlet property="loseWeightButton" destination="KFE-M9-2VN" id="nvz-8j-tWo"/>
-                        <outlet property="protectWeightButton" destination="Nxh-qc-NVq" id="AvW-sj-2hf"/>
+                        <outlet property="protectWeightButton" destination="hS2-Wg-DOK" id="kEL-8k-F8T"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="B88-QV-i4r" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1869" y="-1414"/>
+        </scene>
+        <!--Activeness View Controller-->
+        <scene sceneID="uG8-di-3Rm">
+            <objects>
+                <viewController id="Nng-jU-xKj" customClass="ActivenessViewController" customModule="KAJU" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="gSq-Dd-Htr">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" highlighted="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v6p-mN-wEd">
+                                <rect key="frame" x="10" y="790" width="373" height="72"/>
+                                <color key="backgroundColor" red="0.15686274510000001" green="0.2784313725" blue="0.36078431370000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="72" id="Ens-Sq-BUV"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="29"/>
+                                <state key="normal" title="Next">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Knowing your daily activity level helps us calculate your calorie needs more accurately." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="ITN-So-mgm">
+                                <rect key="frame" x="24" y="181" width="345" height="43"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="43" id="Acp-nm-svW"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="How active are you?" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="HJY-bG-8vK">
+                                <rect key="frame" x="24" y="124" width="345" height="43"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="43" id="RcX-Lb-tG6"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="30"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="G92-xa-tcB">
+                                <rect key="frame" x="24" y="298" width="345" height="418"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" changesSelectionAsPrimaryAction="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Du4-98-ylc">
+                                        <rect key="frame" x="0.0" y="0.0" width="345" height="82"/>
+                                        <color key="backgroundColor" red="0.15686274510000001" green="0.2784313725" blue="0.36078431370000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="82" id="GtW-X1-9iB"/>
+                                        </constraints>
+                                        <color key="tintColor" red="0.51764705879999995" green="0.77647058820000003" blue="0.60784313729999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="🧑‍💻 Lightly active" subtitle="Mostly sitting. e.g. office worker">
+                                            <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </buttonConfiguration>
+                                        <connections>
+                                            <action selector="lightlyActivePressed:" destination="Nng-jU-xKj" eventType="touchUpInside" id="GNM-3u-YJ7"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" changesSelectionAsPrimaryAction="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iiU-L2-M7O">
+                                        <rect key="frame" x="0.0" y="112" width="345" height="82"/>
+                                        <color key="backgroundColor" red="0.15686274510000001" green="0.2784313725" blue="0.36078431370000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="82" id="xJV-5d-AKT"/>
+                                        </constraints>
+                                        <color key="tintColor" red="0.51764705879999995" green="0.77647058820000003" blue="0.60784313729999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="🧑‍🏫 Moderately active" subtitle="Mostly sitting. e.g. office worker">
+                                            <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </buttonConfiguration>
+                                        <connections>
+                                            <action selector="moderatelyActivePressed:" destination="Nng-jU-xKj" eventType="touchUpInside" id="Va5-mb-Euw"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" changesSelectionAsPrimaryAction="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QOM-IS-6nr">
+                                        <rect key="frame" x="0.0" y="224" width="345" height="82"/>
+                                        <color key="backgroundColor" red="0.15686274510000001" green="0.2784313725" blue="0.36078431370000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="82" id="SdB-wS-PnF"/>
+                                        </constraints>
+                                        <color key="tintColor" red="0.51764705879999995" green="0.77647058820000003" blue="0.60784313729999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="🧑‍💼 Active" subtitle="Mostly walking. e.g. salesperson">
+                                            <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </buttonConfiguration>
+                                        <connections>
+                                            <action selector="activePressed:" destination="Nng-jU-xKj" eventType="touchUpInside" id="CtV-7m-l3Y"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" changesSelectionAsPrimaryAction="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oxD-H5-mQP">
+                                        <rect key="frame" x="0.0" y="336" width="345" height="82"/>
+                                        <color key="backgroundColor" red="0.15686274510000001" green="0.2784313725" blue="0.36078431370000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="82" id="gxu-u2-yhM"/>
+                                        </constraints>
+                                        <color key="tintColor" red="0.51764705879999995" green="0.77647058820000003" blue="0.60784313729999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="👷 Very active" subtitle="Physically demanding. e.g. builder">
+                                            <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </buttonConfiguration>
+                                        <connections>
+                                            <action selector="veryActivePressed:" destination="Nng-jU-xKj" eventType="touchUpInside" id="Ifb-JA-bL5"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="EB7-Wc-y7R"/>
+                        <color key="backgroundColor" red="0.1019607843" green="0.1843137255" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <constraints>
+                            <constraint firstItem="EB7-Wc-y7R" firstAttribute="trailing" secondItem="HJY-bG-8vK" secondAttribute="trailing" constant="24" id="3Tb-E5-1ND"/>
+                            <constraint firstAttribute="trailing" secondItem="ITN-So-mgm" secondAttribute="trailing" constant="24" id="48H-vB-fi9"/>
+                            <constraint firstItem="ITN-So-mgm" firstAttribute="leading" secondItem="gSq-Dd-Htr" secondAttribute="leading" constant="24" id="4fE-lS-IbS"/>
+                            <constraint firstItem="v6p-mN-wEd" firstAttribute="top" secondItem="G92-xa-tcB" secondAttribute="bottom" constant="74" id="BKw-SH-Pvt"/>
+                            <constraint firstItem="v6p-mN-wEd" firstAttribute="leading" secondItem="EB7-Wc-y7R" secondAttribute="leading" constant="10" id="CSB-iN-SNh"/>
+                            <constraint firstItem="HJY-bG-8vK" firstAttribute="top" secondItem="EB7-Wc-y7R" secondAttribute="top" constant="21" id="G2I-Ep-lwE"/>
+                            <constraint firstItem="EB7-Wc-y7R" firstAttribute="trailing" secondItem="G92-xa-tcB" secondAttribute="trailing" constant="24" id="Itn-Gl-OFJ"/>
+                            <constraint firstItem="ITN-So-mgm" firstAttribute="centerX" secondItem="gSq-Dd-Htr" secondAttribute="centerX" id="Luz-p0-WDc"/>
+                            <constraint firstItem="G92-xa-tcB" firstAttribute="top" secondItem="ITN-So-mgm" secondAttribute="bottom" constant="74" id="NfW-v0-aqT"/>
+                            <constraint firstItem="G92-xa-tcB" firstAttribute="leading" secondItem="EB7-Wc-y7R" secondAttribute="leading" constant="24" id="OQ3-Vc-xfk"/>
+                            <constraint firstItem="ITN-So-mgm" firstAttribute="centerX" secondItem="gSq-Dd-Htr" secondAttribute="centerX" id="P8A-g7-dug"/>
+                            <constraint firstItem="EB7-Wc-y7R" firstAttribute="trailing" secondItem="v6p-mN-wEd" secondAttribute="trailing" constant="10" id="Q5K-eP-e6b"/>
+                            <constraint firstItem="v6p-mN-wEd" firstAttribute="bottom" secondItem="EB7-Wc-y7R" secondAttribute="bottom" id="auN-MF-KNT"/>
+                            <constraint firstItem="HJY-bG-8vK" firstAttribute="leading" secondItem="EB7-Wc-y7R" secondAttribute="leading" constant="24" id="r6u-zU-DHG"/>
+                            <constraint firstItem="ITN-So-mgm" firstAttribute="top" secondItem="HJY-bG-8vK" secondAttribute="bottom" constant="14" id="tJS-dU-jjz"/>
+                            <constraint firstItem="G92-xa-tcB" firstAttribute="centerX" secondItem="gSq-Dd-Htr" secondAttribute="centerX" id="xgk-mH-8dy"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="KFR-K0-aTd"/>
+                    <connections>
+                        <outlet property="activeButton" destination="QOM-IS-6nr" id="Y6Y-nP-x7Z"/>
+                        <outlet property="activenessNextButton" destination="v6p-mN-wEd" id="Uon-s8-d0V"/>
+                        <outlet property="lightlyActiveButton" destination="Du4-98-ylc" id="41s-P3-xni"/>
+                        <outlet property="moderatelyActiveButton" destination="iiU-L2-M7O" id="IST-52-jEI"/>
+                        <outlet property="veryActiveButton" destination="oxD-H5-mQP" id="SUR-Lb-14P"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="IUB-Il-2rI" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1065" y="-1414"/>
         </scene>
     </scenes>
     <designables>
