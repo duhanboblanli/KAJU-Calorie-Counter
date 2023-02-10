@@ -10,6 +10,7 @@ import UIKit
 class CalculatorViewController: UIViewController {
     
     var calculatorBrain = CalculatorBrain()
+    var ColorDarkGreen = UIColor( red: 47/255, green: 136/255, blue: 134/255, alpha: 1)
     
     @IBOutlet weak var calculateButton: UIButton!
     
@@ -24,17 +25,28 @@ class CalculatorViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupButtonStyle(button: calculateButton, cornerRadius: 0.096)
+        calculateButton.isEnabled = false
+        calculateButton.isHighlighted = true
     }
     
     // Text Label updates
     @IBAction func ageSliderChanged(_ sender: UISlider) {
         ageLabel.text = String(format: "%.0f", sender.value)
+        calculateButton.backgroundColor = ColorDarkGreen
+        calculateButton.isEnabled = true
+        calculateButton.isHighlighted = false
     }
     @IBAction func hightSliderChanged(_ sender: UISlider) {
         heightLabel.text = String(format: "%.2f", sender.value) + "m"
+        calculateButton.backgroundColor = ColorDarkGreen
+        calculateButton.isEnabled = true
+        calculateButton.isHighlighted = false
     }
     @IBAction func weightSliderChanged(_ sender: UISlider) {
         weightLabel.text = String(format: "%.1f", sender.value) + "Kg"
+        calculateButton.backgroundColor = ColorDarkGreen
+        calculateButton.isEnabled = true
+        calculateButton.isHighlighted = false
     }
     
     // Calculate Button
