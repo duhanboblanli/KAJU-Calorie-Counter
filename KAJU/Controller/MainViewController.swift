@@ -61,7 +61,6 @@ class MainViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationBar.leftBarButtonItem = nil
         navigationBar.hidesBackButton = true
         
         // Test Values Before DB

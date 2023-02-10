@@ -14,7 +14,9 @@ class ActivenessViewController: UIViewController {
     //Orta düzeyde hareketli olup çok oturmuyorsanız, BMH’nızı 1.4 ile çarpın.
     //Yüksek düzeyde aktifseniz ve düzenli spor yapıyorsanız, BMH’ınızı 1.5 ile çarpın.
     
-    var bmh = 0.0
+    var changeCalorieAmount = 0
+    var calorieSublabel = ""
+    var bmh:Float = 0.0
     var ColorDarkGreen = UIColor( red: 47/255, green: 136/255, blue: 134/255, alpha: 1)
     
     @IBOutlet weak var lightlyActiveButton: UIButton!
@@ -43,6 +45,7 @@ class ActivenessViewController: UIViewController {
     
     @IBAction func lightlyActivePressed(_ sender: UIButton) {
         bmh = 1.2
+        lightlyActiveButton.isSelected = true
         moderatelyActiveButton.isSelected = false
         activeButton.isSelected = false
         veryActiveButton.isSelected = false
@@ -53,6 +56,7 @@ class ActivenessViewController: UIViewController {
     
     @IBAction func moderatelyActivePressed(_ sender: UIButton) {
         bmh = 1.3
+        moderatelyActiveButton.isSelected = true
         lightlyActiveButton.isSelected = false
         activeButton.isSelected = false
         veryActiveButton.isSelected = false
@@ -63,6 +67,7 @@ class ActivenessViewController: UIViewController {
     
     @IBAction func activePressed(_ sender: UIButton) {
         bmh = 1.4
+        activeButton.isSelected = true
         moderatelyActiveButton.isSelected = false
         lightlyActiveButton.isSelected = false
         veryActiveButton.isSelected = false
@@ -73,6 +78,7 @@ class ActivenessViewController: UIViewController {
     
     @IBAction func veryActivePressed(_ sender: Any) {
         bmh = 1.5
+        veryActiveButton.isSelected = true
         moderatelyActiveButton.isSelected = false
         activeButton.isSelected = false
         lightlyActiveButton.isSelected = false
@@ -85,6 +91,16 @@ class ActivenessViewController: UIViewController {
     func setupButtonStyle(button : UIButton,cornerRadius: Float){
         button.layer.cornerRadius = CGFloat(cornerRadius) * button.bounds.size.width
         button.clipsToBounds = true
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?){
+        
+        if segue.identifier == "goToCalculator" {
+            let destinationVC = segue.destination as! CalculatorViewController
+            destinationVC.bmh = bmh
+            destinationVC.changeCalorieAmount = changeCalorieAmount
+            destinationVC.calorieSublabel = calorieSublabel
+        }
     }
     
     

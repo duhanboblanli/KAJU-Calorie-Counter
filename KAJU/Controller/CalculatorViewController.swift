@@ -9,7 +9,12 @@ import UIKit
 
 class CalculatorViewController: UIViewController {
     
+    
+    var calorieSublabel = ""
+    var bmh:Float = 1.2
+    var changeCalorieAmount = 0
     var calculatorBrain = CalculatorBrain()
+    var sex = "Male"
     var ColorDarkGreen = UIColor( red: 47/255, green: 136/255, blue: 134/255, alpha: 1)
     
     @IBOutlet weak var calculateButton: UIButton!
@@ -22,12 +27,34 @@ class CalculatorViewController: UIViewController {
     @IBOutlet weak var heightSlider: UISlider!
     @IBOutlet weak var weightSlider: UISlider!
     
+    @IBOutlet weak var sexSegment: UISegmentedControl!
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupButtonStyle(button: calculateButton, cornerRadius: 0.096)
         calculateButton.isEnabled = false
         calculateButton.isHighlighted = true
     }
+    
+    @IBAction func sexSegmentPressed(_ sender: UISegmentedControl) {
+        
+        
+        if sender.isSelected {
+            sex = sender.titleForSegment(at:0)!
+            sender.isSelected = false
+        } else {
+            sex = sender.titleForSegment(at: 1)!
+            sender.isSelected = true
+        }
+        
+        print(sex)
+        calculateButton.backgroundColor = ColorDarkGreen
+        calculateButton.isEnabled = true
+        calculateButton.isHighlighted = false
+    }
+    
     
     // Text Label updates
     @IBAction func ageSliderChanged(_ sender: UISlider) {
@@ -51,10 +78,16 @@ class CalculatorViewController: UIViewController {
     
     // Calculate Button
     @IBAction func calculatePressed(_ sender: UIButton) {
-        let height = heightSlider.value
-        let weight = weightSlider.value
         
-        calculatorBrain.calculateBMI(height,weight)
+        var age = ageSlider.value //35.69361
+        age.round()
+        let BMIheight = heightSlider.value // 1.5628742 metre
+        var height = BMIheight * 100
+        height.round()
+        let weight = weightSlider.value //78.791916 kg
+
+        calculatorBrain.calculateBMI(BMIheight,weight)
+        calculatorBrain.calculateCalorie(sex,weight,height,age,bmh,changeCalorieAmount)
         
     }
     
@@ -66,10 +99,10 @@ class CalculatorViewController: UIViewController {
             destinationVC.bmiValue = calculatorBrain.getBMIValue()
             destinationVC.advice = calculatorBrain.getAdvice()
             destinationVC.color = calculatorBrain.getColor()
+            destinationVC.CalorieSublabelField = calorieSublabel
+            destinationVC.calorie = calculatorBrain.getCalorie()
+            
         }
-        
-        
-        
     }
 
     //Kenarlardan 10,height 72 constraintsli buttonlar için ideal cornerRadius 0.096

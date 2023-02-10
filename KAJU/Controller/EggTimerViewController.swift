@@ -11,9 +11,7 @@ import AVFoundation
 class EggTimerViewController: UIViewController {
     
     @IBOutlet weak var titleLabel: UILabel!
-    
     @IBOutlet weak var secondTitleLabel: UILabel!
-    
     @IBOutlet weak var progressBar: UIProgressView!
     
     var player: AVAudioPlayer!
