@@ -9,8 +9,9 @@ import UIKit
 
 class MainViewController: UITableViewController {
     
-    
-    @IBOutlet weak var navigationBar: UINavigationItem!
+    //Constant theme colors
+    let strokeColorDarkGreen = UIColor( red: 47/255, green: 136/255, blue: 134/255, alpha: 1).cgColor
+    let ColorLightGreen = UIColor( red: 132/255, green: 198/255, blue: 155/255, alpha: 1).cgColor
     
     let totalCalShapeLayer = CAShapeLayer ()
     let breakfastShapeLayer = CAShapeLayer()
@@ -41,8 +42,6 @@ class MainViewController: UITableViewController {
     var totalCal =  0
     var currentCal = 0
     
-    var strokeColorDarkGreen = UIColor( red: 47/255, green: 136/255, blue: 134/255, alpha: 1).cgColor
-    
     @IBOutlet weak var breakfastCalLabel: UILabel!
     @IBOutlet weak var snacksCalLabel: UILabel!
     @IBOutlet weak var dinnerCalLabel: UILabel!
@@ -61,7 +60,8 @@ class MainViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationBar.hidesBackButton = true
+        //self.navigationController?.isNavigationBarHidden = true
+        //navigationBar.hidesBackButton = true
         
         // Test Values Before DB
         totalCal = totalBreakfastCal + totalLunchCal + totalDinnerCal + totalSnacksCal
@@ -103,7 +103,7 @@ class MainViewController: UITableViewController {
         // Breakfast Track Layer..
         breakfastTrackLayer.path = circularPathBreakfast.cgPath
         breakfastTrackLayer.fillColor = UIColor.clear.cgColor
-        breakfastTrackLayer.strokeColor = strokeColorDarkGreen
+        breakfastTrackLayer.strokeColor = ColorLightGreen
         breakfastTrackLayer.lineWidth = 6
         breakfastTrackLayer.lineCap = CAShapeLayerLineCap.round
         breakfastTrackLayer.strokeEnd = 0
@@ -122,7 +122,7 @@ class MainViewController: UITableViewController {
         // Lunch Track Layer
         lunchTrackLayer.path = circularPathLunch.cgPath
         lunchTrackLayer.fillColor = UIColor.clear.cgColor
-        lunchTrackLayer.strokeColor = strokeColorDarkGreen
+        lunchTrackLayer.strokeColor = ColorLightGreen
         lunchTrackLayer.lineWidth = 6
         lunchTrackLayer.lineCap = CAShapeLayerLineCap.round
         lunchTrackLayer.strokeEnd = 0
@@ -141,7 +141,7 @@ class MainViewController: UITableViewController {
         // Dinner Track Layer
         dinnerTrackLayer.path = circularPathDinner.cgPath
         dinnerTrackLayer.fillColor = UIColor.clear.cgColor
-        dinnerTrackLayer.strokeColor = strokeColorDarkGreen
+        dinnerTrackLayer.strokeColor = ColorLightGreen
         dinnerTrackLayer.lineWidth = 6
         dinnerTrackLayer.lineCap = CAShapeLayerLineCap.round
         dinnerTrackLayer.strokeEnd = 0
@@ -160,7 +160,7 @@ class MainViewController: UITableViewController {
         // Snacks Track Layer
         snacksTrackLayer.path = circularPathSnacks.cgPath
         snacksTrackLayer.fillColor = UIColor.clear.cgColor
-        snacksTrackLayer.strokeColor = strokeColorDarkGreen
+        snacksTrackLayer.strokeColor = ColorLightGreen
         snacksTrackLayer.lineWidth = 6
         snacksTrackLayer.lineCap = CAShapeLayerLineCap.round
         snacksTrackLayer.strokeEnd = 0
@@ -179,8 +179,8 @@ class MainViewController: UITableViewController {
         // Total Calorie Track Layer
         totalCalTrackLayer.path = circularPathTotalCal.cgPath
         totalCalTrackLayer.fillColor = UIColor.clear.cgColor
-        totalCalTrackLayer.strokeColor = strokeColorDarkGreen
-        totalCalTrackLayer.lineWidth = 8
+        totalCalTrackLayer.strokeColor = ColorLightGreen
+        totalCalTrackLayer.lineWidth = 7
         totalCalTrackLayer.lineCap = CAShapeLayerLineCap.round
         totalCalTrackLayer.strokeEnd = 0
         view.layer.addSublayer(totalCalTrackLayer)

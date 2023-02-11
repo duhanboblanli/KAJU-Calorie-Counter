@@ -29,6 +29,7 @@ class EggTimerViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.isNavigationBarHidden = true
     }
 
     @IBAction func hardnessSelected(_ sender: UIButton) {
