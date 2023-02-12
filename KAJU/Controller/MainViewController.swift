@@ -36,14 +36,27 @@ class MainViewController: UITableViewController {
     var currentDinnerCal = 440
     let totalSnacksCal = 113
     var currentSnacksCal = 20
-    let totalCarbsG = 275
-    var currentCarbsG = 212
-    let totalProteinG = 110
-    var currentProteinG = 152
-    let totalFatG = 73
-    var currentFatG = 69
+    
+    // total calorie * 5/10
+    // 1g carb = 4,1kcal
+    // formula --> (total calorie * 5/10) / 4.1
+    var totalCarbsG = 0
+    var currentCarbsG = 50
+    
+    // total calorie * 2/10
+    // 1g protein = 4,1kcal
+    // formula --> (total calorie * 2/10) / 4.1
+    var totalProteinG = 0
+    var currentProteinG = 50
+    
+    // total calorie * 3/10
+    // 1g fat = 9,2kcal
+    // formula --> (total calorie * 3/10) / 9.2
+    var totalFatG = 0
+    var currentFatG = 50
+    
     var totalCal =  0
-    var currentCal = 0
+    var currentCal = 200
     
     @IBOutlet weak var breakfastCalLabel: UILabel!
     @IBOutlet weak var snacksCalLabel: UILabel!
@@ -63,21 +76,61 @@ class MainViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        loadData()
-        define()
-        action()
         //self.navigationController?.isNavigationBarHidden = true
-        //navigationBar.hidesBackButton = true   
+        //navigationBar.hidesBackButton = true
+        
+        loadData()
+        //define() --> loadData içinden çağrılacak, verilerin senkronize olması için
+        action()
+        
     }
     
-    //
+    // breakfast, dinners vs. total değerleri de burada eklenecek
+    func calculateTotalValues() {
+        let carbsCalorie = Float(totalCal) * Float(0.5)
+        totalCarbsG = Int(carbsCalorie / Float(4.1))
+        let proteinsCalorie = Float(totalCal) * Float(0.2)
+        totalProteinG = Int(proteinsCalorie / Float(4.1))
+        let fatsCalorie = Float(totalCal) * Float(0.3)
+        totalFatG = Int(fatsCalorie / Float(9.2))
+    }
+    
+    private func loadData() {
+        
+        if let currentUserEmail = Auth.auth().currentUser?.email {
+            
+            let docRef = db.collection("UserInformations").document("\(currentUserEmail)")
+            
+            docRef.getDocument { (document, error) in
+                if let document = document, document.exists {
+                    if let data = document.data() {
+                        print("Document data: \(data)")
+                        if let calorie = data["calorie"] {
+                            DispatchQueue.main.async {
+                                self.totalCal = calorie as! Int
+                                print("insideLoadData:\(self.totalCal)")
+                                self.define()
+                            }
+                        }
+                    }
+                } else {
+                    print("Document does not exist.")
+                }
+            }
+        }
+    }
+    
+    
     private func define(){
+        
         // Test Values Before DB
         //totalCal = totalBreakfastCal + totalLunchCal + totalDinnerCal + totalSnacksCal
         //currentCal = currentBreakfastCal + currentLunchCal + currentDinnerCal + currentSnacksCal
         
         // set values..
-        
+        print("insideDefine:\(totalCal)")
+        print("insideDefine:\(currentCal)")
+        calculateTotalValues()
         calorieRemaining.text = abs((totalCal - currentCal)).description
         calorieEaten.text = currentCal.description
         carbsLabel.text = currentCarbsG.description + " / " + totalCarbsG.description + " g"
@@ -208,6 +261,7 @@ class MainViewController: UITableViewController {
     @objc private func loadProgressBars() {
         
         // Load Total Calorie Bar
+        print("insideLoadProgressBar:\(totalCal)")
         var currentRate = 1-CGFloat(totalCal-currentCal)/CGFloat(totalCal)
         var startAngle = CGFloat.pi*3/4
         var progress = CGFloat.pi*3/2*CGFloat(currentRate)
@@ -286,29 +340,6 @@ class MainViewController: UITableViewController {
         fatProgressBar.setProgress(Float(currentFatG)/Float(totalFatG), animated: true)
     }
     
-    func loadData() {
-        
-        if let currentUserEmail = Auth.auth().currentUser?.email {
-            
-            let docRef = db.collection("UserInformations").document("\(currentUserEmail)")
-            
-            docRef.getDocument { (document, error) in
-                if let document = document, document.exists {
-                    let data = document.data()!
-                    print("Document data: \(data)")
-                    let calorie = data["calorie"]!
-                    self.totalCal = calorie as! Int
-                    print(self.totalCal)
-                    self.calorieRemaining.text = "\(self.totalCal)"
-                } else {
-                    print("Document does not exist")
-                }
-            }
-            
-        }
-        
-        
-    }
     
     // MARK: - Table view data source
     
