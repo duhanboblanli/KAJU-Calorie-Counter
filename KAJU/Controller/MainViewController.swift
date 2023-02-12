@@ -6,9 +6,12 @@
 //
 
 import UIKit
+import FirebaseAuth
+import FirebaseFirestore
 
 class MainViewController: UITableViewController {
     
+    let db = Firestore.firestore()
     //Constant theme colors
     let strokeColorDarkGreen = UIColor( red: 47/255, green: 136/255, blue: 134/255, alpha: 1).cgColor
     let ColorLightGreen = UIColor( red: 132/255, green: 198/255, blue: 155/255, alpha: 1).cgColor
@@ -60,14 +63,19 @@ class MainViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        loadData()
+        print(totalCal)
+        print(currentCal)
+        
         //self.navigationController?.isNavigationBarHidden = true
         //navigationBar.hidesBackButton = true
         
         // Test Values Before DB
-        totalCal = totalBreakfastCal + totalLunchCal + totalDinnerCal + totalSnacksCal
-        currentCal = currentBreakfastCal + currentLunchCal + currentDinnerCal + currentSnacksCal
+        //totalCal = totalBreakfastCal + totalLunchCal + totalDinnerCal + totalSnacksCal
+        //currentCal = currentBreakfastCal + currentLunchCal + currentDinnerCal + currentSnacksCal
         
         // set values..
+        
         calorieRemaining.text = abs((totalCal - currentCal)).description
         calorieEaten.text = currentCal.description
         carbsLabel.text = currentCarbsG.description + " / " + totalCarbsG.description + " g"
@@ -80,15 +88,15 @@ class MainViewController: UITableViewController {
         
         // circular paths for circular progress bar shape layers..
         let circularPathTotalCal = UIBezierPath(arcCenter: CGPoint(x: 196.5, y: 90), radius: 50,
-        startAngle:  CGFloat.pi*3/4 , endAngle: CGFloat.pi/4, clockwise: true)
+                                                startAngle:  CGFloat.pi*3/4 , endAngle: CGFloat.pi/4, clockwise: true)
         let circularPathBreakfast = UIBezierPath(arcCenter: CGPoint(x: 71, y: 282), radius: 25,
-        startAngle:  CGFloat.pi*3/2 , endAngle: CGFloat.pi/2*7, clockwise: true)
+                                                 startAngle:  CGFloat.pi*3/2 , endAngle: CGFloat.pi/2*7, clockwise: true)
         let circularPathLunch = UIBezierPath(arcCenter: CGPoint(x: 71, y: 367), radius: 25,
-        startAngle:  CGFloat.pi*3/2 , endAngle: CGFloat.pi/2*7, clockwise: true)
+                                             startAngle:  CGFloat.pi*3/2 , endAngle: CGFloat.pi/2*7, clockwise: true)
         let circularPathDinner = UIBezierPath(arcCenter: CGPoint(x: 71, y: 452), radius: 25,
-        startAngle:  CGFloat.pi*3/2 , endAngle: CGFloat.pi/2*7, clockwise: true)
+                                              startAngle:  CGFloat.pi*3/2 , endAngle: CGFloat.pi/2*7, clockwise: true)
         let circularPathSnacks = UIBezierPath(arcCenter: CGPoint(x: 71, y: 537), radius: 25,
-        startAngle:  CGFloat.pi*3/2 , endAngle: CGFloat.pi/2*7, clockwise: true)
+                                              startAngle:  CGFloat.pi*3/2 , endAngle: CGFloat.pi/2*7, clockwise: true)
         
         
         // BREAKFAST
@@ -118,7 +126,7 @@ class MainViewController: UITableViewController {
         lunchShapeLayer.fillColor = UIColor.clear.cgColor
         lunchShapeLayer.lineCap = CAShapeLayerLineCap.round
         view.layer.addSublayer(lunchShapeLayer)
-
+        
         // Lunch Track Layer
         lunchTrackLayer.path = circularPathLunch.cgPath
         lunchTrackLayer.fillColor = UIColor.clear.cgColor
@@ -230,7 +238,7 @@ class MainViewController: UITableViewController {
         breakfastTrackLayer.add(basicAnimation, forKey: "urSoBasic")
         
         // Load Lunch Bar
-       
+        
         if currentLunchCal >= totalLunchCal{
             currentLunchCal = totalLunchCal
         }
@@ -238,7 +246,7 @@ class MainViewController: UITableViewController {
         var addedLunchProgress = CGFloat.pi*2*CGFloat(lunchRate)
         var currentLunchProgressEndAngle = circleStartAngle + addedLunchProgress
         let currentTrackPathLunch = UIBezierPath(arcCenter: CGPoint(x: 71, y: 367), radius: 25,
-                                                     startAngle:  CGFloat.pi*3/2 , endAngle: currentLunchProgressEndAngle, clockwise: true)
+                                                 startAngle:  CGFloat.pi*3/2 , endAngle: currentLunchProgressEndAngle, clockwise: true)
         
         lunchTrackLayer.path = currentTrackPathLunch.cgPath
         lunchTrackLayer.add(basicAnimation, forKey: "urSoBasic")
@@ -251,7 +259,7 @@ class MainViewController: UITableViewController {
         var addedDinnerProgress = CGFloat.pi*2*CGFloat(dinnerRate)
         var currentDinnerProgressEndAngle = circleStartAngle + addedDinnerProgress
         let currentTrackPathDinner = UIBezierPath(arcCenter: CGPoint(x: 71, y: 452), radius: 25,
-                                                     startAngle:  CGFloat.pi*3/2 , endAngle: currentDinnerProgressEndAngle, clockwise: true)
+                                                  startAngle:  CGFloat.pi*3/2 , endAngle: currentDinnerProgressEndAngle, clockwise: true)
         
         dinnerTrackLayer.path = currentTrackPathDinner.cgPath
         dinnerTrackLayer.add(basicAnimation, forKey: "urSoBasic")
@@ -264,7 +272,7 @@ class MainViewController: UITableViewController {
         var addedSnacksProgress = CGFloat.pi*2*CGFloat(snacksRate)
         var currentSnacksProgressEndAngle = circleStartAngle + addedSnacksProgress
         let currentTrackPathSnacks = UIBezierPath(arcCenter: CGPoint(x: 71, y: 537), radius: 25,
-                                                     startAngle:  CGFloat.pi*3/2 , endAngle: currentSnacksProgressEndAngle, clockwise: true)
+                                                  startAngle:  CGFloat.pi*3/2 , endAngle: currentSnacksProgressEndAngle, clockwise: true)
         
         snacksTrackLayer.path = currentTrackPathSnacks.cgPath
         snacksTrackLayer.add(basicAnimation, forKey: "urSoBasic")
@@ -275,14 +283,38 @@ class MainViewController: UITableViewController {
         proteinProgressBar.setProgress(Float(currentProteinG)/Float(totalProteinG), animated: true)
         fatProgressBar.setProgress(Float(currentFatG)/Float(totalFatG), animated: true)
     }
-
+    
+    func loadData() {
+        
+        if let currentUserEmail = Auth.auth().currentUser?.email {
+            
+            let docRef = db.collection("UserInformations").document("\(currentUserEmail)")
+            
+            docRef.getDocument { (document, error) in
+                if let document = document, document.exists {
+                    let data = document.data()!
+                    print("Document data: \(data)")
+                    let calorie = data["calorie"]!
+                    self.totalCal = calorie as! Int
+                    print(self.totalCal)
+                    self.calorieRemaining.text = "\(self.totalCal)"
+                } else {
+                    print("Document does not exist")
+                }
+            }
+            
+        }
+        
+        
+    }
+    
     // MARK: - Table view data source
-
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 2
     }
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         if section == 0 {
@@ -293,61 +325,61 @@ class MainViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 5
     }
-
+    
     /*
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
-        return cell
-    }
-    */
-
+     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+     let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+     
+     // Configure the cell...
+     
+     return cell
+     }
+     */
+    
     /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
+     // Override to support conditional editing of the table view.
+     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+     // Return false if you do not want the specified item to be editable.
+     return true
+     }
+     */
+    
     /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }
-    }
-    */
-
+     // Override to support editing the table view.
+     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+     if editingStyle == .delete {
+     // Delete the row from the data source
+     tableView.deleteRows(at: [indexPath], with: .fade)
+     } else if editingStyle == .insert {
+     // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+     }
+     }
+     */
+    
     /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
+     // Override to support rearranging the table view.
+     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
+     
+     }
+     */
+    
     /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
+     // Override to support conditional rearranging of the table view.
+     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+     // Return false if you do not want the item to be re-orderable.
+     return true
+     }
+     */
+    
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destination.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }
 

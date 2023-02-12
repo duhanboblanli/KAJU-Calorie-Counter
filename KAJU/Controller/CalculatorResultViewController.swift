@@ -8,7 +8,10 @@
 import UIKit
 import CLTypingLabel
 
+
 class CalculatorResultViewController: UIViewController {
+    
+    
     
     var bmiValue: String?
     var advice: String?

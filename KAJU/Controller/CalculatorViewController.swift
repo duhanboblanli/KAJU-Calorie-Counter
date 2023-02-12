@@ -6,9 +6,12 @@
 //
 
 import UIKit
+import FirebaseAuth
+import FirebaseFirestore
 
 class CalculatorViewController: UIViewController {
     
+    let db = Firestore.firestore()
     
     var calorieSublabel = ""
     var bmh:Float = 1.2
@@ -85,9 +88,31 @@ class CalculatorViewController: UIViewController {
         var height = BMIheight * 100
         height.round()
         let weight = weightSlider.value //78.791916 kg
-
+        
         calculatorBrain.calculateBMI(BMIheight,weight)
         calculatorBrain.calculateCalorie(sex,weight,height,age,bmh,changeCalorieAmount)
+        
+        //Verilerin database'e kaydedilmesi işlemi --> calculatorBrainde func yaz!
+        let calorie = calculatorBrain.getCalorie()
+        let calorieFloat = Float(calorie) ?? 0.0
+        let calorieInt = Int(calorieFloat)
+        if let currentUserEmail = Auth.auth().currentUser?.email {
+             db.collection("UserInformations").document("\(currentUserEmail)").setData([
+                "UserEmail": currentUserEmail,
+                "calorie": calorieInt,
+                "sex": sex,
+                "weight": weight,
+                "height": height,
+                "age": age,
+                "bmh": bmh,
+                "changeCalorieAmount": changeCalorieAmount]) { err in
+                    if let err = err {
+                        print("Error adding document: \(err)")
+                    } else {
+                        print("Document successfully written!")
+                    }
+                }
+        }
         
     }
     
@@ -104,7 +129,7 @@ class CalculatorViewController: UIViewController {
             
         }
     }
-
+    
     //Kenarlardan 10,height 72 constraintsli buttonlar için ideal cornerRadius 0.096
     func setupButtonStyle(button : UIButton,cornerRadius: Float){
         button.layer.cornerRadius = CGFloat(cornerRadius) * button.bounds.size.width
