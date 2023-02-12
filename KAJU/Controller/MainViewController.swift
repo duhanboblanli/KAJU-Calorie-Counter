@@ -64,12 +64,14 @@ class MainViewController: UITableViewController {
         super.viewDidLoad()
         
         loadData()
-        print(totalCal)
-        print(currentCal)
-        
+        define()
+        action()
         //self.navigationController?.isNavigationBarHidden = true
-        //navigationBar.hidesBackButton = true
-        
+        //navigationBar.hidesBackButton = true   
+    }
+    
+    //
+    private func define(){
         // Test Values Before DB
         //totalCal = totalBreakfastCal + totalLunchCal + totalDinnerCal + totalSnacksCal
         //currentCal = currentBreakfastCal + currentLunchCal + currentDinnerCal + currentSnacksCal
@@ -198,8 +200,8 @@ class MainViewController: UITableViewController {
             totalCalTrackLayer.strokeColor = UIColor.orange.cgColor
             currentCal = totalCal
         }
-        
-        
+    }
+    private func action(){
         // tap gesture just for testing circular progress bars.
         view.addGestureRecognizer(UITapGestureRecognizer (target: self, action: #selector (loadProgressBars)))
     }
