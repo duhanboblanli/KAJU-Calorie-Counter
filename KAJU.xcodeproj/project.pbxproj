@@ -18,6 +18,7 @@
 		FE41A2012997ABA200892346 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE41A2002997ABA200892346 /* TabBarController.swift */; };
 		FE59984E298B0EDF002CB4DF /* CalculatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE59984D298B0EDF002CB4DF /* CalculatorViewController.swift */; };
 		FE599850298B1C55002CB4DF /* CalculatorResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE59984F298B1C55002CB4DF /* CalculatorResultViewController.swift */; };
+		FE5DEF59299ADE7900F13802 /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = FE5DEF58299ADE7900F13802 /* IQKeyboardManagerSwift */; };
 		FE5E92AB298D1C5400947F7A /* BMI.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5E92AA298D1C5400947F7A /* BMI.swift */; };
 		FE95C5502992F44900BCC4A6 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE95C54F2992F44900BCC4A6 /* RegisterViewController.swift */; };
 		FEBF1DCA2986BB4400FD4760 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEBF1DC92986BB4400FD4760 /* AppDelegate.swift */; };
@@ -62,6 +63,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				33BBF98882CBF449C942A21C /* Pods_KAJU.framework in Frameworks */,
+				FE5DEF59299ADE7900F13802 /* IQKeyboardManagerSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -172,6 +174,9 @@
 			dependencies = (
 			);
 			name = KAJU;
+			packageProductDependencies = (
+				FE5DEF58299ADE7900F13802 /* IQKeyboardManagerSwift */,
+			);
 			productName = KAJU;
 			productReference = FEBF1DC62986BB4400FD4760 /* KAJU.app */;
 			productType = "com.apple.product-type.application";
@@ -200,6 +205,9 @@
 				Base,
 			);
 			mainGroup = FEBF1DBD2986BB4400FD4760;
+			packageReferences = (
+				FE5DEF57299ADE7900F13802 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
+			);
 			productRefGroup = FEBF1DC72986BB4400FD4760 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -506,6 +514,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		FE5DEF57299ADE7900F13802 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/hackiftekhar/IQKeyboardManager";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		FE5DEF58299ADE7900F13802 /* IQKeyboardManagerSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FE5DEF57299ADE7900F13802 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;
+			productName = IQKeyboardManagerSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = FEBF1DBE2986BB4400FD4760 /* Project object */;
 }
