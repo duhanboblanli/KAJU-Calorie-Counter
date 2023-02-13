@@ -27,15 +27,21 @@ class MainViewController: UITableViewController {
     let dinnerTrackLayer = CAShapeLayer()
     let snacksTrackLayer = CAShapeLayer()
     
-    // Test Values Before DB
-    let totalBreakfastCal = 675
+    // total calorie * 3/10
+    var totalBreakfastCal = 0
     var currentBreakfastCal = 200
-    let totalLunchCal = 900
-    var currentLunchCal = 1400
-    let totalDinnerCal = 563
-    var currentDinnerCal = 440
-    let totalSnacksCal = 113
-    var currentSnacksCal = 20
+    
+    // total calorie * 4/10
+    var totalLunchCal = 0
+    var currentLunchCal = 200
+    
+    // total calorie * 25/100
+    var totalDinnerCal = 0
+    var currentDinnerCal = 200
+    
+    // total calorie * 5/100
+    var totalSnacksCal = 0
+    var currentSnacksCal = 200
     
     // total calorie * 5/10
     // 1g carb = 4,1kcal
@@ -93,6 +99,15 @@ class MainViewController: UITableViewController {
         totalProteinG = Int(proteinsCalorie / Float(4.1))
         let fatsCalorie = Float(totalCal) * Float(0.3)
         totalFatG = Int(fatsCalorie / Float(9.2))
+        // total calorie * 3/10
+        totalBreakfastCal = Int(Float(totalCal) * Float(0.3))
+        // total calorie * 4/10
+        totalLunchCal = Int(Float(totalCal) * Float(0.4))
+        // total calorie * 25/100
+        totalDinnerCal = Int(Float(totalCal) * Float(0.25))
+        // total calorie * 5/100
+        totalSnacksCal = Int(Float(totalCal) * Float(0.05))
+        
     }
     
     private func loadData() {
