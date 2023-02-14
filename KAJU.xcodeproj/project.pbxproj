@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2D850C3F299BFA6F00A525F0 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D850C3E299BFA6F00A525F0 /* Model.swift */; };
+		2D850C41299BFA8E00A525F0 /* ApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D850C40299BFA8E00A525F0 /* ApiService.swift */; };
+		2D850C43299BFAAD00A525F0 /* FoodViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D850C42299BFAAD00A525F0 /* FoodViewModel.swift */; };
 		33BBF98882CBF449C942A21C /* Pods_KAJU.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAF2C5DAE50E9AB50509E94F /* Pods_KAJU.framework */; };
 		FE08EA90298F06EC008BDC6A /* CalculatorBrain.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE08EA8F298F06EC008BDC6A /* CalculatorBrain.swift */; };
 		FE08EA92298F0798008BDC6A /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE08EA91298F0798008BDC6A /* MainViewController.swift */; };
@@ -20,7 +23,6 @@
 		FE599850298B1C55002CB4DF /* CalculatorResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE59984F298B1C55002CB4DF /* CalculatorResultViewController.swift */; };
 		FE5DEF59299ADE7900F13802 /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = FE5DEF58299ADE7900F13802 /* IQKeyboardManagerSwift */; };
 		FE5DEF5D299BC5AC00F13802 /* FoodsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5DEF5C299BC5AC00F13802 /* FoodsViewController.swift */; };
-		FE5DEF67299BD69E00F13802 /* Food.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5DEF66299BD69E00F13802 /* Food.swift */; };
 		FE5E92AB298D1C5400947F7A /* BMI.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5E92AA298D1C5400947F7A /* BMI.swift */; };
 		FE95C5502992F44900BCC4A6 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE95C54F2992F44900BCC4A6 /* RegisterViewController.swift */; };
 		FEBF1DCA2986BB4400FD4760 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEBF1DC92986BB4400FD4760 /* AppDelegate.swift */; };
@@ -34,6 +36,9 @@
 
 /* Begin PBXFileReference section */
 		19C1B6341DC89EDF1E04D0D4 /* Pods-KAJU.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KAJU.release.xcconfig"; path = "Target Support Files/Pods-KAJU/Pods-KAJU.release.xcconfig"; sourceTree = "<group>"; };
+		2D850C3E299BFA6F00A525F0 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		2D850C40299BFA8E00A525F0 /* ApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiService.swift; sourceTree = "<group>"; };
+		2D850C42299BFAAD00A525F0 /* FoodViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodViewModel.swift; sourceTree = "<group>"; };
 		86387DEFE4A93B11BD601BE5 /* Pods-KAJU.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KAJU.debug.xcconfig"; path = "Target Support Files/Pods-KAJU/Pods-KAJU.debug.xcconfig"; sourceTree = "<group>"; };
 		CAF2C5DAE50E9AB50509E94F /* Pods_KAJU.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KAJU.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FE08EA8F298F06EC008BDC6A /* CalculatorBrain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorBrain.swift; sourceTree = "<group>"; };
@@ -47,7 +52,6 @@
 		FE59984D298B0EDF002CB4DF /* CalculatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorViewController.swift; sourceTree = "<group>"; };
 		FE59984F298B1C55002CB4DF /* CalculatorResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorResultViewController.swift; sourceTree = "<group>"; };
 		FE5DEF5C299BC5AC00F13802 /* FoodsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodsViewController.swift; sourceTree = "<group>"; };
-		FE5DEF66299BD69E00F13802 /* Food.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Food.swift; sourceTree = "<group>"; };
 		FE5E92AA298D1C5400947F7A /* BMI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BMI.swift; sourceTree = "<group>"; };
 		FE95C54F2992F44900BCC4A6 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		FEBF1DC62986BB4400FD4760 /* KAJU.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KAJU.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -130,7 +134,9 @@
 			children = (
 				FE5E92AA298D1C5400947F7A /* BMI.swift */,
 				FE08EA8F298F06EC008BDC6A /* CalculatorBrain.swift */,
-				FE5DEF66299BD69E00F13802 /* Food.swift */,
+				2D850C3E299BFA6F00A525F0 /* Model.swift */,
+				2D850C40299BFA8E00A525F0 /* ApiService.swift */,
+				2D850C42299BFAAD00A525F0 /* FoodViewModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -287,17 +293,19 @@
 			files = (
 				FE32926D2991AF740075A5B8 /* WelcomeViewController.swift in Sources */,
 				FE95C5502992F44900BCC4A6 /* RegisterViewController.swift in Sources */,
+				2D850C41299BFA8E00A525F0 /* ApiService.swift in Sources */,
 				FE08EA90298F06EC008BDC6A /* CalculatorBrain.swift in Sources */,
 				FEBF1DCE2986BB4400FD4760 /* EggTimerViewController.swift in Sources */,
 				FE599850298B1C55002CB4DF /* CalculatorResultViewController.swift in Sources */,
 				FE5E92AB298D1C5400947F7A /* BMI.swift in Sources */,
 				FE5DEF5D299BC5AC00F13802 /* FoodsViewController.swift in Sources */,
+				2D850C3F299BFA6F00A525F0 /* Model.swift in Sources */,
 				FE1F72C529969C0D005FFC4B /* ActivenessViewController.swift in Sources */,
 				FEBF1DCA2986BB4400FD4760 /* AppDelegate.swift in Sources */,
 				FE59984E298B0EDF002CB4DF /* CalculatorViewController.swift in Sources */,
-				FE5DEF67299BD69E00F13802 /* Food.swift in Sources */,
 				FEBF1DCC2986BB4400FD4760 /* SceneDelegate.swift in Sources */,
 				FE0BB00C29958C320062E096 /* GoalViewController.swift in Sources */,
+				2D850C43299BFAAD00A525F0 /* FoodViewModel.swift in Sources */,
 				FE41A2012997ABA200892346 /* TabBarController.swift in Sources */,
 				FE1432662991E131000F762D /* LogInViewController.swift in Sources */,
 				FE08EA92298F0798008BDC6A /* MainViewController.swift in Sources */,
