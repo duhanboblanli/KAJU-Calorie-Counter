@@ -10,7 +10,8 @@ import UIKit
 
 class FoodViewModel{
     var apiService = ApiService()
-
+    private var targetFoods = [FoodData]() // The list of foods
+    private var targetFoods1 = [FoodStruct]() // The list of foods
     private let food_app_id = "1587e073"
     private let food_app_key = "602facc0a5347c2e83c1a5932bcb13bc"
     private var nextPageUrl: String = ""

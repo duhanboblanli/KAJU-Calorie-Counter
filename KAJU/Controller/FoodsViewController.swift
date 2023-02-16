@@ -11,9 +11,6 @@ import UIKit
 class FoodsViewController: UIViewController, UISearchBarDelegate{
     
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var refreshButton: UIButton!
-    
-   
     
     @IBOutlet weak var searchBar: UISearchBar!
     
@@ -26,7 +23,11 @@ class FoodsViewController: UIViewController, UISearchBarDelegate{
         tableView.dataSource = self
         searchBar.delegate = self
         searchBar.searchTextField.leftView?.tintColor = UIColor( red: 170/255, green: 170/255, blue: 170/255, alpha: 1)
-
+        searchBar.searchTextField.attributedPlaceholder = NSAttributedString(string: "Search For A Food", attributes: [NSAttributedString.Key.foregroundColor: UIColor( red: 170/255, green: 170/255, blue: 170/255, alpha: 1)])
+        LoadFoodsData()
+    }
+    private func LoadFoodsData() {
+        // Called at the beginning to do an API call and fill targetGames
         foodViewModel.fetchFoodData(pagination: false){ [weak self] in
             self?.tableView.dataSource = self
             self?.tableView.reloadData()
@@ -35,7 +36,7 @@ class FoodsViewController: UIViewController, UISearchBarDelegate{
 
 } // end of FoodsViewController
 
-
+//MARK: - UIScrollViewDelegate
 extension FoodsViewController: UIScrollViewDelegate{
     private func createSpinnerFooter() -> UIView {
         let footerView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.size
@@ -74,11 +75,6 @@ extension FoodsViewController: UITableViewDataSource, UITableViewDelegate {
         return foodViewModel.numberOfRowsInSection(section: section)
     }
     
-    /*  Seçilen cellin indexini verir
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-    }*/
-    
     // Belirlenen tablo cell indexinde gönderilen celli döndürür
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var cell : FoodTableViewCell // Declare the cell
@@ -91,6 +87,9 @@ extension FoodsViewController: UITableViewDataSource, UITableViewDelegate {
 
 //MARK: - UITextFieldDelegate
 extension FoodsViewController: UITextFieldDelegate {
+    
+    // Klavyeden returne bastığında klavye kapatır
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
 
         searchBar.endEditing(true)
         return true
@@ -112,7 +111,9 @@ extension FoodsViewController: UITextFieldDelegate {
     // Klavye kapandıysa ve bir şey yazıldıysa yazıyı temizler
     // Yerine placeholder koyar
     func textFieldDidEndEditing(_ textField: UITextField) {
-
+        searchBar.text = ""
+        textField.placeholder = "Search For A Food"
+        self.navigationController?.isNavigationBarHidden = false
     }
 }
 
