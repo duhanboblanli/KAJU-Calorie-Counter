@@ -24,7 +24,6 @@
 		FE5DEF59299ADE7900F13802 /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = FE5DEF58299ADE7900F13802 /* IQKeyboardManagerSwift */; };
 		FE5DEF5D299BC5AC00F13802 /* FoodsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5DEF5C299BC5AC00F13802 /* FoodsViewController.swift */; };
 		FE5DEF69299D10F300F13802 /* games.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FE5DEF68299D10F300F13802 /* games.storyboard */; };
-		FE5DEF6B299D122200F13802 /* Deneme.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5DEF6A299D122200F13802 /* Deneme.swift */; };
 		FE5DEF6D299D196C00F13802 /* RecipesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5DEF6C299D196C00F13802 /* RecipesViewController.swift */; };
 		FE5E92AB298D1C5400947F7A /* BMI.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5E92AA298D1C5400947F7A /* BMI.swift */; };
 		FE95C5502992F44900BCC4A6 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE95C54F2992F44900BCC4A6 /* RegisterViewController.swift */; };
@@ -57,7 +56,6 @@
 		FE59984F298B1C55002CB4DF /* CalculatorResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorResultViewController.swift; sourceTree = "<group>"; };
 		FE5DEF5C299BC5AC00F13802 /* FoodsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodsViewController.swift; sourceTree = "<group>"; };
 		FE5DEF68299D10F300F13802 /* games.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = games.storyboard; sourceTree = "<group>"; };
-		FE5DEF6A299D122200F13802 /* Deneme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Deneme.swift; sourceTree = "<group>"; };
 		FE5DEF6C299D196C00F13802 /* RecipesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipesViewController.swift; sourceTree = "<group>"; };
 		FE5E92AA298D1C5400947F7A /* BMI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BMI.swift; sourceTree = "<group>"; };
 		FE95C54F2992F44900BCC4A6 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
@@ -145,7 +143,6 @@
 				2D850C3E299BFA6F00A525F0 /* Model.swift */,
 				2D850C40299BFA8E00A525F0 /* ApiService.swift */,
 				2D850C42299BFAAD00A525F0 /* FoodViewModel.swift */,
-				FE5DEF6A299D122200F13802 /* Deneme.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -313,7 +310,6 @@
 				FE5E92AB298D1C5400947F7A /* BMI.swift in Sources */,
 				FE5DEF5D299BC5AC00F13802 /* FoodsViewController.swift in Sources */,
 				FE5DEF6D299D196C00F13802 /* RecipesViewController.swift in Sources */,
-				FE5DEF6B299D122200F13802 /* Deneme.swift in Sources */,
 				2D850C3F299BFA6F00A525F0 /* Model.swift in Sources */,
 				FE1F72C529969C0D005FFC4B /* ActivenessViewController.swift in Sources */,
 				FEBF1DCA2986BB4400FD4760 /* AppDelegate.swift in Sources */,

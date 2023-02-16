@@ -32,13 +32,7 @@ class RecipesViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     
-    
-    var foods: [Deneme] = [
-        Deneme(foodName: "Muz", foodCallorie: "50kcal", foodQuantity: "30g"),
-        Deneme(foodName: "Muz", foodCallorie: "50kcal", foodQuantity: "30g"),
-        Deneme(foodName: "Muz", foodCallorie: "50kcal", foodQuantity: "30g")
-    
-    ]
+
     
     override func viewDidLoad() {
         super.viewDidLoad()

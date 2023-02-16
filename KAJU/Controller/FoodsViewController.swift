@@ -15,12 +15,7 @@ class FoodsViewController: UIViewController{
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var refreshButton: UIButton!
     
-    var foods: [Deneme] = [
-        Deneme(foodName: "Muz", foodCallorie: "50kcal", foodQuantity: "30g"),
-        Deneme(foodName: "Muz", foodCallorie: "50kcal", foodQuantity: "30g"),
-        Deneme(foodName: "Muz", foodCallorie: "50kcal", foodQuantity: "30g")
-    
-    ]
+   
     
     override func viewDidLoad() {
         super.viewDidLoad()
