@@ -23,10 +23,7 @@ class FoodsViewController: UIViewController, UISearchBarDelegate{
         tableView.dataSource = self
         searchBar.delegate = self
         searchBar.searchTextField.leftView?.tintColor = UIColor( red: 170/255, green: 170/255, blue: 170/255, alpha: 1)
-        searchBar.searchTextField.attributedPlaceholder = NSAttributedString(string: "Search Foods", attributes: [NSAttributedString.Key.foregroundColor: UIColor( red: 170/255, green: 170/255, blue: 170/255, alpha: 1)])
-        LoadFoodsData()
-    }
-    private func LoadFoodsData() { // Called at the beginning to do an API call and fill targetGames
+
         foodViewModel.fetchFoodData(pagination: false){ [weak self] in
             self?.tableView.dataSource = self
             self?.tableView.reloadData()
@@ -34,6 +31,7 @@ class FoodsViewController: UIViewController, UISearchBarDelegate{
     }
 
 } // end of FoodsViewController
+
 
 extension FoodsViewController: UIScrollViewDelegate{
     private func createSpinnerFooter() -> UIView {
@@ -86,62 +84,33 @@ extension FoodsViewController: UITableViewDataSource, UITableViewDelegate {
         cell.setCellWithValuesOf(food)
         return cell
     }
-    
-    
 }
 
 //MARK: - UITextFieldDelegate
 extension FoodsViewController: UITextFieldDelegate {
-    // Search buttona bastığında klavye kapatır
-    @IBAction func searchBtn(_ sender: Any) {
-        searchBar.endEditing(true)
-        //this is line of code helps to relode tableview --> eklenecek
-    }
-    
-    // Klavyeden returne bastığında klavye kapatır
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+
         searchBar.endEditing(true)
         return true
     }
     
-    // Klavye kapandıysa yazıyı temizler
-    // Yerine placeholder koyar
+    // Klavye kapandıysa ve bir şey yazılmadıysa yerine placeholder koyar
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
         
         if textField.text != "" {
             return true
         }else{
-            textField.placeholder = "Type Something..."
-            return false
+            DispatchQueue.main.async {
+                textField.placeholder = "Type Something" }
+            return true
         }
+        
     }
     
-    // Karakter arası boşlukları düzeltir
+    // Klavye kapandıysa ve bir şey yazıldıysa yazıyı temizler
+    // Yerine placeholder koyar
     func textFieldDidEndEditing(_ textField: UITextField) {
-        
-        if let Item = searchBar.text?.trimmingCharacters(in: .whitespaces) {
-            let newText = Item.replacingOccurrences(of: " ", with: "")
-            // written this to remove spaces between
-        }
-        
-        searchBar.text = ""
+
     }
 }
 
- 
     
-
-
-
-    
-    
-    
-    
-    
-   
-    
-
-
-
-    
-

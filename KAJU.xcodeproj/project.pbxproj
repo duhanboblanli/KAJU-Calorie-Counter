@@ -22,12 +22,12 @@
 		FE41A2012997ABA200892346 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE41A2002997ABA200892346 /* TabBarController.swift */; };
 		FE59984E298B0EDF002CB4DF /* CalculatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE59984D298B0EDF002CB4DF /* CalculatorViewController.swift */; };
 		FE599850298B1C55002CB4DF /* CalculatorResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE59984F298B1C55002CB4DF /* CalculatorResultViewController.swift */; };
-		FE5DEF59299ADE7900F13802 /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = FE5DEF58299ADE7900F13802 /* IQKeyboardManagerSwift */; };
 		FE5DEF5D299BC5AC00F13802 /* FoodsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5DEF5C299BC5AC00F13802 /* FoodsViewController.swift */; };
 		FE5DEF69299D10F300F13802 /* games.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FE5DEF68299D10F300F13802 /* games.storyboard */; };
 		FE5DEF6B299D122200F13802 /* Deneme.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5DEF6A299D122200F13802 /* Deneme.swift */; };
 		FE5DEF6D299D196C00F13802 /* RecipesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5DEF6C299D196C00F13802 /* RecipesViewController.swift */; };
 		FE5E92AB298D1C5400947F7A /* BMI.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5E92AA298D1C5400947F7A /* BMI.swift */; };
+		FE95C262299EDF2200122BC1 /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = FE95C261299EDF2200122BC1 /* IQKeyboardManagerSwift */; };
 		FE95C5502992F44900BCC4A6 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE95C54F2992F44900BCC4A6 /* RegisterViewController.swift */; };
 		FEBF1DCA2986BB4400FD4760 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEBF1DC92986BB4400FD4760 /* AppDelegate.swift */; };
 		FEBF1DCC2986BB4400FD4760 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEBF1DCB2986BB4400FD4760 /* SceneDelegate.swift */; };
@@ -36,7 +36,7 @@
 		FEBF1DD32986BB4600FD4760 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FEBF1DD22986BB4600FD4760 /* Assets.xcassets */; };
 		FEBF1DD62986BB4600FD4760 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FEBF1DD42986BB4600FD4760 /* LaunchScreen.storyboard */; };
 		FEE2CDEB2989A4B0002DAA6F /* guitar_alarm_sound.wav in Resources */ = {isa = PBXBuildFile; fileRef = FEE2CDEA2989A4B0002DAA6F /* guitar_alarm_sound.wav */; };
-		FEE9E150299DAB87007FA5FB /* CellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE9E14F299DAB87007FA5FB /* CellView.swift */; };
+		FEE9E150299DAB87007FA5FB /* RecipeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE9E14F299DAB87007FA5FB /* RecipeTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -72,7 +72,7 @@
 		FEBF1DD52986BB4600FD4760 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FEBF1DD72986BB4600FD4760 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FEE2CDEA2989A4B0002DAA6F /* guitar_alarm_sound.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = guitar_alarm_sound.wav; sourceTree = "<group>"; };
-		FEE9E14F299DAB87007FA5FB /* CellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellView.swift; sourceTree = "<group>"; };
+		FEE9E14F299DAB87007FA5FB /* RecipeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,7 +81,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				33BBF98882CBF449C942A21C /* Pods_KAJU.framework in Frameworks */,
-				FE5DEF59299ADE7900F13802 /* IQKeyboardManagerSwift in Frameworks */,
+				FE95C262299EDF2200122BC1 /* IQKeyboardManagerSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -156,7 +156,8 @@
 		FEE2CDE229892A6B002DAA6F /* View */ = {
 			isa = PBXGroup;
 			children = (
-				FEE9E14F299DAB87007FA5FB /* CellView.swift */,
+				2DF9F2F7299D1B530023AB7C /* FoodTableViewCell.swift */,
+				FEE9E14F299DAB87007FA5FB /* RecipeTableViewCell.swift */,
 				FE5DEF68299D10F300F13802 /* games.storyboard */,
 				FEBF1DCF2986BB4400FD4760 /* Main.storyboard */,
 				FEBF1DD42986BB4600FD4760 /* LaunchScreen.storyboard */,
@@ -202,7 +203,7 @@
 			);
 			name = KAJU;
 			packageProductDependencies = (
-				FE5DEF58299ADE7900F13802 /* IQKeyboardManagerSwift */,
+				FE95C261299EDF2200122BC1 /* IQKeyboardManagerSwift */,
 			);
 			productName = KAJU;
 			productReference = FEBF1DC62986BB4400FD4760 /* KAJU.app */;
@@ -233,7 +234,7 @@
 			);
 			mainGroup = FEBF1DBD2986BB4400FD4760;
 			packageReferences = (
-				FE5DEF57299ADE7900F13802 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
+				FE95C260299EDF2200122BC1 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
 			);
 			productRefGroup = FEBF1DC72986BB4400FD4760 /* Products */;
 			projectDirPath = "";
@@ -328,7 +329,7 @@
 				2DF9F2F8299D1B530023AB7C /* FoodTableViewCell.swift in Sources */,
 				FE1432662991E131000F762D /* LogInViewController.swift in Sources */,
 				FE08EA92298F0798008BDC6A /* MainViewController.swift in Sources */,
-				FEE9E150299DAB87007FA5FB /* CellView.swift in Sources */,
+				FEE9E150299DAB87007FA5FB /* RecipeTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -552,7 +553,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		FE5DEF57299ADE7900F13802 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */ = {
+		FE95C260299EDF2200122BC1 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/hackiftekhar/IQKeyboardManager";
 			requirement = {
@@ -563,9 +564,9 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		FE5DEF58299ADE7900F13802 /* IQKeyboardManagerSwift */ = {
+		FE95C261299EDF2200122BC1 /* IQKeyboardManagerSwift */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = FE5DEF57299ADE7900F13802 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;
+			package = FE95C260299EDF2200122BC1 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;
 			productName = IQKeyboardManagerSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
