@@ -15,10 +15,10 @@ class FoodsViewController: UIViewController{
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var refreshButton: UIButton!
     
-    var foods: [Food] = [
-        Food(foodName: "Muz", foodCallorie: "50kcal", foodQuantity: "30g"),
-        Food(foodName: "Muz", foodCallorie: "50kcal", foodQuantity: "30g"),
-        Food(foodName: "Muz", foodCallorie: "50kcal", foodQuantity: "30g")
+    var foods: [Deneme] = [
+        Deneme(foodName: "Muz", foodCallorie: "50kcal", foodQuantity: "30g"),
+        Deneme(foodName: "Muz", foodCallorie: "50kcal", foodQuantity: "30g"),
+        Deneme(foodName: "Muz", foodCallorie: "50kcal", foodQuantity: "30g")
     
     ]
     
@@ -48,13 +48,13 @@ extension FoodsViewController: UITableViewDataSource {
     
     // Tablo görünümde kaç hücre ya da kaç satır istiyoruz burda belirtilir
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return foods.count
+        return 5
     }
     
     // Belirlenen tablo cell indexinde gönderilen celli döndürür
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ReusableCell", for: indexPath)
-        cell.textLabel?.text = foods[indexPath.row].foodName
+        //cell.textLabel?.text = foods[indexPath.row].foodName
         return cell
     }
     
@@ -100,14 +100,7 @@ extension FoodsViewController: UITextFieldDelegate {
     }
 }
 
-    // Lost connection error
-    func didFailWithError(error: Error) {
-        DispatchQueue.main.async {
-            let alertControl = UIAlertController(title:"Error", message: "Lost Connection", preferredStyle: .actionSheet)
-            alertControl.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-            
-        }
-    }
+ 
     
 
 

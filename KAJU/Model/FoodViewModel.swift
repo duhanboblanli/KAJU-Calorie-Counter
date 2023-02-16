@@ -9,7 +9,7 @@ import Foundation
 
 class FoodViewModel{
     private var apiService = ApiService()
-    private var targetFoods = [Food]() // The list of games
+    private var targetFoods = [Food]() // The list of foods
     private let food_app_id = "1587e073"
     private let food_app_key = "602facc0a5347c2e83c1a5932bcb13bc"
 
