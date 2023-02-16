@@ -10,6 +10,7 @@
 		2D850C3F299BFA6F00A525F0 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D850C3E299BFA6F00A525F0 /* Model.swift */; };
 		2D850C41299BFA8E00A525F0 /* ApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D850C40299BFA8E00A525F0 /* ApiService.swift */; };
 		2D850C43299BFAAD00A525F0 /* FoodViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D850C42299BFAAD00A525F0 /* FoodViewModel.swift */; };
+		2DF9F2F8299D1B530023AB7C /* FoodTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DF9F2F7299D1B530023AB7C /* FoodTableViewCell.swift */; };
 		33BBF98882CBF449C942A21C /* Pods_KAJU.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAF2C5DAE50E9AB50509E94F /* Pods_KAJU.framework */; };
 		FE08EA90298F06EC008BDC6A /* CalculatorBrain.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE08EA8F298F06EC008BDC6A /* CalculatorBrain.swift */; };
 		FE08EA92298F0798008BDC6A /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE08EA91298F0798008BDC6A /* MainViewController.swift */; };
@@ -43,6 +44,7 @@
 		2D850C3E299BFA6F00A525F0 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		2D850C40299BFA8E00A525F0 /* ApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiService.swift; sourceTree = "<group>"; };
 		2D850C42299BFAAD00A525F0 /* FoodViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodViewModel.swift; sourceTree = "<group>"; };
+		2DF9F2F7299D1B530023AB7C /* FoodTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodTableViewCell.swift; sourceTree = "<group>"; };
 		86387DEFE4A93B11BD601BE5 /* Pods-KAJU.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KAJU.debug.xcconfig"; path = "Target Support Files/Pods-KAJU/Pods-KAJU.debug.xcconfig"; sourceTree = "<group>"; };
 		CAF2C5DAE50E9AB50509E94F /* Pods_KAJU.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KAJU.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FE08EA8F298F06EC008BDC6A /* CalculatorBrain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorBrain.swift; sourceTree = "<group>"; };
@@ -145,6 +147,7 @@
 				2D850C3E299BFA6F00A525F0 /* Model.swift */,
 				2D850C40299BFA8E00A525F0 /* ApiService.swift */,
 				2D850C42299BFAAD00A525F0 /* FoodViewModel.swift */,
+				2DF9F2F7299D1B530023AB7C /* FoodTableViewCell.swift */,
 				FE5DEF6A299D122200F13802 /* Deneme.swift */,
 			);
 			path = Model;
@@ -322,6 +325,7 @@
 				FE0BB00C29958C320062E096 /* GoalViewController.swift in Sources */,
 				2D850C43299BFAAD00A525F0 /* FoodViewModel.swift in Sources */,
 				FE41A2012997ABA200892346 /* TabBarController.swift in Sources */,
+				2DF9F2F8299D1B530023AB7C /* FoodTableViewCell.swift in Sources */,
 				FE1432662991E131000F762D /* LogInViewController.swift in Sources */,
 				FE08EA92298F0798008BDC6A /* MainViewController.swift in Sources */,
 				FEE9E150299DAB87007FA5FB /* CellView.swift in Sources */,
@@ -472,7 +476,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = DCNVW927UZ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = KAJU/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -502,7 +506,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = DCNVW927UZ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = KAJU/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

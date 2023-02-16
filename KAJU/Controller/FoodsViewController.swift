@@ -8,53 +8,82 @@
 import UIKit
 
 
-class FoodsViewController: UIViewController{
+class FoodsViewController: UIViewController, UISearchBarDelegate{
     
-    @IBOutlet weak var SearchBar: UITextField!
-    @IBOutlet weak var searchButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var refreshButton: UIButton!
     
-    var foods: [Deneme] = [
-        Deneme(foodName: "Muz", foodCallorie: "50kcal", foodQuantity: "30g"),
-        Deneme(foodName: "Muz", foodCallorie: "50kcal", foodQuantity: "30g"),
-        Deneme(foodName: "Muz", foodCallorie: "50kcal", foodQuantity: "30g")
+    @IBOutlet weak var searchBar: UISearchBar!
     
-    ]
+    private var foodViewModel = FoodViewModel()
+    private var images: [UIImage]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
-        SearchBar.delegate = self
-        SearchBar.layer.cornerRadius = SearchBar.frame.size.height / 5
+        searchBar.delegate = self
+        searchBar.searchTextField.leftView?.tintColor = UIColor( red: 170/255, green: 170/255, blue: 170/255, alpha: 1)
+        searchBar.searchTextField.attributedPlaceholder = NSAttributedString(string: "Search Foods", attributes: [NSAttributedString.Key.foregroundColor: UIColor( red: 170/255, green: 170/255, blue: 170/255, alpha: 1)])
+        LoadFoodsData()
     }
-    
-    
-    
-    
+    private func LoadFoodsData() { // Called at the beginning to do an API call and fill targetGames
+        foodViewModel.fetchFoodData(pagination: false){ [weak self] in
+            self?.tableView.dataSource = self
+            self?.tableView.reloadData()
+        }
+    }
+
 } // end of FoodsViewController
 
-//MARK: - UITableViewDelegate
-extension FoodsViewController: UITableViewDelegate {
-    //  Seçilen cellin indexini verir
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print(indexPath.row)
+extension FoodsViewController: UIScrollViewDelegate{
+    private func createSpinnerFooter() -> UIView {
+        let footerView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.size
+            .width, height: 100))
+        let spinner = UIActivityIndicatorView()
+        spinner.center = footerView.center
+        spinner.color = UIColor( red: 170/255, green: 170/255, blue: 170/255, alpha: 1)
+        footerView.addSubview(spinner)
+        spinner.startAnimating()
+        return footerView
+    }
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let position = scrollView.contentOffset.y
+        if position > (tableView.contentSize.height-100-scrollView.frame.size.height){
+            
+            guard !foodViewModel.apiService.isPaginating else {
+                // we are already fetching more data
+                return
+            }
+            self.tableView.tableFooterView = createSpinnerFooter()
+            foodViewModel.fetchFoodData(pagination: true){ [weak self] in
+                print("load more")
+                self?.tableView.tableFooterView = nil
+                self?.tableView.dataSource = self
+                self?.tableView.reloadData()
+            }
+        }
     }
 }
 
 //MARK: - UITableViewDataSource
-extension FoodsViewController: UITableViewDataSource {
+extension FoodsViewController: UITableViewDataSource, UITableViewDelegate {
     
     // Tablo görünümde kaç hücre ya da kaç satır istiyoruz burda belirtilir
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return foodViewModel.numberOfRowsInSection(section: section)
     }
+    
+    /*  Seçilen cellin indexini verir
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+    }*/
     
     // Belirlenen tablo cell indexinde gönderilen celli döndürür
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ReusableCell", for: indexPath)
-        //cell.textLabel?.text = foods[indexPath.row].foodName
+        var cell : FoodTableViewCell // Declare the cell
+        cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! FoodTableViewCell // Initialize cell
+        let food = foodViewModel.cellForRowAt(indexPath: indexPath)
+        cell.setCellWithValuesOf(food)
         return cell
     }
     
@@ -63,16 +92,15 @@ extension FoodsViewController: UITableViewDataSource {
 
 //MARK: - UITextFieldDelegate
 extension FoodsViewController: UITextFieldDelegate {
-    
     // Search buttona bastığında klavye kapatır
     @IBAction func searchBtn(_ sender: Any) {
-        SearchBar.endEditing(true)
+        searchBar.endEditing(true)
         //this is line of code helps to relode tableview --> eklenecek
     }
     
     // Klavyeden returne bastığında klavye kapatır
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        SearchBar.endEditing(true)
+        searchBar.endEditing(true)
         return true
     }
     
@@ -91,12 +119,12 @@ extension FoodsViewController: UITextFieldDelegate {
     // Karakter arası boşlukları düzeltir
     func textFieldDidEndEditing(_ textField: UITextField) {
         
-        if let Item = SearchBar.text?.trimmingCharacters(in: .whitespaces) {
+        if let Item = searchBar.text?.trimmingCharacters(in: .whitespaces) {
             let newText = Item.replacingOccurrences(of: " ", with: "")
             // written this to remove spaces between
         }
         
-        SearchBar.text = ""
+        searchBar.text = ""
     }
 }
 
