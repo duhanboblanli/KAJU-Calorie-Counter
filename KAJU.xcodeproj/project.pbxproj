@@ -147,6 +147,7 @@
 				2D850C3E299BFA6F00A525F0 /* Model.swift */,
 				2D850C40299BFA8E00A525F0 /* ApiService.swift */,
 				2D850C42299BFAAD00A525F0 /* FoodViewModel.swift */,
+				2DF9F2F7299D1B530023AB7C /* FoodTableViewCell.swift */,
 				FE5DEF6A299D122200F13802 /* Deneme.swift */,
 			);
 			path = Model;
