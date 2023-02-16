@@ -78,7 +78,10 @@ class MainViewController: UITableViewController {
     @IBOutlet weak var remainingTitle: UILabel!
     @IBOutlet weak var calorieEaten: UILabel!
     @IBOutlet weak var calorieRemaining: UILabel!
-    
+    @IBOutlet weak var addSnacksButton: UIButton!
+    @IBOutlet weak var addDinnerButton: UIButton!
+    @IBOutlet weak var addLunchButton: UIButton!
+    @IBOutlet weak var addBreakfastButton: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -137,6 +140,8 @@ class MainViewController: UITableViewController {
     
     
     private func define(){
+        
+        //addBreakfastButton.addTarget(self, action: "addBreakfastButtonClicked:", for: .touchUpInside)
         
         // Test Values Before DB
         //totalCal = totalBreakfastCal + totalLunchCal + totalDinnerCal + totalSnacksCal
@@ -272,6 +277,19 @@ class MainViewController: UITableViewController {
     private func action(){
         // tap gesture just for testing circular progress bars.
         view.addGestureRecognizer(UITapGestureRecognizer (target: self, action: #selector (loadProgressBars)))
+    }
+    
+    private func addBreakfastButtonClicked(){
+        if let vc = storyboard?.instantiateViewController(identifier:
+        "FoodsViewController") as?
+            FoodsViewController{ // Set the view controller to pass to
+            //vc.name = targetgGames[i].name
+            //vc.isFav = favoriteGamesList?[i]
+            /*vc.callBack = { (index: Int,isFav: Bool) in
+             //nothing for now
+             }*/
+            self.navigationController?.pushViewController(vc,animated:true)
+        }
     }
     @objc private func loadProgressBars() {
         
