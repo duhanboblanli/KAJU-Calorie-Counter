@@ -32,6 +32,7 @@ class RecipesViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     
+    
     var foods: [Deneme] = [
         Deneme(foodName: "Muz", foodCallorie: "50kcal", foodQuantity: "30g"),
         Deneme(foodName: "Muz", foodCallorie: "50kcal", foodQuantity: "30g"),
@@ -41,6 +42,8 @@ class RecipesViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //self.navigationController?.isNavigationBarHidden = true
+        
         firstBottomConstraint.constant = 4.0
         secondBottomConstraint.constant = 3.0
         tableView.delegate = self
@@ -48,8 +51,10 @@ class RecipesViewController: UIViewController {
         searchBar.delegate = self
         searchBar.layer.cornerRadius = searchBar.frame.size.height / 5
         
+       
+    
         
-        
+    
         
     }
     
@@ -107,39 +112,42 @@ extension RecipesViewController: UITableViewDataSource {
 extension RecipesViewController: UITextFieldDelegate {
     
     // Search buttona bastığında klavye kapatır
-    @IBAction func searchBtn(_ sender: Any) {
+    @IBAction func searchButtonPressed(_ sender: UIButton) {
+
         searchBar.endEditing(true)
         //this is line of code helps to relode tableview --> eklenecek
     }
     
     // Klavyeden returne bastığında klavye kapatır
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+
         searchBar.endEditing(true)
         return true
     }
     
-    // Klavye kapandıysa yazıyı temizler
-    // Yerine placeholder koyar
+    // Klavye kapandıysa ve bir şey yazılmadıysa yerine placeholder koyar
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
         
         if textField.text != "" {
             return true
         }else{
-            textField.placeholder = "Type Something..."
-            return false
+            DispatchQueue.main.async {
+                textField.placeholder = "Type Something" }
+            return true
         }
+        
     }
     
-    // Karakter arası boşlukları düzeltir
+    // Klavye kapandıysa ve bir şey yazıldıysa yazıyı temizler
+    // Yerine placeholder koyar
     func textFieldDidEndEditing(_ textField: UITextField) {
-        
-        if let Item = searchBar.text?.trimmingCharacters(in: .whitespaces) {
-            let newText = Item.replacingOccurrences(of: " ", with: "")
-            // written this to remove spaces between
-        }
-        
         searchBar.text = ""
+        textField.placeholder = "Search For A Recipe"
+        self.navigationController?.isNavigationBarHidden = false
     }
+    
+    
+    
 }
 
     
