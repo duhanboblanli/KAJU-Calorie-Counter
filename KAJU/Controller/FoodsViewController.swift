@@ -30,6 +30,7 @@ class FoodsViewController: UIViewController, UISearchBarDelegate{
         foodViewModel.fetchFoodData(pagination: false){ [weak self] in
             self?.tableView.dataSource = self
             self?.tableView.reloadData()
+            print("hmm", self!.foodViewModel.getCount())
         }
     }
 
@@ -94,6 +95,7 @@ extension FoodsViewController: UITableViewDataSource, UITableViewDelegate {
 extension FoodsViewController: UITextFieldDelegate {
     // Search buttona bastığında klavye kapatır
     @IBAction func searchBtn(_ sender: Any) {
+        print("heyyyy")
         searchBar.endEditing(true)
         //this is line of code helps to relode tableview --> eklenecek
     }
