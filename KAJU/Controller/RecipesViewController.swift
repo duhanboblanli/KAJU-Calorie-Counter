@@ -25,13 +25,15 @@ class RecipesViewController: UIViewController {
     @IBOutlet weak var discoverLabel: UILabel!
     @IBOutlet weak var favoritesLabel: UILabel!
     
-    
     @IBOutlet weak var searchBar: UITextField!
     @IBOutlet weak var refreshButton: UIButton!
     @IBOutlet weak var searchButton: UIButton!
-    @IBOutlet weak var tableView: UITableView!
+    
+    @IBOutlet weak var discoverTableView: UITableView!
+    @IBOutlet weak var favTableView: UITableView!
     
     
+    @IBOutlet weak var recipesNavigationıtem: UINavigationItem!
     
   
     
@@ -41,15 +43,15 @@ class RecipesViewController: UIViewController {
         
         firstBottomConstraint.constant = 4.0
         secondBottomConstraint.constant = 3.0
-        tableView.delegate = self
-        tableView.dataSource = self
+        discoverTableView.delegate = self
+        discoverTableView.dataSource = self
+        favTableView.delegate = self
+        favTableView.dataSource = self
         searchBar.delegate = self
         searchBar.layer.cornerRadius = searchBar.frame.size.height / 5
+        recipesNavigationıtem.title = "Recipes"
         
-       
-    
         
-    
         
     }
     
@@ -62,6 +64,7 @@ class RecipesViewController: UIViewController {
         secondButtonView.backgroundColor = ColorHardDarkGreen
         discoverLabel.textColor = ColorDarkGreen
         favoritesLabel.textColor = UIColor.lightGray
+        
     }
     
     @IBAction func secondTabPressed(_ sender: UIButton) {
@@ -73,6 +76,7 @@ class RecipesViewController: UIViewController {
         secondButtonView.backgroundColor = ColorDarkGreen
         discoverLabel.textColor = UIColor.lightGray
         favoritesLabel.textColor = ColorDarkGreen
+        
     }
     
 }// end of RecipesViewController
@@ -90,14 +94,33 @@ extension RecipesViewController: UITableViewDataSource {
     
     // Tablo görünümde kaç hücre ya da kaç satır istiyoruz burda belirtilir
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        var numberOfRow = 0
+            switch tableView {
+            case discoverTableView:
+                numberOfRow = 5
+            case favTableView:
+                numberOfRow = 1
+                favoritesLabel.text = "Favorites(\(numberOfRow))"
+            default:
+                print("Some things Wrong RecipesTableViewDataSource!!")
+            }
+            return numberOfRow
     }
     
     // Belirlenen tablo cell indexinde gönderilen celli döndürür
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ReusableCell", for: indexPath)
-        //cell.textLabel?.text = foods[indexPath.row].foodName
-        return cell
+        
+        var cell = UITableViewCell()
+        
+           switch tableView {
+           case discoverTableView:
+               cell = tableView.dequeueReusableCell(withIdentifier: "DiscoverCell", for: indexPath)
+           case favTableView:
+               cell = tableView.dequeueReusableCell(withIdentifier: "FavoritesCell", for: indexPath)
+           default:
+               print("Some things Wrong RecipesTableViewDataSource!!")
+           }
+           return cell
     }
     
     

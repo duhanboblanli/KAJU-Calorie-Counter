@@ -20,6 +20,7 @@
 		FE1F72C529969C0D005FFC4B /* ActivenessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1F72C429969C0D005FFC4B /* ActivenessViewController.swift */; };
 		FE32926D2991AF740075A5B8 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE32926C2991AF740075A5B8 /* WelcomeViewController.swift */; };
 		FE41A2012997ABA200892346 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE41A2002997ABA200892346 /* TabBarController.swift */; };
+		FE4C750329A175B400723DC6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FEBF1DCF2986BB4400FD4760 /* Main.storyboard */; };
 		FE59984E298B0EDF002CB4DF /* CalculatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE59984D298B0EDF002CB4DF /* CalculatorViewController.swift */; };
 		FE599850298B1C55002CB4DF /* CalculatorResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE59984F298B1C55002CB4DF /* CalculatorResultViewController.swift */; };
 		FE5DEF5D299BC5AC00F13802 /* FoodsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5DEF5C299BC5AC00F13802 /* FoodsViewController.swift */; };
@@ -31,7 +32,6 @@
 		FEBF1DCA2986BB4400FD4760 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEBF1DC92986BB4400FD4760 /* AppDelegate.swift */; };
 		FEBF1DCC2986BB4400FD4760 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEBF1DCB2986BB4400FD4760 /* SceneDelegate.swift */; };
 		FEBF1DCE2986BB4400FD4760 /* EggTimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEBF1DCD2986BB4400FD4760 /* EggTimerViewController.swift */; };
-		FEBF1DD12986BB4400FD4760 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FEBF1DCF2986BB4400FD4760 /* Main.storyboard */; };
 		FEBF1DD32986BB4600FD4760 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FEBF1DD22986BB4600FD4760 /* Assets.xcassets */; };
 		FEBF1DD62986BB4600FD4760 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FEBF1DD42986BB4600FD4760 /* LaunchScreen.storyboard */; };
 		FEE2CDEB2989A4B0002DAA6F /* guitar_alarm_sound.wav in Resources */ = {isa = PBXBuildFile; fileRef = FEE2CDEA2989A4B0002DAA6F /* guitar_alarm_sound.wav */; };
@@ -164,6 +164,7 @@
 		FEE2CDE329892A73002DAA6F /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				FE5DEF6C299D196C00F13802 /* RecipesViewController.swift */,
 				FE5DEF5C299BC5AC00F13802 /* FoodsViewController.swift */,
 				FEBF1DCD2986BB4400FD4760 /* EggTimerViewController.swift */,
 				FE41A2002997ABA200892346 /* TabBarController.swift */,
@@ -175,7 +176,6 @@
 				FE95C54F2992F44900BCC4A6 /* RegisterViewController.swift */,
 				FE0BB00B29958C320062E096 /* GoalViewController.swift */,
 				FE1F72C429969C0D005FFC4B /* ActivenessViewController.swift */,
-				FE5DEF6C299D196C00F13802 /* RecipesViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -249,9 +249,9 @@
 				FEBF1DD62986BB4600FD4760 /* LaunchScreen.storyboard in Resources */,
 				FEE2CDEB2989A4B0002DAA6F /* guitar_alarm_sound.wav in Resources */,
 				FE0BB00A299519690062E096 /* GoogleService-Info.plist in Resources */,
+				FE4C750329A175B400723DC6 /* Main.storyboard in Resources */,
 				FEBF1DD32986BB4600FD4760 /* Assets.xcassets in Resources */,
 				FE5DEF69299D10F300F13802 /* games.storyboard in Resources */,
-				FEBF1DD12986BB4400FD4760 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
