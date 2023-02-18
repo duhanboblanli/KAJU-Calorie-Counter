@@ -12,7 +12,6 @@ import UIKit
 class FoodsViewController: UIViewController, UISearchBarDelegate{
     
     @IBOutlet weak var tableView: UITableView!
-    
     @IBOutlet weak var searchBar: UISearchBar!
     
     private var foodViewModel = FoodViewModel()
@@ -28,7 +27,7 @@ class FoodsViewController: UIViewController, UISearchBarDelegate{
         LoadFoodsData()
     }
     private func LoadFoodsData() {
-        // Called at the beginning to do an API call and fill targetGames
+        // Called at the beginning to do an API call and fill targetFoods
         foodViewModel.fetchFoodData(pagination: false){ [weak self] in
             self?.tableView.dataSource = self
             self?.tableView.reloadData()
@@ -78,11 +77,11 @@ extension FoodsViewController: UITableViewDataSource, UITableViewDelegate {
     
     // Belirlenen tablo cell indexinde gönderilen celli döndürür
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var cell : FoodTableViewCell // Declare the cell
-        cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! FoodTableViewCell // Initialize cell
+        var foodCell : FoodTableViewCell // Declare the cell
+        foodCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! FoodTableViewCell // Initialize cell
         let food = foodViewModel.cellForRowAt(indexPath: indexPath)
-        cell.setCellWithValuesOf(food)
-        return cell
+        foodCell.setCellWithValuesOf(food)
+        return foodCell
     }
 }
 

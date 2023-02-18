@@ -9,28 +9,35 @@ import Foundation
 import UIKit
 
 class FoodViewModel{
-    var apiService = ApiService()
-    private var targetFoods = [FoodData]() // The list of foods
-    private var targetFoods1 = [FoodStruct]() // The list of foods
+    var apiService = FoodApiService()
+    // The list of foods - list type is FoodApiModel FoodData struct
+    private var targetFoods = [FoodData]()
+    // The list of foods - list type is FoodApiModel FoodStruct struct
+    private var targetFoods1 = [FoodStruct]()
     private let food_app_id = "1587e073"
     private let food_app_key = "602facc0a5347c2e83c1a5932bcb13bc"
     private var nextPageUrl: String = ""
-
+    
+    //Full URL
+    //https://api.edamam.com/api/food-database/v2/parser?app_id=1587e073&app_key=602facc0a5347c2e83c1a5932bcb13bc&nutrition-type=cooking
+    
     // The API call to get the foods
     func fetchFoodData(pagination: Bool, completion: @escaping () -> ()) {
-        //app_id=1587e073&app_key=602facc0a5347c2e83c1a5932bcb13bc&nutrition-type=cooking
+        //app_id=1587e073   &app_key=602facc0a5347c2e83c1a5932bcb13bc     &nutrition-type=cooking
         var foodsUrl: String?
         
         if pagination == false{
             foodsUrl = "https://api.edamam.com/api/food-database/v2/parser?app_id=" + food_app_id +
             "&app_key=" + food_app_key + "&nutrition-type=cooking"
         }
+        
         else{
             foodsUrl = nextPageUrl
         }
         // weak self - prevent retain cycles
-        print("Fetching food data.. : ", foodsUrl)
+        print("Fetching food data.. : ", foodsUrl ?? "ERROR: URL Not Found! (FoodViewModel.swift)")
         apiService.getFoodsData(pagination: pagination, foodsUrl: foodsUrl!) { [weak self] (result) in
+            print("apiService.getFoodsData:")
             print(result)
             switch result{
             case .success(let listOf):
@@ -99,13 +106,13 @@ class FoodViewModel{
     // Return the number of foods in targetFoods
     func numberOfRowsInSection(section: Int) -> Int {
         if targetFoods.count != 0 {
-            print("total games count: ",targetFoods.count)
+            print("Total foods count: ",targetFoods.count)
             return targetFoods.count
         }
         return 0
     }
 
-    // Return the game at index 'indexPath' of targetFoods
+    // Return the food at index 'indexPath' of targetFoods
     func cellForRowAt (indexPath: IndexPath) -> FoodStruct {
         return targetFoods1[indexPath.row]
     }

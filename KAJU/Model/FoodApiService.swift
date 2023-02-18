@@ -8,20 +8,20 @@
 import Foundation
 import UIKit
 
-class ApiService {
+class FoodApiService {
     
     private var dataTask: URLSessionDataTask?
     var isPaginating = false
     
-    // Get the foods with an API call and return it as a decoded object (See 'Model.FoodsData')
+    // Get the foods with an API call and return it as a decoded object (See 'FoodApiModel')
     func getFoodsData(pagination: Bool, foodsUrl: String,completion: @escaping (Result<FoodsData, Error>) -> Void) {
         
         if pagination{
             isPaginating = true
         }
         
-        //foodsUrl = "https://api.rawg.io/api/games?key=3be8af6ebf124ffe81d90f514e59856c"
-        
+        //foodsUrl
+        //https://api.edamam.com/api/food-database/v2/parser?app_id=1587e073&app_key=602facc0a5347c2e83c1a5932bcb13bc&nutrition-type=cooking
         guard let url = URL(string: foodsUrl) else {return}
         
         // Create URL Session - work on the background
@@ -51,6 +51,7 @@ class ApiService {
                 // Parse the data
                 let decoder = JSONDecoder()
                 
+                // data'dan gelen verileri FoodsData tipinde decode et
                 let jsonData = try decoder.decode(FoodsData.self, from: data)
                 
                 // Back to the main thread
