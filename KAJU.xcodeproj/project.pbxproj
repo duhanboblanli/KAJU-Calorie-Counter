@@ -34,6 +34,7 @@
 		FEBF1DCE2986BB4400FD4760 /* EggTimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEBF1DCD2986BB4400FD4760 /* EggTimerViewController.swift */; };
 		FEBF1DD32986BB4600FD4760 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FEBF1DD22986BB4600FD4760 /* Assets.xcassets */; };
 		FEBF1DD62986BB4600FD4760 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FEBF1DD42986BB4600FD4760 /* LaunchScreen.storyboard */; };
+		FEC7C20629A260CC009A99A8 /* RecipeApiModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC7C20529A260CC009A99A8 /* RecipeApiModel.swift */; };
 		FEE2CDEB2989A4B0002DAA6F /* guitar_alarm_sound.wav in Resources */ = {isa = PBXBuildFile; fileRef = FEE2CDEA2989A4B0002DAA6F /* guitar_alarm_sound.wav */; };
 		FEE9E150299DAB87007FA5FB /* RecipeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE9E14F299DAB87007FA5FB /* RecipeTableViewCell.swift */; };
 /* End PBXBuildFile section */
@@ -69,6 +70,7 @@
 		FEBF1DD22986BB4600FD4760 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FEBF1DD52986BB4600FD4760 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FEBF1DD72986BB4600FD4760 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FEC7C20529A260CC009A99A8 /* RecipeApiModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeApiModel.swift; sourceTree = "<group>"; };
 		FEE2CDEA2989A4B0002DAA6F /* guitar_alarm_sound.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = guitar_alarm_sound.wav; sourceTree = "<group>"; };
 		FEE9E14F299DAB87007FA5FB /* RecipeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -143,6 +145,7 @@
 				FE5E92AA298D1C5400947F7A /* BMI.swift */,
 				FE08EA8F298F06EC008BDC6A /* CalculatorBrain.swift */,
 				2D850C3E299BFA6F00A525F0 /* FoodApiModel.swift */,
+				FEC7C20529A260CC009A99A8 /* RecipeApiModel.swift */,
 				2D850C40299BFA8E00A525F0 /* FoodApiService.swift */,
 				2D850C42299BFAAD00A525F0 /* FoodViewModel.swift */,
 			);
@@ -314,6 +317,7 @@
 				FE5DEF5D299BC5AC00F13802 /* FoodsViewController.swift in Sources */,
 				FE5DEF6D299D196C00F13802 /* RecipesViewController.swift in Sources */,
 				2D850C3F299BFA6F00A525F0 /* FoodApiModel.swift in Sources */,
+				FEC7C20629A260CC009A99A8 /* RecipeApiModel.swift in Sources */,
 				FE1F72C529969C0D005FFC4B /* ActivenessViewController.swift in Sources */,
 				FEBF1DCA2986BB4400FD4760 /* AppDelegate.swift in Sources */,
 				FE59984E298B0EDF002CB4DF /* CalculatorViewController.swift in Sources */,

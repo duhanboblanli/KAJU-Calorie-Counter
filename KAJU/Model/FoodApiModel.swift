@@ -79,7 +79,7 @@ struct NextPage: Decodable {
     }
 }
 
-//Food Celle Aktarılacak Bilgiler
+//Food Cell'e Aktarılacak Bilgiler
 struct FoodStruct {
     let label: String?
     let calorie: Float?
