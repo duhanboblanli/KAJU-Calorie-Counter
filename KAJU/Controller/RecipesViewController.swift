@@ -9,7 +9,6 @@ import UIKit
 
 class RecipesViewController: UIViewController {
     
-    
     let ColorHardDarkGreen = UIColor( red: 40/255, green: 71/255, blue: 92/255, alpha: 1)
     let ColorDarkGreen = UIColor( red: 47/255, green: 136/255, blue: 134/255, alpha: 1)
     let ColorLightGreen = UIColor( red: 132/255, green: 198/255, blue: 155/255, alpha: 1)
@@ -24,7 +23,6 @@ class RecipesViewController: UIViewController {
     @IBOutlet weak var favoritesButton: UIButton!
     @IBOutlet weak var discoverLabel: UILabel!
     @IBOutlet weak var favoritesLabel: UILabel!
-    
     @IBOutlet weak var searchBar: UITextField!
     @IBOutlet weak var refreshButton: UIButton!
     @IBOutlet weak var searchButton: UIButton!
@@ -32,8 +30,10 @@ class RecipesViewController: UIViewController {
     @IBOutlet weak var discoverTableView: UITableView!
     @IBOutlet weak var favTableView: UITableView!
     
-    
     @IBOutlet weak var recipesNavigationıtem: UINavigationItem!
+    
+    private var recipeViewModel = RecipeManager()
+    private var images: [UIImage]?
     
   
     
@@ -50,9 +50,17 @@ class RecipesViewController: UIViewController {
         searchBar.delegate = self
         searchBar.layer.cornerRadius = searchBar.frame.size.height / 5
         recipesNavigationıtem.title = "Recipes"
+        discoverTableView.reloadData()
+        loadRecipesData()
         
-        
-        
+    }
+    
+    private func loadRecipesData() {
+        // Called at the beginning to do an API call and fill targetRecipes
+        recipeViewModel.fetchRecipeData(pagination: false){ [weak self] in
+            self?.discoverTableView.dataSource = self
+            self?.discoverTableView.reloadData()
+        }
     }
     
     @IBAction func firstTabPressed(_ sender: UIButton) {
@@ -79,7 +87,38 @@ class RecipesViewController: UIViewController {
         
     }
     
-}// end of RecipesViewController
+}// ends of RecipesViewController
+
+//MARK: - UIScrollViewDelegate
+extension RecipesViewController: UIScrollViewDelegate{
+    private func createSpinnerFooter() -> UIView {
+        let footerView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.size
+            .width, height: 100))
+        let spinner = UIActivityIndicatorView()
+        spinner.center = footerView.center
+        spinner.color = UIColor( red: 170/255, green: 170/255, blue: 170/255, alpha: 1)
+        footerView.addSubview(spinner)
+        spinner.startAnimating()
+        return footerView
+    }
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let position = scrollView.contentOffset.y
+        if position > (discoverTableView.contentSize.height-100-scrollView.frame.size.height){
+            
+            guard !recipeViewModel.apiService.isPaginating else {
+                // we are already fetching more data
+                return
+            }
+            self.discoverTableView.tableFooterView = createSpinnerFooter()
+            recipeViewModel.fetchRecipeData(pagination: true){ [weak self] in
+                print("load more")
+                self?.discoverTableView.tableFooterView = nil
+                self?.discoverTableView.dataSource = self
+                self?.discoverTableView.reloadData()
+            }
+        }
+    }
+}
 
 //MARK: - UITableViewDelegate
 extension RecipesViewController: UITableViewDelegate {
@@ -94,10 +133,11 @@ extension RecipesViewController: UITableViewDataSource {
     
     // Tablo görünümde kaç hücre ya da kaç satır istiyoruz burda belirtilir
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        var numberOfRow = 0
+        var numberOfRow = 1
             switch tableView {
             case discoverTableView:
-                numberOfRow = 5
+                numberOfRow = recipeViewModel.numberOfRowsInSection(section: section)
+                return numberOfRow
             case favTableView:
                 numberOfRow = 1
                 favoritesLabel.text = "Favorites(\(numberOfRow))"
@@ -110,17 +150,23 @@ extension RecipesViewController: UITableViewDataSource {
     // Belirlenen tablo cell indexinde gönderilen celli döndürür
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        var cell = UITableViewCell()
+        var recipeCell = RecipeTableViewCell() // Declare the cell
         
            switch tableView {
            case discoverTableView:
-               cell = tableView.dequeueReusableCell(withIdentifier: "DiscoverCell", for: indexPath)
+               recipeCell = tableView.dequeueReusableCell(withIdentifier: "DiscoverCell", for: indexPath) as! RecipeTableViewCell
+               let recipe = recipeViewModel.cellForRowAt(indexPath: indexPath)
+                   recipeCell.setCellWithValuesOf(recipe)
+               
            case favTableView:
-               cell = tableView.dequeueReusableCell(withIdentifier: "FavoritesCell", for: indexPath)
+               recipeCell = tableView.dequeueReusableCell(withIdentifier: "FavoritesCell", for: indexPath) as! RecipeTableViewCell
+               
            default:
                print("Some things Wrong RecipesTableViewDataSource!!")
+               
            }
-           return cell
+        return recipeCell
+           
     }
     
     

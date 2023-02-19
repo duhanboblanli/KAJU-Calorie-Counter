@@ -26,7 +26,7 @@ class RecipeManager {
     private let recipe_app_key = "4d8c707a337640bf241ab4076fc94de7"
     
     // The API call to get the recipes
-    func fetchFoodData(pagination: Bool, completion: @escaping () -> ()) {
+    func fetchRecipeData(pagination: Bool, completion: @escaping () -> ()) {
         //app_id=78a155af   &app_key=4d8c707a337640bf241ab4076fc94de7    &imageSize=LARGE
         var recipesUrl: String?
         

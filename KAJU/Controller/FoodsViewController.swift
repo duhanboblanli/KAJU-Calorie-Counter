@@ -34,7 +34,7 @@ class FoodsViewController: UIViewController, UISearchBarDelegate{
         }
     }
 
-} // end of FoodsViewController
+} // ends of FoodsViewController
 
 //MARK: - UIScrollViewDelegate
 extension FoodsViewController: UIScrollViewDelegate{

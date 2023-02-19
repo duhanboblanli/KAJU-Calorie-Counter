@@ -7,7 +7,7 @@
 
 import UIKit
 
-class RecipeTableViewCell: UIView {
+class RecipeTableView: UIView {
     
     override func layoutSubviews() {
             super.layoutSubviews()
