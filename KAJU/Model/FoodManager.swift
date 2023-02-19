@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class FoodViewModel{
+class FoodManager {
     var apiService = FoodApiService()
     // The list of foods - list type is FoodApiModel FoodData struct
     private var targetFoods = [FoodData]()

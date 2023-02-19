@@ -14,7 +14,7 @@ class FoodsViewController: UIViewController, UISearchBarDelegate{
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
     
-    private var foodViewModel = FoodViewModel()
+    private var foodViewModel = FoodManager()
     private var images: [UIImage]?
     
     override func viewDidLoad() {
