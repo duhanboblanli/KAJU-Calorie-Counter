@@ -11,10 +11,9 @@ import UIKit
 class FoodsViewController: UIViewController, UISearchBarDelegate{
     
     @IBOutlet weak var tableView: UITableView!
-    
     @IBOutlet weak var searchBar: UISearchBar!
     
-    private var foodViewModel = FoodViewModel()
+    private var foodViewModel = FoodManager()
     private var images: [UIImage]?
     
     override func viewDidLoad() {
@@ -23,10 +22,11 @@ class FoodsViewController: UIViewController, UISearchBarDelegate{
         tableView.dataSource = self
         searchBar.delegate = self
         searchBar.searchTextField.leftView?.tintColor = UIColor( red: 170/255, green: 170/255, blue: 170/255, alpha: 1)
-        searchBar.searchTextField.attributedPlaceholder = NSAttributedString(string: "Search Foods", attributes: [NSAttributedString.Key.foregroundColor: UIColor( red: 170/255, green: 170/255, blue: 170/255, alpha: 1)])
+        searchBar.searchTextField.attributedPlaceholder = NSAttributedString(string: "Search For A Food", attributes: [NSAttributedString.Key.foregroundColor: UIColor( red: 170/255, green: 170/255, blue: 170/255, alpha: 1)])
         LoadFoodsData()
     }
-    private func LoadFoodsData() { // Called at the beginning to do an API call and fill targetGames
+    private func LoadFoodsData() {
+        // Called at the beginning to do an API call and fill targetFoods
         foodViewModel.fetchFoodData(pagination: false){ [weak self] in
             self?.tableView.dataSource = self
             self?.tableView.reloadData()
@@ -34,8 +34,9 @@ class FoodsViewController: UIViewController, UISearchBarDelegate{
         }
     }
 
-} // end of FoodsViewController
+} // ends of FoodsViewController
 
+//MARK: - UIScrollViewDelegate
 extension FoodsViewController: UIScrollViewDelegate{
     private func createSpinnerFooter() -> UIView {
         let footerView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.size
@@ -74,21 +75,14 @@ extension FoodsViewController: UITableViewDataSource, UITableViewDelegate {
         return foodViewModel.numberOfRowsInSection(section: section)
     }
     
-    /*  Seçilen cellin indexini verir
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-    }*/
-    
     // Belirlenen tablo cell indexinde gönderilen celli döndürür
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var cell : FoodTableViewCell // Declare the cell
-        cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! FoodTableViewCell // Initialize cell
+        var foodCell : FoodTableViewCell // Declare the cell
+        foodCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! FoodTableViewCell // Initialize cell
         let food = foodViewModel.cellForRowAt(indexPath: indexPath)
-        cell.setCellWithValuesOf(food)
-        return cell
+        foodCell.setCellWithValuesOf(food)
+        return foodCell
     }
-    
-    
 }
 
 //MARK: - UITextFieldDelegate
@@ -102,48 +96,31 @@ extension FoodsViewController: UITextFieldDelegate {
     
     // Klavyeden returne bastığında klavye kapatır
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+
         searchBar.endEditing(true)
         return true
     }
     
-    // Klavye kapandıysa yazıyı temizler
-    // Yerine placeholder koyar
+    // Klavye kapandıysa ve bir şey yazılmadıysa yerine placeholder koyar
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
         
         if textField.text != "" {
             return true
         }else{
-            textField.placeholder = "Type Something..."
-            return false
+            DispatchQueue.main.async {
+                textField.placeholder = "Type Something" }
+            return true
         }
+        
     }
     
-    // Karakter arası boşlukları düzeltir
+    // Klavye kapandıysa ve bir şey yazıldıysa yazıyı temizler
+    // Yerine placeholder koyar
     func textFieldDidEndEditing(_ textField: UITextField) {
-        
-        if let Item = searchBar.text?.trimmingCharacters(in: .whitespaces) {
-            let newText = Item.replacingOccurrences(of: " ", with: "")
-            // written this to remove spaces between
-        }
-        
         searchBar.text = ""
+        textField.placeholder = "Search For A Food"
+        self.navigationController?.isNavigationBarHidden = false
     }
 }
 
- 
     
-
-
-
-    
-    
-    
-    
-    
-   
-    
-
-
-
-    
-
