@@ -5,16 +5,19 @@
 //  Created by Duhan Boblanlı on 14.02.2023.
 //
 
-
 import UIKit
 
 
-class FoodsViewController: UIViewController, UISearchBarDelegate{
+class FoodsViewController: UIViewController, UISearchBarDelegate, UpdateDelegate{
+    func didUpdate(sender: FoodViewModel) {
+        self.tableView.reloadData()
+    }
+    
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
     
-    private var foodViewModel = FoodManager()
+    private var foodViewModel = FoodViewModel()
     private var images: [UIImage]?
     
     override func viewDidLoad() {
@@ -22,6 +25,7 @@ class FoodsViewController: UIViewController, UISearchBarDelegate{
         tableView.delegate = self
         tableView.dataSource = self
         searchBar.delegate = self
+        foodViewModel.delegate = self
         searchBar.searchTextField.leftView?.tintColor = UIColor( red: 170/255, green: 170/255, blue: 170/255, alpha: 1)
         searchBar.searchTextField.attributedPlaceholder = NSAttributedString(string: "Search For A Food", attributes: [NSAttributedString.Key.foregroundColor: UIColor( red: 170/255, green: 170/255, blue: 170/255, alpha: 1)])
         LoadFoodsData()
@@ -31,6 +35,7 @@ class FoodsViewController: UIViewController, UISearchBarDelegate{
         foodViewModel.fetchFoodData(pagination: false){ [weak self] in
             self?.tableView.dataSource = self
             self?.tableView.reloadData()
+            print("hmm", self!.foodViewModel.getCount())
         }
     }
 
@@ -80,6 +85,7 @@ extension FoodsViewController: UITableViewDataSource, UITableViewDelegate {
         var foodCell : FoodTableViewCell // Declare the cell
         foodCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! FoodTableViewCell // Initialize cell
         let food = foodViewModel.cellForRowAt(indexPath: indexPath)
+        print("Food?: ", food)
         foodCell.setCellWithValuesOf(food)
         return foodCell
     }
@@ -87,6 +93,11 @@ extension FoodsViewController: UITableViewDataSource, UITableViewDelegate {
 
 //MARK: - UITextFieldDelegate
 extension FoodsViewController: UITextFieldDelegate {
+    // Search buttona bastığında klavye kapatır
+    @IBAction func searchBtn(_ sender: Any) {
+        searchBar.endEditing(true)
+        //this is line of code helps to relode tableview --> eklenecek
+    }
     
     // Klavyeden returne bastığında klavye kapatır
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

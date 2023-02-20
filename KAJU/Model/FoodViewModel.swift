@@ -8,7 +8,12 @@
 import Foundation
 import UIKit
 
-class FoodManager {
+protocol UpdateDelegate {
+    func didUpdate(sender: FoodViewModel)
+}
+
+class FoodViewModel {
+    var delegate: UpdateDelegate?
     var apiService = FoodApiService()
     // The list of foods - list type is FoodApiModel FoodData struct
     private var targetFoods = [FoodData]()
@@ -17,6 +22,7 @@ class FoodManager {
     private let food_app_id = "1587e073"
     private let food_app_key = "602facc0a5347c2e83c1a5932bcb13bc"
     private var nextPageUrl: String = ""
+    var x = 0
     
     //Full URL
     //https://api.edamam.com/api/food-database/v2/parser?app_id=1587e073&app_key=602facc0a5347c2e83c1a5932bcb13bc&nutrition-type=cooking
@@ -41,12 +47,14 @@ class FoodManager {
             print(result)
             switch result{
             case .success(let listOf):
+                
                 var currentCount = self?.targetFoods.count
                 var url2 = ""
                 self?.targetFoods.append(contentsOf: listOf.hints)
                 self?.nextPageUrl = (listOf._links.next?.href)!
                 self?.targetFoods1 = self!.targetFoods1 + Array(repeating: FoodStruct(label: "", calorie: 0.0, image: UIImage(named: "Egg-Breakfast-PNG-Download-Image")), count: listOf.hints.count)
                 for (i, food) in listOf.hints.enumerated(){
+                    print("UUUUUUUU", i)
                     if food.food.image == nil{
                         url2 = "https://www.edamam.com/food-img/541/541e46e44ba61aec8bcd599df94c0eed.jpg"
                     }
@@ -79,6 +87,7 @@ class FoodManager {
                 print("Fetching image.. !!!!!!!!!!!")
                 self?.targetFoods1[index] = FoodStruct(label: food.label,
                                                   calorie: food.nutrients?.ENERC_KCAL,image: listOf)
+                self?.delegate!.didUpdate(sender: self!)
                 //self?.targetFoods1.append(contentsOf: FoodStruct(label: food.label,
                   //                                              calorie: food.nutrients?.ENERC_KCAL,image: listOf))
             case .failure(let error):

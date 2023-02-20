@@ -32,7 +32,7 @@ class RecipesViewController: UIViewController {
     
     @IBOutlet weak var recipesNavigationıtem: UINavigationItem!
     
-    private var recipeViewModel = RecipeManager()
+    private var recipeViewModel = RecipeViewModel()
     private var images: [UIImage]?
     
   
