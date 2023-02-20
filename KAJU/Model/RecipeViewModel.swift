@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class RecipeManager {
+class RecipeViewModel {
     var apiService = RecipeApiService()
     // The list of recipes - list type is RecipeApiModel RecipeData struct
     private var targetRecipes = [RecipeData]()
