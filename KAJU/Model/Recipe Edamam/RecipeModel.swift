@@ -5,7 +5,7 @@
 //  Created by Duhan Boblanlı on 19.02.2023.
 //
 
-import Foundation
+/*import Foundation
 import UIKit
 
 // Model for targetRecipes which is a list of recipes
@@ -73,3 +73,5 @@ struct RecipeStruct {
     let image: UIImage? // URL for API call to get UIImage object
     let time: Float?
 }
+
+*/

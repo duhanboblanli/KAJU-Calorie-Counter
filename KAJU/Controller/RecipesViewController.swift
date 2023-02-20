@@ -32,15 +32,15 @@ class RecipesViewController: UIViewController {
     
     @IBOutlet weak var recipesNavigationıtem: UINavigationItem!
     
-    private var recipeViewModel = RecipeViewModel()
-    private var images: [UIImage]?
+    var recipes = [Recipe]()
+    
+    
     
   
     
     override func viewDidLoad() {
         super.viewDidLoad()
         //self.navigationController?.isNavigationBarHidden = true
-        
         firstBottomConstraint.constant = 4.0
         secondBottomConstraint.constant = 3.0
         discoverTableView.delegate = self
@@ -50,17 +50,22 @@ class RecipesViewController: UIViewController {
         searchBar.delegate = self
         searchBar.layer.cornerRadius = searchBar.frame.size.height / 5
         recipesNavigationıtem.title = "Recipes"
-        discoverTableView.reloadData()
-        loadRecipesData()
+        SpoonacularClient.getRandomRecipe(completion: handleRecipes)
+       
         
     }
     
-    private func loadRecipesData() {
+    /*private func loadRecipesData() {
         // Called at the beginning to do an API call and fill targetRecipes
         recipeViewModel.fetchRecipeData(pagination: false){ [weak self] in
             self?.discoverTableView.dataSource = self
             self?.discoverTableView.reloadData()
         }
+    } */
+    
+    @IBAction func refreshButtonPressed(_ sender: UIButton) {
+        SpoonacularClient.getRandomRecipe(completion: handleRecipes)
+        
     }
     
     @IBAction func firstTabPressed(_ sender: UIButton) {
@@ -87,7 +92,24 @@ class RecipesViewController: UIViewController {
         
     }
     
+    //MARK: - Handle API Response
+    
+    func handleRecipes(recipes: [Recipe], error: Error?) {
+        //self.showActivityIndicator(show: false)
+        if let error = error {
+            DispatchQueue.main.async {
+                self.presentAlert(title: error.localizedDescription, message: "")
+            }
+        }
+        self.recipes = recipes
+        DispatchQueue.main.async {
+            self.discoverTableView.reloadData()
+        }
+    }
+    
 }// ends of RecipesViewController
+
+
 
 //MARK: - UIScrollViewDelegate
 extension RecipesViewController: UIScrollViewDelegate{
@@ -105,7 +127,7 @@ extension RecipesViewController: UIScrollViewDelegate{
         let position = scrollView.contentOffset.y
         if position > (discoverTableView.contentSize.height-100-scrollView.frame.size.height){
             
-            guard !recipeViewModel.apiService.isPaginating else {
+           /* guard !recipeViewModel.apiService.isPaginating else {
                 // we are already fetching more data
                 return
             }
@@ -115,7 +137,7 @@ extension RecipesViewController: UIScrollViewDelegate{
                 self?.discoverTableView.tableFooterView = nil
                 self?.discoverTableView.dataSource = self
                 self?.discoverTableView.reloadData()
-            }
+            } */
         }
     }
 }
@@ -136,7 +158,7 @@ extension RecipesViewController: UITableViewDataSource {
         var numberOfRow = 1
             switch tableView {
             case discoverTableView:
-                numberOfRow = recipeViewModel.numberOfRowsInSection(section: section)
+                numberOfRow = recipes.count
                 return numberOfRow
             case favTableView:
                 numberOfRow = 1
@@ -155,8 +177,20 @@ extension RecipesViewController: UITableViewDataSource {
            switch tableView {
            case discoverTableView:
                recipeCell = tableView.dequeueReusableCell(withIdentifier: "DiscoverCell", for: indexPath) as! RecipeTableViewCell
-               let recipe = recipeViewModel.cellForRowAt(indexPath: indexPath)
-                   recipeCell.setCellWithValuesOf(recipe)
+               
+               let recipe = recipes[indexPath.row]
+               if let title = recipe.title {
+                   recipeCell.name.text = title
+               }
+               if let time = recipe.timeRequired {
+                   recipeCell.time.text = String("\(time) minutes")
+               }
+               recipeCell.recipeImage.image = UIImage(named: "imagePlaceholder")
+               if let imageURL = recipe.imageURL {
+                   SpoonacularClient.downloadRecipeImage(imageURL: imageURL) { (image, success) in
+                       recipeCell.recipeImage.image = image
+                   }
+               }
                
            case favTableView:
                recipeCell = tableView.dequeueReusableCell(withIdentifier: "FavoritesCell", for: indexPath) as! RecipeTableViewCell

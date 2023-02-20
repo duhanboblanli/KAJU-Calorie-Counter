@@ -235,6 +235,9 @@
                                                     <state key="normal" image="arrow.clockwise" catalog="system">
                                                         <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="29" weight="medium"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="refreshButtonPressed:" destination="p5D-E9-j5p" eventType="touchUpInside" id="G1C-HF-fVb"/>
+                                                    </connections>
                                                 </button>
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Search For A Recipe" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="9UD-U9-YmD">
                                                     <rect key="frame" x="46" y="0.0" width="301" height="37"/>
@@ -287,7 +290,7 @@
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="R3f-Dk-FCv" customClass="RecipeTableView" customModule="KAJU" customModuleProvider="target">
                                                             <rect key="frame" x="20" y="20" width="353" height="357"/>
                                                             <subviews>
-                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="recipesDeneme" translatesAutoresizingMaskIntoConstraints="NO" id="fOx-tR-Mtb">
+                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="recipesDeneme" translatesAutoresizingMaskIntoConstraints="NO" id="fOx-tR-Mtb">
                                                                     <rect key="frame" x="0.0" y="0.0" width="353" height="298.33333333333331"/>
                                                                 </imageView>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="ESA-f1-8jP">
@@ -930,7 +933,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="aAM-tH-Wcf">
-                                <rect key="frame" x="56.333333333333343" y="433" width="280.66666666666663" height="51"/>
+                                <rect key="frame" x="56.333333333333343" y="394" width="280.66666666666663" height="128.66666666666663"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="🍏 Daily Calorie Goal" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="wrv-1o-oc5">
                                         <rect key="frame" x="0.0" y="0.0" width="280.66666666666669" height="43"/>
@@ -942,7 +945,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="249" horizontalCompressionResistancePriority="1000" text="1882.5" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TWC-Vj-qzP" customClass="CLTypingLabel" customModule="CLTypingLabel">
-                                        <rect key="frame" x="140.33333333333331" y="51" width="0.0" height="0.0"/>
+                                        <rect key="frame" x="34.333333333333343" y="51.000000000000007" width="212" height="77.666666666666686"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="65"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -950,7 +953,7 @@
                                 </subviews>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="According to your choices, your goal is to maintain your weight." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="MFo-mA-Mz5">
-                                <rect key="frame" x="24" y="500" width="345" height="43"/>
+                                <rect key="frame" x="24" y="538.66666666666663" width="345" height="43"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="43" id="UOP-jI-hch"/>
                                 </constraints>
@@ -1477,7 +1480,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" highlighted="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v6p-mN-wEd">
-                                <rect key="frame" x="10" y="790" width="373" height="72"/>
+                                <rect key="frame" x="10" y="746" width="373" height="72"/>
                                 <color key="backgroundColor" red="0.15686274510000001" green="0.2784313725" blue="0.36078431370000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="72" id="Ens-Sq-BUV"/>
@@ -1509,10 +1512,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="G92-xa-tcB">
-                                <rect key="frame" x="24" y="298" width="345" height="418"/>
+                                <rect key="frame" x="24" y="298" width="345" height="374"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Du4-98-ylc">
-                                        <rect key="frame" x="0.0" y="0.0" width="345" height="82"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="345" height="71"/>
                                         <color key="backgroundColor" red="0.15686274510000001" green="0.2784313725" blue="0.36078431370000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="82" id="GtW-X1-9iB"/>
@@ -1527,7 +1530,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iiU-L2-M7O">
-                                        <rect key="frame" x="0.0" y="112" width="345" height="82"/>
+                                        <rect key="frame" x="0.0" y="101" width="345" height="71"/>
                                         <color key="backgroundColor" red="0.15686274510000001" green="0.2784313725" blue="0.36078431370000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="82" id="xJV-5d-AKT"/>
@@ -1542,7 +1545,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QOM-IS-6nr">
-                                        <rect key="frame" x="0.0" y="224" width="345" height="82"/>
+                                        <rect key="frame" x="0.0" y="202" width="345" height="71"/>
                                         <color key="backgroundColor" red="0.15686274510000001" green="0.2784313725" blue="0.36078431370000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="82" id="SdB-wS-PnF"/>
@@ -1557,7 +1560,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oxD-H5-mQP">
-                                        <rect key="frame" x="0.0" y="336" width="345" height="82"/>
+                                        <rect key="frame" x="0.0" y="303" width="345" height="71"/>
                                         <color key="backgroundColor" red="0.15686274510000001" green="0.2784313725" blue="0.36078431370000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="82" id="gxu-u2-yhM"/>
@@ -2328,33 +2331,17 @@
         </scene>
     </scenes>
     <designables>
-        <designable name="9UP-ca-LTD">
-            <size key="intrinsicContentSize" width="64" height="17"/>
+        <designable name="CWT-O1-Xi1">
+            <size key="intrinsicContentSize" width="136.33333333333334" height="50"/>
         </designable>
-        <designable name="CWT-O1-Xi1"/>
-        <designable name="DBi-8M-wfN">
-            <size key="intrinsicContentSize" width="64" height="17"/>
+        <designable name="M5H-zT-ZYy">
+            <size key="intrinsicContentSize" width="677.33333333333337" height="21.666666666666668"/>
         </designable>
-        <designable name="LF9-0j-dfb">
-            <size key="intrinsicContentSize" width="50.666666666666664" height="17"/>
+        <designable name="TWC-Vj-qzP">
+            <size key="intrinsicContentSize" width="212" height="77.666666666666671"/>
         </designable>
-        <designable name="M5H-zT-ZYy"/>
-        <designable name="MiB-gl-KzM">
-            <size key="intrinsicContentSize" width="147" height="21.666666666666668"/>
-        </designable>
-        <designable name="OHI-CU-Q6F">
-            <size key="intrinsicContentSize" width="59.666666666666664" height="20.333333333333332"/>
-        </designable>
-        <designable name="TWC-Vj-qzP"/>
-        <designable name="e5U-OA-aC3">
-            <size key="intrinsicContentSize" width="50.666666666666664" height="17"/>
-        </designable>
-        <designable name="fRe-n5-i5s"/>
-        <designable name="i6l-X8-NvN">
-            <size key="intrinsicContentSize" width="147" height="21.666666666666668"/>
-        </designable>
-        <designable name="xCY-wK-vmR">
-            <size key="intrinsicContentSize" width="75.333333333333329" height="20.333333333333332"/>
+        <designable name="fRe-n5-i5s">
+            <size key="intrinsicContentSize" width="128.66666666666666" height="77.666666666666671"/>
         </designable>
     </designables>
     <inferredMetricsTieBreakers>

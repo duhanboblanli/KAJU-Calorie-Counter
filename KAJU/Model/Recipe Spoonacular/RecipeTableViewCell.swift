@@ -2,7 +2,7 @@
 //  RecipeTableViewCell.swift
 //  KAJU
 //
-//  Created by Duhan Boblanlı on 19.02.2023.
+//  Created by Duhan Boblanlı on 20.02.2023.
 //
 
 import UIKit
@@ -23,30 +23,14 @@ class RecipeTableViewCell: UITableViewCell {
         
     }
     
-    func setCellWithValuesOf(_ recipeData:RecipeStruct) {
+    /*func setCellWithValuesOf(_ recipeData:RecipeStruct) {
         updateUI(label: recipeData.label, calorie: recipeData.calorie, image: recipeData.image, time: recipeData.time)
-    }
+    }*/
     
     // Update the UI Views
     private func updateUI(label: String?, calorie: Float?, image: UIImage?, time: Float?) {
         
         self.name.text = label ?? "Label not found!"
-        print("LABELLLLL:", label ?? "Label not found!")
-        print("LABELLLLL:", label ?? "Label not found!")
-
-        print("LABELLLLL:", label ?? "Label not found!")
-
-        print("LABELLLLL:", label ?? "Label not found!")
-
-        print("LABELLLLL:", label!)
-
-        print("LABELLLLL:", label!)
-
-        print("LABELLLLL:", label!)
-
-        print("LABELLLLL:", label!)
-
-        
         let calorie = String(format: "%.0f", calorie ?? 0.0)
         self.calorie.text = "\(calorie) kcal"
         self.recipeImage.image = image

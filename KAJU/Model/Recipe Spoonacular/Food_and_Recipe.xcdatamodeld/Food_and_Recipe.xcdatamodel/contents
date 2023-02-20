@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14903" systemVersion="19A583" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="FoodRecipe" representedClassName="FoodRecipe" syncable="YES" codeGenerationType="class">
+        <attribute name="image" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES"/>
+        <attribute name="sourceURL" optional="YES" attributeType="String"/>
+        <attribute name="timeRequired" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="title" optional="YES" attributeType="String"/>
+        <relationship name="ingredients" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Ingredient" inverseName="foodRecipe" inverseEntity="Ingredient"/>
+        <relationship name="instructions" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Instruction" inverseName="foodRecipe" inverseEntity="Instruction"/>
+    </entity>
+    <entity name="Ingredient" representedClassName="Ingredient" syncable="YES" codeGenerationType="class">
+        <attribute name="ingredient" optional="YES" attributeType="String"/>
+        <attribute name="number" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="foodRecipe" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="FoodRecipe" inverseName="ingredients" inverseEntity="FoodRecipe"/>
+    </entity>
+    <entity name="Instruction" representedClassName="Instruction" syncable="YES" codeGenerationType="class">
+        <attribute name="instruction" optional="YES" attributeType="String"/>
+        <attribute name="stepNumber" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="foodRecipe" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="FoodRecipe" inverseName="instructions" inverseEntity="FoodRecipe"/>
+    </entity>
+    <elements>
+        <element name="FoodRecipe" positionX="-238.109375" positionY="44.97265625" width="128" height="133"/>
+        <element name="Ingredient" positionX="-2.10546875" positionY="-12.01953125" width="128" height="88"/>
+        <element name="Instruction" positionX="0.7890625" positionY="179.80078125" width="128" height="88"/>
+    </elements>
+</model>
