@@ -34,10 +34,6 @@ class RecipesViewController: UIViewController {
     
     var recipes = [Recipe]()
     
-    
-    
-  
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         //self.navigationController?.isNavigationBarHidden = true
@@ -51,7 +47,6 @@ class RecipesViewController: UIViewController {
         searchBar.layer.cornerRadius = searchBar.frame.size.height / 5
         recipesNavigationıtem.title = "Recipes"
         SpoonacularClient.getRandomRecipe(completion: handleRecipes)
-       
         
     }
     
@@ -65,7 +60,6 @@ class RecipesViewController: UIViewController {
     
     @IBAction func refreshButtonPressed(_ sender: UIButton) {
         SpoonacularClient.getRandomRecipe(completion: handleRecipes)
-        
     }
     
     @IBAction func firstTabPressed(_ sender: UIButton) {
@@ -93,7 +87,6 @@ class RecipesViewController: UIViewController {
     }
     
     //MARK: - Handle API Response
-    
     func handleRecipes(recipes: [Recipe], error: Error?) {
         //self.showActivityIndicator(show: false)
         if let error = error {
@@ -102,6 +95,7 @@ class RecipesViewController: UIViewController {
             }
         }
         self.recipes = recipes
+        
         DispatchQueue.main.async {
             self.discoverTableView.reloadData()
         }
@@ -177,20 +171,9 @@ extension RecipesViewController: UITableViewDataSource {
            switch tableView {
            case discoverTableView:
                recipeCell = tableView.dequeueReusableCell(withIdentifier: "DiscoverCell", for: indexPath) as! RecipeTableViewCell
-               
                let recipe = recipes[indexPath.row]
-               if let title = recipe.title {
-                   recipeCell.name.text = title
-               }
-               if let time = recipe.timeRequired {
-                   recipeCell.time.text = String("\(time) minutes")
-               }
-               recipeCell.recipeImage.image = UIImage(named: "imagePlaceholder")
-               if let imageURL = recipe.imageURL {
-                   SpoonacularClient.downloadRecipeImage(imageURL: imageURL) { (image, success) in
-                       recipeCell.recipeImage.image = image
-                   }
-               }
+               
+               recipeCell.updateUI(recipe: recipe, recipeCell: recipeCell)
                
            case favTableView:
                recipeCell = tableView.dequeueReusableCell(withIdentifier: "FavoritesCell", for: indexPath) as! RecipeTableViewCell

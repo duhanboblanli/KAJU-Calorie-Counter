@@ -8,25 +8,48 @@
 import UIKit
 
 class SpoonacularClient {
-    // af5551aeb300483382684e0f90ad9367
-    // a67a5241c34f45429f75c2d8a1858a67
-    static let apiKey = "af5551aeb300483382684e0f90ad9367"
+    
+    //static let apiKeys: [String] = ["8b8db97d79c840ec95ae4c7c472b8fdd","0706fa7896064f859e95c8cb220b288e","a67a5241c34f45429f75c2d8a1858a67"]
+    //static let randomInt = Int.random(in: 0..<3)
+    
+    // ege - 8b8db97d79c840ec95ae4c7c472b8fdd -
+    // duhan - 0706fa7896064f859e95c8cb220b288e -
+    // duhan2 - 1b7e88a834da447bbb98991d223bceb8
+    // unknown - a67a5241c34f45429f75c2d8a1858a67 -
+    static var apiKey = "1b7e88a834da447bbb98991d223bceb8"
     static let host = "api.spoonacular.com"
     static let scheme = "https"
-    // Full URL
-    // https://api.spoonacular.com/recipes/random?apiKey=a67a5241c34f45429f75c2d8a1858a67&number=8
+    // Random URL
+    // https://api.spoonacular.com/recipes/random?apiKey=a67a5241c34f45429f75c2d8a1858a67&number=8&tags=
+    
+    // Complex Search URL
+    // https://api.spoonacular.com/recipes/complexSearch?apiKey=0706fa7896064f859e95c8cb220b288e&number=8&addRecipeNutrition=true&fillIngredients=true&instructionsRequired=true
     
     // Declare URL
     static var randomRecipeURL: URL {
+        //Random kapalı tüm api keyler açılınca açabilirsin!!
+        let apiKeys: [String] = ["8b8db97d79c840ec95ae4c7c472b8fdd","0706fa7896064f859e95c8cb220b288e","a67a5241c34f45429f75c2d8a1858a67","1b7e88a834da447bbb98991d223bceb8"]
+        let randomInt = Int.random(in: 0..<4)
+        let randomOffsetInt = Int.random(in: 1...900)
+        let randomOffsetString = String(randomOffsetInt)
         var components = URLComponents()
         components.host = host
-        components.path = "/recipes/random"
+        components.path = "/recipes/complexSearch"
         components.scheme = scheme
         //Query itemlerdan önce gelmesi gereken '?', '&', '=' gibi semboller otomatik atanır
         components.queryItems = [URLQueryItem]()
+        //SpoonacularClient.apiKey = apiKeys[randomInt]
         components.queryItems?.append(URLQueryItem(name: "apiKey", value: SpoonacularClient.apiKey))
         // Kaç tane recipes verisi çekilsin?
-        components.queryItems?.append(URLQueryItem(name: "number", value: "8"))
+        components.queryItems?.append(URLQueryItem(name: "number", value: "10"))
+        components.queryItems?.append(URLQueryItem(name: "addRecipeNutrition", value: "true"))
+        components.queryItems?.append(URLQueryItem(name: "fillIngredients", value: "true"))
+        components.queryItems?.append(URLQueryItem(name: "instructionsRequired", value: "true"))
+        components.queryItems?.append(URLQueryItem(name: "offset", value: randomOffsetString))
+        
+        print("Full URL: " , components.url!)
+        print("Full URL: " , components.url!)
+        print("Full URL: " , components.url!)
         print("Full URL: " , components.url!)
         return components.url!
     }
@@ -48,7 +71,7 @@ class SpoonacularClient {
                 // responseObject: Optional([AnyHashable("recipes"): <__NSArrayI 0x6000020d54a0> {JSON verilerini NSArray'de döndürür}
                 let responseObject = try JSONSerialization.jsonObject(with: data, options: .fragmentsAllowed) as? [AnyHashable: Any]
                 // JSON verilerinin "recipes" listesinden, veriler dict olarak alınır ve arraye atılır
-                if let recipeArray = responseObject?["recipes"] as? [[String: Any]] {
+                if let recipeArray = responseObject?["results"] as? [[String: Any]] {
                     // Recipe struct modelinde recipes arrayi döner
                     let recipes = createRecipes(recipeArray: recipeArray)
                     // Recipes ve nil error döner
@@ -80,23 +103,26 @@ class SpoonacularClient {
     private class func configureRecipe(recipeInfo: [String: Any]) -> Recipe{
         var recipe = Recipe()
         
+        if let id = recipeInfo["id"] as? Int {
+            recipe.id = id
+        }
         // Key: title , value: String ise recipe.title'a atanır
         if let title = recipeInfo["title"] as? String {
             recipe.title = title
         }
-        
+        if let timeRequired = recipeInfo["readyInMinutes"] as? Int {
+            recipe.timeRequired = timeRequired
+        }
         if let servings = recipeInfo["servings"] as? Int {
             recipe.servings = servings
         }
-        
         if let imageURL = recipeInfo["image"] as? String {
             recipe.imageURL = imageURL
         }
-        
         if let sourceURL = recipeInfo["sourceUrl"] as? String {
             recipe.sourceURL = sourceURL
         }
-
+        
         if let ingredientArray = recipeInfo["extendedIngredients"] as? [[String: Any]] {
             if ingredientArray.count == 0 {
                 recipe.ingredients = []
@@ -111,10 +137,6 @@ class SpoonacularClient {
                             }
         } else {
             recipe.ingredients = []
-        }
-        
-        if let timeRequired = recipeInfo["readyInMinutes"] as? Int {
-            recipe.timeRequired = timeRequired
         }
         
         if let instructions = recipeInfo["analyzedInstructions"] as? [[String : Any]]  {
@@ -136,6 +158,32 @@ class SpoonacularClient {
         } else {
             recipe.instructions = []
         }
+        
+        //["results"][0]["extendedIngredients"][0]["original"]
+        
+        //["results"][0]["nutrition"]["nutrients"][0]["amount"]
+        if let nutritions = recipeInfo["nutrition"] as? [String : Any]{
+                if let nutrition = nutritions["nutrients"] as? [[String : Any]] {
+                    if let calories = nutrition[0]["amount"] as? Double {
+                        recipe.calories = calories
+                    }
+                    
+                    if let carbs = nutrition[3]["amount"] as? Double {
+                        recipe.carbs = carbs
+                    }
+                    
+                    if let fat = nutrition[1]["amount"] as? Double {
+                        recipe.fat = fat
+                    }
+                    
+                    if let protein = nutrition[8]["amount"] as? Double {
+                        recipe.protein = protein
+                    }
+                    if let sugar = nutrition[5]["amount"] as? Double {
+                        recipe.sugar = sugar
+                    }
+                }
+            }     
         return recipe
     }
     
@@ -156,6 +204,42 @@ class SpoonacularClient {
             }
         }
     }
+    
+    // Id Int parametre olarak alınır ve tek bir Recipe döndürür
+    // id'den yeni bir url yaratılarak nutritions değerleri bulunur --> x.recipes[0].id
+    // https://api.spoonacular.com/recipes/1003464/nutritionWidget.json?apiKey=af5551aeb300483382684e0f90ad9367
+    class func getRecipeNutrition(id: Int, completion: @escaping (Recipe?, Bool, Error?) -> Void){
+        var url: URL {
+            var components = URLComponents()
+            components.host = host
+            components.path = "/recipes/\(id)/nutritionWidget.json"
+            components.scheme = scheme
+            components.queryItems = [URLQueryItem]()
+            components.queryItems?.append(URLQueryItem(name: "apiKey", value: SpoonacularClient.apiKey))
+            return components.url!
+        }
+        
+        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+            if error != nil {
+                completion(nil, false, error)
+                return
+            }
+            guard let data = data else {
+                completion(nil, false, error)
+                return
+            }
+            do {
+                if let responseObject = try JSONSerialization.jsonObject(with: data, options: .fragmentsAllowed) as? [String: Any] {
+                    let recipe = configureRecipe(recipeInfo: responseObject)
+                    completion(recipe, true, nil)
+                }
+            } catch {
+                completion(nil, false, error)
+            }
+        }
+        task.resume()
+    }
+
     
     // Id Int parametre olarak alınır ve tek bir Recipe döndürür
     // Örn URL:
@@ -190,7 +274,6 @@ class SpoonacularClient {
             } catch {
                 completion(nil, false, error)
             }
-            
         }
         task.resume()
     }
@@ -261,8 +344,6 @@ class SpoonacularClient {
         }
         task.resume()
     }
-    
-    
-}
+} // end of SpoonacularClient
 
 

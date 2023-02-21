@@ -18,4 +18,10 @@ struct Recipe {
     var ingredients : [String]?
     var instructions : [String]?
     var servings: Int?
+    var id: Int?
+    var calories: Double?
+    var carbs: Double?
+    var fat: Double?
+    var protein: Double?
+    var sugar: Double?
 }

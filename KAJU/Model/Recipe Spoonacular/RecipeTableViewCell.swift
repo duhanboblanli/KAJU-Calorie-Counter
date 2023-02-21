@@ -16,26 +16,40 @@ class RecipeTableViewCell: UITableViewCell {
     @IBOutlet weak var calorie: UILabel!
     @IBOutlet weak var time: UILabel!
     
-    override func awakeFromNib() {
+    /*override func awakeFromNib() {
         super.awakeFromNib()
         
         // Initialization code
         
-    }
+    }*/
     
     /*func setCellWithValuesOf(_ recipeData:RecipeStruct) {
         updateUI(label: recipeData.label, calorie: recipeData.calorie, image: recipeData.image, time: recipeData.time)
     }*/
     
-    // Update the UI Views
-    private func updateUI(label: String?, calorie: Float?, image: UIImage?, time: Float?) {
+    // Update the Cell UI Views
+    func updateUI(recipe: Recipe, recipeCell: RecipeTableViewCell) {
         
-        self.name.text = label ?? "Label not found!"
-        let calorie = String(format: "%.0f", calorie ?? 0.0)
-        self.calorie.text = "\(calorie) kcal"
-        self.recipeImage.image = image
-        let time = String(format: "%.0f", time ?? 0.0)
-        self.time.text = "\(time) min"
+        if let title = recipe.title {
+            recipeCell.name.text = title
+        }
+        if let time = recipe.timeRequired {
+            recipeCell.time.text = String("\(time) minutes")
+         
+        }
+        recipeCell.recipeImage.image = UIImage(named: "imagePlaceholder")
+        if let imageURL = recipe.imageURL {
+            SpoonacularClient.downloadRecipeImage(imageURL: imageURL) { (image, success) in
+                recipeCell.recipeImage.image = image
+            }
+        }
+        recipeCell.calorie.text = "0 kcal"
+        if let calorie = recipe.calories {
+            let calorieString = String(format: "%.0f", calorie)
+            recipeCell.calorie.text = "\(calorieString) kcal"
+        }
+        
+        
     }
 
 }
