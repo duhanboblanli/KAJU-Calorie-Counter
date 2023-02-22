@@ -26,10 +26,10 @@
 		FE59984E298B0EDF002CB4DF /* CalculatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE59984D298B0EDF002CB4DF /* CalculatorViewController.swift */; };
 		FE599850298B1C55002CB4DF /* CalculatorResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE59984F298B1C55002CB4DF /* CalculatorResultViewController.swift */; };
 		FE5DEF5D299BC5AC00F13802 /* FoodsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5DEF5C299BC5AC00F13802 /* FoodsViewController.swift */; };
-		FE5DEF69299D10F300F13802 /* games.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FE5DEF68299D10F300F13802 /* games.storyboard */; };
 		FE5E92AB298D1C5400947F7A /* BMI.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5E92AA298D1C5400947F7A /* BMI.swift */; };
 		FE95C262299EDF2200122BC1 /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = FE95C261299EDF2200122BC1 /* IQKeyboardManagerSwift */; };
 		FE95C5502992F44900BCC4A6 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE95C54F2992F44900BCC4A6 /* RegisterViewController.swift */; };
+		FE9BCD7729A6C2A400D88351 /* InstructionsHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE9BCD7629A6C2A400D88351 /* InstructionsHeaderCell.swift */; };
 		FEBF1DCA2986BB4400FD4760 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEBF1DC92986BB4400FD4760 /* AppDelegate.swift */; };
 		FEBF1DCC2986BB4400FD4760 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEBF1DCB2986BB4400FD4760 /* SceneDelegate.swift */; };
 		FEBF1DCE2986BB4400FD4760 /* EggTimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEBF1DCD2986BB4400FD4760 /* EggTimerViewController.swift */; };
@@ -48,6 +48,9 @@
 		FEC7C20629A260CC009A99A8 /* RecipeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC7C20529A260CC009A99A8 /* RecipeModel.swift */; };
 		FEE2CDEB2989A4B0002DAA6F /* guitar_alarm_sound.wav in Resources */ = {isa = PBXBuildFile; fileRef = FEE2CDEA2989A4B0002DAA6F /* guitar_alarm_sound.wav */; };
 		FEE9E150299DAB87007FA5FB /* RecipeTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE9E14F299DAB87007FA5FB /* RecipeTableView.swift */; };
+		FEFFFD2329A63BFD0001999E /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEFFFD2229A63BFD0001999E /* DetailViewController.swift */; };
+		FEFFFD2529A63C230001999E /* InstructionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEFFFD2429A63C230001999E /* InstructionsViewController.swift */; };
+		FEFFFD2729A63C770001999E /* CustomHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEFFFD2629A63C770001999E /* CustomHeaderCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -71,9 +74,9 @@
 		FE59984D298B0EDF002CB4DF /* CalculatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorViewController.swift; sourceTree = "<group>"; };
 		FE59984F298B1C55002CB4DF /* CalculatorResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorResultViewController.swift; sourceTree = "<group>"; };
 		FE5DEF5C299BC5AC00F13802 /* FoodsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodsViewController.swift; sourceTree = "<group>"; };
-		FE5DEF68299D10F300F13802 /* games.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = games.storyboard; sourceTree = "<group>"; };
 		FE5E92AA298D1C5400947F7A /* BMI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BMI.swift; sourceTree = "<group>"; };
 		FE95C54F2992F44900BCC4A6 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
+		FE9BCD7629A6C2A400D88351 /* InstructionsHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionsHeaderCell.swift; sourceTree = "<group>"; };
 		FEBF1DC62986BB4400FD4760 /* KAJU.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KAJU.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FEBF1DC92986BB4400FD4760 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FEBF1DCB2986BB4400FD4760 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -95,6 +98,9 @@
 		FEC7C20529A260CC009A99A8 /* RecipeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeModel.swift; sourceTree = "<group>"; };
 		FEE2CDEA2989A4B0002DAA6F /* guitar_alarm_sound.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = guitar_alarm_sound.wav; sourceTree = "<group>"; };
 		FEE9E14F299DAB87007FA5FB /* RecipeTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeTableView.swift; sourceTree = "<group>"; };
+		FEFFFD2229A63BFD0001999E /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		FEFFFD2429A63C230001999E /* InstructionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstructionsViewController.swift; sourceTree = "<group>"; };
+		FEFFFD2629A63C770001999E /* CustomHeaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomHeaderCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -220,7 +226,8 @@
 			isa = PBXGroup;
 			children = (
 				FEE9E14F299DAB87007FA5FB /* RecipeTableView.swift */,
-				FE5DEF68299D10F300F13802 /* games.storyboard */,
+				FEFFFD2629A63C770001999E /* CustomHeaderCell.swift */,
+				FE9BCD7629A6C2A400D88351 /* InstructionsHeaderCell.swift */,
 				FEBF1DCF2986BB4400FD4760 /* Main.storyboard */,
 				FEBF1DD42986BB4600FD4760 /* LaunchScreen.storyboard */,
 			);
@@ -231,6 +238,8 @@
 			isa = PBXGroup;
 			children = (
 				FEC7BF6629A3F2AC001B1EC9 /* RecipesViewController.swift */,
+				FEFFFD2229A63BFD0001999E /* DetailViewController.swift */,
+				FEFFFD2429A63C230001999E /* InstructionsViewController.swift */,
 				FE5DEF5C299BC5AC00F13802 /* FoodsViewController.swift */,
 				FEBF1DCD2986BB4400FD4760 /* EggTimerViewController.swift */,
 				FE41A2002997ABA200892346 /* TabBarController.swift */,
@@ -319,7 +328,6 @@
 				FE0BB00A299519690062E096 /* GoogleService-Info.plist in Resources */,
 				FE4C750329A175B400723DC6 /* Main.storyboard in Resources */,
 				FEBF1DD32986BB4600FD4760 /* Assets.xcassets in Resources */,
-				FE5DEF69299D10F300F13802 /* games.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -373,6 +381,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				FE32926D2991AF740075A5B8 /* WelcomeViewController.swift in Sources */,
+				FEFFFD2729A63C770001999E /* CustomHeaderCell.swift in Sources */,
+				FEFFFD2329A63BFD0001999E /* DetailViewController.swift in Sources */,
 				FEC7BF6329A3F269001B1EC9 /* Extension + UITableView.swift in Sources */,
 				FE95C5502992F44900BCC4A6 /* RegisterViewController.swift in Sources */,
 				2D850C41299BFA8E00A525F0 /* FoodApiService.swift in Sources */,
@@ -386,10 +396,12 @@
 				FE160F5329A2876D00876278 /* RecipeApiService.swift in Sources */,
 				FEC7BF5E29A3F147001B1EC9 /* RecipeTableViewCell.swift in Sources */,
 				2D850C3F299BFA6F00A525F0 /* FoodModel.swift in Sources */,
+				FE9BCD7729A6C2A400D88351 /* InstructionsHeaderCell.swift in Sources */,
 				FEC7C20629A260CC009A99A8 /* RecipeModel.swift in Sources */,
 				FE1F72C529969C0D005FFC4B /* ActivenessViewController.swift in Sources */,
 				FEBF1DCA2986BB4400FD4760 /* AppDelegate.swift in Sources */,
 				FEC7BF6529A3F271001B1EC9 /* Extension + UIViewController.swift in Sources */,
+				FEFFFD2529A63C230001999E /* InstructionsViewController.swift in Sources */,
 				FE59984E298B0EDF002CB4DF /* CalculatorViewController.swift in Sources */,
 				FEBF1DCC2986BB4400FD4760 /* SceneDelegate.swift in Sources */,
 				FEC7BF5D29A3F147001B1EC9 /* SearchedRecipes.swift in Sources */,

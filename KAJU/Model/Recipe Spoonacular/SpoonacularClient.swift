@@ -18,7 +18,7 @@ class SpoonacularClient {
     // duhan2 - 1b7e88a834da447bbb98991d223bceb8
     // duhan3 - cec51adb54d74837a287543d74a80cc9
     // unknown - a67a5241c34f45429f75c2d8a1858a67
-    static var apiKey = "0706fa7896064f859e95c8cb220b288e"
+    static var apiKey = "a67a5241c34f45429f75c2d8a1858a67"
     static let host = "api.spoonacular.com"
     static let scheme = "https"
     // Random URL
@@ -44,7 +44,7 @@ class SpoonacularClient {
         //SpoonacularClient.apiKey = apiKeys[randomInt]
         components.queryItems?.append(URLQueryItem(name: "apiKey", value: SpoonacularClient.apiKey))
         // Kaç tane recipes verisi çekilsin?
-        components.queryItems?.append(URLQueryItem(name: "number", value: "5"))
+        components.queryItems?.append(URLQueryItem(name: "number", value: "20"))
         components.queryItems?.append(URLQueryItem(name: "addRecipeNutrition", value: "true"))
         components.queryItems?.append(URLQueryItem(name: "fillIngredients", value: "true"))
         components.queryItems?.append(URLQueryItem(name: "instructionsRequired", value: "true"))

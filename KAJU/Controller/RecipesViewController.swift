@@ -7,9 +7,8 @@
 
 import UIKit
 
+
 class RecipesViewController: UIViewController {
-    
-    
     
     let ColorHardDarkGreen = UIColor( red: 40/255, green: 71/255, blue: 92/255, alpha: 1)
     let ColorDarkGreen = UIColor( red: 47/255, green: 136/255, blue: 134/255, alpha: 1)
@@ -39,6 +38,15 @@ class RecipesViewController: UIViewController {
     private var recipeViewModel = RecipeViewModel()
     private var images: [UIImage]?
     
+    @IBOutlet weak var scrollTopButton: UIButton!
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.tabBarController?.tabBar.isHidden = false
+        
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         //self.navigationController?.isNavigationBarHidden = true
@@ -52,6 +60,7 @@ class RecipesViewController: UIViewController {
         searchBar.layer.cornerRadius = searchBar.frame.size.height / 5
         recipesNavigationıtem.title = "Recipes"
         SpoonacularClient.getRandomRecipe(pagination:true,completion: handleRecipes)
+       
         //loadRecipesData()
         
     }
@@ -117,9 +126,27 @@ class RecipesViewController: UIViewController {
 
 //MARK: - UITableViewDelegate
 extension RecipesViewController: UITableViewDelegate {
-    //  Seçilen cellin indexini verir
+    // Seçilen cellin indexini verir
+    // Datada seçilen recipe'in ingredients verisi bulunamazsa, recipe'in websitesine yönlendir
+    // Bulunursa detail view'e yönlendir
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print(indexPath.row)
+        let recipe = recipes[indexPath.row]
+        if recipe.ingredients?.count == 0 {
+            if let url = URL(string: recipe.sourceURL ?? "") {
+                if UIApplication.shared.canOpenURL(url) {
+                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                } else {
+                    self.presentAlert(title: "Recipe Unavailable", message: "")
+                }
+            } else {
+                self.presentAlert(title: "Recipe Unavailable", message: "")
+            }
+        } else {
+            let detailVC = DetailViewController()
+            detailVC.recipe = recipe
+            navigationController?.pushViewController(detailVC, animated: true)
+            //navigationController?.show(detailVC, sender: self)
+        }
     }
 }
 
@@ -131,12 +158,15 @@ extension RecipesViewController: UITableViewDataSource {
         var numberOfRow = 1
             switch tableView {
             case discoverTableView:
-                if recipes.count >= 10 {
                     numberOfRow = recipes.count
-                    return numberOfRow
-                } else {
-                    numberOfRow = recipes.count}
-               
+                if recipes.count <= 1 {
+                    scrollTopButton.isEnabled = false
+                    scrollTopButton.isHidden = true
+                }
+                else {
+                    scrollTopButton.isEnabled = true
+                    scrollTopButton.isHidden = false
+                }
                 //Edamam
                 //numberOfRow = recipeViewModel.numberOfRowsInSection(section: section)
                 return numberOfRow
@@ -269,3 +299,4 @@ extension RecipesViewController: UIScrollViewDelegate{
 } */
 
     
+
