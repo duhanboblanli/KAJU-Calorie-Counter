@@ -22,7 +22,6 @@ class InstructionsHeaderCell: UIView {
         label.textColor = .white
         label.font = UIFont.boldSystemFont(ofSize: 27)
         label.textAlignment = .left
-        label.text = "Instructions"
         return label
     }()
     
