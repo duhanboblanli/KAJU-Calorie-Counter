@@ -4,7 +4,7 @@
 //
 //  Created by Duhan Boblanlı on 19.02.2023.
 //
-/*
+
 import Foundation
 import UIKit
 
@@ -69,10 +69,8 @@ class RecipeApiService {
         dataTask?.resume()
     }
     func getImageDataFrom(url: String, completion: @escaping (Result<UIImage, Error>) -> Void) {
-        print("Fetching image11111111.. ", url)
         guard let url = URL(string: url) else {return}
         dataTask = URLSession.shared.dataTask(with: url) { (data, response, error) in
-            print("Fetching image22222222.. ", url)
             // Handle Error
             if let error = error {
                 completion(.failure(error))
@@ -85,11 +83,8 @@ class RecipeApiService {
                 print("Empty Response")
                 return
             }
-            print("Response status code: \(response.statusCode)")
-            
             guard let data = data else {
                 // Handle Empty Data
-                
                 print("Empty Data")
                 return
             }
@@ -109,4 +104,4 @@ class RecipeApiService {
 }
 
 
-*/
+

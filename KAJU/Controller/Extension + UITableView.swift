@@ -49,3 +49,9 @@ extension UITableView {
         self.separatorStyle = .singleLine
     }
 }
+
+extension UITableView {
+    func scrollToTop(animated: Bool) {
+        setContentOffset(CGPointZero, animated: animated)
+    }
+}

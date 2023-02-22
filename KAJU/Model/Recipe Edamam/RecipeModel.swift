@@ -5,7 +5,7 @@
 //  Created by Duhan Boblanlı on 19.02.2023.
 //
 
-/*import Foundation
+import Foundation
 import UIKit
 
 // Model for targetRecipes which is a list of recipes
@@ -20,13 +20,13 @@ struct RecipesData: Decodable {
 }
 
 struct RecipeData: Decodable {
-    let recipe: Recipe
+    let recipe: Recipe2
     private enum CodingKeys: String, CodingKey {
         case recipe = "recipe"
     }
 }
 
-struct Recipe: Decodable {
+struct Recipe2: Decodable {
     let label: String?
     let image: String? // URL for API call to get UIImage object
     let url: String? // URL for API call to get detail website
@@ -35,7 +35,6 @@ struct Recipe: Decodable {
     let ingredientLines: [String?]
     let cuisineType: [String?]
     let mealType: [String?]
-    let dishType: [String?]
 
     private enum CodingKeys: String, CodingKey {
         case label
@@ -46,7 +45,6 @@ struct Recipe: Decodable {
         case ingredientLines
         case cuisineType
         case mealType
-        case dishType
     }
 }
 
@@ -74,4 +72,4 @@ struct RecipeStruct {
     let time: Float?
 }
 
-*/
+

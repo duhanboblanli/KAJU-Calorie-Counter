@@ -6,30 +6,33 @@
 //
 
 import UIKit
+import Foundation
 
 class SpoonacularClient {
     
     //static let apiKeys: [String] = ["8b8db97d79c840ec95ae4c7c472b8fdd","0706fa7896064f859e95c8cb220b288e","a67a5241c34f45429f75c2d8a1858a67"]
     //static let randomInt = Int.random(in: 0..<3)
     
-    // ege - 8b8db97d79c840ec95ae4c7c472b8fdd -
-    // duhan - 0706fa7896064f859e95c8cb220b288e -
+    // ege - 8b8db97d79c840ec95ae4c7c472b8fdd
+    // duhan - 0706fa7896064f859e95c8cb220b288e
     // duhan2 - 1b7e88a834da447bbb98991d223bceb8
-    // unknown - a67a5241c34f45429f75c2d8a1858a67 -
-    static var apiKey = "1b7e88a834da447bbb98991d223bceb8"
+    // duhan3 - cec51adb54d74837a287543d74a80cc9
+    // unknown - a67a5241c34f45429f75c2d8a1858a67
+    static var apiKey = "0706fa7896064f859e95c8cb220b288e"
     static let host = "api.spoonacular.com"
     static let scheme = "https"
     // Random URL
     // https://api.spoonacular.com/recipes/random?apiKey=a67a5241c34f45429f75c2d8a1858a67&number=8&tags=
     
     // Complex Search URL
-    // https://api.spoonacular.com/recipes/complexSearch?apiKey=0706fa7896064f859e95c8cb220b288e&number=8&addRecipeNutrition=true&fillIngredients=true&instructionsRequired=true
+    // https://api.spoonacular.com/recipes/complexSearch?apiKey=8b8db97d79c840ec95ae4c7c472b8fdd&number=8&addRecipeNutrition=true&fillIngredients=true&instructionsRequired=true
+    
     
     // Declare URL
     static var randomRecipeURL: URL {
         //Random kapalı tüm api keyler açılınca açabilirsin!!
-        let apiKeys: [String] = ["8b8db97d79c840ec95ae4c7c472b8fdd","0706fa7896064f859e95c8cb220b288e","a67a5241c34f45429f75c2d8a1858a67","1b7e88a834da447bbb98991d223bceb8"]
-        let randomInt = Int.random(in: 0..<4)
+        let apiKeys: [String] = ["8b8db97d79c840ec95ae4c7c472b8fdd","0706fa7896064f859e95c8cb220b288e","a67a5241c34f45429f75c2d8a1858a67","1b7e88a834da447bbb98991d223bceb8","cec51adb54d74837a287543d74a80cc9"]
+        let randomInt = Int.random(in: 0..<apiKeys.count)
         let randomOffsetInt = Int.random(in: 1...900)
         let randomOffsetString = String(randomOffsetInt)
         var components = URLComponents()
@@ -41,50 +44,59 @@ class SpoonacularClient {
         //SpoonacularClient.apiKey = apiKeys[randomInt]
         components.queryItems?.append(URLQueryItem(name: "apiKey", value: SpoonacularClient.apiKey))
         // Kaç tane recipes verisi çekilsin?
-        components.queryItems?.append(URLQueryItem(name: "number", value: "10"))
+        components.queryItems?.append(URLQueryItem(name: "number", value: "5"))
         components.queryItems?.append(URLQueryItem(name: "addRecipeNutrition", value: "true"))
         components.queryItems?.append(URLQueryItem(name: "fillIngredients", value: "true"))
         components.queryItems?.append(URLQueryItem(name: "instructionsRequired", value: "true"))
         components.queryItems?.append(URLQueryItem(name: "offset", value: randomOffsetString))
         
         print("Full URL: " , components.url!)
-        print("Full URL: " , components.url!)
-        print("Full URL: " , components.url!)
-        print("Full URL: " , components.url!)
         return components.url!
     }
     
+    static var task: URLSessionDataTask?
+    static var isPaginating = false
     // JSON datayı Model.Recipe tipinde döndürür
-    class func getRandomRecipe(completion: @escaping ([Recipe], Error?) -> Void) {
-        // URL task'e verilir
-        let task = URLSession.shared.dataTask(with: SpoonacularClient.randomRecipeURL) { (data, response, error) in
-            if error != nil {
-                // Nil Array ve error döner
-                completion([], error)
-                return
-            }
-            guard let data = data else {
-                completion([], error)
-                return
-            }
-            do {
-                // responseObject: Optional([AnyHashable("recipes"): <__NSArrayI 0x6000020d54a0> {JSON verilerini NSArray'de döndürür}
-                let responseObject = try JSONSerialization.jsonObject(with: data, options: .fragmentsAllowed) as? [AnyHashable: Any]
-                // JSON verilerinin "recipes" listesinden, veriler dict olarak alınır ve arraye atılır
-                if let recipeArray = responseObject?["results"] as? [[String: Any]] {
-                    // Recipe struct modelinde recipes arrayi döner
-                    let recipes = createRecipes(recipeArray: recipeArray)
-                    // Recipes ve nil error döner
-                    completion(recipes, nil)
+    class func getRandomRecipe(pagination: Bool,completion: @escaping ([Recipe], Error?) -> Void) {
+        DispatchQueue.main.async {
+            if pagination {
+                isPaginating = true
+            } }
+            // URL task'e verilir
+            task = URLSession.shared.dataTask(with: SpoonacularClient.randomRecipeURL) { (data, response, error) in
+                if error != nil {
+                    // Nil Array ve error döner
+                    completion([], error)
+                    return
                 }
-                else {
+                guard let data = data else {
+                    completion([], error)
+                    return
+                }
+                do {
+                    // responseObject: Optional([AnyHashable("recipes"): <__NSArrayI 0x6000020d54a0> {JSON verilerini NSArray'de döndürür}
+                    let responseObject = try JSONSerialization.jsonObject(with: data, options: .fragmentsAllowed) as? [AnyHashable: Any]
+                    // JSON verilerinin "recipes" listesinden, veriler dict olarak alınır ve arraye atılır
+                    if let recipeArray = responseObject?["results"] as? [[String: Any]] {
+                        // Recipe struct modelinde recipes arrayi döner
+                        let recipes = createRecipes(recipeArray: recipeArray)
+                        // Recipes ve nil error döner
+                        
+                        DispatchQueue.main.async {
+                            completion(recipes, nil)
+                            if pagination{
+                                self.isPaginating = false
+                            }
+                        }
+                    }
+                    else {
+                        completion([], error)
+                    }
+                } catch {
                     completion([], error)
                 }
-            } catch {
-                completion([], error)
             }
-        }
-        task.resume()
+            task?.resume()
     }
     
     // JSON verilerini Recipe modele uygun şekilde arraye dönüştürür

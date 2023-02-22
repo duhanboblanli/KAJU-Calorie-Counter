@@ -9,6 +9,8 @@ import UIKit
 
 class RecipesViewController: UIViewController {
     
+    
+    
     let ColorHardDarkGreen = UIColor( red: 40/255, green: 71/255, blue: 92/255, alpha: 1)
     let ColorDarkGreen = UIColor( red: 47/255, green: 136/255, blue: 134/255, alpha: 1)
     let ColorLightGreen = UIColor( red: 132/255, green: 198/255, blue: 155/255, alpha: 1)
@@ -34,6 +36,9 @@ class RecipesViewController: UIViewController {
     
     var recipes = [Recipe]()
     
+    private var recipeViewModel = RecipeViewModel()
+    private var images: [UIImage]?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         //self.navigationController?.isNavigationBarHidden = true
@@ -46,20 +51,27 @@ class RecipesViewController: UIViewController {
         searchBar.delegate = self
         searchBar.layer.cornerRadius = searchBar.frame.size.height / 5
         recipesNavigationıtem.title = "Recipes"
-        SpoonacularClient.getRandomRecipe(completion: handleRecipes)
+        SpoonacularClient.getRandomRecipe(pagination:true,completion: handleRecipes)
+        //loadRecipesData()
         
     }
     
-    /*private func loadRecipesData() {
+    private func loadRecipesData() {
         // Called at the beginning to do an API call and fill targetRecipes
         recipeViewModel.fetchRecipeData(pagination: false){ [weak self] in
             self?.discoverTableView.dataSource = self
             self?.discoverTableView.reloadData()
         }
-    } */
+    } 
     
     @IBAction func refreshButtonPressed(_ sender: UIButton) {
-        SpoonacularClient.getRandomRecipe(completion: handleRecipes)
+        SpoonacularClient.getRandomRecipe(pagination:true,completion: handleRecipes)
+        
+        //loadRecipesData()
+    }
+    
+    @IBAction func scrollToTopButtonPressed(_ sender: UIButton) {
+        discoverTableView.scrollToTop(animated: true)
     }
     
     @IBAction func firstTabPressed(_ sender: UIButton) {
@@ -103,39 +115,6 @@ class RecipesViewController: UIViewController {
     
 }// ends of RecipesViewController
 
-
-
-//MARK: - UIScrollViewDelegate
-extension RecipesViewController: UIScrollViewDelegate{
-    private func createSpinnerFooter() -> UIView {
-        let footerView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.size
-            .width, height: 100))
-        let spinner = UIActivityIndicatorView()
-        spinner.center = footerView.center
-        spinner.color = UIColor( red: 170/255, green: 170/255, blue: 170/255, alpha: 1)
-        footerView.addSubview(spinner)
-        spinner.startAnimating()
-        return footerView
-    }
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let position = scrollView.contentOffset.y
-        if position > (discoverTableView.contentSize.height-100-scrollView.frame.size.height){
-            
-           /* guard !recipeViewModel.apiService.isPaginating else {
-                // we are already fetching more data
-                return
-            }
-            self.discoverTableView.tableFooterView = createSpinnerFooter()
-            recipeViewModel.fetchRecipeData(pagination: true){ [weak self] in
-                print("load more")
-                self?.discoverTableView.tableFooterView = nil
-                self?.discoverTableView.dataSource = self
-                self?.discoverTableView.reloadData()
-            } */
-        }
-    }
-}
-
 //MARK: - UITableViewDelegate
 extension RecipesViewController: UITableViewDelegate {
     //  Seçilen cellin indexini verir
@@ -152,7 +131,14 @@ extension RecipesViewController: UITableViewDataSource {
         var numberOfRow = 1
             switch tableView {
             case discoverTableView:
-                numberOfRow = recipes.count
+                if recipes.count >= 10 {
+                    numberOfRow = recipes.count
+                    return numberOfRow
+                } else {
+                    numberOfRow = recipes.count}
+               
+                //Edamam
+                //numberOfRow = recipeViewModel.numberOfRowsInSection(section: section)
                 return numberOfRow
             case favTableView:
                 numberOfRow = 1
@@ -175,18 +161,19 @@ extension RecipesViewController: UITableViewDataSource {
                
                recipeCell.updateUI(recipe: recipe, recipeCell: recipeCell)
                
+               //Edamam
+              /* recipeCell = tableView.dequeueReusableCell(withIdentifier: "DiscoverCell", for: indexPath) as! RecipeTableViewCell
+                 let recipe = recipeViewModel.cellForRowAt(indexPath: indexPath)
+                     recipeCell.setCellWithValuesOf(recipe) */
+               
            case favTableView:
                recipeCell = tableView.dequeueReusableCell(withIdentifier: "FavoritesCell", for: indexPath) as! RecipeTableViewCell
                
            default:
                print("Some things Wrong RecipesTableViewDataSource!!")
-               
            }
         return recipeCell
-           
     }
-    
-    
 }
 
 //MARK: - UITextFieldDelegate
@@ -226,9 +213,59 @@ extension RecipesViewController: UITextFieldDelegate {
         textField.placeholder = "Search For A Recipe"
         self.navigationController?.isNavigationBarHidden = false
     }
-    
-    
-    
+  
 }
+
+/*//MARK: - UIScrollViewDelegate - request sayısı yetersiz açma!
+extension RecipesViewController: UIScrollViewDelegate{
+    
+    // Pagination beklenirken loading animasyonu yarat
+    private func createSpinnerFooter() -> UIView {
+        let footerView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.size
+            .width, height: 100))
+        let spinner = UIActivityIndicatorView()
+        spinner.center = footerView.center
+        spinner.color = UIColor( red: 170/255, green: 170/255, blue: 170/255, alpha: 1)
+        footerView.addSubview(spinner)
+        spinner.startAnimating()
+        return footerView
+    }
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let position = scrollView.contentOffset.y
+        if position > (discoverTableView.contentSize.height-100-scrollView.frame.size.height){
+            print("fetch more")
+            
+            
+            // Spoonacular
+           /* guard !SpoonacularClient.isPaginating else {
+                print("111we are already fetching more data")
+                return
+            }
+            self.discoverTableView.tableFooterView = createSpinnerFooter()
+            SpoonacularClient.getRandomRecipe(pagination:true,completion: handleRecipes)
+            self.discoverTableView.tableFooterView = nil
+            
+            guard SpoonacularClient.isPaginating else {
+                print("222we are already fetching more data")
+                 return
+             } */
+             
+
+            
+            /* //Edamam
+            guard !recipeViewModel.apiService.isPaginating else {
+                            // we are already fetching more data
+                            return
+                        }
+            self.discoverTableView.tableFooterView = createSpinnerFooter()
+            recipeViewModel.fetchRecipeData(pagination: true){ [weak self] in
+                self?.discoverTableView.reloadData()
+                print("load more")
+                self?.discoverTableView.tableFooterView = nil }
+                
+             */
+        }
+    }
+} */
 
     
