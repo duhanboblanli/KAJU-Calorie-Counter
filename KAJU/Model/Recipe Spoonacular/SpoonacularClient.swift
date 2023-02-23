@@ -44,7 +44,7 @@ class SpoonacularClient {
         //SpoonacularClient.apiKey = apiKeys[randomInt]
         components.queryItems?.append(URLQueryItem(name: "apiKey", value: SpoonacularClient.apiKey))
         // Kaç tane recipes verisi çekilsin?
-        components.queryItems?.append(URLQueryItem(name: "number", value: "20"))
+        components.queryItems?.append(URLQueryItem(name: "number", value: "1"))
         components.queryItems?.append(URLQueryItem(name: "addRecipeNutrition", value: "true"))
         components.queryItems?.append(URLQueryItem(name: "fillIngredients", value: "true"))
         components.queryItems?.append(URLQueryItem(name: "instructionsRequired", value: "true"))

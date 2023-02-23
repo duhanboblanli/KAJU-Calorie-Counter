@@ -60,5 +60,22 @@ class RecipeTableViewCell: UITableViewCell {
             recipeCell.calorie.text = "\(calorieString) kcal"
         }
     }
+    
+    func updateFoodUI(recipe: FoodRecipe, recipeCell: RecipeTableViewCell) {
+        
+            let title = recipe.title
+            recipeCell.name.text = title
+        
+            let time = recipe.timeRequired
+            recipeCell.time.text = String("\(time) minutes")
+         
+        
+        recipeCell.recipeImage.image = UIImage(data: recipe.image!)
+       
+        
+        let calorie = recipe.calories
+        recipeCell.calorie.text = "\(calorie) kcal"
+        
+    }
 }
 

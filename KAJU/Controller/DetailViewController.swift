@@ -19,13 +19,15 @@ class DetailViewController: UIViewController {
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     var recipe: Recipe!
     var ingredientsArray = [String]()
-    var ingredients = [Ingredient]() // Type local databasede tanımlı
+    var ingredients = [Ingredient]() // Type, local databasede tanımlı; detail viewde tıklanan recipe
     var image = UIImage()
     var isSavedRecipe = false
-    var foodRecipe: FoodRecipe! // Type local databasede tanımlı
+    var foodRecipe: FoodRecipe! // Type, local databasede tanımlı; detail viewde tıklanan recipe
     let instructionsButton = UIButton()
     let tableView = UITableView.init(frame: CGRect.zero, style: .grouped)
-    
+    // For favorites
+    var isFav = false
+    var favoriteRecipes: [FoodRecipe] = []
     //MARK:- Core Data setup
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -44,13 +46,25 @@ class DetailViewController: UIViewController {
         if let ingredients = recipe.ingredients {
             self.ingredientsArray = ingredients
         }
-        setupNavigationButtons()
+        getFavorites()
+        favoriteAction()
     }
-    
+    //Localdaki verileri çek
+    private func getFavorites() {
+        let fetchRequest: NSFetchRequest<FoodRecipe> = FoodRecipe.fetchRequest()
+        fetchRequest.returnsObjectsAsFaults = false
+        fetchRequest.sortDescriptors = []
+        if let result = try? appDelegate.persistentContainer.viewContext.fetch(fetchRequest) {
+            favoriteRecipes = result
+        }
+    }
+   
     // Localdaki datanın ingredientsleri alır
     // Ingredients tableView'i bununla updateler
+    // Saved sayfasından detailse basarsan çağrılır
     private func setupFetchRequest() {
         let fetchRequest: NSFetchRequest<Ingredient> = Ingredient.fetchRequest()
+        fetchRequest.returnsObjectsAsFaults = false
         let predicate = NSPredicate(format: "foodRecipe == %@", foodRecipe)
         fetchRequest.sortDescriptors = []
         fetchRequest.predicate = predicate
@@ -60,8 +74,45 @@ class DetailViewController: UIViewController {
         }
     }
     
-    //MARK: - Setup View
+    // viewDidLoad'da çağrılır
+    func favoriteAction(){
+        
+        for fav in favoriteRecipes {
+            if fav.title == recipe.title {
+                isFav = true
+            }
+        }
+        if isFav {
+            navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Favorited", style: .plain, target: self, action: #selector(self.unfavorite(_:)))
+        }
+        else{
+            navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Favorite", style: .plain, target: self, action: #selector(self.favorite(_:)))
+        }
+    }
+    // Change the button label and action if clicked
+    @objc func favorite(_ sender: UITapGestureRecognizer) {
+        isFav = true
+        navigationItem.rightBarButtonItem?.title = "Favorited"
+        saveAction()
+        navigationItem.rightBarButtonItem?.action = #selector(self.unfavorite(_:))
+    }
     
+    @objc func unfavorite(_ sender: UITapGestureRecognizer) {
+        isFav = false
+        navigationItem.rightBarButtonItem?.title = "Favorite"
+        getFavorites()
+        for fav in favoriteRecipes {
+            if fav.title == recipe.title { //|| fav.title == foodRecipe.title
+                self.appDelegate.persistentContainer.viewContext.delete(fav)
+                try? self.appDelegate.persistentContainer.viewContext.save()
+                self.favoriteRecipes.remove(at: favoriteRecipes.firstIndex(of: fav)!)
+            }
+        }
+        navigationItem.rightBarButtonItem?.action = #selector(self.favorite(_:))
+    }
+  
+    
+    //MARK: - Setup View
     override func loadView() {
         super.loadView()
         setupView()
@@ -91,16 +142,6 @@ class DetailViewController: UIViewController {
         tableView.separatorColor = ColorLightGreen
     }
     
-    //MARK:- Setup Navigation Buttons
-    private func setupNavigationButtons() {
-        if isSavedRecipe == false {
-            let saveButton = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveAction))
-            self.navigationItem.rightBarButtonItem = saveButton
-        }
-        // Storyboarddan'dan komple navigationItemColorları ColorGreen dene
-        //self.navigationItem.rightBarButtonItem?.tintColor = ColorGreen
-        //self.navigationItem.backBarButtonItem?.tintColor = ColorLightGreen
-    }
     
     private func setupInstructionButton() {
         view.addSubview(instructionsButton)
@@ -127,7 +168,12 @@ class DetailViewController: UIViewController {
         foodRecipe.title = recipe.title
         foodRecipe.sourceURL = recipe.sourceURL
         foodRecipe.timeRequired = Int64(recipe.timeRequired!)
+        foodRecipe.calories = Int64(recipe.calories!)
+        foodRecipe.carbs = Int64(recipe.carbs!)
+        foodRecipe.fats = Int64(recipe.fat!)
+        foodRecipe.proteins = Int64(recipe.protein!)
         foodRecipe.image = imageData
+        
         if ingredientsArray.count != 0 {
             for ingredientString in ingredientsArray {
                 let ingredient = Ingredient(context: appDelegate.persistentContainer.viewContext)
@@ -137,6 +183,7 @@ class DetailViewController: UIViewController {
         } else {
             foodRecipe.ingredients = []
         }
+        
         if let instructions = recipe.instructions {
             if instructions.count != 0 {
                 var count = 1
@@ -153,9 +200,9 @@ class DetailViewController: UIViewController {
         }
         do {
             try appDelegate.persistentContainer.viewContext.save()
-            presentAlert(title: "Recipe Saved", message: "")
+            presentAlert(title: "Recipe Favorited 🤩", message: "")
         } catch {
-            presentAlert(title: "Unable to save the recipe", message: "")
+            presentAlert(title: "Unable to Save the Recipe", message: "")
         }
     }
     
@@ -241,12 +288,11 @@ class DetailViewController: UIViewController {
         else {
             headerView.recipeTitleLabel.text = foodRecipe.title
             // Nutritients bilgileri localDataBase'e kayıt edilmedi networkingden al
-            if let calorie = recipe.calories, let carbs = recipe.carbs, let protein = recipe.protein, let fat = recipe.fat {
-                let calInt = Int(calorie)
-                let carbInt = Int(carbs)
-                let protInt = Int(protein)
-                let fatInt = Int(fat)
-                headerView.timingLabel.text = "  🔥\(calInt)kcal   🥖Carbs: \(carbInt)g   🥩Protein: \(protInt)g   🧈Fat: \(fatInt)g" }
+            let calorie = foodRecipe.calories
+            let carbs = foodRecipe.carbs
+            let protein = foodRecipe.proteins
+            let fat = foodRecipe.fats
+            headerView.timingLabel.text = "  🔥\(calorie)kcal   🥖Carbs: \(carbs)g   🥩Protein: \(protein)g   🧈Fat: \(fat)g"
             headerView.imageView.image = UIImage(data: foodRecipe.image!)
             headerView.ingredientsLabel.text = "  Ingredients (\(foodRecipe.ingredients!.count) items)"
         }

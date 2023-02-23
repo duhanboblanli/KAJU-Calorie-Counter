@@ -24,7 +24,7 @@ extension UITableView {
         
         titleLabel.font = .boldSystemFont(ofSize: 17)
         titleLabel.numberOfLines = 0
-        titleLabel.textColor = .black
+        titleLabel.textColor = .lightGray
         titleLabel.text = title
         
         emptyView.addSubview(messageLabel)

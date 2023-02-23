@@ -154,7 +154,7 @@ extension InstructionsViewController: UITableViewDataSource, UITableViewDelegate
         if isSavedRecipe == false {
             headerView.ingredientsLabel.text = "☑️Instructions (\(instructionsArray.count) items)" }
         else {
-            headerView.ingredientsLabel.text = "✅Instructions (\(foodRecipe.instructions!.count) items)"
+            headerView.ingredientsLabel.text = "☑️Instructions (\(foodRecipe.instructions!.count) items)"
         }
         return headerView
     }

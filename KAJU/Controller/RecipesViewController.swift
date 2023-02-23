@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreData
 
 
 class RecipesViewController: UIViewController {
@@ -32,19 +33,51 @@ class RecipesViewController: UIViewController {
     @IBOutlet weak var favTableView: UITableView!
     
     @IBOutlet weak var recipesNavigationıtem: UINavigationItem!
+    @IBOutlet weak var scrollTopButton: UIButton!
     
+    //For discover view
     var recipes = [Recipe]()
     
+    // For favorites view
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    var foodRecipes: [FoodRecipe] = []
+    
+    //let context = ( UIApplication.shared.delegate as! AppDelegate ).persistentContainer.viewContext
+   // var request = NSFetchRequest<NSFetchRequestResult>()
+
+    // Edamam model
     private var recipeViewModel = RecipeViewModel()
     private var images: [UIImage]?
     
-    @IBOutlet weak var scrollTopButton: UIButton!
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.tabBarController?.tabBar.isHidden = false
-        
-        
+        setupFetchRequest()
+        /*request = FoodRecipe.fetchRequest()
+        request.returnsObjectsAsFaults = false
+        do {
+            let arrayOfData = try context.fetch(request)
+            print("RecipesViewArrayofdata:",arrayOfData)
+        } catch {
+            print("error")
+        } */
+    }
+
+    //Localdaki verileri çek
+    private func setupFetchRequest() {
+        let fetchRequest: NSFetchRequest<FoodRecipe> = FoodRecipe.fetchRequest()
+        fetchRequest.returnsObjectsAsFaults = false
+        fetchRequest.sortDescriptors = []
+        if let result = try? appDelegate.persistentContainer.viewContext.fetch(fetchRequest) {
+            //Delete all data
+            /*for object in result {
+                guard let objectData = object as? NSManagedObject else {continue}
+                appDelegate.persistentContainer.viewContext.delete(objectData) }*/
+            foodRecipes = result
+            print("Recipe View Fetch Request:",foodRecipes)
+            favTableView.reloadData()
+        }
     }
     
     override func viewDidLoad() {
@@ -60,7 +93,6 @@ class RecipesViewController: UIViewController {
         searchBar.layer.cornerRadius = searchBar.frame.size.height / 5
         recipesNavigationıtem.title = "Recipes"
         SpoonacularClient.getRandomRecipe(pagination:true,completion: handleRecipes)
-       
         //loadRecipesData()
         
     }
@@ -75,7 +107,6 @@ class RecipesViewController: UIViewController {
     
     @IBAction func refreshButtonPressed(_ sender: UIButton) {
         SpoonacularClient.getRandomRecipe(pagination:true,completion: handleRecipes)
-        
         //loadRecipesData()
     }
     
@@ -92,7 +123,6 @@ class RecipesViewController: UIViewController {
         secondButtonView.backgroundColor = ColorHardDarkGreen
         discoverLabel.textColor = ColorDarkGreen
         favoritesLabel.textColor = UIColor.lightGray
-        
     }
     
     @IBAction func secondTabPressed(_ sender: UIButton) {
@@ -104,6 +134,9 @@ class RecipesViewController: UIViewController {
         secondButtonView.backgroundColor = ColorDarkGreen
         discoverLabel.textColor = UIColor.lightGray
         favoritesLabel.textColor = ColorDarkGreen
+        DispatchQueue.main.async { [self] in
+            setupFetchRequest()
+        }
         
     }
     
@@ -130,24 +163,67 @@ extension RecipesViewController: UITableViewDelegate {
     // Datada seçilen recipe'in ingredients verisi bulunamazsa, recipe'in websitesine yönlendir
     // Bulunursa detail view'e yönlendir
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let recipe = recipes[indexPath.row]
-        if recipe.ingredients?.count == 0 {
-            if let url = URL(string: recipe.sourceURL ?? "") {
-                if UIApplication.shared.canOpenURL(url) {
-                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        switch tableView {
+        case discoverTableView:
+            let recipe = recipes[indexPath.row]
+            if recipe.ingredients?.count == 0 {
+                if let url = URL(string: recipe.sourceURL ?? "") {
+                    if UIApplication.shared.canOpenURL(url) {
+                        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                    } else {
+                        self.presentAlert(title: "Recipe Unavailable", message: "")
+                    }
                 } else {
                     self.presentAlert(title: "Recipe Unavailable", message: "")
                 }
             } else {
-                self.presentAlert(title: "Recipe Unavailable", message: "")
+                let detailVC = DetailViewController()
+                detailVC.recipe = recipe
+                navigationController?.pushViewController(detailVC, animated: true)
             }
-        } else {
-            let detailVC = DetailViewController()
-            detailVC.recipe = recipe
-            navigationController?.pushViewController(detailVC, animated: true)
-            //navigationController?.show(detailVC, sender: self)
+               
+        case favTableView:
+            let foodRecipe = foodRecipes[indexPath.row]
+            if foodRecipe.ingredients!.count == 0 {
+                if let url = URL(string: foodRecipe.sourceURL ?? "") {
+                    if UIApplication.shared.canOpenURL(url) {
+                        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                    } else {
+                        self.presentAlert(title: "Recipe Unavailable", message: "")
+                    }
+                } else {
+                    self.presentAlert(title: "Recipe Unavailable", message: "")
+                }
+            } else {
+                let detailVC = DetailViewController()
+                detailVC.foodRecipe = foodRecipes[indexPath.row]
+                self.navigationController?.pushViewController(detailVC, animated: true)
+            }
+            
+          
+        default:
+            print("Some things Wrong Recipes didSelectRowAt!!")
         }
     }
+    
+    // Sola kaydırarak silme işlevi
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        
+        var action = UISwipeActionsConfiguration()
+        if tableView == favTableView {
+            let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { (action, view, completionHandler) in
+                let recipeToDelete = self.foodRecipes[indexPath.row]
+                self.appDelegate.persistentContainer.viewContext.delete(recipeToDelete)
+                try? self.appDelegate.persistentContainer.viewContext.save()
+                self.foodRecipes.remove(at: indexPath.row)
+                self.favTableView.deleteRows(at: [indexPath], with: .automatic)
+                completionHandler(true)
+            }
+            action =  UISwipeActionsConfiguration(actions: [deleteAction])
+        }
+        return action
+    }
+
 }
 
 //MARK: - UITableViewDataSource
@@ -171,8 +247,16 @@ extension RecipesViewController: UITableViewDataSource {
                 //numberOfRow = recipeViewModel.numberOfRowsInSection(section: section)
                 return numberOfRow
             case favTableView:
-                numberOfRow = 1
-                favoritesLabel.text = "Favorites(\(numberOfRow))"
+                numberOfRow = foodRecipes.count
+                if numberOfRow != 0 {
+                    favoritesLabel.text = "Favorites(\(numberOfRow))"
+                    favTableView.restore()
+                }
+                else {
+                    favoritesLabel.text = "Favorites"
+                    favTableView.setEmptyView(title: "You don't have any saved favorite recipes.", message: "Your saved recipes will be in here.")
+                }
+            
             default:
                 print("Some things Wrong RecipesTableViewDataSource!!")
             }
@@ -181,28 +265,21 @@ extension RecipesViewController: UITableViewDataSource {
     
     // Belirlenen tablo cell indexinde gönderilen celli döndürür
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        var recipeCell = RecipeTableViewCell() // Declare the cell
-        
-           switch tableView {
-           case discoverTableView:
-               recipeCell = tableView.dequeueReusableCell(withIdentifier: "DiscoverCell", for: indexPath) as! RecipeTableViewCell
-               let recipe = recipes[indexPath.row]
-               
-               recipeCell.updateUI(recipe: recipe, recipeCell: recipeCell)
-               
-               //Edamam
-              /* recipeCell = tableView.dequeueReusableCell(withIdentifier: "DiscoverCell", for: indexPath) as! RecipeTableViewCell
-                 let recipe = recipeViewModel.cellForRowAt(indexPath: indexPath)
-                     recipeCell.setCellWithValuesOf(recipe) */
-               
-           case favTableView:
-               recipeCell = tableView.dequeueReusableCell(withIdentifier: "FavoritesCell", for: indexPath) as! RecipeTableViewCell
-               
-           default:
-               print("Some things Wrong RecipesTableViewDataSource!!")
-           }
-        return recipeCell
+            
+        if tableView == discoverTableView {
+            var recipeCell = RecipeTableViewCell()
+            recipeCell = tableView.dequeueReusableCell(withIdentifier: "DiscoverCell", for: indexPath) as! RecipeTableViewCell
+            
+            let recipe = recipes[indexPath.row]
+            recipeCell.updateUI(recipe: recipe, recipeCell: recipeCell)
+            return recipeCell
+        }else {
+            var recipeCell = FavoritesCell()
+            recipeCell = favTableView.dequeueReusableCell(withIdentifier: "FavoritesCell", for: indexPath) as! FavoritesCell
+            let foodRecipe = foodRecipes[indexPath.row]
+            recipeCell.updateFoodUI(recipe: foodRecipe, recipeCell: recipeCell)
+            return recipeCell
+        }
     }
 }
 
