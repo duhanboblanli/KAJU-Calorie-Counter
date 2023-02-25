@@ -39,15 +39,12 @@
 		FEBF1DD62986BB4600FD4760 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FEBF1DD42986BB4600FD4760 /* LaunchScreen.storyboard */; };
 		FEC7BF5B29A3F147001B1EC9 /* SpoonacularClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC7BF5329A3F142001B1EC9 /* SpoonacularClient.swift */; };
 		FEC7BF5C29A3F147001B1EC9 /* Recipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC7BF5429A3F143001B1EC9 /* Recipe.swift */; };
-		FEC7BF5D29A3F147001B1EC9 /* SearchedRecipes.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC7BF5529A3F143001B1EC9 /* SearchedRecipes.swift */; };
 		FEC7BF5E29A3F147001B1EC9 /* RecipeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC7BF5629A3F144001B1EC9 /* RecipeTableViewCell.swift */; };
-		FEC7BF5F29A3F147001B1EC9 /* SearchResultResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC7BF5729A3F145001B1EC9 /* SearchResultResponse.swift */; };
 		FEC7BF6029A3F147001B1EC9 /* AutoCompleteSearchResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC7BF5829A3F146001B1EC9 /* AutoCompleteSearchResponse.swift */; };
 		FEC7BF6329A3F269001B1EC9 /* Extension + UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC7BF6229A3F269001B1EC9 /* Extension + UITableView.swift */; };
 		FEC7BF6529A3F271001B1EC9 /* Extension + UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC7BF6429A3F270001B1EC9 /* Extension + UIViewController.swift */; };
 		FEC7BF6729A3F2AC001B1EC9 /* RecipesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC7BF6629A3F2AC001B1EC9 /* RecipesViewController.swift */; };
 		FEC7C20629A260CC009A99A8 /* RecipeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC7C20529A260CC009A99A8 /* RecipeModel.swift */; };
-		FED2FFB029A9857200EDBF19 /* SearchResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FED2FFAF29A9857100EDBF19 /* SearchResultsViewController.swift */; };
 		FED2FFB229A985E000EDBF19 /* RecipeSearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FED2FFB129A985DF00EDBF19 /* RecipeSearchCell.swift */; };
 		FEE2CDEB2989A4B0002DAA6F /* guitar_alarm_sound.wav in Resources */ = {isa = PBXBuildFile; fileRef = FEE2CDEA2989A4B0002DAA6F /* guitar_alarm_sound.wav */; };
 		FEE9E150299DAB87007FA5FB /* RecipeTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE9E14F299DAB87007FA5FB /* RecipeTableView.swift */; };
@@ -92,15 +89,12 @@
 		FEBF1DD72986BB4600FD4760 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FEC7BF5329A3F142001B1EC9 /* SpoonacularClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpoonacularClient.swift; sourceTree = "<group>"; };
 		FEC7BF5429A3F143001B1EC9 /* Recipe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Recipe.swift; sourceTree = "<group>"; };
-		FEC7BF5529A3F143001B1EC9 /* SearchedRecipes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchedRecipes.swift; sourceTree = "<group>"; };
 		FEC7BF5629A3F144001B1EC9 /* RecipeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeTableViewCell.swift; sourceTree = "<group>"; };
-		FEC7BF5729A3F145001B1EC9 /* SearchResultResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResultResponse.swift; sourceTree = "<group>"; };
 		FEC7BF5829A3F146001B1EC9 /* AutoCompleteSearchResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoCompleteSearchResponse.swift; sourceTree = "<group>"; };
 		FEC7BF6229A3F269001B1EC9 /* Extension + UITableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Extension + UITableView.swift"; sourceTree = "<group>"; };
 		FEC7BF6429A3F270001B1EC9 /* Extension + UIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Extension + UIViewController.swift"; sourceTree = "<group>"; };
 		FEC7BF6629A3F2AC001B1EC9 /* RecipesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipesViewController.swift; sourceTree = "<group>"; };
 		FEC7C20529A260CC009A99A8 /* RecipeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeModel.swift; sourceTree = "<group>"; };
-		FED2FFAF29A9857100EDBF19 /* SearchResultsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResultsViewController.swift; sourceTree = "<group>"; };
 		FED2FFB129A985DF00EDBF19 /* RecipeSearchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeSearchCell.swift; sourceTree = "<group>"; };
 		FEE2CDEA2989A4B0002DAA6F /* guitar_alarm_sound.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = guitar_alarm_sound.wav; sourceTree = "<group>"; };
 		FEE9E14F299DAB87007FA5FB /* RecipeTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeTableView.swift; sourceTree = "<group>"; };
@@ -200,8 +194,6 @@
 				FE93498A29A78E3A00316B22 /* Food_and_Recipe.xcdatamodeld */,
 				FEC7BF5829A3F146001B1EC9 /* AutoCompleteSearchResponse.swift */,
 				FEC7BF5429A3F143001B1EC9 /* Recipe.swift */,
-				FEC7BF5529A3F143001B1EC9 /* SearchedRecipes.swift */,
-				FEC7BF5729A3F145001B1EC9 /* SearchResultResponse.swift */,
 				FEC7BF5329A3F142001B1EC9 /* SpoonacularClient.swift */,
 			);
 			path = "Recipe Spoonacular";
@@ -248,7 +240,6 @@
 				FEC7BF6629A3F2AC001B1EC9 /* RecipesViewController.swift */,
 				FEFFFD2229A63BFD0001999E /* DetailViewController.swift */,
 				FEFFFD2429A63C230001999E /* InstructionsViewController.swift */,
-				FED2FFAF29A9857100EDBF19 /* SearchResultsViewController.swift */,
 				FE5DEF5C299BC5AC00F13802 /* FoodsViewController.swift */,
 				FEBF1DCD2986BB4400FD4760 /* EggTimerViewController.swift */,
 				FE41A2002997ABA200892346 /* TabBarController.swift */,
@@ -390,7 +381,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				FE32926D2991AF740075A5B8 /* WelcomeViewController.swift in Sources */,
-				FED2FFB029A9857200EDBF19 /* SearchResultsViewController.swift in Sources */,
 				FEFFFD2729A63C770001999E /* CustomHeaderCell.swift in Sources */,
 				FEFFFD2329A63BFD0001999E /* DetailViewController.swift in Sources */,
 				FEC7BF6329A3F269001B1EC9 /* Extension + UITableView.swift in Sources */,
@@ -414,11 +404,9 @@
 				FEFFFD2529A63C230001999E /* InstructionsViewController.swift in Sources */,
 				FE59984E298B0EDF002CB4DF /* CalculatorViewController.swift in Sources */,
 				FEBF1DCC2986BB4400FD4760 /* SceneDelegate.swift in Sources */,
-				FEC7BF5D29A3F147001B1EC9 /* SearchedRecipes.swift in Sources */,
 				FEC7BF5B29A3F147001B1EC9 /* SpoonacularClient.swift in Sources */,
 				FE0BB00C29958C320062E096 /* GoalViewController.swift in Sources */,
 				2D850C43299BFAAD00A525F0 /* FoodViewModel.swift in Sources */,
-				FEC7BF5F29A3F147001B1EC9 /* SearchResultResponse.swift in Sources */,
 				FEC7BF6729A3F2AC001B1EC9 /* RecipesViewController.swift in Sources */,
 				FE41A2012997ABA200892346 /* TabBarController.swift in Sources */,
 				2DF9F2F8299D1B530023AB7C /* FoodTableViewCell.swift in Sources */,

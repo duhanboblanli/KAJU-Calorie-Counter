@@ -41,7 +41,7 @@ class SpoonacularClient {
         components.queryItems = [URLQueryItem]()
         components.queryItems?.append(URLQueryItem(name: "apiKey", value: SpoonacularClient.apiKey))
         // Kaç tane recipes verisi çekilsin?
-        components.queryItems?.append(URLQueryItem(name: "number", value: "1"))
+        components.queryItems?.append(URLQueryItem(name: "number", value: "20"))
         components.queryItems?.append(URLQueryItem(name: "addRecipeNutrition", value: "true"))
         components.queryItems?.append(URLQueryItem(name: "fillIngredients", value: "true"))
         components.queryItems?.append(URLQueryItem(name: "instructionsRequired", value: "true"))
@@ -283,81 +283,12 @@ class SpoonacularClient {
         return task
     }
     
-    // Query String olarak alınır ve SearchedRecipes modelinde liste döndürür
+    // Query String olarak alınır ve Recipes modelinde liste döndürür
     // Verilen stringe benzer stringde recipeler bu modelde listelenir
     // Örn URL
     // https://api.spoonacular.com/recipes/complexSearch?apiKey=a67a5241c34f45429f75c2d8a1858a67&number=8&query=chicken
-    class func search(query: String, completion: @escaping ([SearchedRecipes], Bool, Error?) -> Void) {
-        var searchURL: URL {
-            var components = URLComponents()
-            components.host = host
-            components.path = "/recipes/complexSearch"
-            components.scheme = scheme
-            
-            components.queryItems = [URLQueryItem]()
-            components.queryItems?.append(URLQueryItem(name: "apiKey", value: "a67a5241c34f45429f75c2d8a1858a67"))
-            components.queryItems?.append(URLQueryItem(name: "number", value: "8"))
-            components.queryItems?.append(URLQueryItem(name: "query", value: query))
-            
-            print("SEARCH URL: " , components.url!)
-            return components.url!
-        }
-        
-        let task = URLSession.shared.dataTask(with: searchURL) { (data, response, error) in
-            guard let data = data else {
-                completion([], false, error)
-                return
-            }
-            do {
-                let responseObject = try JSONDecoder().decode(SearchResultResponse.self, from: data)
-                completion(responseObject.results, true, nil)
-            } catch {
-                completion([], false, error)
-            }
-        }
-        task.resume()
-    }
-    
-    
-    
-    // https://api.spoonacular.com/recipes/complexSearch?apiKey=a67a5241c34f45429f75c2d8a1858a67&number=8&query=chicken
-    class func search2(query: String, completion: @escaping ([SearchedRecipes], Bool, Error?) -> Void) {
-        var searchURL: URL {
-            var components = URLComponents()
-            components.host = host
-            components.path = "/recipes/complexSearch"
-            components.scheme = scheme
-            
-            components.queryItems = [URLQueryItem]()
-            components.queryItems?.append(URLQueryItem(name: "apiKey", value: "a67a5241c34f45429f75c2d8a1858a67"))
-            components.queryItems?.append(URLQueryItem(name: "number", value: "8"))
-            components.queryItems?.append(URLQueryItem(name: "query", value: query))
-            
-            print("SEARCH URL: " , components.url!)
-            return components.url!
-        }
-        
-        let task = URLSession.shared.dataTask(with: searchURL) { (data, response, error) in
-            guard let data = data else {
-                completion([], false, error)
-                return
-            }
-            do {
-                let responseObject = try JSONDecoder().decode(SearchResultResponse.self, from: data)
-                completion(responseObject.results, true, nil)
-            } catch {
-                completion([], false, error)
-            }
-        }
-        task.resume()
-    }
-    
-    
-    
-    
-    // New Search
     // JSON datayı Model.Recipe tipinde döndürür
-    class func search3(query: String,completion: @escaping ([Recipe], Error?) -> Void) {
+    class func newSearch(query: String,completion: @escaping ([Recipe], Error?) -> Void) {
         // Declare URL
         var searchURL: URL {
             
@@ -413,7 +344,7 @@ class SpoonacularClient {
                 }
             }
         task.resume()
-    }
+    } // ends of func newSearch
     
     
     

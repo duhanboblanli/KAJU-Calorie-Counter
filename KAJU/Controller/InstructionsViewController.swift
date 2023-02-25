@@ -109,16 +109,29 @@ class InstructionsViewController: UIViewController {
     
     // Instruction buttona basıldığında oluşacak action
     @objc func showInstructionsAction() {
-        if let url = URL(string: recipe.sourceURL ?? "") {
-            if UIApplication.shared.canOpenURL(url) {
-                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        if isSavedRecipe {
+            if let url = URL(string: foodRecipe.sourceURL ?? "") {
+                if UIApplication.shared.canOpenURL(url) {
+                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                } else {
+                    self.presentAlert(title: "Instructions Unavailable", message: "")
+                }
             } else {
                 self.presentAlert(title: "Instructions Unavailable", message: "")
             }
         } else {
-            self.presentAlert(title: "Instructions Unavailable", message: "")
+            if let url = URL(string: recipe.sourceURL ?? "") {
+                if UIApplication.shared.canOpenURL(url) {
+                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                } else {
+                    self.presentAlert(title: "Instructions Unavailable", message: "")
+                }
+            } else {
+                self.presentAlert(title: "Instructions Unavailable", message: "")
+            }
         }
     }
+   
 }
 
 //MARK: - Setup TableView

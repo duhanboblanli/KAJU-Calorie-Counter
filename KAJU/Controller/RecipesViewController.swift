@@ -8,14 +8,13 @@
 import UIKit
 import CoreData
 
-
 class RecipesViewController: UIViewController, UISearchBarDelegate {
     
-    //Bunlar diğer sayfalardakinden farklı, değiştirme!
+    // Bunlar diğer sayfalardakinden farklı, değiştirme!
     let ColorHardDarkGreen = UIColor( red: 40/255, green: 71/255, blue: 92/255, alpha: 1)
     let ColorDarkGreen = UIColor( red: 47/255, green: 136/255, blue: 134/255, alpha: 1)
     let ColorLightGreen = UIColor( red: 132/255, green: 198/255, blue: 155/255, alpha: 1)
-    
+    // For Discover/Favorites Pagination
     @IBOutlet weak var firstButtonView: UIView!
     @IBOutlet weak var secondButtonView: UIView!
     @IBOutlet weak var firstBottomConstraint: NSLayoutConstraint!
@@ -26,21 +25,17 @@ class RecipesViewController: UIViewController, UISearchBarDelegate {
     @IBOutlet weak var favoritesButton: UIButton!
     @IBOutlet weak var discoverLabel: UILabel!
     @IBOutlet weak var favoritesLabel: UILabel!
-    
     // For search
     @IBOutlet weak var searchBar: UITextField!
     var recipeSearchSuggestions = [AutoCompleteSearchResponse]()
     var currentSearchTask: URLSessionTask?
-    var searchedRecipes = [SearchedRecipes]()
-    //UISearchBar
+    var newSearchedRecipes = [Recipe]()
+    // UISearchBar
     @IBOutlet weak var orginSearchBar: UISearchBar!
-    
     @IBOutlet weak var refreshButton: UIButton!
     @IBOutlet weak var searchButton: UIButton!
-    
     @IBOutlet weak var discoverTableView: UITableView!
     @IBOutlet weak var favTableView: UITableView!
-    
     @IBOutlet weak var recipesNavigationıtem: UINavigationItem!
     @IBOutlet weak var scrollTopButton: UIButton!
     
@@ -48,17 +43,13 @@ class RecipesViewController: UIViewController, UISearchBarDelegate {
     var activityIndicatorContainer: UIView!
     var activityIndicator: UIActivityIndicatorView!
     
-    // For discover view
+    // For random discover recipes
     var recipes = [Recipe]()
     
-    // For favorites view
+    // For favorites local recipes
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     var foodRecipes: [FoodRecipe] = []
-    
-    // Edamam model
-    private var recipeViewModel = RecipeViewModel()
-    private var images: [UIImage]?
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.tabBarController?.tabBar.isHidden = false
@@ -89,18 +80,17 @@ class RecipesViewController: UIViewController, UISearchBarDelegate {
         searchBar.layer.cornerRadius = searchBar.frame.size.height / 5
         discoverTableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         recipesNavigationıtem.title = "Recipes"
-        
-        //loadRecipesData()
     }
+    
     override func loadView() {
         super.loadView()
         setupActivityIndicator()
         showActivityIndicator(show: true)
         SpoonacularClient.getRandomRecipe(pagination:true,completion: handleRecipes)
-        
     }
     
-    
+    // Eşzamanlı searchTextFielddan text çekme
+    // 3.harf ve sonrası autoComplete tableView reload eder
     @IBAction func searchBarTextDidChange(_ sender: UITextField) {
         if let searchText = sender.text {
             if searchText.count >= 3 {
@@ -115,7 +105,6 @@ class RecipesViewController: UIViewController, UISearchBarDelegate {
                     }
                 }
                 currentSearchTask?.resume()
-                
             }
             else {
                 discoverTableView.separatorStyle = .none
@@ -125,27 +114,20 @@ class RecipesViewController: UIViewController, UISearchBarDelegate {
             }
         }
     }
-    
-    private func loadRecipesData() {
-        // Called at the beginning to do an API call and fill targetRecipes
-        recipeViewModel.fetchRecipeData(pagination: false){ [weak self] in
-            self?.discoverTableView.dataSource = self
-            self?.discoverTableView.reloadData()
-        }
-    } 
-    
+ 
     @IBAction func refreshButtonPressed(_ sender: UIButton) {
         setupActivityIndicator()
         showActivityIndicator(show: true)
-        searchedRecipes = []
+        newSearchedRecipes = []
         SpoonacularClient.getRandomRecipe(pagination:true,completion: handleRecipes)
+        //SpoonacularClient.newSearch(query: "chicken", completion: handleSearchRecipes)
         DispatchQueue.main.async {
             self.searchBar.placeholder = "Discover from Random Recipes!"
         }
         discoverTableView.reloadData()
-        //loadRecipesData()
     }
     
+    // Loading alert functionality
     private func showActivityIndicator(show: Bool) {
       if show {
         DispatchQueue.main.async{
@@ -163,6 +145,7 @@ class RecipesViewController: UIViewController, UISearchBarDelegate {
         }
     }
     
+    //Loading Alert Setup
     private func setupActivityIndicator() {
         
         activityIndicatorContainer = UIView(frame: CGRect(x: 0, y: 0, width: 80, height: 80))
@@ -184,8 +167,6 @@ class RecipesViewController: UIViewController, UISearchBarDelegate {
         activityIndicator.centerXAnchor.constraint(equalTo: activityIndicatorContainer.centerXAnchor).isActive = true
         activityIndicator.centerYAnchor.constraint(equalTo: activityIndicatorContainer.centerYAnchor).isActive = true
     }
-    
-    
     
     @IBAction func scrollToTopButtonPressed(_ sender: UIButton) {
         discoverTableView.scrollToTop(animated: true)
@@ -218,6 +199,7 @@ class RecipesViewController: UIViewController, UISearchBarDelegate {
     }
     
     //MARK: - Handle API Response
+    // For random recipes API call
     func handleRecipes(recipes: [Recipe], error: Error?) {
         self.showActivityIndicator(show: false)
         if let error = error {
@@ -226,7 +208,20 @@ class RecipesViewController: UIViewController, UISearchBarDelegate {
             }
         }
         self.recipes = recipes
-        
+        DispatchQueue.main.async {
+            self.discoverTableView.reloadData()
+        }
+    }
+    
+    // For search recipes API call
+    func handleSearchRecipes(recipes: [Recipe], error: Error?) {
+        self.showActivityIndicator(show: false)
+        if let error = error {
+            DispatchQueue.main.async {
+                self.presentAlert(title: error.localizedDescription, message: "")
+            }
+        }
+        self.newSearchedRecipes = recipes
         DispatchQueue.main.async {
             self.discoverTableView.reloadData()
         }
@@ -244,7 +239,7 @@ extension RecipesViewController: UITableViewDelegate {
         if recipeSearchSuggestions.count == 0 {
             switch tableView {
             case discoverTableView:
-                if searchedRecipes.count == 0 {
+                if newSearchedRecipes.count == 0 {
                     let recipe = recipes[indexPath.row]
                     if recipe.ingredients?.count == 0 {
                         if let url = URL(string: recipe.sourceURL ?? "") {
@@ -263,36 +258,22 @@ extension RecipesViewController: UITableViewDelegate {
                     }
                 }
                 else {
-                    let id = searchedRecipes[indexPath.row].id
-                    self.setupActivityIndicator()
-                    self.showActivityIndicator(show: true)
-                    SpoonacularClient.getUserSearchedRecipe(id: id) { (recipe, dataFetched, error) in
-                        if !dataFetched {
-                            self.showActivityIndicator(show: true)
-                            if error != nil {
-                                self.presentAlert(title: error!.localizedDescription, message: "")
-                            }
-                        }
-                        self.showActivityIndicator(show: false)
-                        DispatchQueue.main.async {
-                            if recipe!.ingredients?.count == 0 {
-                                if let url = URL(string: recipe!.sourceURL ?? "") {
-                                    if UIApplication.shared.canOpenURL(url) {
-                                        UIApplication.shared.open(url, options: [:], completionHandler: nil)
-                                    } else {
-                                        self.presentAlert(title: "Recipe Unavailable", message: "")
-                                    }
-                                } else {
-                                    self.presentAlert(title: "Recipe Unavailable", message: "")
-                                }
+                    let recipe = newSearchedRecipes[indexPath.row]
+                    if recipe.ingredients?.count == 0 {
+                        if let url = URL(string: recipe.sourceURL ?? "") {
+                            if UIApplication.shared.canOpenURL(url) {
+                                UIApplication.shared.open(url, options: [:], completionHandler: nil)
                             } else {
-                                let detailVC = DetailViewController()
-                                detailVC.recipe = recipe
-                                self.navigationController?.pushViewController(detailVC, animated: true)
+                                self.presentAlert(title: "Recipe Unavailable", message: "")
                             }
+                        } else {
+                            self.presentAlert(title: "Recipe Unavailable", message: "")
                         }
+                    } else {
+                        let detailVC = DetailViewController()
+                        detailVC.recipe = recipe
+                        navigationController?.pushViewController(detailVC, animated: true)
                     }
-                    
                 }
             case favTableView:
                 let foodRecipe = foodRecipes[indexPath.row]
@@ -341,8 +322,7 @@ extension RecipesViewController: UITableViewDelegate {
         }
         return action
     }
-
-}
+} // ends of extension:UITableViewDelegate
 
 //MARK: - UITableViewDataSource
 extension RecipesViewController: UITableViewDataSource {
@@ -354,7 +334,7 @@ extension RecipesViewController: UITableViewDataSource {
             switch tableView {
             case discoverTableView:
                 
-                if searchedRecipes.count == 0 {
+                if newSearchedRecipes.count == 0 {
                     numberOfRow = recipes.count
                     if recipes.count <= 1 {
                         scrollTopButton.isEnabled = false
@@ -369,7 +349,7 @@ extension RecipesViewController: UITableViewDataSource {
                     return numberOfRow
                 }
                 else {
-                    numberOfRow = searchedRecipes.count
+                    numberOfRow = newSearchedRecipes.count
                 }
                 
             case favTableView:
@@ -382,24 +362,21 @@ extension RecipesViewController: UITableViewDataSource {
                     favoritesLabel.text = "Favorites"
                     favTableView.setEmptyView(title: "You don't have any saved favorite recipes.", message: "Your saved recipes will be in here.")
                 }
-                
             default:
                 print("Some things Wrong RecipesTableViewDataSource!!")
-            } }
+            }
+        }
         else {
             numberOfRow = recipeSearchSuggestions.count
         }
-        
             return numberOfRow
     }
     
     // Belirlenen tablo cell indexinde gönderilen celli döndürür
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if recipeSearchSuggestions.count == 0 {
-            
             if tableView == discoverTableView {
-                
-                if searchedRecipes.count == 0 {
+                if newSearchedRecipes.count == 0 {
                     var recipeCell = RecipeTableViewCell()
                     recipeCell = tableView.dequeueReusableCell(withIdentifier: "DiscoverCell", for: indexPath) as! RecipeTableViewCell
                     
@@ -409,18 +386,11 @@ extension RecipesViewController: UITableViewDataSource {
                 } else {
                     var recipeCell = RecipeTableViewCell()
                     recipeCell = tableView.dequeueReusableCell(withIdentifier: "DiscoverCell", for: indexPath) as! RecipeTableViewCell
-                    let recipe = searchedRecipes[indexPath.row]
                     
-                    recipeCell.name.text = recipe.title
-                    recipeCell.recipeImage.image = UIImage(named: "imagePlaceholder")
-                    
-                    SpoonacularClient.downloadRecipeImage(imageURL: recipe.image) { (image, success) in
-                        recipeCell.recipeImage.image = image
-                    }
-                    
+                    let recipe = newSearchedRecipes[indexPath.row]
+                    recipeCell.updateUI(recipe: recipe, recipeCell: recipeCell)
                     return recipeCell
                 }
-                
             }else {
                 var recipeCell = FavoritesCell()
                 recipeCell = favTableView.dequeueReusableCell(withIdentifier: "FavoritesCell", for: indexPath) as! FavoritesCell
@@ -429,7 +399,6 @@ extension RecipesViewController: UITableViewDataSource {
                 return recipeCell
             }
         }
-    
     else {
         let cell = discoverTableView.dequeueReusableCell(withIdentifier: "cell")!
         cell.contentView.backgroundColor = UIColor( red: 26/255, green: 47/255, blue: 75/255, alpha: 1)
@@ -440,33 +409,18 @@ extension RecipesViewController: UITableViewDataSource {
         return cell
         }
     }
-}
+} // ends of extension:UITableViewDataSource
 
 //MARK: - UITextFieldDelegate
 extension RecipesViewController: UITextFieldDelegate {
-
     // Search buttona bastığında klavye kapatır
     @IBAction func searchButtonPressed(_ sender: UIButton) {
-        
         if let searchQuery = searchBar.text {
             if searchQuery != "" {
                 setupActivityIndicator()
                 showActivityIndicator(show: true)
-                SpoonacularClient.search(query: searchQuery) { (searchedRecipes, success, error) in
-                    self.showActivityIndicator(show: false)
-                    if let error = error {
-                        DispatchQueue.main.async {
-                            self.presentAlert(title: error.localizedDescription, message: "")
-                        }
-                    } else {
-                        self.searchedRecipes = searchedRecipes
-                        
-                        DispatchQueue.main.async {
-                            self.searchBar.placeholder = "Search Results for '\(searchQuery)' "
-                            self.discoverTableView.reloadData()
-                        }
-                    }
-                }
+                self.searchBar.placeholder = "Search Results for '\(searchQuery)' "
+                SpoonacularClient.newSearch(query: searchQuery, completion: handleSearchRecipes)
             } else {
                 DispatchQueue.main.async {
                     self.searchBar.placeholder = "Type Something!"
@@ -476,29 +430,14 @@ extension RecipesViewController: UITextFieldDelegate {
             searchBar.endEditing(true)
         }
     }
-    
     // Klavyeden returne bastığında klavye kapatır
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        
         if let searchQuery = searchBar.text {
             if searchQuery != "" {
                 setupActivityIndicator()
                 showActivityIndicator(show: true)
-                SpoonacularClient.search(query: searchQuery) { (searchedRecipes, success, error) in
-                    self.showActivityIndicator(show: false)
-                    if let error = error {
-                        DispatchQueue.main.async {
-                            self.presentAlert(title: error.localizedDescription, message: "")
-                        }
-                    } else {
-                        self.searchedRecipes = searchedRecipes
-                        
-                        DispatchQueue.main.async {
-                            self.searchBar.placeholder = "Search Results for '\(searchQuery)' "
-                            self.discoverTableView.reloadData()
-                        }
-                    }
-                }
+                self.searchBar.placeholder = "Search Results for '\(searchQuery)' "
+                SpoonacularClient.newSearch(query: searchQuery, completion: handleSearchRecipes)
             } else {
                 DispatchQueue.main.async {
                     self.searchBar.placeholder = "Type Something!"
@@ -517,14 +456,10 @@ extension RecipesViewController: UITextFieldDelegate {
         if textField.text != "" {
             return false
         }else{
-            DispatchQueue.main.async {
-                //textField.placeholder = "Search For A Recipe"
-                
-            }
             return true
         }
     }
-    
+
     // Klavye kapandıysa ve bir şey yazıldıysa yazıyı temizler
     // Yerine placeholder koyar
     func textFieldDidEndEditing(_ textField: UITextField) {
@@ -535,8 +470,8 @@ extension RecipesViewController: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         textField.placeholder = "Search For A Recipe"
     }
-    
-}
+
+} // ends of extension:UITextFieldDelegate
 
 /*//MARK: - UIScrollViewDelegate - request sayısı yetersiz açma!
 extension RecipesViewController: UIScrollViewDelegate{
