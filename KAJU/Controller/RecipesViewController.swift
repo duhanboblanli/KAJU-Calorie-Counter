@@ -9,8 +9,9 @@ import UIKit
 import CoreData
 
 
-class RecipesViewController: UIViewController {
+class RecipesViewController: UIViewController, UISearchBarDelegate {
     
+    //Bunlar diğer sayfalardakinden farklı, değiştirme!
     let ColorHardDarkGreen = UIColor( red: 40/255, green: 71/255, blue: 92/255, alpha: 1)
     let ColorDarkGreen = UIColor( red: 47/255, green: 136/255, blue: 134/255, alpha: 1)
     let ColorLightGreen = UIColor( red: 132/255, green: 198/255, blue: 155/255, alpha: 1)
@@ -25,7 +26,14 @@ class RecipesViewController: UIViewController {
     @IBOutlet weak var favoritesButton: UIButton!
     @IBOutlet weak var discoverLabel: UILabel!
     @IBOutlet weak var favoritesLabel: UILabel!
+    
+    // For search
     @IBOutlet weak var searchBar: UITextField!
+    var recipeSearchSuggestions = [AutoCompleteSearchResponse]()
+    var currentSearchTask: URLSessionTask?
+    //UISearchBar
+    @IBOutlet weak var orginSearchBar: UISearchBar!
+    
     @IBOutlet weak var refreshButton: UIButton!
     @IBOutlet weak var searchButton: UIButton!
     
@@ -35,33 +43,21 @@ class RecipesViewController: UIViewController {
     @IBOutlet weak var recipesNavigationıtem: UINavigationItem!
     @IBOutlet weak var scrollTopButton: UIButton!
     
-    //For discover view
+    // For discover view
     var recipes = [Recipe]()
     
     // For favorites view
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     var foodRecipes: [FoodRecipe] = []
     
-    //let context = ( UIApplication.shared.delegate as! AppDelegate ).persistentContainer.viewContext
-   // var request = NSFetchRequest<NSFetchRequestResult>()
-
     // Edamam model
     private var recipeViewModel = RecipeViewModel()
     private var images: [UIImage]?
-    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.tabBarController?.tabBar.isHidden = false
         setupFetchRequest()
-        /*request = FoodRecipe.fetchRequest()
-        request.returnsObjectsAsFaults = false
-        do {
-            let arrayOfData = try context.fetch(request)
-            print("RecipesViewArrayofdata:",arrayOfData)
-        } catch {
-            print("error")
-        } */
     }
 
     //Localdaki verileri çek
@@ -70,10 +66,6 @@ class RecipesViewController: UIViewController {
         fetchRequest.returnsObjectsAsFaults = false
         fetchRequest.sortDescriptors = []
         if let result = try? appDelegate.persistentContainer.viewContext.fetch(fetchRequest) {
-            //Delete all data
-            /*for object in result {
-                guard let objectData = object as? NSManagedObject else {continue}
-                appDelegate.persistentContainer.viewContext.delete(objectData) }*/
             foodRecipes = result
             print("Recipe View Fetch Request:",foodRecipes)
             favTableView.reloadData()
@@ -82,7 +74,6 @@ class RecipesViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //self.navigationController?.isNavigationBarHidden = true
         firstBottomConstraint.constant = 4.0
         secondBottomConstraint.constant = 3.0
         discoverTableView.delegate = self
@@ -91,10 +82,36 @@ class RecipesViewController: UIViewController {
         favTableView.dataSource = self
         searchBar.delegate = self
         searchBar.layer.cornerRadius = searchBar.frame.size.height / 5
+        discoverTableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         recipesNavigationıtem.title = "Recipes"
         SpoonacularClient.getRandomRecipe(pagination:true,completion: handleRecipes)
         //loadRecipesData()
-        
+    }
+    
+    
+    @IBAction func searchBarTextDidChange(_ sender: UITextField) {
+        if let searchText = sender.text {
+            if searchText.count >= 3 {
+                discoverTableView.separatorStyle = UITableViewCell.SeparatorStyle.singleLine
+                discoverTableView.separatorColor = ColorLightGreen
+                scrollTopButton.isHidden = true
+                currentSearchTask?.cancel()
+                currentSearchTask = SpoonacularClient.autoCompleteRecipeSearch(query: searchText) { (recipeSearchSuggestions, error) in
+                    self.recipeSearchSuggestions = recipeSearchSuggestions
+                    DispatchQueue.main.async {
+                        self.discoverTableView.reloadData()
+                    }
+                }
+                currentSearchTask?.resume()
+                
+            }
+            else {
+                discoverTableView.separatorStyle = .none
+                scrollTopButton.isHidden = false
+                recipeSearchSuggestions = []
+                discoverTableView.reloadData()
+            }
+        }
     }
     
     private func loadRecipesData() {
@@ -163,46 +180,56 @@ extension RecipesViewController: UITableViewDelegate {
     // Datada seçilen recipe'in ingredients verisi bulunamazsa, recipe'in websitesine yönlendir
     // Bulunursa detail view'e yönlendir
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        switch tableView {
-        case discoverTableView:
-            let recipe = recipes[indexPath.row]
-            if recipe.ingredients?.count == 0 {
-                if let url = URL(string: recipe.sourceURL ?? "") {
-                    if UIApplication.shared.canOpenURL(url) {
-                        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+       
+        if recipeSearchSuggestions.count == 0 {
+            switch tableView {
+            case discoverTableView:
+                let recipe = recipes[indexPath.row]
+                if recipe.ingredients?.count == 0 {
+                    if let url = URL(string: recipe.sourceURL ?? "") {
+                        if UIApplication.shared.canOpenURL(url) {
+                            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                        } else {
+                            self.presentAlert(title: "Recipe Unavailable", message: "")
+                        }
                     } else {
                         self.presentAlert(title: "Recipe Unavailable", message: "")
                     }
                 } else {
-                    self.presentAlert(title: "Recipe Unavailable", message: "")
+                    let detailVC = DetailViewController()
+                    detailVC.recipe = recipe
+                    navigationController?.pushViewController(detailVC, animated: true)
                 }
-            } else {
-                let detailVC = DetailViewController()
-                detailVC.recipe = recipe
-                navigationController?.pushViewController(detailVC, animated: true)
-            }
-               
-        case favTableView:
-            let foodRecipe = foodRecipes[indexPath.row]
-            if foodRecipe.ingredients!.count == 0 {
-                if let url = URL(string: foodRecipe.sourceURL ?? "") {
-                    if UIApplication.shared.canOpenURL(url) {
-                        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                
+            case favTableView:
+                let foodRecipe = foodRecipes[indexPath.row]
+                if foodRecipe.ingredients!.count == 0 {
+                    if let url = URL(string: foodRecipe.sourceURL ?? "") {
+                        if UIApplication.shared.canOpenURL(url) {
+                            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                        } else {
+                            self.presentAlert(title: "Recipe Unavailable", message: "")
+                        }
                     } else {
                         self.presentAlert(title: "Recipe Unavailable", message: "")
                     }
                 } else {
-                    self.presentAlert(title: "Recipe Unavailable", message: "")
+                    let detailVC = DetailViewController()
+                    detailVC.foodRecipe = foodRecipes[indexPath.row]
+                    self.navigationController?.pushViewController(detailVC, animated: true)
                 }
-            } else {
-                let detailVC = DetailViewController()
-                detailVC.foodRecipe = foodRecipes[indexPath.row]
-                self.navigationController?.pushViewController(detailVC, animated: true)
+                
+            default:
+                print("Some things Wrong Recipes didSelectRowAt!!")
             }
-            
-          
-        default:
-            print("Some things Wrong Recipes didSelectRowAt!!")
+        }
+        else {
+            let searchResultVC = SearchResultsViewController()
+            searchResultVC.searchQuery = recipeSearchSuggestions[indexPath.row].title
+            recipeSearchSuggestions = []
+            discoverTableView.separatorStyle = .none
+            discoverTableView.reloadData()
+            self.navigationController?.pushViewController(searchResultVC, animated: true)
         }
     }
     
@@ -232,9 +259,10 @@ extension RecipesViewController: UITableViewDataSource {
     // Tablo görünümde kaç hücre ya da kaç satır istiyoruz burda belirtilir
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         var numberOfRow = 1
+        if recipeSearchSuggestions.count == 0 {
             switch tableView {
             case discoverTableView:
-                    numberOfRow = recipes.count
+                numberOfRow = recipes.count
                 if recipes.count <= 1 {
                     scrollTopButton.isEnabled = false
                     scrollTopButton.isHidden = true
@@ -256,43 +284,67 @@ extension RecipesViewController: UITableViewDataSource {
                     favoritesLabel.text = "Favorites"
                     favTableView.setEmptyView(title: "You don't have any saved favorite recipes.", message: "Your saved recipes will be in here.")
                 }
-            
+                
             default:
                 print("Some things Wrong RecipesTableViewDataSource!!")
-            }
+            } }
+        else {
+            numberOfRow = recipeSearchSuggestions.count
+        }
+        
             return numberOfRow
     }
     
     // Belirlenen tablo cell indexinde gönderilen celli döndürür
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-            
-        if tableView == discoverTableView {
-            var recipeCell = RecipeTableViewCell()
-            recipeCell = tableView.dequeueReusableCell(withIdentifier: "DiscoverCell", for: indexPath) as! RecipeTableViewCell
-            
-            let recipe = recipes[indexPath.row]
-            recipeCell.updateUI(recipe: recipe, recipeCell: recipeCell)
-            return recipeCell
-        }else {
-            var recipeCell = FavoritesCell()
-            recipeCell = favTableView.dequeueReusableCell(withIdentifier: "FavoritesCell", for: indexPath) as! FavoritesCell
-            let foodRecipe = foodRecipes[indexPath.row]
-            recipeCell.updateFoodUI(recipe: foodRecipe, recipeCell: recipeCell)
-            return recipeCell
+        print("recipeSuggestCount:",recipeSearchSuggestions.count)
+        
+        if recipeSearchSuggestions.count == 0 {
+            if tableView == discoverTableView {
+                var recipeCell = RecipeTableViewCell()
+                recipeCell = tableView.dequeueReusableCell(withIdentifier: "DiscoverCell", for: indexPath) as! RecipeTableViewCell
+                
+                let recipe = recipes[indexPath.row]
+                recipeCell.updateUI(recipe: recipe, recipeCell: recipeCell)
+                return recipeCell
+            }else {
+                var recipeCell = FavoritesCell()
+                recipeCell = favTableView.dequeueReusableCell(withIdentifier: "FavoritesCell", for: indexPath) as! FavoritesCell
+                let foodRecipe = foodRecipes[indexPath.row]
+                recipeCell.updateFoodUI(recipe: foodRecipe, recipeCell: recipeCell)
+                return recipeCell
+            }
+        }
+    
+    else {
+        let cell = discoverTableView.dequeueReusableCell(withIdentifier: "cell")!
+        cell.contentView.backgroundColor = UIColor( red: 26/255, green: 47/255, blue: 75/255, alpha: 1)
+        cell.textLabel?.numberOfLines = 1
+        cell.textLabel?.font = UIFont(name: "Verdana", size: 16)
+        cell.textLabel?.textColor = .lightGray
+        cell.textLabel?.text = recipeSearchSuggestions[indexPath.row].title
+        return cell
         }
     }
 }
 
+
+
 //MARK: - UITextFieldDelegate
 extension RecipesViewController: UITextFieldDelegate {
-    
+
     // Search buttona bastığında klavye kapatır
     @IBAction func searchButtonPressed(_ sender: UIButton) {
 
         searchBar.endEditing(true)
-        //this is line of code helps to relode tableview --> eklenecek
+        self.relode()
     }
     
+    func relode() {
+        self.discoverTableView.reloadData()
+        self.discoverTableView.reloadInputViews()
+        self.discoverTableView.reloadSectionIndexTitles()
+    }
     // Klavyeden returne bastığında klavye kapatır
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
 
@@ -302,7 +354,6 @@ extension RecipesViewController: UITextFieldDelegate {
     
     // Klavye kapandıysa ve bir şey yazılmadıysa yerine placeholder koyar
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
-        
         if textField.text != "" {
             return true
         }else{
@@ -320,7 +371,7 @@ extension RecipesViewController: UITextFieldDelegate {
         textField.placeholder = "Search For A Recipe"
         self.navigationController?.isNavigationBarHidden = false
     }
-  
+    
 }
 
 /*//MARK: - UIScrollViewDelegate - request sayısı yetersiz açma!

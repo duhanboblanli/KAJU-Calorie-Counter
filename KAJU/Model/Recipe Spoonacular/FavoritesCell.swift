@@ -20,7 +20,7 @@ class FavoritesCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        swipe.layer.cornerRadius = swipe.frame.size.height/4
+        swipe.layer.cornerRadius = swipe.frame.size.height/7
         swipe.layer.masksToBounds = true
         swipe.layer.borderWidth = 0.9
     }
