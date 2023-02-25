@@ -27,6 +27,7 @@ class SearchResultsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("query:",searchQuery!)
         setupActivityIndicator()
         showActivityIndicator(show: true)
         SpoonacularClient.search(query: searchQuery) { (searchedRecipes, success, error) in

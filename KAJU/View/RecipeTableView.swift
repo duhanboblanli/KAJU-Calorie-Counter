@@ -13,7 +13,6 @@ class RecipeTableView: UIView {
             super.layoutSubviews()
         roundCorners(corners: [.topLeft, .topRight, .bottomLeft, .bottomRight], radius: 20)
         }
-    
 }
 
 extension UIView {

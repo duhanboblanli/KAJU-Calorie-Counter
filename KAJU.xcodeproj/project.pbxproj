@@ -200,9 +200,6 @@
 				FE93498A29A78E3A00316B22 /* Food_and_Recipe.xcdatamodeld */,
 				FEC7BF5829A3F146001B1EC9 /* AutoCompleteSearchResponse.swift */,
 				FEC7BF5429A3F143001B1EC9 /* Recipe.swift */,
-				FEC7BF5629A3F144001B1EC9 /* RecipeTableViewCell.swift */,
-				FE6FCCFE29A7B6B700FDE008 /* FavoritesCell.swift */,
-				FED2FFB129A985DF00EDBF19 /* RecipeSearchCell.swift */,
 				FEC7BF5529A3F143001B1EC9 /* SearchedRecipes.swift */,
 				FEC7BF5729A3F145001B1EC9 /* SearchResultResponse.swift */,
 				FEC7BF5329A3F142001B1EC9 /* SpoonacularClient.swift */,
@@ -233,6 +230,9 @@
 		FEE2CDE229892A6B002DAA6F /* View */ = {
 			isa = PBXGroup;
 			children = (
+				FEC7BF5629A3F144001B1EC9 /* RecipeTableViewCell.swift */,
+				FE6FCCFE29A7B6B700FDE008 /* FavoritesCell.swift */,
+				FED2FFB129A985DF00EDBF19 /* RecipeSearchCell.swift */,
 				FEE9E14F299DAB87007FA5FB /* RecipeTableView.swift */,
 				FEFFFD2629A63C770001999E /* CustomHeaderCell.swift */,
 				FE9BCD7629A6C2A400D88351 /* InstructionsHeaderCell.swift */,

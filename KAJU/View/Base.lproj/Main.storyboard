@@ -242,6 +242,7 @@
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Search For A Recipe" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="9UD-U9-YmD">
                                                     <rect key="frame" x="46" y="0.0" width="301" height="37"/>
                                                     <color key="backgroundColor" red="0.15686274510000001" green="0.2784313725" blue="0.36078431370000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                    <color key="tintColor" red="0.1843137255" green="0.53333333329999999" blue="0.52549019610000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="37" id="oHN-Gi-nNt"/>
                                                     </constraints>
