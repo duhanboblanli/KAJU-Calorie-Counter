@@ -237,20 +237,20 @@
 		FEE2CDE329892A73002DAA6F /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				FE08EA91298F0798008BDC6A /* MainViewController.swift */,
+				FE5DEF5C299BC5AC00F13802 /* FoodsViewController.swift */,
 				FEC7BF6629A3F2AC001B1EC9 /* RecipesViewController.swift */,
 				FEFFFD2229A63BFD0001999E /* DetailViewController.swift */,
 				FEFFFD2429A63C230001999E /* InstructionsViewController.swift */,
-				FE5DEF5C299BC5AC00F13802 /* FoodsViewController.swift */,
 				FEBF1DCD2986BB4400FD4760 /* EggTimerViewController.swift */,
-				FE41A2002997ABA200892346 /* TabBarController.swift */,
-				FE59984D298B0EDF002CB4DF /* CalculatorViewController.swift */,
-				FE59984F298B1C55002CB4DF /* CalculatorResultViewController.swift */,
-				FE08EA91298F0798008BDC6A /* MainViewController.swift */,
 				FE32926C2991AF740075A5B8 /* WelcomeViewController.swift */,
-				FE1432652991E131000F762D /* LogInViewController.swift */,
 				FE95C54F2992F44900BCC4A6 /* RegisterViewController.swift */,
+				FE1432652991E131000F762D /* LogInViewController.swift */,
 				FE0BB00B29958C320062E096 /* GoalViewController.swift */,
 				FE1F72C429969C0D005FFC4B /* ActivenessViewController.swift */,
+				FE59984D298B0EDF002CB4DF /* CalculatorViewController.swift */,
+				FE59984F298B1C55002CB4DF /* CalculatorResultViewController.swift */,
+				FE41A2002997ABA200892346 /* TabBarController.swift */,
 				FEC7BF6229A3F269001B1EC9 /* Extension + UITableView.swift */,
 				FEC7BF6429A3F270001B1EC9 /* Extension + UIViewController.swift */,
 			);

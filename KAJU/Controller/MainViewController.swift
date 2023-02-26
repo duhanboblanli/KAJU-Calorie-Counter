@@ -12,15 +12,16 @@ import FirebaseFirestore
 class MainViewController: UITableViewController {
     
     let db = Firestore.firestore()
-    //Constant theme colors
-    let strokeColorDarkGreen = UIColor( red: 47/255, green: 136/255, blue: 134/255, alpha: 1).cgColor
-    let ColorLightGreen = UIColor( red: 132/255, green: 198/255, blue: 155/255, alpha: 1).cgColor
+    
+    // Constant theme colors
+    let strokeColorDarkGreen = UIColor( red: 47/255, green: 160/255, blue: 134/255, alpha: 1).cgColor
     
     let totalCalShapeLayer = CAShapeLayer ()
     let breakfastShapeLayer = CAShapeLayer()
     let lunchShapeLayer = CAShapeLayer()
     let dinnerShapeLayer = CAShapeLayer()
     let snacksShapeLayer = CAShapeLayer()
+    
     let totalCalTrackLayer = CAShapeLayer()
     let breakfastTrackLayer = CAShapeLayer()
     let lunchTrackLayer = CAShapeLayer()
@@ -82,19 +83,22 @@ class MainViewController: UITableViewController {
     @IBOutlet weak var addDinnerButton: UIButton!
     @IBOutlet weak var addLunchButton: UIButton!
     @IBOutlet weak var addBreakfastButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //self.navigationController?.isNavigationBarHidden = true
-        //navigationBar.hidesBackButton = true
+        carbsProgressBar.progressTintColor = UIColor( red: 47/255, green: 160/255, blue: 134/255, alpha: 1)
+        fatProgressBar.progressTintColor = UIColor( red: 47/255, green: 160/255, blue: 134/255, alpha: 1)
+        proteinProgressBar.progressTintColor = UIColor( red: 47/255, green: 160/255, blue: 134/255, alpha: 1)
         
+        // DB verilerini çeker ve define() çağırır
         loadData()
-        //define() --> loadData içinden çağrılacak, verilerin senkronize olması için
+        
         action()
         
     }
     
-    // breakfast, dinners vs. total değerleri de burada eklenecek
+    // breakfast, dinners vs. total değerleri ekler
     func calculateTotalValues() {
         let carbsCalorie = Float(totalCal) * Float(0.5)
         totalCarbsG = Int(carbsCalorie / Float(4.1))
@@ -110,9 +114,9 @@ class MainViewController: UITableViewController {
         totalDinnerCal = Int(Float(totalCal) * Float(0.25))
         // total calorie * 5/100
         totalSnacksCal = Int(Float(totalCal) * Float(0.05))
-        
     }
     
+    // Load firebase db
     private func loadData() {
         
         if let currentUserEmail = Auth.auth().currentUser?.email {
@@ -162,6 +166,8 @@ class MainViewController: UITableViewController {
         snacksCalLabel.text = currentSnacksCal.description + " / " + totalSnacksCal.description + " kcal"
         
         // circular paths for circular progress bar shape layers..
+        // x: 196.5, y: 90   141.5 58  w:70 h:23
+        
         let circularPathTotalCal = UIBezierPath(arcCenter: CGPoint(x: 196.5, y: 90), radius: 50,
                                                 startAngle:  CGFloat.pi*3/4 , endAngle: CGFloat.pi/4, clockwise: true)
         let circularPathBreakfast = UIBezierPath(arcCenter: CGPoint(x: 71, y: 282), radius: 25,
@@ -186,7 +192,7 @@ class MainViewController: UITableViewController {
         // Breakfast Track Layer..
         breakfastTrackLayer.path = circularPathBreakfast.cgPath
         breakfastTrackLayer.fillColor = UIColor.clear.cgColor
-        breakfastTrackLayer.strokeColor = ColorLightGreen
+        breakfastTrackLayer.strokeColor = strokeColorDarkGreen
         breakfastTrackLayer.lineWidth = 6
         breakfastTrackLayer.lineCap = CAShapeLayerLineCap.round
         breakfastTrackLayer.strokeEnd = 0
@@ -205,7 +211,7 @@ class MainViewController: UITableViewController {
         // Lunch Track Layer
         lunchTrackLayer.path = circularPathLunch.cgPath
         lunchTrackLayer.fillColor = UIColor.clear.cgColor
-        lunchTrackLayer.strokeColor = ColorLightGreen
+        lunchTrackLayer.strokeColor = strokeColorDarkGreen
         lunchTrackLayer.lineWidth = 6
         lunchTrackLayer.lineCap = CAShapeLayerLineCap.round
         lunchTrackLayer.strokeEnd = 0
@@ -224,7 +230,7 @@ class MainViewController: UITableViewController {
         // Dinner Track Layer
         dinnerTrackLayer.path = circularPathDinner.cgPath
         dinnerTrackLayer.fillColor = UIColor.clear.cgColor
-        dinnerTrackLayer.strokeColor = ColorLightGreen
+        dinnerTrackLayer.strokeColor = strokeColorDarkGreen
         dinnerTrackLayer.lineWidth = 6
         dinnerTrackLayer.lineCap = CAShapeLayerLineCap.round
         dinnerTrackLayer.strokeEnd = 0
@@ -243,7 +249,7 @@ class MainViewController: UITableViewController {
         // Snacks Track Layer
         snacksTrackLayer.path = circularPathSnacks.cgPath
         snacksTrackLayer.fillColor = UIColor.clear.cgColor
-        snacksTrackLayer.strokeColor = ColorLightGreen
+        snacksTrackLayer.strokeColor = strokeColorDarkGreen
         snacksTrackLayer.lineWidth = 6
         snacksTrackLayer.lineCap = CAShapeLayerLineCap.round
         snacksTrackLayer.strokeEnd = 0
@@ -254,7 +260,7 @@ class MainViewController: UITableViewController {
         // Total Calorie Shape Layer
         totalCalShapeLayer.path = circularPathTotalCal.cgPath
         totalCalShapeLayer.strokeColor = UIColor.lightGray.cgColor
-        totalCalShapeLayer.lineWidth = 5
+        totalCalShapeLayer.lineWidth = 6
         totalCalShapeLayer.fillColor = UIColor.clear.cgColor
         totalCalShapeLayer.lineCap = CAShapeLayerLineCap.round
         view.layer.addSublayer(totalCalShapeLayer)
@@ -262,7 +268,7 @@ class MainViewController: UITableViewController {
         // Total Calorie Track Layer
         totalCalTrackLayer.path = circularPathTotalCal.cgPath
         totalCalTrackLayer.fillColor = UIColor.clear.cgColor
-        totalCalTrackLayer.strokeColor = ColorLightGreen
+        totalCalTrackLayer.strokeColor = strokeColorDarkGreen
         totalCalTrackLayer.lineWidth = 7
         totalCalTrackLayer.lineCap = CAShapeLayerLineCap.round
         totalCalTrackLayer.strokeEnd = 0
@@ -273,7 +279,8 @@ class MainViewController: UITableViewController {
             totalCalTrackLayer.strokeColor = UIColor.orange.cgColor
             currentCal = totalCal
         }
-    }
+    } // ends of func define()
+    
     private func action(){
         // tap gesture just for testing circular progress bars.
         view.addGestureRecognizer(UITapGestureRecognizer (target: self, action: #selector (loadProgressBars)))
@@ -291,8 +298,8 @@ class MainViewController: UITableViewController {
             self.navigationController?.pushViewController(vc,animated:true)
         }
     }
+    
     @objc private func loadProgressBars() {
-        
         // Load Total Calorie Bar
         print("insideLoadProgressBar:\(totalCal)")
         var currentRate = 1-CGFloat(totalCal-currentCal)/CGFloat(totalCal)
@@ -371,7 +378,8 @@ class MainViewController: UITableViewController {
         carbsProgressBar.setProgress(Float(currentCarbsG)/Float(totalCarbsG), animated: true)
         proteinProgressBar.setProgress(Float(currentProteinG)/Float(totalProteinG), animated: true)
         fatProgressBar.setProgress(Float(currentFatG)/Float(totalFatG), animated: true)
-    }
+        
+    } // ends of func loadProgressBars()
     
     
     // MARK: - Table view data source
