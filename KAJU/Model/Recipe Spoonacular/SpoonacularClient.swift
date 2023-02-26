@@ -14,10 +14,11 @@ class SpoonacularClient {
     // duhan - 0706fa7896064f859e95c8cb220b288e
     // duhan2 - 1b7e88a834da447bbb98991d223bceb8
     // duhan3 - cec51adb54d74837a287543d74a80cc9
+    // merttr - ff00eaacffa1447989ecab1045698e14
     // unknown - a67a5241c34f45429f75c2d8a1858a67 --> premium key for search
     
     //static var apiKey = "a67a5241c34f45429f75c2d8a1858a67"
-    static let apiKeys: [String] = ["8b8db97d79c840ec95ae4c7c472b8fdd","0706fa7896064f859e95c8cb220b288e","1b7e88a834da447bbb98991d223bceb8","cec51adb54d74837a287543d74a80cc9"]
+    static let apiKeys: [String] = ["8b8db97d79c840ec95ae4c7c472b8fdd","0706fa7896064f859e95c8cb220b288e","1b7e88a834da447bbb98991d223bceb8","cec51adb54d74837a287543d74a80cc9","ff00eaacffa1447989ecab1045698e14"]
     static let randomInt = Int.random(in: 0..<apiKeys.count)
     static var apiKey = apiKeys[randomInt]
     static let host = "api.spoonacular.com"
