@@ -32,8 +32,6 @@ class CalculatorViewController: UIViewController {
     
     @IBOutlet weak var sexSegment: UISegmentedControl!
     
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupButtonStyle(button: calculateButton, cornerRadius: 0.096)
@@ -92,7 +90,7 @@ class CalculatorViewController: UIViewController {
         calculatorBrain.calculateBMI(BMIheight,weight)
         calculatorBrain.calculateCalorie(sex,weight,height,age,bmh,changeCalorieAmount)
         
-        //Verilerin database'e kaydedilmesi işlemi --> calculatorBrainde func yaz!
+        //Verilerin database'e kaydedilmesi
         let calorie = calculatorBrain.getCalorie()
         let calorieFloat = Float(calorie) ?? 0.0
         let calorieInt = Int(calorieFloat)
@@ -135,14 +133,5 @@ class CalculatorViewController: UIViewController {
         button.layer.cornerRadius = CGFloat(cornerRadius) * button.bounds.size.width
         button.clipsToBounds = true
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+ 
 }

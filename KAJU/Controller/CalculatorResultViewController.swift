@@ -8,10 +8,7 @@
 import UIKit
 import CLTypingLabel
 
-
 class CalculatorResultViewController: UIViewController {
-    
-    
     
     var bmiValue: String?
     var advice: String?
@@ -19,7 +16,7 @@ class CalculatorResultViewController: UIViewController {
     var calorie: String?
     var CalorieSublabelField: String?
     
-    @IBOutlet weak var bmiLabel: CLTypingLabel!
+    @IBOutlet weak var bmiLabel: UILabel!
     @IBOutlet weak var adviceLabel: UILabel!
     @IBOutlet weak var resultLabel: UILabel!
     
@@ -34,7 +31,16 @@ class CalculatorResultViewController: UIViewController {
         setupButtonStyle(button: resultNextButton, cornerRadius: 0.096)
         
         if let bmiValue {
-            bmiLabel.text = bmiValue
+            //Title Label Animation With For Loop
+            bmiLabel.text = ""
+            var charIndex = 0.0
+            let titleText = bmiValue
+            for letter in titleText {
+                Timer.scheduledTimer(withTimeInterval: 0.25*charIndex, repeats: false) { (timer) in
+                    self.bmiLabel.text?.append(letter)
+                }
+                charIndex += 1
+            }
         }
         if let advice {
             adviceLabel.text = advice
@@ -46,7 +52,7 @@ class CalculatorResultViewController: UIViewController {
             calorieSublabel.text = CalorieSublabelField
         }
         if let calorie {
-            calorieLabel.text = calorie
+            calorieLabel.text = "\(calorie) kcal"
         }
         
     }
@@ -59,15 +65,4 @@ class CalculatorResultViewController: UIViewController {
         button.layer.cornerRadius = CGFloat(cornerRadius) * button.bounds.size.width
         button.clipsToBounds = true
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
 }

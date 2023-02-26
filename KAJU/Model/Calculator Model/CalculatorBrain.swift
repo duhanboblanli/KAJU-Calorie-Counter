@@ -54,7 +54,7 @@ struct CalculatorBrain {
     }
     
     func getCalorie() -> String {
-        let calorieTo1DecimalPlace = String(format: "%.1f", calorie ?? 0.0)
+        let calorieTo1DecimalPlace = String(format: "%.0f", calorie ?? 0.0)
         return calorieTo1DecimalPlace
     }
     

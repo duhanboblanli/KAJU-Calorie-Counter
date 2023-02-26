@@ -18,6 +18,10 @@ class LogInViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupButtonStyle(button: logInButton, cornerRadius: 0.096)
+        emailTextField.delegate = self
+         passwordTextField.delegate = self
+         emailTextField.tag = 1
+         passwordTextField.tag = 2
     }
     
     
@@ -42,3 +46,18 @@ class LogInViewController: UIViewController {
     }
     
 }
+
+//MARK: - UITextFieldDelegate
+extension LogInViewController: UITextFieldDelegate {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+     //Check if there is any other text-field in the view whose tag is +1 greater than the current text-field on which the return key was pressed. If yes → then move the cursor to that next text-field. If No → Dismiss the keyboard
+     if let nextField = self.view.viewWithTag(textField.tag + 1) as? UITextField {
+     nextField.becomeFirstResponder()
+     } else {
+     textField.resignFirstResponder()
+     }
+     return false
+     }
+
+} // ends of extension:UITextFieldDelegate

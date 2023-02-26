@@ -40,7 +40,7 @@ class WelcomeViewController: UIViewController {
             charIndex += 1
         }
         
-        incrementLabel(amount: 20)
+        incrementLabel(amount: 12)
     }
     
     //Kenarlardan 10,height 72 constraintsli buttonlar için ideal cornerRadius 0.096
@@ -59,7 +59,6 @@ class WelcomeViewController: UIViewController {
         if (counter > 0) {
             counter -= 1
             percentage += 1
-            print(percentage)
             if percentage == 6 {
                 //Title Label Animation With For Loop
                 infoLabel.text = ""

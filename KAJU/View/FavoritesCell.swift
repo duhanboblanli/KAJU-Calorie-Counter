@@ -9,8 +9,6 @@ import UIKit
 
 class FavoritesCell: UITableViewCell {
     
-    
-    
     @IBOutlet weak var recipeImage: UIImageView!
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var calorie: UILabel!
