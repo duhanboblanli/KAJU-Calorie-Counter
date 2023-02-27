@@ -9,10 +9,10 @@ import UIKit
 
 
 class FoodsViewController: UIViewController, UISearchBarDelegate, UpdateDelegate{
+    
     func didUpdate(sender: FoodViewModel) {
         self.tableView.reloadData()
     }
-    
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!

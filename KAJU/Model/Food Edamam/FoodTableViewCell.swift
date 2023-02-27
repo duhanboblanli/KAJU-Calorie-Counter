@@ -32,7 +32,8 @@ class FoodTableViewCell: UITableViewCell {
     // Update the UI Views
     private func updateUI(label: String?, calorie: Float?, image: UIImage?) {
         self.name.text = label
-        self.calorie.text = calorie?.description
+        let calorieNoDecimal = Int(calorie ?? 0.0)
+        self.calorie.text = (calorieNoDecimal.description) + " kcal"
         self.foodImage.image = image
     }
 

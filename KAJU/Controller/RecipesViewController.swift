@@ -158,7 +158,9 @@ class RecipesViewController: UIViewController, UISearchBarDelegate {
         // Configure the activity indicator
         activityIndicator = UIActivityIndicatorView()
         activityIndicator.hidesWhenStopped = true
-        activityIndicator.style = UIActivityIndicatorView.Style.whiteLarge
+        activityIndicator.style = UIActivityIndicatorView.Style.large
+        activityIndicator.color = .white
+        
         activityIndicator.translatesAutoresizingMaskIntoConstraints = false
         activityIndicatorContainer.addSubview(activityIndicator)
         view.addSubview(activityIndicatorContainer)
