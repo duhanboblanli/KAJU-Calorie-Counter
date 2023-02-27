@@ -32,6 +32,7 @@
 		FE95C262299EDF2200122BC1 /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = FE95C261299EDF2200122BC1 /* IQKeyboardManagerSwift */; };
 		FE95C5502992F44900BCC4A6 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE95C54F2992F44900BCC4A6 /* RegisterViewController.swift */; };
 		FE9BCD7729A6C2A400D88351 /* InstructionsHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE9BCD7629A6C2A400D88351 /* InstructionsHeaderCell.swift */; };
+		FEA6096929ACF985005E7820 /* CircleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEA6096829ACF985005E7820 /* CircleButton.swift */; };
 		FEBF1DCA2986BB4400FD4760 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEBF1DC92986BB4400FD4760 /* AppDelegate.swift */; };
 		FEBF1DCC2986BB4400FD4760 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEBF1DCB2986BB4400FD4760 /* SceneDelegate.swift */; };
 		FEBF1DCE2986BB4400FD4760 /* EggTimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEBF1DCD2986BB4400FD4760 /* EggTimerViewController.swift */; };
@@ -79,6 +80,7 @@
 		FE93498B29A78E3A00316B22 /* Food_and_Recipe.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Food_and_Recipe.xcdatamodel; sourceTree = "<group>"; };
 		FE95C54F2992F44900BCC4A6 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		FE9BCD7629A6C2A400D88351 /* InstructionsHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionsHeaderCell.swift; sourceTree = "<group>"; };
+		FEA6096829ACF985005E7820 /* CircleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleButton.swift; sourceTree = "<group>"; };
 		FEBF1DC62986BB4400FD4760 /* KAJU.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KAJU.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FEBF1DC92986BB4400FD4760 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FEBF1DCB2986BB4400FD4760 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -230,6 +232,7 @@
 				FE9BCD7629A6C2A400D88351 /* InstructionsHeaderCell.swift */,
 				FEBF1DCF2986BB4400FD4760 /* Main.storyboard */,
 				FEBF1DD42986BB4600FD4760 /* LaunchScreen.storyboard */,
+				FEA6096829ACF985005E7820 /* CircleButton.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -413,6 +416,7 @@
 				FE1432662991E131000F762D /* LogInViewController.swift in Sources */,
 				FEC7BF5C29A3F147001B1EC9 /* Recipe.swift in Sources */,
 				FEC7BF6029A3F147001B1EC9 /* AutoCompleteSearchResponse.swift in Sources */,
+				FEA6096929ACF985005E7820 /* CircleButton.swift in Sources */,
 				FE08EA92298F0798008BDC6A /* MainViewController.swift in Sources */,
 				FE93498C29A78E3A00316B22 /* Food_and_Recipe.xcdatamodeld in Sources */,
 				FEE9E150299DAB87007FA5FB /* RecipeTableView.swift in Sources */,

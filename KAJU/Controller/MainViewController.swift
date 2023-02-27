@@ -11,22 +11,35 @@ import FirebaseFirestore
 
 class MainViewController: UITableViewController {
     
+    let strokeColorDarkGreen = UIColor( red: 47/255, green: 160/255, blue: 134/255, alpha: 1).cgColor
     let db = Firestore.firestore()
     
-    // Constant theme colors
-    let strokeColorDarkGreen = UIColor( red: 47/255, green: 160/255, blue: 134/255, alpha: 1).cgColor
-    
+    // Views for shapes autolayout constraints
+    @IBOutlet weak var totalCalView: UIView!
     let totalCalShapeLayer = CAShapeLayer ()
-    let breakfastShapeLayer = CAShapeLayer()
-    let lunchShapeLayer = CAShapeLayer()
-    let dinnerShapeLayer = CAShapeLayer()
-    let snacksShapeLayer = CAShapeLayer()
-    
     let totalCalTrackLayer = CAShapeLayer()
+    
+    
+    @IBOutlet weak var breakfastView: UIView!
+    let breakfastShapeLayer = CAShapeLayer()
     let breakfastTrackLayer = CAShapeLayer()
+    
+    
+    @IBOutlet weak var lunchView: UIView!
+    let lunchShapeLayer = CAShapeLayer()
     let lunchTrackLayer = CAShapeLayer()
+    
+    
+    @IBOutlet weak var dinnerView: UIView!
+    let dinnerShapeLayer = CAShapeLayer()
     let dinnerTrackLayer = CAShapeLayer()
+    
+    
+    @IBOutlet weak var snacksView: UIView!
+    let snacksShapeLayer = CAShapeLayer()
     let snacksTrackLayer = CAShapeLayer()
+    
+    
     
     // total calorie * 3/10
     var totalBreakfastCal = 0
@@ -165,18 +178,22 @@ class MainViewController: UITableViewController {
         dinnerCalLabel.text = currentDinnerCal.description + " / " + totalDinnerCal.description + " kcal"
         snacksCalLabel.text = currentSnacksCal.description + " / " + totalSnacksCal.description + " kcal"
         
-        // circular paths for circular progress bar shape layers..
-        // x: 196.5, y: 90   141.5 58  w:70 h:23
-        
-        let circularPathTotalCal = UIBezierPath(arcCenter: CGPoint(x: 196.5, y: 90), radius: 50,
+        // circular paths for circular progress bar shape layers
+        // viewin ortası CGPoint(x: totalCalView.bounds.midX, y: totalCalView.bounds.midY)
+        // x: 196.5, y: 90 ---> totalCalView.layer.addSublayer(breakfastShapeLayer)
+        let circularPathTotalCal = UIBezierPath(arcCenter: CGPoint(x: totalCalView.bounds.midX, y: totalCalView.bounds.midY), radius: 50,
                                                 startAngle:  CGFloat.pi*3/4 , endAngle: CGFloat.pi/4, clockwise: true)
-        let circularPathBreakfast = UIBezierPath(arcCenter: CGPoint(x: 71, y: 282), radius: 25,
+        //x: 71, y: 282
+        let circularPathBreakfast = UIBezierPath(arcCenter: CGPoint(x: breakfastView.bounds.midX, y: breakfastView.bounds.midY), radius: 25,
                                                  startAngle:  CGFloat.pi*3/2 , endAngle: CGFloat.pi/2*7, clockwise: true)
-        let circularPathLunch = UIBezierPath(arcCenter: CGPoint(x: 71, y: 367), radius: 25,
+        
+        let circularPathLunch = UIBezierPath(arcCenter: CGPoint(x: lunchView.bounds.midX, y: lunchView.bounds.midY), radius: 25,
                                              startAngle:  CGFloat.pi*3/2 , endAngle: CGFloat.pi/2*7, clockwise: true)
-        let circularPathDinner = UIBezierPath(arcCenter: CGPoint(x: 71, y: 452), radius: 25,
+        
+        let circularPathDinner = UIBezierPath(arcCenter: CGPoint(x: dinnerView.bounds.midX, y: dinnerView.bounds.midY), radius: 25,
                                               startAngle:  CGFloat.pi*3/2 , endAngle: CGFloat.pi/2*7, clockwise: true)
-        let circularPathSnacks = UIBezierPath(arcCenter: CGPoint(x: 71, y: 537), radius: 25,
+        
+        let circularPathSnacks = UIBezierPath(arcCenter: CGPoint(x: snacksView.bounds.midX, y: snacksView.bounds.midY), radius: 25,
                                               startAngle:  CGFloat.pi*3/2 , endAngle: CGFloat.pi/2*7, clockwise: true)
         
         
@@ -187,8 +204,10 @@ class MainViewController: UITableViewController {
         breakfastShapeLayer.lineWidth = 5
         breakfastShapeLayer.fillColor = UIColor.clear.cgColor
         breakfastShapeLayer.lineCap = CAShapeLayerLineCap.round
-        view.layer.addSublayer(breakfastShapeLayer)
+        //view.layer.addSublayer(breakfastShapeLayer)
+        breakfastView.layer.addSublayer(breakfastShapeLayer)
         
+      
         // Breakfast Track Layer..
         breakfastTrackLayer.path = circularPathBreakfast.cgPath
         breakfastTrackLayer.fillColor = UIColor.clear.cgColor
@@ -196,7 +215,8 @@ class MainViewController: UITableViewController {
         breakfastTrackLayer.lineWidth = 6
         breakfastTrackLayer.lineCap = CAShapeLayerLineCap.round
         breakfastTrackLayer.strokeEnd = 0
-        view.layer.addSublayer(breakfastTrackLayer)
+        //view.layer.addSublayer(breakfastTrackLayer)
+        breakfastView.layer.addSublayer(breakfastTrackLayer)
         
         
         // LUNCH
@@ -206,7 +226,8 @@ class MainViewController: UITableViewController {
         lunchShapeLayer.lineWidth = 5
         lunchShapeLayer.fillColor = UIColor.clear.cgColor
         lunchShapeLayer.lineCap = CAShapeLayerLineCap.round
-        view.layer.addSublayer(lunchShapeLayer)
+        //view.layer.addSublayer(lunchShapeLayer)
+        lunchView.layer.addSublayer(lunchShapeLayer)
         
         // Lunch Track Layer
         lunchTrackLayer.path = circularPathLunch.cgPath
@@ -215,7 +236,8 @@ class MainViewController: UITableViewController {
         lunchTrackLayer.lineWidth = 6
         lunchTrackLayer.lineCap = CAShapeLayerLineCap.round
         lunchTrackLayer.strokeEnd = 0
-        view.layer.addSublayer(lunchTrackLayer)
+        //view.layer.addSublayer(lunchTrackLayer)
+        lunchView.layer.addSublayer(lunchTrackLayer)
         
         
         // DINNER
@@ -225,7 +247,8 @@ class MainViewController: UITableViewController {
         dinnerShapeLayer.lineWidth = 5
         dinnerShapeLayer.fillColor = UIColor.clear.cgColor
         dinnerShapeLayer.lineCap = CAShapeLayerLineCap.round
-        view.layer.addSublayer(dinnerShapeLayer)
+        //view.layer.addSublayer(dinnerShapeLayer)
+        dinnerView.layer.addSublayer(dinnerShapeLayer)
         
         // Dinner Track Layer
         dinnerTrackLayer.path = circularPathDinner.cgPath
@@ -234,8 +257,9 @@ class MainViewController: UITableViewController {
         dinnerTrackLayer.lineWidth = 6
         dinnerTrackLayer.lineCap = CAShapeLayerLineCap.round
         dinnerTrackLayer.strokeEnd = 0
-        view.layer.addSublayer(dinnerTrackLayer)
-        
+        //view.layer.addSublayer(dinnerTrackLayer)
+        dinnerView.layer.addSublayer(dinnerTrackLayer)
+
         
         // SNACKS
         // Snacks Shape Layer
@@ -244,8 +268,9 @@ class MainViewController: UITableViewController {
         snacksShapeLayer.lineWidth = 5
         snacksShapeLayer.fillColor = UIColor.clear.cgColor
         snacksShapeLayer.lineCap = CAShapeLayerLineCap.round
-        view.layer.addSublayer(snacksShapeLayer)
-        
+        //view.layer.addSublayer(snacksShapeLayer)
+        snacksView.layer.addSublayer(snacksShapeLayer)
+
         // Snacks Track Layer
         snacksTrackLayer.path = circularPathSnacks.cgPath
         snacksTrackLayer.fillColor = UIColor.clear.cgColor
@@ -253,8 +278,9 @@ class MainViewController: UITableViewController {
         snacksTrackLayer.lineWidth = 6
         snacksTrackLayer.lineCap = CAShapeLayerLineCap.round
         snacksTrackLayer.strokeEnd = 0
-        view.layer.addSublayer(snacksTrackLayer)
-        
+        //view.layer.addSublayer(snacksTrackLayer)
+        snacksView.layer.addSublayer(snacksTrackLayer)
+
         
         // TOTAL CALORIE
         // Total Calorie Shape Layer
@@ -263,7 +289,8 @@ class MainViewController: UITableViewController {
         totalCalShapeLayer.lineWidth = 6
         totalCalShapeLayer.fillColor = UIColor.clear.cgColor
         totalCalShapeLayer.lineCap = CAShapeLayerLineCap.round
-        view.layer.addSublayer(totalCalShapeLayer)
+        //view.layer.addSublayer(totalCalShapeLayer)
+        totalCalView.layer.addSublayer(totalCalShapeLayer)
         
         // Total Calorie Track Layer
         totalCalTrackLayer.path = circularPathTotalCal.cgPath
@@ -272,7 +299,8 @@ class MainViewController: UITableViewController {
         totalCalTrackLayer.lineWidth = 7
         totalCalTrackLayer.lineCap = CAShapeLayerLineCap.round
         totalCalTrackLayer.strokeEnd = 0
-        view.layer.addSublayer(totalCalTrackLayer)
+        //view.layer.addSublayer(totalCalTrackLayer)
+        totalCalView.layer.addSublayer(totalCalTrackLayer)
         
         if currentCal >= totalCal{
             remainingTitle.text = "Over"
@@ -306,9 +334,10 @@ class MainViewController: UITableViewController {
         var startAngle = CGFloat.pi*3/4
         var progress = CGFloat.pi*3/2*CGFloat(currentRate)
         var currentEndAngle = startAngle + progress
-        let circularPath3 = UIBezierPath(arcCenter: CGPoint(x: 196.5, y: 90), radius: 50,
+        let circularPath3 = UIBezierPath(arcCenter: CGPoint(x: totalCalView.bounds.midX, y: totalCalView.bounds.midY), radius: 50,
                                          startAngle:  CGFloat.pi*3/4,
                                          endAngle: currentEndAngle, clockwise:true)
+      
         let basicAnimation = CABasicAnimation(keyPath: "strokeEnd")
         basicAnimation.toValue = 1
         basicAnimation.duration = 2
@@ -327,21 +356,20 @@ class MainViewController: UITableViewController {
         var breakfastRate = CGFloat(currentBreakfastCal)/CGFloat(totalBreakfastCal)
         var addedBreakfastProgress = CGFloat.pi*2*CGFloat(breakfastRate)
         var currentBreakfastProgressEndAngle = circleStartAngle + addedBreakfastProgress
-        let currentTrackPathBreakfast = UIBezierPath(arcCenter: CGPoint(x: 71, y: 282), radius: 25,
+        let currentTrackPathBreakfast = UIBezierPath(arcCenter: CGPoint(x: breakfastView.bounds.midX, y: breakfastView.bounds.midY), radius: 25,
                                                      startAngle:  CGFloat.pi*3/2 , endAngle: currentBreakfastProgressEndAngle, clockwise: true)
         
         breakfastTrackLayer.path = currentTrackPathBreakfast.cgPath
         breakfastTrackLayer.add(basicAnimation, forKey: "urSoBasic")
         
         // Load Lunch Bar
-        
         if currentLunchCal >= totalLunchCal{
             currentLunchCal = totalLunchCal
         }
         var lunchRate = CGFloat(currentLunchCal)/CGFloat(totalLunchCal)
         var addedLunchProgress = CGFloat.pi*2*CGFloat(lunchRate)
         var currentLunchProgressEndAngle = circleStartAngle + addedLunchProgress
-        let currentTrackPathLunch = UIBezierPath(arcCenter: CGPoint(x: 71, y: 367), radius: 25,
+        let currentTrackPathLunch = UIBezierPath(arcCenter: CGPoint(x: lunchView.bounds.midX, y: lunchView.bounds.midY), radius: 25,
                                                  startAngle:  CGFloat.pi*3/2 , endAngle: currentLunchProgressEndAngle, clockwise: true)
         
         lunchTrackLayer.path = currentTrackPathLunch.cgPath
@@ -354,7 +382,7 @@ class MainViewController: UITableViewController {
         var dinnerRate = CGFloat(currentDinnerCal)/CGFloat(totalDinnerCal)
         var addedDinnerProgress = CGFloat.pi*2*CGFloat(dinnerRate)
         var currentDinnerProgressEndAngle = circleStartAngle + addedDinnerProgress
-        let currentTrackPathDinner = UIBezierPath(arcCenter: CGPoint(x: 71, y: 452), radius: 25,
+        let currentTrackPathDinner = UIBezierPath(arcCenter: CGPoint(x: dinnerView.bounds.midX, y: dinnerView.bounds.midY), radius: 25,
                                                   startAngle:  CGFloat.pi*3/2 , endAngle: currentDinnerProgressEndAngle, clockwise: true)
         
         dinnerTrackLayer.path = currentTrackPathDinner.cgPath
@@ -367,7 +395,7 @@ class MainViewController: UITableViewController {
         var snacksRate = CGFloat(currentSnacksCal)/CGFloat(totalSnacksCal)
         var addedSnacksProgress = CGFloat.pi*2*CGFloat(snacksRate)
         var currentSnacksProgressEndAngle = circleStartAngle + addedSnacksProgress
-        let currentTrackPathSnacks = UIBezierPath(arcCenter: CGPoint(x: 71, y: 537), radius: 25,
+        let currentTrackPathSnacks = UIBezierPath(arcCenter: CGPoint(x: snacksView.bounds.midX, y: snacksView.bounds.midY), radius: 25,
                                                   startAngle:  CGFloat.pi*3/2 , endAngle: currentSnacksProgressEndAngle, clockwise: true)
         
         snacksTrackLayer.path = currentTrackPathSnacks.cgPath
