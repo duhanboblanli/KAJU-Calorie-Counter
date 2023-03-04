@@ -7,8 +7,7 @@
 
 import UIKit
 
-
-class FoodsViewController: UIViewController, UISearchBarDelegate, UpdateDelegate{
+class FoodsViewController: UIViewController, UpdateDelegate {
     
     func didUpdate(sender: FoodViewModel) {
         self.tableView.reloadData()
@@ -16,6 +15,9 @@ class FoodsViewController: UIViewController, UISearchBarDelegate, UpdateDelegate
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
+    //For waiting alert
+    var activityIndicatorContainer: UIView!
+    var activityIndicator: UIActivityIndicatorView!
     
     private var foodViewModel = FoodViewModel()
     private var images: [UIImage]?
@@ -26,19 +28,61 @@ class FoodsViewController: UIViewController, UISearchBarDelegate, UpdateDelegate
         tableView.dataSource = self
         searchBar.delegate = self
         foodViewModel.delegate = self
-        searchBar.searchTextField.leftView?.tintColor = UIColor( red: 170/255, green: 170/255, blue: 170/255, alpha: 1)
         searchBar.searchTextField.attributedPlaceholder = NSAttributedString(string: "Search For A Food", attributes: [NSAttributedString.Key.foregroundColor: UIColor( red: 170/255, green: 170/255, blue: 170/255, alpha: 1)])
         LoadFoodsData()
     }
+    
     private func LoadFoodsData() {
         // Called at the beginning to do an API call and fill targetFoods
+        setupActivityIndicator()
+        showActivityIndicator(show: true)
         foodViewModel.fetchFoodData(pagination: false){ [weak self] in
             self?.tableView.dataSource = self
             self?.tableView.reloadData()
-            print("hmm", self!.foodViewModel.getCount())
+            self?.showActivityIndicator(show: false)
         }
     }
 
+    // Loading alert functionality
+    private func showActivityIndicator(show: Bool) {
+      if show {
+        DispatchQueue.main.async{
+            self.tableView.allowsSelection = false
+            self.activityIndicator.startAnimating()
+        }
+      } else {
+            DispatchQueue.main.async{
+                self.tableView.allowsSelection = true
+                self.activityIndicator.stopAnimating()
+                self.activityIndicatorContainer.removeFromSuperview()
+            }
+        }
+    }
+    
+    //Loading Alert Setup
+    private func setupActivityIndicator() {
+        
+        activityIndicatorContainer = UIView(frame: CGRect(x: 0, y: 0, width: 80, height: 80))
+        activityIndicatorContainer.center.x = view.center.x
+        activityIndicatorContainer.center.y = view.center.y
+        activityIndicatorContainer.backgroundColor = UIColor.black
+        activityIndicatorContainer.alpha = 0.8
+        activityIndicatorContainer.layer.cornerRadius = 10
+          
+        // Configure the activity indicator
+        activityIndicator = UIActivityIndicatorView()
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.style = UIActivityIndicatorView.Style.large
+        activityIndicator.color = .white
+        
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        activityIndicatorContainer.addSubview(activityIndicator)
+        view.addSubview(activityIndicatorContainer)
+            
+        // Constraints
+        activityIndicator.centerXAnchor.constraint(equalTo: activityIndicatorContainer.centerXAnchor).isActive = true
+        activityIndicator.centerYAnchor.constraint(equalTo: activityIndicatorContainer.centerYAnchor).isActive = true
+    }
 } // ends of FoodsViewController
 
 //MARK: - UIScrollViewDelegate
@@ -70,9 +114,9 @@ extension FoodsViewController: UIScrollViewDelegate{
             }
         }
     }
-}
+} // ends of extension: UIScrollViewDelegate
 
-//MARK: - UITableViewDataSource
+//MARK: - UITableViewDataSource, UITableViewDelegate
 extension FoodsViewController: UITableViewDataSource, UITableViewDelegate {
     
     // Tablo görünümde kaç hücre ya da kaç satır istiyoruz burda belirtilir
@@ -85,47 +129,57 @@ extension FoodsViewController: UITableViewDataSource, UITableViewDelegate {
         var foodCell : FoodTableViewCell // Declare the cell
         foodCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! FoodTableViewCell // Initialize cell
         let food = foodViewModel.cellForRowAt(indexPath: indexPath)
-        print("Food?: ", food)
         foodCell.setCellWithValuesOf(food)
         return foodCell
     }
-}
+} // ends of extension: TableView
 
-//MARK: - UITextFieldDelegate
-extension FoodsViewController: UITextFieldDelegate {
-    // Search buttona bastığında klavye kapatır
-    @IBAction func searchBtn(_ sender: Any) {
-        searchBar.endEditing(true)
-        //this is line of code helps to relode tableview --> eklenecek
-    }
+//MARK: - UISearchBarDelegate
+extension FoodsViewController: UISearchBarDelegate {
     
-    // Klavyeden returne bastığında klavye kapatır
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-
-        searchBar.endEditing(true)
-        return true
-    }
-    
-    // Klavye kapandıysa ve bir şey yazılmadıysa yerine placeholder koyar
-    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
-        
-        if textField.text != "" {
-            return true
-        }else{
-            DispatchQueue.main.async {
-                textField.placeholder = "Type Something" }
-            return true
+    // Arama için query oluşturan fonksiyon
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        if let searchQuery = searchBar.text {
+            if searchQuery != "" {
+                setupActivityIndicator()
+                showActivityIndicator(show: true)
+                self.searchBar.placeholder = "Search Results for '\(searchQuery)' "
+                foodViewModel.clearData()
+                foodViewModel.fetchSearchedFoodData(searchQuery: searchQuery, pagination: false){ [weak self] in
+                self?.tableView.dataSource = self
+                self?.tableView.reloadData()
+                self?.showActivityIndicator(show: false)
+            }
+                // food için query alan fonk yaz
+            } else {
+                DispatchQueue.main.async {
+                    self.searchBar.placeholder = "Type Something!"
+                }
+            }
+            searchBar.text = ""
+            searchBar.endEditing(true)
+            
         }
-        
+        self.searchBar.showsCancelButton = false
+        searchBar.text = ""
+        searchBar.endEditing(true)
     }
     
-    // Klavye kapandıysa ve bir şey yazıldıysa yazıyı temizler
-    // Yerine placeholder koyar
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        searchBar.text = ""
-        textField.placeholder = "Search For A Food"
-        self.navigationController?.isNavigationBarHidden = false
+    // Autocomplete için kullanılacak
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
     }
-}
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+            self.searchBar.showsCancelButton = true
+            searchBar.placeholder = "Search For A Food"
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+            searchBar.showsCancelButton = false
+            searchBar.text = ""
+            searchBar.resignFirstResponder()
+    }
+} // ends of extension: UISearchBarDelegate
+
 
     

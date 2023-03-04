@@ -69,10 +69,8 @@ class FoodApiService {
         dataTask?.resume()
     }
     func getImageDataFrom(url: String, completion: @escaping (Result<UIImage, Error>) -> Void) {
-        print("Fetching image11111111.. ", url)
         guard let url = URL(string: url) else {return}
         dataTask = URLSession.shared.dataTask(with: url) { (data, response, error) in
-            print("Fetching image22222222.. ", url)
             // Handle Error
             if let error = error {
                 completion(.failure(error))
@@ -102,7 +100,6 @@ class FoodApiService {
             } catch let error {
                 completion(.failure(error))
             }
-            
         }
         dataTask?.resume()
     }

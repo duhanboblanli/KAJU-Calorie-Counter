@@ -63,7 +63,6 @@ class RecipesViewController: UIViewController, UISearchBarDelegate {
         fetchRequest.sortDescriptors = []
         if let result = try? appDelegate.persistentContainer.viewContext.fetch(fetchRequest) {
             foodRecipes = result
-            print("Recipe View Fetch Request:",foodRecipes)
             favTableView.reloadData()
         }
     }
@@ -329,7 +328,7 @@ extension RecipesViewController: UITableViewDelegate {
 //MARK: - UITableViewDataSource
 extension RecipesViewController: UITableViewDataSource {
     
-    // Tablo görünümde kaç hücre ya da kaç satır istiyoruz burda belirtilir
+    // Tablo görünümde kaç hücre ya da kaç satır istiyoruz?
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         var numberOfRow = 1
         if recipeSearchSuggestions.count == 0 {

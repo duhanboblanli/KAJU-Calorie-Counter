@@ -10,12 +10,22 @@ import UIKit
 
 // Model for targetFoods which is a list of foods
 struct FoodsData: Decodable {
+    let text: String?
+    let parsed: [ParsedData]?
     let hints: [FoodData]
     let _links: NextPageData
     
     private enum CodingKeys: String, CodingKey {
+        case text
+        case parsed
         case hints
         case _links
+    }
+}
+struct ParsedData: Decodable {
+    let food: Food
+    private enum CodingKeys: String, CodingKey {
+        case food = "food"
     }
 }
 
@@ -49,9 +59,9 @@ struct Food: Decodable {
 struct Nutrients: Decodable {
     let ENERC_KCAL: Float?
     let PROCNT: Float?
-    let FAT: Float
-    let CHOCDF: Float
-    let FIBTG: Float
+    let FAT: Float?
+    let CHOCDF: Float?
+    let FIBTG: Float?
     
     private enum CodingKeys: String, CodingKey {
         case ENERC_KCAL
