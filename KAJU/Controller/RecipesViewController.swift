@@ -55,7 +55,7 @@ class RecipesViewController: UIViewController, UISearchBarDelegate {
         self.tabBarController?.tabBar.isHidden = false
         setupFetchRequest()
     }
-
+    
     //Localdaki verileri çek
     private func setupFetchRequest() {
         let fetchRequest: NSFetchRequest<FoodRecipe> = FoodRecipe.fetchRequest()
@@ -113,7 +113,7 @@ class RecipesViewController: UIViewController, UISearchBarDelegate {
             }
         }
     }
- 
+    
     @IBAction func refreshButtonPressed(_ sender: UIButton) {
         setupActivityIndicator()
         showActivityIndicator(show: true)
@@ -377,6 +377,7 @@ extension RecipesViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if recipeSearchSuggestions.count == 0 {
             if tableView == discoverTableView {
+                discoverTableView.rowHeight = 375
                 if newSearchedRecipes.count == 0 {
                     var recipeCell = RecipeTableViewCell()
                     recipeCell = tableView.dequeueReusableCell(withIdentifier: "DiscoverCell", for: indexPath) as! RecipeTableViewCell
@@ -393,6 +394,7 @@ extension RecipesViewController: UITableViewDataSource {
                     return recipeCell
                 }
             }else {
+                favTableView.rowHeight = 375
                 var recipeCell = FavoritesCell()
                 recipeCell = favTableView.dequeueReusableCell(withIdentifier: "FavoritesCell", for: indexPath) as! FavoritesCell
                 let foodRecipe = foodRecipes[indexPath.row]
@@ -401,6 +403,7 @@ extension RecipesViewController: UITableViewDataSource {
             }
         }
     else {
+        discoverTableView.rowHeight = 35
         let cell = discoverTableView.dequeueReusableCell(withIdentifier: "cell")!
         cell.contentView.backgroundColor = UIColor( red: 26/255, green: 47/255, blue: 75/255, alpha: 1)
         cell.textLabel?.numberOfLines = 1

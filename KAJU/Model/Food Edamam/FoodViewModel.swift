@@ -142,18 +142,49 @@ class FoodViewModel {
             }
         }
     }
+    
+    
+    func autoCompleteFoodSearch(searchQuery: String, completion: @escaping ([String], Error?) -> Void) -> URLSessionTask {
+        var searchURL: URL {
+            var components = URLComponents()
+            components.host = "api.edamam.com"
+            components.path = "/auto-complete"
+            components.scheme = "https"
+            
+            components.queryItems = [URLQueryItem]()
+            components.queryItems?.append(URLQueryItem(name: "app_id", value: "1587e073"))
+            components.queryItems?.append(URLQueryItem(name: "app_key", value: "602facc0a5347c2e83c1a5932bcb13bc"))
+            components.queryItems?.append(URLQueryItem(name: "q", value: searchQuery))
+            print("autoCompleteURL", components.url!)
+            return components.url!
+        }
+        let task = URLSession.shared.dataTask(with: searchURL) { (data, response, error) in
+            guard let data = data else {
+                completion([], error)
+                return
+            }
+            do {
+                let responseObject = try JSONDecoder().decode([String].self, from: data)
+                completion(responseObject, nil)
+            } catch {
+                completion([], error)
+            }
+        }
+        return task
+    }
 
     func clearData(){
         targetFoods.removeAll()
     }
-
+    
     func getFoods()->[FoodData]{
         return targetFoods
     }
+    
     func getNextPage()->String{
         return nextPageUrl
     }
-
+    
     func getCount()->Int{
         return targetFoods.count
     }

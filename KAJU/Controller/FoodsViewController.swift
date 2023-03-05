@@ -14,7 +14,11 @@ class FoodsViewController: UIViewController, UpdateDelegate {
     }
     
     @IBOutlet weak var tableView: UITableView!
+    //For search and autoComplete
     @IBOutlet weak var searchBar: UISearchBar!
+    var foodSearchSuggestions = [String]()
+    var currentSearchTask: URLSessionTask?
+    
     //For waiting alert
     var activityIndicatorContainer: UIView!
     var activityIndicator: UIActivityIndicatorView!
@@ -28,15 +32,17 @@ class FoodsViewController: UIViewController, UpdateDelegate {
         tableView.dataSource = self
         searchBar.delegate = self
         foodViewModel.delegate = self
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "autoCompleteCell")
         searchBar.searchTextField.attributedPlaceholder = NSAttributedString(string: "Search For A Food", attributes: [NSAttributedString.Key.foregroundColor: UIColor( red: 170/255, green: 170/255, blue: 170/255, alpha: 1)])
-        LoadFoodsData()
+        LoadFoodsData(with: "egg")
     }
     
-    private func LoadFoodsData() {
+    
+    private func LoadFoodsData(with searchQuery: String) {
         // Called at the beginning to do an API call and fill targetFoods
         setupActivityIndicator()
         showActivityIndicator(show: true)
-        foodViewModel.fetchFoodData(pagination: false){ [weak self] in
+        foodViewModel.fetchSearchedFoodData(searchQuery:searchQuery,pagination: false){ [weak self] in
             self?.tableView.dataSource = self
             self?.tableView.reloadData()
             self?.showActivityIndicator(show: false)
@@ -58,7 +64,7 @@ class FoodsViewController: UIViewController, UpdateDelegate {
             }
         }
     }
-    
+            
     //Loading Alert Setup
     private func setupActivityIndicator() {
         
@@ -107,7 +113,6 @@ extension FoodsViewController: UIScrollViewDelegate{
             }
             self.tableView.tableFooterView = createSpinnerFooter()
             foodViewModel.fetchFoodData(pagination: true){ [weak self] in
-                print("load more")
                 self?.tableView.tableFooterView = nil
                 self?.tableView.dataSource = self
                 self?.tableView.reloadData()
@@ -119,19 +124,62 @@ extension FoodsViewController: UIScrollViewDelegate{
 //MARK: - UITableViewDataSource, UITableViewDelegate
 extension FoodsViewController: UITableViewDataSource, UITableViewDelegate {
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+       
+        if foodSearchSuggestions.count == 0 {
+            
+        }
+        else {
+            searchBar.text = foodSearchSuggestions[indexPath.row]
+            foodSearchSuggestions = []
+            tableView.reloadData()
+        }
+    }
+    
     // Tablo görünümde kaç hücre ya da kaç satır istiyoruz burda belirtilir
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return foodViewModel.numberOfRowsInSection(section: section)
+        var numberOfRow = 1
+        if foodSearchSuggestions.count == 0 {
+            numberOfRow = foodViewModel.numberOfRowsInSection(section: section)
+        }
+        else {
+            numberOfRow = foodSearchSuggestions.count
+        }
+            return numberOfRow
     }
     
     // Belirlenen tablo cell indexinde gönderilen celli döndürür
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var foodCell : FoodTableViewCell // Declare the cell
-        foodCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! FoodTableViewCell // Initialize cell
-        let food = foodViewModel.cellForRowAt(indexPath: indexPath)
-        foodCell.setCellWithValuesOf(food)
-        return foodCell
+        
+        if foodSearchSuggestions.count == 0 {
+            var foodCell : FoodTableViewCell // Declare the cell
+            foodCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! FoodTableViewCell // Initialize cell
+            let food = foodViewModel.cellForRowAt(indexPath: indexPath)
+            foodCell.setCellWithValuesOf(food)
+            return foodCell
+            
+        }
+        else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "autoCompleteCell")!
+            
+            cell.contentView.backgroundColor = UIColor( red: 26/255, green: 47/255, blue: 75/255, alpha: 1)
+            cell.textLabel?.numberOfLines = 1
+            cell.textLabel?.font = UIFont(name: "Verdana", size: 16)
+            cell.textLabel?.textColor = .lightGray
+            cell.textLabel?.text = foodSearchSuggestions[indexPath.row]
+            return cell
+        }
     }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if foodSearchSuggestions.count == 0 {
+                return 100
+            }else {
+                return 35
+            }
+        }
+
+    
 } // ends of extension: TableView
 
 //MARK: - UISearchBarDelegate
@@ -139,18 +187,14 @@ extension FoodsViewController: UISearchBarDelegate {
     
     // Arama için query oluşturan fonksiyon
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        
         if let searchQuery = searchBar.text {
             if searchQuery != "" {
-                setupActivityIndicator()
-                showActivityIndicator(show: true)
                 self.searchBar.placeholder = "Search Results for '\(searchQuery)' "
                 foodViewModel.clearData()
-                foodViewModel.fetchSearchedFoodData(searchQuery: searchQuery, pagination: false){ [weak self] in
-                self?.tableView.dataSource = self
-                self?.tableView.reloadData()
-                self?.showActivityIndicator(show: false)
-            }
-                // food için query alan fonk yaz
+                var configuretedQuery = searchQuery.replacingOccurrences(of: ",", with: "%2C", options: .literal, range: nil)
+                configuretedQuery = searchQuery.replacingOccurrences(of: " ", with: "%2C", options: .literal, range: nil)
+                LoadFoodsData(with: configuretedQuery)
             } else {
                 DispatchQueue.main.async {
                     self.searchBar.placeholder = "Type Something!"
@@ -158,8 +202,8 @@ extension FoodsViewController: UISearchBarDelegate {
             }
             searchBar.text = ""
             searchBar.endEditing(true)
-            
         }
+//        showActivityIndicator(show: false)
         self.searchBar.showsCancelButton = false
         searchBar.text = ""
         searchBar.endEditing(true)
@@ -167,6 +211,22 @@ extension FoodsViewController: UISearchBarDelegate {
     
     // Autocomplete için kullanılacak
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+       
+            if searchText.count >= 3 {
+                currentSearchTask?.cancel()
+                currentSearchTask = foodViewModel.autoCompleteFoodSearch(searchQuery: searchText) { (foodSearchSuggestions, error) in
+                    self.foodSearchSuggestions = foodSearchSuggestions
+                    print("foodSearchSuggestions:",self.foodSearchSuggestions)
+                    DispatchQueue.main.async {
+                        self.tableView.reloadData()
+                    }
+                }
+                currentSearchTask?.resume()
+            }
+            else {
+                foodSearchSuggestions = []
+                tableView.reloadData()
+            }
     }
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
