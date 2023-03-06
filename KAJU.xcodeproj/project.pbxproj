@@ -22,6 +22,7 @@
 		FE1F72C529969C0D005FFC4B /* ActivenessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1F72C429969C0D005FFC4B /* ActivenessViewController.swift */; };
 		FE32926D2991AF740075A5B8 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE32926C2991AF740075A5B8 /* WelcomeViewController.swift */; };
 		FE41A2012997ABA200892346 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE41A2002997ABA200892346 /* TabBarController.swift */; };
+		FE44DF0229B5DDC3005CD7C1 /* FoodDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE44DF0129B5DDC3005CD7C1 /* FoodDetailVC.swift */; };
 		FE4C750329A175B400723DC6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FEBF1DCF2986BB4400FD4760 /* Main.storyboard */; };
 		FE59984E298B0EDF002CB4DF /* CalculatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE59984D298B0EDF002CB4DF /* CalculatorViewController.swift */; };
 		FE599850298B1C55002CB4DF /* CalculatorResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE59984F298B1C55002CB4DF /* CalculatorResultViewController.swift */; };
@@ -72,6 +73,7 @@
 		FE1F72C429969C0D005FFC4B /* ActivenessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivenessViewController.swift; sourceTree = "<group>"; };
 		FE32926C2991AF740075A5B8 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		FE41A2002997ABA200892346 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		FE44DF0129B5DDC3005CD7C1 /* FoodDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodDetailVC.swift; sourceTree = "<group>"; };
 		FE59984D298B0EDF002CB4DF /* CalculatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorViewController.swift; sourceTree = "<group>"; };
 		FE59984F298B1C55002CB4DF /* CalculatorResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorResultViewController.swift; sourceTree = "<group>"; };
 		FE5DEF5C299BC5AC00F13802 /* FoodsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodsViewController.swift; sourceTree = "<group>"; };
@@ -241,6 +243,7 @@
 			isa = PBXGroup;
 			children = (
 				FE08EA91298F0798008BDC6A /* MainViewController.swift */,
+				FE44DF0129B5DDC3005CD7C1 /* FoodDetailVC.swift */,
 				FE5DEF5C299BC5AC00F13802 /* FoodsViewController.swift */,
 				FEC7BF6629A3F2AC001B1EC9 /* RecipesViewController.swift */,
 				FEFFFD2229A63BFD0001999E /* DetailViewController.swift */,
@@ -411,6 +414,7 @@
 				FE0BB00C29958C320062E096 /* GoalViewController.swift in Sources */,
 				2D850C43299BFAAD00A525F0 /* FoodViewModel.swift in Sources */,
 				FEC7BF6729A3F2AC001B1EC9 /* RecipesViewController.swift in Sources */,
+				FE44DF0229B5DDC3005CD7C1 /* FoodDetailVC.swift in Sources */,
 				FE41A2012997ABA200892346 /* TabBarController.swift in Sources */,
 				2DF9F2F8299D1B530023AB7C /* FoodTableViewCell.swift in Sources */,
 				FE1432662991E131000F762D /* LogInViewController.swift in Sources */,

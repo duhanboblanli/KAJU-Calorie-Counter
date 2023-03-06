@@ -40,43 +40,42 @@ class MainViewController: UITableViewController {
     let snacksTrackLayer = CAShapeLayer()
     
     
-    
     // total calorie * 3/10
     var totalBreakfastCal = 0
-    var currentBreakfastCal = 200
+    var currentBreakfastCal = 0
     
     // total calorie * 4/10
     var totalLunchCal = 0
-    var currentLunchCal = 200
+    var currentLunchCal = 0
     
     // total calorie * 25/100
     var totalDinnerCal = 0
-    var currentDinnerCal = 200
+    var currentDinnerCal = 0
     
     // total calorie * 5/100
     var totalSnacksCal = 0
-    var currentSnacksCal = 200
+    var currentSnacksCal = 0
     
     // total calorie * 5/10
     // 1g carb = 4,1kcal
     // formula --> (total calorie * 5/10) / 4.1
     var totalCarbsG = 0
-    var currentCarbsG = 50
+    var currentCarbsG:Float = 0.0
     
     // total calorie * 2/10
     // 1g protein = 4,1kcal
     // formula --> (total calorie * 2/10) / 4.1
     var totalProteinG = 0
-    var currentProteinG = 50
+    var currentProteinG:Float = 0.0
     
     // total calorie * 3/10
     // 1g fat = 9,2kcal
     // formula --> (total calorie * 3/10) / 9.2
     var totalFatG = 0
-    var currentFatG = 50
+    var currentFatG:Float = 0.0
     
     var totalCal =  0
-    var currentCal = 200
+    var currentCal = 0
     
     @IBOutlet weak var breakfastCalLabel: UILabel!
     @IBOutlet weak var snacksCalLabel: UILabel!
@@ -97,18 +96,20 @@ class MainViewController: UITableViewController {
     @IBOutlet weak var addLunchButton: UIButton!
     @IBOutlet weak var addBreakfastButton: UIButton!
     
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        // DB verilerini çeker, define(), loadprogressBars() çağırır
+        loadData()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         carbsProgressBar.progressTintColor = UIColor( red: 47/255, green: 160/255, blue: 134/255, alpha: 1)
         fatProgressBar.progressTintColor = UIColor( red: 47/255, green: 160/255, blue: 134/255, alpha: 1)
         proteinProgressBar.progressTintColor = UIColor( red: 47/255, green: 160/255, blue: 134/255, alpha: 1)
-        
-        // DB verilerini çeker ve define() çağırır
-        loadData()
-        
-        action()
-        
+ 
     }
     
     // breakfast, dinners vs. total değerleri ekler
@@ -133,18 +134,59 @@ class MainViewController: UITableViewController {
     private func loadData() {
         
         if let currentUserEmail = Auth.auth().currentUser?.email {
-            
             let docRef = db.collection("UserInformations").document("\(currentUserEmail)")
             
+            // currentCal = currentBreakfastCal + currentLunchCal + currentDinnerCal + currentSnacksCal
+            // breakfast lunch dinner snacks değerleri burada db'den gelen calorie değerleri ile güncellenecek
+            // current carbs pro fat güncellenecek
             docRef.getDocument { (document, error) in
                 if let document = document, document.exists {
                     if let data = document.data() {
                         print("Document data: \(data)")
-                        if let calorie = data["calorie"] {
+    
+                        if let calorie = data["calorie"]{
                             DispatchQueue.main.async {
-                                self.totalCal = calorie as! Int
-                                print("insideLoadData:\(self.totalCal)")
+                                self.totalCal = calorie as? Int ?? 0
+                                //Breakfast and Nutrients Updated
+                                if let currentBreakfastCal = data["currentBreakfastCal"], let currentCarb = data["currentCarbs"], let currentFat = data["currentFat"], let currentPro = data["currentPro"] {
+                                    self.currentBreakfastCal += currentBreakfastCal as? Int ?? 0
+                                    self.currentCarbsG += currentCarb as? Float ?? 0.0
+                                    self.currentFatG += currentFat as? Float ?? 0.0
+                                    self.currentProteinG += currentPro as? Float ?? 0.0
+                                }// Lunch Cal Updated
+                                if let currentLunchCal = data["currentLunchCal"] {
+                                    self.currentLunchCal += currentLunchCal as? Int ?? 0
+                                    
+                                }// Dinner Cal Updated
+                                if let currentDinnerCal = data["currentDinnerCal"] {
+                                    self.currentDinnerCal += currentDinnerCal as? Int ?? 0
+                                   
+                                }// Snacks Cal Updated
+                                if let currentSnacksCal = data["currentSnacksCal"] {
+                                    self.currentSnacksCal += currentSnacksCal as? Int ?? 0
+                                
+                                }
+                                // db'den current değer eklendikten sonra değer sıfırlanmalı
+                                // yoksa her viewDidLoad'da değer tekrar eklenir
+                                if let currentUserEmail = Auth.auth().currentUser?.email {
+                                    self.db.collection("UserInformations").document("\(currentUserEmail)").updateData([
+                                        "currentBreakfastCal": 0,
+                                        "currentLunchCal": 0,
+                                        "currentDinnerCal": 0,
+                                        "currentSnacksCal": 0,
+                                        "currentCarbs": 0.0,
+                                        "currentPro": 0.0,
+                                        "currentFat": 0.0
+                                     ]) { err in
+                                            if let err = err {
+                                                print("Error adding document: \(err)")
+                                            } else {
+                                                print("Document successfully written!")
+                                            }
+                                        }
+                                }
                                 self.define()
+                                self.loadProgressBars()
                             }
                         }
                     }
@@ -162,7 +204,7 @@ class MainViewController: UITableViewController {
         
         // Test Values Before DB
         //totalCal = totalBreakfastCal + totalLunchCal + totalDinnerCal + totalSnacksCal
-        //currentCal = currentBreakfastCal + currentLunchCal + currentDinnerCal + currentSnacksCal
+        currentCal = currentBreakfastCal + currentLunchCal + currentDinnerCal + currentSnacksCal
         
         // set values..
         print("insideDefine:\(totalCal)")
@@ -170,9 +212,12 @@ class MainViewController: UITableViewController {
         calculateTotalValues()
         calorieRemaining.text = abs((totalCal - currentCal)).description
         calorieEaten.text = currentCal.description
-        carbsLabel.text = currentCarbsG.description + " / " + totalCarbsG.description + " g"
-        proteinLabel.text = currentProteinG.description + " / " + totalProteinG.description + " g"
-        fatLabel.text = currentFatG.description + " / " + totalFatG.description + " g"
+        let currentCarbsGStr = String(format: "%.1f", currentCarbsG)
+        carbsLabel.text = currentCarbsGStr + " / " + totalCarbsG.description + " g"
+        let currentProGStr = String(format: "%.1f", currentProteinG)
+        proteinLabel.text = currentProGStr + " / " + totalProteinG.description + " g"
+        let currentPFatGStr = String(format: "%.1f", currentFatG)
+        fatLabel.text = currentPFatGStr + " / " + totalFatG.description + " g"
         breakfastCalLabel.text = currentBreakfastCal.description + " / " + totalBreakfastCal.description + " kcal"
         lunchCalLabel.text = currentLunchCal.description + " / " + totalLunchCal.description + " kcal"
         dinnerCalLabel.text = currentDinnerCal.description + " / " + totalDinnerCal.description + " kcal"
@@ -302,32 +347,45 @@ class MainViewController: UITableViewController {
         //view.layer.addSublayer(totalCalTrackLayer)
         totalCalView.layer.addSublayer(totalCalTrackLayer)
         
-        if currentCal >= totalCal{
+       if currentCal >= totalCal{
             remainingTitle.text = "Over"
             totalCalTrackLayer.strokeColor = UIColor.orange.cgColor
             currentCal = totalCal
         }
     } // ends of func define()
     
-    private func action(){
-        // tap gesture just for testing circular progress bars.
-        view.addGestureRecognizer(UITapGestureRecognizer (target: self, action: #selector (loadProgressBars)))
-    }
-    
-    private func addBreakfastButtonClicked(){
+ 
+    private func addBreakfastButtonClicked() {
         if let vc = storyboard?.instantiateViewController(identifier:
         "FoodsViewController") as?
-            FoodsViewController{ // Set the view controller to pass to
-            //vc.name = targetgGames[i].name
-            //vc.isFav = favoriteGamesList?[i]
-            /*vc.callBack = { (index: Int,isFav: Bool) in
-             //nothing for now
-             }*/
+            FoodsViewController {
+            vc.query = "egg"
             self.navigationController?.pushViewController(vc,animated:true)
         }
     }
     
-    @objc private func loadProgressBars() {
+    @IBAction func addLunchButtonClicked(_ sender: UIButton) {
+        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+        let nextViewController = storyBoard.instantiateViewController(withIdentifier: "FoodsViewController") as! FoodsViewController
+        nextViewController.query = "penne"
+        self.navigationController?.pushViewController(nextViewController, animated: true)
+    }
+    
+    @IBAction func addDinnerButtonClicked(_ sender: UIButton) {
+        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+        let nextViewController = storyBoard.instantiateViewController(withIdentifier: "FoodsViewController") as! FoodsViewController
+        nextViewController.query = "fish"
+        self.navigationController?.pushViewController(nextViewController, animated: true)
+    }
+    
+    @IBAction func addSnacksButtonClicked(_ sender: UIButton) {
+        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+        let nextViewController = storyBoard.instantiateViewController(withIdentifier: "FoodsViewController") as! FoodsViewController
+        nextViewController.query = "apple"
+        self.navigationController?.pushViewController(nextViewController, animated: true)
+    }
+    
+    private func loadProgressBars() {
         // Load Total Calorie Bar
         print("insideLoadProgressBar:\(totalCal)")
         var currentRate = 1-CGFloat(totalCal-currentCal)/CGFloat(totalCal)

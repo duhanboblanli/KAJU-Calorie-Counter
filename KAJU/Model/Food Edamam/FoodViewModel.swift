@@ -15,9 +15,9 @@ protocol UpdateDelegate {
 class FoodViewModel {
     var delegate: UpdateDelegate?
     var apiService = FoodApiService()
-    // The list of foods - list type is FoodApiModel FoodData struct
+    // The list of fetch foods - list type is FoodApiModel FoodData struct
     private var targetFoods = [FoodData]()
-    // The list of foods - list type is FoodApiModel FoodStruct struct
+    // The list of stored foods - list type is FoodApiModel FoodStruct struct
     private var targetFoods1 = [FoodStruct]()
     private let food_app_id = "1587e073"
     private let food_app_key = "602facc0a5347c2e83c1a5932bcb13bc"
@@ -55,9 +55,9 @@ class FoodViewModel {
                 var url2 = ""
                 self?.targetFoods.append(contentsOf: listOf.hints)
                 self?.nextPageUrl = (listOf._links.next?.href)!
-                self?.targetFoods1 = self!.targetFoods1 + Array(repeating: FoodStruct(label: "", calorie: 0.0, image: UIImage(named: "imagePlaceholder")), count: listOf.hints.count)
+                // FoodStruct
+                self?.targetFoods1 = self!.targetFoods1 + Array(repeating: FoodStruct(label: "", calorie: 0.0, image: UIImage(named: "imagePlaceholder"), carbs: 0.0, fat: 0.0, protein: 0.0,wholeGram: 0.0,measureLabel: ""), count: listOf.hints.count)
                 for (i, food) in listOf.hints.enumerated(){
-                    print("UUUUUUUU", i)
                     if food.food.image == nil{
                         url2 = "https://www.edamam.com/food-img/541/541e46e44ba61aec8bcd599df94c0eed.jpg"
                     }
@@ -101,7 +101,8 @@ class FoodViewModel {
                 var url2 = ""
                 self?.targetFoods.append(contentsOf: listOf.hints)
                 self?.nextPageUrl = (listOf._links.next?.href)!
-                self?.targetFoods1 = self!.targetFoods1 + Array(repeating: FoodStruct(label: "", calorie: 0.0, image: UIImage(named: "imagePlaceholder")), count: listOf.hints.count)
+                //FoodStruct
+                self?.targetFoods1 = self!.targetFoods1 + Array(repeating: FoodStruct(label: "", calorie: 0.0, image: UIImage(named: "imagePlaceholder"), carbs: 0.0, fat: 0.0, protein: 0.0,wholeGram: 0.0,measureLabel: ""), count: listOf.hints.count)
                 for (i, food) in listOf.hints.enumerated(){
                     print("UUUUUUUU", i)
                     if food.food.image == nil{
@@ -127,12 +128,13 @@ class FoodViewModel {
     func fetchFoodImage(url: String, index: Int, completion: @escaping () -> ()) {
         
         let food = self.targetFoods[index].food
+        let measures = self.targetFoods[index].measures
         apiService.getImageDataFrom(url: url) { [weak self] (result) in
             print(result)
             switch result{
             case .success(let listOf):
-                self?.targetFoods1[index] = FoodStruct(label: food.label,
-                                                  calorie: food.nutrients?.ENERC_KCAL,image: listOf)
+                //FoodStruct değerlerin atanması
+                self?.targetFoods1[index] = FoodStruct(label: food.label,calorie: food.nutrients?.ENERC_KCAL,image: listOf, carbs: food.nutrients?.CHOCDF, fat: food.nutrients?.FAT, protein: food.nutrients?.PROCNT,wholeGram: measures[0].weight,measureLabel: measures[0].label)
                 self?.delegate!.didUpdate(sender: self!)
                 //self?.targetFoods1.append(contentsOf: FoodStruct(label: food.label,
                   //                                              calorie: food.nutrients?.ENERC_KCAL,image: listOf))

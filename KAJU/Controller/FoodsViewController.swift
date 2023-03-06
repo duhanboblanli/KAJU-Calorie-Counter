@@ -9,9 +9,7 @@ import UIKit
 
 class FoodsViewController: UIViewController, UpdateDelegate {
     
-    func didUpdate(sender: FoodViewModel) {
-        self.tableView.reloadData()
-    }
+    var query = "egg"
     
     @IBOutlet weak var tableView: UITableView!
     //For search and autoComplete
@@ -34,9 +32,12 @@ class FoodsViewController: UIViewController, UpdateDelegate {
         foodViewModel.delegate = self
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "autoCompleteCell")
         searchBar.searchTextField.attributedPlaceholder = NSAttributedString(string: "Search For A Food", attributes: [NSAttributedString.Key.foregroundColor: UIColor( red: 170/255, green: 170/255, blue: 170/255, alpha: 1)])
-        LoadFoodsData(with: "egg")
+        LoadFoodsData(with: query)
     }
     
+    func didUpdate(sender: FoodViewModel) {
+        self.tableView.reloadData()
+    }
     
     private func LoadFoodsData(with searchQuery: String) {
         // Called at the beginning to do an API call and fill targetFoods
@@ -127,6 +128,12 @@ extension FoodsViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
        
         if foodSearchSuggestions.count == 0 {
+            let food = foodViewModel.cellForRowAt(indexPath: indexPath)
+            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+            let nextViewController = storyBoard.instantiateViewController(withIdentifier: "FoodDetailVC") as! FoodDetailVC
+            nextViewController.food = food
+            nextViewController.query = self.query
+            self.navigationController?.pushViewController(nextViewController, animated: true)
             
         }
         else {
@@ -179,7 +186,6 @@ extension FoodsViewController: UITableViewDataSource, UITableViewDelegate {
             }
         }
 
-    
 } // ends of extension: TableView
 
 //MARK: - UISearchBarDelegate
@@ -190,6 +196,7 @@ extension FoodsViewController: UISearchBarDelegate {
         
         if let searchQuery = searchBar.text {
             if searchQuery != "" {
+                foodSearchSuggestions = []
                 self.searchBar.placeholder = "Search Results for '\(searchQuery)' "
                 foodViewModel.clearData()
                 var configuretedQuery = searchQuery.replacingOccurrences(of: ",", with: "%2C", options: .literal, range: nil)

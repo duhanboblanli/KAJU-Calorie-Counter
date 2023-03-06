@@ -31,8 +31,20 @@ struct ParsedData: Decodable {
 
 struct FoodData: Decodable {
     let food: Food
+    let measures: [Measure]
     private enum CodingKeys: String, CodingKey {
-        case food = "food"
+        case food
+        case measures
+    }
+}
+
+struct Measure: Decodable {
+    let label: String?
+    let weight: Float?
+    
+    private enum CodingKeys: String, CodingKey {
+        case label
+        case weight
     }
 }
 
@@ -94,4 +106,9 @@ struct FoodStruct {
     let label: String?
     let calorie: Float?
     let image: UIImage? // URL for API call to get UIImage object
+    let carbs: Float?
+    let fat: Float?
+    let protein: Float?
+    let wholeGram: Float?
+    let measureLabel: String?
 }

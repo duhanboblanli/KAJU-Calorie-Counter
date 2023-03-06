@@ -262,11 +262,11 @@ class DetailViewController: UIViewController {
                 headerView.recipeTitleLabel.text = title
             }
             if let calorie = recipe.calories, let carbs = recipe.carbs, let protein = recipe.protein, let fat = recipe.fat {
-                let calInt = Int(calorie)
-                let carbInt = Int(carbs)
-                let protInt = Int(protein)
-                let fatInt = Int(fat)
-                headerView.timingLabel.text = "  🔥\(calInt)kcal   🥖Carbs: \(carbInt)g   🥩Protein: \(protInt)g   🧈Fat: \(fatInt)g"
+                let calInt = Int(calorie.rounded())
+                let carbInt = Int(carbs.rounded())
+                let protInt = Int(protein.rounded())
+                let fatInt = Int(fat.rounded())
+                headerView.timingLabel.text = "🔥\(calInt)kcal   🥖Carbs: \(carbInt)g   🥩Protein: \(protInt)g   🧈Fat: \(fatInt)g"
             }
             if let imageURL = recipe.imageURL {
                 SpoonacularClient.downloadRecipeImage(imageURL: imageURL) { (image, success) in

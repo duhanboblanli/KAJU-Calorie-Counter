@@ -77,10 +77,10 @@ class CustomHeaderCell: UIView {
         imageView.topAnchor.constraint(equalTo: topAnchor).isActive = true
         imageView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
         imageView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
-        imageView.bottomAnchor.constraint(equalTo: timingLabel.topAnchor,constant: -5).isActive = true
+        imageView.bottomAnchor.constraint(equalTo: timingLabel.topAnchor,constant: 0).isActive = true
         imageView.widthAnchor.constraint(equalToConstant: 312).isActive = true
         imageView.heightAnchor.constraint(equalToConstant: 231).isActive = true
-        imageView.contentMode = .scaleAspectFill
+        imageView.contentMode = .scaleToFill
     }
     
     // Üst,sol,sağ view'e yaslı ve centerX'de
@@ -96,7 +96,7 @@ class CustomHeaderCell: UIView {
     // Height:35
     private func setupIngredientsLabel() {
         ingredientsLabel.translatesAutoresizingMaskIntoConstraints = false
-        ingredientsLabel.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+        ingredientsLabel.leadingAnchor.constraint(equalTo: leadingAnchor,constant: 4).isActive = true
         ingredientsLabel.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
         ingredientsLabel.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
         ingredientsLabel.heightAnchor.constraint(equalToConstant: 35).isActive = true
@@ -107,7 +107,7 @@ class CustomHeaderCell: UIView {
     // Height: 35
     private func setupTimingLabel() {
         timingLabel.translatesAutoresizingMaskIntoConstraints = false
-        timingLabel.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+        timingLabel.leadingAnchor.constraint(equalTo: leadingAnchor,constant: 8).isActive = true
         timingLabel.trailingAnchor.constraint(equalTo: trailingAnchor,constant: -8).isActive = true
         timingLabel.bottomAnchor.constraint(equalTo: ingredientsLabel.topAnchor).isActive = true
         timingLabel.heightAnchor.constraint(equalToConstant: 35).isActive = true
