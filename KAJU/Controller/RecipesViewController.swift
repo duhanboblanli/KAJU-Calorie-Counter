@@ -78,7 +78,7 @@ class RecipesViewController: UIViewController, UISearchBarDelegate {
         searchBar.delegate = self
         searchBar.layer.cornerRadius = searchBar.frame.size.height / 5
         discoverTableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
-        recipesNavigationıtem.title = "recipes"
+        recipesNavigationıtem.title = "Recipes"
     }
     
     override func loadView() {

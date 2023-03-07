@@ -39,6 +39,28 @@
 		FEBF1DCE2986BB4400FD4760 /* EggTimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEBF1DCD2986BB4400FD4760 /* EggTimerViewController.swift */; };
 		FEBF1DD32986BB4600FD4760 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FEBF1DD22986BB4600FD4760 /* Assets.xcassets */; };
 		FEBF1DD62986BB4600FD4760 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FEBF1DD42986BB4600FD4760 /* LaunchScreen.storyboard */; };
+		FEC1A94A29B7871600342AF6 /* AutoLayoutExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC1A94629B7871600342AF6 /* AutoLayoutExtension.swift */; };
+		FEC1A94B29B7871600342AF6 /* DropDownExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC1A94729B7871600342AF6 /* DropDownExtension.swift */; };
+		FEC1A95129B7877700342AF6 /* SettingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC1A94D29B7877400342AF6 /* SettingModel.swift */; };
+		FEC1A95229B7877700342AF6 /* GoalCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC1A94E29B7877500342AF6 /* GoalCellModel.swift */; };
+		FEC1A95329B7877700342AF6 /* Texts.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC1A94F29B7877600342AF6 /* Texts.swift */; };
+		FEC1A95429B7877700342AF6 /* ProfileCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC1A95029B7877700342AF6 /* ProfileCellModel.swift */; };
+		FEC1A95629B7879700342AF6 /* ThemesOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC1A95529B7879700342AF6 /* ThemesOptions.swift */; };
+		FEC1A95D29B787C800342AF6 /* AccountSettingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC1A95729B787C000342AF6 /* AccountSettingCell.swift */; };
+		FEC1A95E29B787C800342AF6 /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC1A95829B787C200342AF6 /* ProfileCell.swift */; };
+		FEC1A95F29B787C800342AF6 /* SettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC1A95929B787C400342AF6 /* SettingsCell.swift */; };
+		FEC1A96029B787C800342AF6 /* ProfileSettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC1A95A29B787C500342AF6 /* ProfileSettingsCell.swift */; };
+		FEC1A96129B787C800342AF6 /* MyGoalSettingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC1A95B29B787C600342AF6 /* MyGoalSettingCell.swift */; };
+		FEC1A96229B787C800342AF6 /* MyGoalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC1A95C29B787C800342AF6 /* MyGoalCell.swift */; };
+		FEC1A96B29B787F500342AF6 /* PhotoPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC1A96329B787EA00342AF6 /* PhotoPicker.swift */; };
+		FEC1A96C29B787F500342AF6 /* AccountSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC1A96429B787EC00342AF6 /* AccountSettingsController.swift */; };
+		FEC1A96D29B787F500342AF6 /* Editor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC1A96529B787EE00342AF6 /* Editor.swift */; };
+		FEC1A96E29B787F500342AF6 /* AboutUsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC1A96629B787EF00342AF6 /* AboutUsController.swift */; };
+		FEC1A96F29B787F500342AF6 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC1A96729B787F100342AF6 /* SettingsViewController.swift */; };
+		FEC1A97029B787F500342AF6 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC1A96829B787F200342AF6 /* ProfileViewController.swift */; };
+		FEC1A97129B787F500342AF6 /* MyGoalSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC1A96929B787F400342AF6 /* MyGoalSettingsController.swift */; };
+		FEC1A97229B787F500342AF6 /* ProfileSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC1A96A29B787F500342AF6 /* ProfileSettingsController.swift */; };
+		FEC30E4F29B763FC00D20327 /* ProfileOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC30E4E29B763FC00D20327 /* ProfileOption.swift */; };
 		FEC7BF5B29A3F147001B1EC9 /* SpoonacularClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC7BF5329A3F142001B1EC9 /* SpoonacularClient.swift */; };
 		FEC7BF5C29A3F147001B1EC9 /* Recipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC7BF5429A3F143001B1EC9 /* Recipe.swift */; };
 		FEC7BF5E29A3F147001B1EC9 /* RecipeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC7BF5629A3F144001B1EC9 /* RecipeTableViewCell.swift */; };
@@ -91,6 +113,28 @@
 		FEBF1DD22986BB4600FD4760 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FEBF1DD52986BB4600FD4760 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FEBF1DD72986BB4600FD4760 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FEC1A94629B7871600342AF6 /* AutoLayoutExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoLayoutExtension.swift; sourceTree = "<group>"; };
+		FEC1A94729B7871600342AF6 /* DropDownExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropDownExtension.swift; sourceTree = "<group>"; };
+		FEC1A94D29B7877400342AF6 /* SettingModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingModel.swift; sourceTree = "<group>"; };
+		FEC1A94E29B7877500342AF6 /* GoalCellModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoalCellModel.swift; sourceTree = "<group>"; };
+		FEC1A94F29B7877600342AF6 /* Texts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Texts.swift; sourceTree = "<group>"; };
+		FEC1A95029B7877700342AF6 /* ProfileCellModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileCellModel.swift; sourceTree = "<group>"; };
+		FEC1A95529B7879700342AF6 /* ThemesOptions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThemesOptions.swift; sourceTree = "<group>"; };
+		FEC1A95729B787C000342AF6 /* AccountSettingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountSettingCell.swift; sourceTree = "<group>"; };
+		FEC1A95829B787C200342AF6 /* ProfileCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileCell.swift; sourceTree = "<group>"; };
+		FEC1A95929B787C400342AF6 /* SettingsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsCell.swift; sourceTree = "<group>"; };
+		FEC1A95A29B787C500342AF6 /* ProfileSettingsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileSettingsCell.swift; sourceTree = "<group>"; };
+		FEC1A95B29B787C600342AF6 /* MyGoalSettingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyGoalSettingCell.swift; sourceTree = "<group>"; };
+		FEC1A95C29B787C800342AF6 /* MyGoalCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyGoalCell.swift; sourceTree = "<group>"; };
+		FEC1A96329B787EA00342AF6 /* PhotoPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoPicker.swift; sourceTree = "<group>"; };
+		FEC1A96429B787EC00342AF6 /* AccountSettingsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountSettingsController.swift; sourceTree = "<group>"; };
+		FEC1A96529B787EE00342AF6 /* Editor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Editor.swift; sourceTree = "<group>"; };
+		FEC1A96629B787EF00342AF6 /* AboutUsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutUsController.swift; sourceTree = "<group>"; };
+		FEC1A96729B787F100342AF6 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		FEC1A96829B787F200342AF6 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		FEC1A96929B787F400342AF6 /* MyGoalSettingsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyGoalSettingsController.swift; sourceTree = "<group>"; };
+		FEC1A96A29B787F500342AF6 /* ProfileSettingsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileSettingsController.swift; sourceTree = "<group>"; };
+		FEC30E4E29B763FC00D20327 /* ProfileOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileOption.swift; sourceTree = "<group>"; };
 		FEC7BF5329A3F142001B1EC9 /* SpoonacularClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpoonacularClient.swift; sourceTree = "<group>"; };
 		FEC7BF5429A3F143001B1EC9 /* Recipe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Recipe.swift; sourceTree = "<group>"; };
 		FEC7BF5629A3F144001B1EC9 /* RecipeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeTableViewCell.swift; sourceTree = "<group>"; };
@@ -171,6 +215,25 @@
 			path = KAJU;
 			sourceTree = "<group>";
 		};
+		FEC30E5029B7642400D20327 /* Profile Model */ = {
+			isa = PBXGroup;
+			children = (
+				FEC30E4E29B763FC00D20327 /* ProfileOption.swift */,
+				FEC1A94E29B7877500342AF6 /* GoalCellModel.swift */,
+				FEC1A95029B7877700342AF6 /* ProfileCellModel.swift */,
+				FEC1A94D29B7877400342AF6 /* SettingModel.swift */,
+				FEC1A94F29B7877600342AF6 /* Texts.swift */,
+				FEC1A95529B7879700342AF6 /* ThemesOptions.swift */,
+				FEC1A95729B787C000342AF6 /* AccountSettingCell.swift */,
+				FEC1A95C29B787C800342AF6 /* MyGoalCell.swift */,
+				FEC1A95B29B787C600342AF6 /* MyGoalSettingCell.swift */,
+				FEC1A95829B787C200342AF6 /* ProfileCell.swift */,
+				FEC1A95A29B787C500342AF6 /* ProfileSettingsCell.swift */,
+				FEC1A95929B787C400342AF6 /* SettingsCell.swift */,
+			);
+			path = "Profile Model";
+			sourceTree = "<group>";
+		};
 		FEC7BF4F29A3EEB6001B1EC9 /* Food Edamam */ = {
 			isa = PBXGroup;
 			children = (
@@ -215,6 +278,7 @@
 		FEE2CDE129892A5B002DAA6F /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				FEC30E5029B7642400D20327 /* Profile Model */,
 				FEC7BF5129A3EEFD001B1EC9 /* Recipe Spoonacular */,
 				FEC7BF5029A3EED4001B1EC9 /* Recipe Edamam */,
 				FEC7BF4F29A3EEB6001B1EC9 /* Food Edamam */,
@@ -259,6 +323,16 @@
 				FE41A2002997ABA200892346 /* TabBarController.swift */,
 				FEC7BF6229A3F269001B1EC9 /* Extension + UITableView.swift */,
 				FEC7BF6429A3F270001B1EC9 /* Extension + UIViewController.swift */,
+				FEC1A94729B7871600342AF6 /* DropDownExtension.swift */,
+				FEC1A94629B7871600342AF6 /* AutoLayoutExtension.swift */,
+				FEC1A96629B787EF00342AF6 /* AboutUsController.swift */,
+				FEC1A96429B787EC00342AF6 /* AccountSettingsController.swift */,
+				FEC1A96529B787EE00342AF6 /* Editor.swift */,
+				FEC1A96929B787F400342AF6 /* MyGoalSettingsController.swift */,
+				FEC1A96329B787EA00342AF6 /* PhotoPicker.swift */,
+				FEC1A96A29B787F500342AF6 /* ProfileSettingsController.swift */,
+				FEC1A96829B787F200342AF6 /* ProfileViewController.swift */,
+				FEC1A96729B787F100342AF6 /* SettingsViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -387,22 +461,41 @@
 			buildActionMask = 2147483647;
 			files = (
 				FE32926D2991AF740075A5B8 /* WelcomeViewController.swift in Sources */,
+				FEC1A95229B7877700342AF6 /* GoalCellModel.swift in Sources */,
+				FEC1A95329B7877700342AF6 /* Texts.swift in Sources */,
+				FEC1A96229B787C800342AF6 /* MyGoalCell.swift in Sources */,
 				FEFFFD2729A63C770001999E /* CustomHeaderCell.swift in Sources */,
+				FEC1A97029B787F500342AF6 /* ProfileViewController.swift in Sources */,
+				FEC1A96B29B787F500342AF6 /* PhotoPicker.swift in Sources */,
+				FEC1A96E29B787F500342AF6 /* AboutUsController.swift in Sources */,
 				FEFFFD2329A63BFD0001999E /* DetailViewController.swift in Sources */,
 				FEC7BF6329A3F269001B1EC9 /* Extension + UITableView.swift in Sources */,
 				FE95C5502992F44900BCC4A6 /* RegisterViewController.swift in Sources */,
+				FEC1A94A29B7871600342AF6 /* AutoLayoutExtension.swift in Sources */,
 				2D850C41299BFA8E00A525F0 /* FoodApiService.swift in Sources */,
 				FE08EA90298F06EC008BDC6A /* CalculatorBrain.swift in Sources */,
 				FEBF1DCE2986BB4400FD4760 /* EggTimerViewController.swift in Sources */,
+				FEC1A96129B787C800342AF6 /* MyGoalSettingCell.swift in Sources */,
+				FEC30E4F29B763FC00D20327 /* ProfileOption.swift in Sources */,
+				FEC1A96F29B787F500342AF6 /* SettingsViewController.swift in Sources */,
+				FEC1A96029B787C800342AF6 /* ProfileSettingsCell.swift in Sources */,
+				FEC1A95E29B787C800342AF6 /* ProfileCell.swift in Sources */,
 				FE599850298B1C55002CB4DF /* CalculatorResultViewController.swift in Sources */,
+				FEC1A95D29B787C800342AF6 /* AccountSettingCell.swift in Sources */,
+				FEC1A96D29B787F500342AF6 /* Editor.swift in Sources */,
 				FE6FCCFF29A7B6B700FDE008 /* FavoritesCell.swift in Sources */,
+				FEC1A95F29B787C800342AF6 /* SettingsCell.swift in Sources */,
 				FE5E92AB298D1C5400947F7A /* BMI.swift in Sources */,
 				FE5DEF5D299BC5AC00F13802 /* FoodsViewController.swift in Sources */,
 				FE160F5529A28A6400876278 /* RecipeViewModel.swift in Sources */,
+				FEC1A95429B7877700342AF6 /* ProfileCellModel.swift in Sources */,
 				FE160F5329A2876D00876278 /* RecipeApiService.swift in Sources */,
 				FEC7BF5E29A3F147001B1EC9 /* RecipeTableViewCell.swift in Sources */,
 				2D850C3F299BFA6F00A525F0 /* FoodModel.swift in Sources */,
 				FE9BCD7729A6C2A400D88351 /* InstructionsHeaderCell.swift in Sources */,
+				FEC1A95629B7879700342AF6 /* ThemesOptions.swift in Sources */,
+				FEC1A96C29B787F500342AF6 /* AccountSettingsController.swift in Sources */,
+				FEC1A95129B7877700342AF6 /* SettingModel.swift in Sources */,
 				FEC7C20629A260CC009A99A8 /* RecipeModel.swift in Sources */,
 				FE1F72C529969C0D005FFC4B /* ActivenessViewController.swift in Sources */,
 				FEBF1DCA2986BB4400FD4760 /* AppDelegate.swift in Sources */,
@@ -416,7 +509,9 @@
 				FEC7BF6729A3F2AC001B1EC9 /* RecipesViewController.swift in Sources */,
 				FE44DF0229B5DDC3005CD7C1 /* FoodDetailVC.swift in Sources */,
 				FE41A2012997ABA200892346 /* TabBarController.swift in Sources */,
+				FEC1A97229B787F500342AF6 /* ProfileSettingsController.swift in Sources */,
 				2DF9F2F8299D1B530023AB7C /* FoodTableViewCell.swift in Sources */,
+				FEC1A97129B787F500342AF6 /* MyGoalSettingsController.swift in Sources */,
 				FE1432662991E131000F762D /* LogInViewController.swift in Sources */,
 				FEC7BF5C29A3F147001B1EC9 /* Recipe.swift in Sources */,
 				FEC7BF6029A3F147001B1EC9 /* AutoCompleteSearchResponse.swift in Sources */,
@@ -424,6 +519,7 @@
 				FE08EA92298F0798008BDC6A /* MainViewController.swift in Sources */,
 				FE93498C29A78E3A00316B22 /* Food_and_Recipe.xcdatamodeld in Sources */,
 				FEE9E150299DAB87007FA5FB /* RecipeTableView.swift in Sources */,
+				FEC1A94B29B7871600342AF6 /* DropDownExtension.swift in Sources */,
 				FED2FFB229A985E000EDBF19 /* RecipeSearchCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
