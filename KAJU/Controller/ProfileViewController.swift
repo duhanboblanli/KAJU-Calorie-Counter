@@ -111,7 +111,6 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
                                         let calorieUnwrapped = calorie as? Int ?? 0
                                         let localGoal = GoalCellModel(goalType: goalTypeUnwrapped, weight: weightString, calories: "\(calorieUnwrapped)")
                                         goalCell.setGoalCell(model: localGoal)
-                                        
                                     }
                                 }
                             }
