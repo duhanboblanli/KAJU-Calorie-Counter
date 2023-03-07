@@ -81,23 +81,22 @@
             </objects>
             <point key="canvasLocation" x="1541" y="101"/>
         </scene>
-        <!--BMI Calculator-->
+        <!--Profile-->
         <scene sceneID="DE5-s0-MaH">
             <objects>
-                <navigationController id="hUq-fY-Kxp" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="BMI Calculator" id="gGs-A6-AyX">
-                        <imageReference key="image" image="weight-scale" symbolScale="large"/>
-                    </tabBarItem>
+                <navigationController id="hUq-fY-Kxp" userLabel="Profile" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Profile" image="person.circle.fill" catalog="system" id="gGs-A6-AyX"/>
+                    <navigationItem key="navigationItem" id="D2f-yu-P13"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="sAM-0m-7Y5">
                         <rect key="frame" x="0.0" y="59" width="393" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textAttributes key="largeTitleTextAttributes">
                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="34"/>
-                            <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="textColor" systemColor="systemGray6Color"/>
                         </textAttributes>
                     </navigationBar>
                     <connections>
-                        <segue destination="H14-xW-eXP" kind="relationship" relationship="rootViewController" id="Zjm-IS-KfM"/>
+                        <segue destination="gen-u5-EN9" kind="relationship" relationship="rootViewController" id="RbE-fs-s8k"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2SN-dt-DTO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -310,235 +309,21 @@
             </objects>
             <point key="canvasLocation" x="1539.6946564885495" y="809.85915492957747"/>
         </scene>
-        <!--BMI Calculator-->
-        <scene sceneID="q5R-fo-WqR">
+        <!--Profile View Controller-->
+        <scene sceneID="ShS-Ac-yUt">
             <objects>
-                <viewController id="H14-xW-eXP" userLabel="BMI Calculator" customClass="CalculatorViewController" customModule="KAJU" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="NDx-d5-wFs">
+                <viewController id="gen-u5-EN9" customClass="ProfileViewController" customModule="KAJU" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="dhM-bG-85K">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background_2" translatesAutoresizingMaskIntoConstraints="NO" id="53H-rg-zdX">
-                                <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
-                            </imageView>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="t52-fq-oX4">
-                                <rect key="frame" x="16" y="159" width="361" height="602"/>
-                                <subviews>
-                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="yzE-eL-pR2">
-                                        <rect key="frame" x="0.0" y="0.0" width="361" height="70"/>
-                                        <segments>
-                                            <segment title="Male"/>
-                                            <segment title="Female"/>
-                                        </segments>
-                                    </segmentedControl>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="gJX-2T-wX0" userLabel="Age Stack View">
-                                        <rect key="frame" x="0.0" y="76" width="361" height="69.333333333333314"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Age" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iEN-3v-8z7" userLabel="AgeLabel">
-                                                <rect key="frame" x="0.0" y="0.0" width="29.666666666666668" height="69.333333333333329"/>
-                                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
-                                                <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="50" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Max-Vq-Jzn" userLabel="AgeValueLabel">
-                                                <rect key="frame" x="340.66666666666669" y="0.0" width="20.333333333333314" height="69.333333333333329"/>
-                                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
-                                                <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                    </stackView>
-                                    <slider opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="51" minValue="2" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="FI5-E8-tY9" userLabel="Age Horizontal Slider">
-                                        <rect key="frame" x="-2" y="152.33333333333331" width="365" height="70"/>
-                                        <color key="minimumTrackTintColor" red="0.4549019608" green="0.44705882349999998" blue="0.82352941180000006" alpha="0.51797945209999996" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                        <color key="thumbTintColor" red="0.4549019608" green="0.44705882349999998" blue="0.82352941180000006" alpha="0.49510380990000002" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <connections>
-                                            <action selector="ageSliderChanged:" destination="H14-xW-eXP" eventType="valueChanged" id="oWB-4d-RYR"/>
-                                        </connections>
-                                    </slider>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="WFh-Ag-dIb" userLabel="Height Stack View">
-                                        <rect key="frame" x="0.0" y="228.33333333333334" width="361" height="69.333333333333343"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Height" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hfu-Aa-RsS" userLabel="HeightLabel">
-                                                <rect key="frame" x="0.0" y="0.0" width="50" height="69.333333333333329"/>
-                                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
-                                                <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="1.50m" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6gs-Qi-L12" userLabel="HeightValueLabel">
-                                                <rect key="frame" x="316" y="0.0" width="45" height="69.333333333333329"/>
-                                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
-                                                <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                    </stackView>
-                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1.5" minValue="0.5" maxValue="2.5" translatesAutoresizingMaskIntoConstraints="NO" id="FeE-aY-IAj" userLabel="Height Horizontal Slider">
-                                        <rect key="frame" x="-2" y="304.66666666666669" width="365" height="70"/>
-                                        <color key="minimumTrackTintColor" red="0.4549019608" green="0.44705882349999998" blue="0.82352941180000006" alpha="0.51797945209999996" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                        <color key="thumbTintColor" red="0.4549019608" green="0.44705882349999998" blue="0.82352941180000006" alpha="0.49510380990000002" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <connections>
-                                            <action selector="hightSliderChanged:" destination="H14-xW-eXP" eventType="valueChanged" id="U0G-cK-hEd"/>
-                                        </connections>
-                                    </slider>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="Elz-cp-MBg" userLabel="Weight Stack View">
-                                        <rect key="frame" x="0.0" y="380.66666666666663" width="361" height="69"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Weight" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QRR-EA-rdj" userLabel="WeightLabel">
-                                                <rect key="frame" x="0.0" y="0.0" width="53" height="69"/>
-                                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
-                                                <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="100Kg" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JAv-0G-KeR" userLabel="WeightValueLabel">
-                                                <rect key="frame" x="313.66666666666669" y="0.0" width="47.333333333333314" height="69"/>
-                                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
-                                                <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                    </stackView>
-                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="101.5" minValue="3" maxValue="200" translatesAutoresizingMaskIntoConstraints="NO" id="VB2-eK-jlt" userLabel="Weight Horizontal Slider">
-                                        <rect key="frame" x="-2" y="456.66666666666663" width="365" height="70.333333333333371"/>
-                                        <color key="minimumTrackTintColor" red="0.4549019608" green="0.44705882349999998" blue="0.82352941180000006" alpha="0.49890303940000003" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                        <color key="thumbTintColor" red="0.4549019608" green="0.44705882349999998" blue="0.82352941180000006" alpha="0.50481592470000003" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <connections>
-                                            <action selector="weightSliderChanged:" destination="H14-xW-eXP" eventType="valueChanged" id="bDS-a5-T2g"/>
-                                        </connections>
-                                    </slider>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xCF-wR-6Hz">
-                                        <rect key="frame" x="0.0" y="533" width="361" height="69"/>
-                                        <color key="backgroundColor" red="0.38587427140000002" green="0.37681865689999999" blue="0.61593395470000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                        <state key="normal" title="CALCULATE">
-                                            <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <integer key="value" value="10"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="boolean" keyPath="clipsToBounds" value="YES"/>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <action selector="calculatePressed:" destination="H14-xW-eXP" eventType="touchUpInside" id="fYh-aQ-j2a"/>
-                                            <segue destination="i4B-2v-mWv" kind="show" identifier="goToResult" id="BOF-up-dda"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                            </stackView>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="1LJ-A2-HAn"/>
-                        <color key="backgroundColor" red="0.75477737190000005" green="0.81238031389999998" blue="0.98433536290000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                        <constraints>
-                            <constraint firstItem="t52-fq-oX4" firstAttribute="top" secondItem="NDx-d5-wFs" secondAttribute="topMargin" constant="4" id="4iN-zi-S0o"/>
-                            <constraint firstAttribute="trailing" secondItem="53H-rg-zdX" secondAttribute="trailing" id="ML8-U7-dtY"/>
-                            <constraint firstAttribute="bottom" secondItem="53H-rg-zdX" secondAttribute="bottom" id="QA5-0E-CzW"/>
-                            <constraint firstItem="1LJ-A2-HAn" firstAttribute="bottom" secondItem="t52-fq-oX4" secondAttribute="bottom" constant="8" id="ZH4-KU-8dC"/>
-                            <constraint firstItem="53H-rg-zdX" firstAttribute="top" secondItem="NDx-d5-wFs" secondAttribute="top" id="d0W-pM-xuz"/>
-                            <constraint firstItem="53H-rg-zdX" firstAttribute="leading" secondItem="NDx-d5-wFs" secondAttribute="leading" id="dm4-gp-xHG"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="t52-fq-oX4" secondAttribute="trailing" id="iTA-nR-3yT"/>
-                            <constraint firstItem="t52-fq-oX4" firstAttribute="leading" secondItem="NDx-d5-wFs" secondAttribute="leadingMargin" id="x3m-by-oiW"/>
-                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="xky-l8-1HU"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <navigationItem key="navigationItem" title="BMI Calculator" id="F2h-qy-j6p"/>
-                    <connections>
-                        <outlet property="ageLabel" destination="Max-Vq-Jzn" id="2ss-vs-IUb"/>
-                        <outlet property="ageSlider" destination="FI5-E8-tY9" id="5As-4r-uYt"/>
-                        <outlet property="heightLabel" destination="6gs-Qi-L12" id="1Yv-jJ-YHo"/>
-                        <outlet property="heightSlider" destination="FeE-aY-IAj" id="k7m-Rf-wqF"/>
-                        <outlet property="weightLabel" destination="JAv-0G-KeR" id="Cix-3T-oz1"/>
-                        <outlet property="weightSlider" destination="VB2-eK-jlt" id="B3v-SE-H7F"/>
-                    </connections>
+                    <navigationItem key="navigationItem" id="zbu-0q-Wry"/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="bHu-3a-sqe" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wvZ-Eg-knj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="680.15267175572512" y="807.74647887323943"/>
-        </scene>
-        <!--Calculator Result-->
-        <scene sceneID="ltI-wM-mHD">
-            <objects>
-                <viewController id="i4B-2v-mWv" userLabel="Calculator Result" customClass="CalculatorResultViewController" customModule="KAJU" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="apO-LH-ScN">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background_2" translatesAutoresizingMaskIntoConstraints="NO" id="FtJ-xm-QaD">
-                                <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
-                            </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="result_background_bottom" translatesAutoresizingMaskIntoConstraints="NO" id="CgI-5J-2CI">
-                                <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
-                            </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fi3-au-OQq">
-                                <rect key="frame" x="16" y="697" width="361" height="55"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="55" id="7c3-aY-lwL"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <state key="normal" title="RECALCULATE">
-                                    <color key="titleColor" red="0.4549019608" green="0.44705882349999998" blue="0.82352941180000006" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <integer key="value" value="10"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="clipsToBounds" value="YES"/>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="recalculatePressed:" destination="i4B-2v-mWv" eventType="touchUpInside" id="376-NP-VDw"/>
-                                </connections>
-                            </button>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Azg-PC-LW1">
-                                <rect key="frame" x="78.666666666666686" y="277" width="236" height="177.66666666666663"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="YOUR RESULT" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8wL-v6-V2L">
-                                        <rect key="frame" x="0.0" y="0.0" width="236" height="42"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="35"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="249" horizontalCompressionResistancePriority="1000" text="19.5" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fRe-n5-i5s">
-                                        <rect key="frame" x="0.0" y="50.000000000000007" width="236" height="95.666666666666686"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="80"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="EAT SOME MORE SNACKS!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MZW-5F-mal">
-                                        <rect key="frame" x="0.0" y="153.66666666666669" width="236" height="24"/>
-                                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="20"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                            </stackView>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="a1A-zv-lec"/>
-                        <color key="backgroundColor" red="0.75477737190000005" green="0.81238031389999998" blue="0.98433536290000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                        <constraints>
-                            <constraint firstItem="FtJ-xm-QaD" firstAttribute="top" secondItem="apO-LH-ScN" secondAttribute="top" id="53L-2G-K4P"/>
-                            <constraint firstItem="FtJ-xm-QaD" firstAttribute="leading" secondItem="apO-LH-ScN" secondAttribute="leading" id="FAp-a5-sKN"/>
-                            <constraint firstAttribute="trailing" secondItem="CgI-5J-2CI" secondAttribute="trailing" id="FXX-Mj-hfb"/>
-                            <constraint firstItem="fi3-au-OQq" firstAttribute="leading" secondItem="apO-LH-ScN" secondAttribute="leadingMargin" id="G3L-BA-0tR"/>
-                            <constraint firstItem="Azg-PC-LW1" firstAttribute="centerX" secondItem="apO-LH-ScN" secondAttribute="centerX" id="HY0-3g-cVc"/>
-                            <constraint firstItem="fi3-au-OQq" firstAttribute="bottom" secondItem="a1A-zv-lec" secondAttribute="bottom" constant="-17" id="Kzf-Da-8oU"/>
-                            <constraint firstItem="CgI-5J-2CI" firstAttribute="leading" secondItem="apO-LH-ScN" secondAttribute="leading" id="QcP-Bj-0GH"/>
-                            <constraint firstAttribute="bottom" secondItem="CgI-5J-2CI" secondAttribute="bottom" id="U5i-q0-5XS"/>
-                            <constraint firstItem="Azg-PC-LW1" firstAttribute="centerY" secondItem="apO-LH-ScN" secondAttribute="centerY" constant="-60.166666666666629" id="WaQ-3t-v4y"/>
-                            <constraint firstAttribute="trailing" secondItem="FtJ-xm-QaD" secondAttribute="trailing" id="X8Y-xx-TOc"/>
-                            <constraint firstItem="CgI-5J-2CI" firstAttribute="top" secondItem="apO-LH-ScN" secondAttribute="top" id="r0p-KH-MYK"/>
-                            <constraint firstItem="fi3-au-OQq" firstAttribute="trailing" secondItem="apO-LH-ScN" secondAttribute="trailingMargin" id="wKw-fX-7nI"/>
-                            <constraint firstAttribute="bottom" secondItem="FtJ-xm-QaD" secondAttribute="bottom" id="wZj-wG-FyQ"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" id="LyQ-VR-t1E"/>
-                    <connections>
-                        <outlet property="adviceLabel" destination="MZW-5F-mal" id="Wma-8G-IHY"/>
-                        <outlet property="bmiLabel" destination="fRe-n5-i5s" id="aak-kg-jHo"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="oNi-NT-RVc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="681.67938931297704" y="1498.5915492957747"/>
+            <point key="canvasLocation" x="681.67938931297704" y="809.85915492957747"/>
         </scene>
     </scenes>
     <resources>
@@ -547,12 +332,14 @@
         <image name="fork-knife" width="30" height="30"/>
         <image name="hard_egg" width="287.66665649414062" height="366.33334350585938"/>
         <image name="medium_egg" width="288" height="363.33334350585938"/>
-        <image name="result_background_bottom" width="375" height="812"/>
+        <image name="person.circle.fill" catalog="system" width="128" height="123"/>
         <image name="soft_egg" width="287" height="365.33334350585938"/>
         <image name="stopwatch" width="29" height="30"/>
-        <image name="weight-scale" width="29" height="30"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGray6Color">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemOrangeColor">
             <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

@@ -7,8 +7,30 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		FE59984E298B0EDF002CB4DF /* CalculatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE59984D298B0EDF002CB4DF /* CalculatorViewController.swift */; };
-		FE599850298B1C55002CB4DF /* CalculatorResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE59984F298B1C55002CB4DF /* CalculatorResultViewController.swift */; };
+		1311232A29AFFA240046EB1D /* PhotoPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1311232929AFFA240046EB1D /* PhotoPicker.swift */; };
+		1311232E29B002590046EB1D /* Editor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1311232D29B002590046EB1D /* Editor.swift */; };
+		1311233729B1F70A0046EB1D /* AccountSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1311233629B1F70A0046EB1D /* AccountSettingsController.swift */; };
+		1311233D29B1FB280046EB1D /* AccountSettingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1311233C29B1FB280046EB1D /* AccountSettingCell.swift */; };
+		1311233F29B21C160046EB1D /* ThemesOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1311233E29B21C160046EB1D /* ThemesOptions.swift */; };
+		1311234129B225620046EB1D /* DropDownExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1311234029B225620046EB1D /* DropDownExtension.swift */; };
+		1311234629B381DB0046EB1D /* AboutUsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1311234529B381DB0046EB1D /* AboutUsController.swift */; };
+		1335857B299BD6C90099DAE9 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1335857A299BD6C90099DAE9 /* SettingsViewController.swift */; };
+		1335857E299BDA260099DAE9 /* PinExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1335857D299BDA260099DAE9 /* PinExtension.swift */; };
+		13358580299BE2A40099DAE9 /* ProfileOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1335857F299BE2A40099DAE9 /* ProfileOption.swift */; };
+		13358582299BEBD60099DAE9 /* SettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13358581299BEBD60099DAE9 /* SettingsCell.swift */; };
+		13358584299D55080099DAE9 /* ProfileSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13358583299D55080099DAE9 /* ProfileSettingsController.swift */; };
+		1354E84729A4C3B400431619 /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1354E84629A4C3B400431619 /* ProfileCell.swift */; };
+		1354E84929A4D5ED00431619 /* ProfileCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1354E84829A4D5ED00431619 /* ProfileCellModel.swift */; };
+		1354E84B29A5087A00431619 /* MyGoalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1354E84A29A5087A00431619 /* MyGoalCell.swift */; };
+		1354E84D29A5403F00431619 /* GoalCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1354E84C29A5403F00431619 /* GoalCellModel.swift */; };
+		1354E84F29A5527700431619 /* AutoLayoutExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1354E84E29A5527700431619 /* AutoLayoutExtension.swift */; };
+		1354E85129A6799D00431619 /* ProfileSettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1354E85029A6799D00431619 /* ProfileSettingsCell.swift */; };
+		1354E85329A791B700431619 /* SettingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1354E85229A791B700431619 /* SettingModel.swift */; };
+		138E10B929B644980065CDB2 /* Texts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 138E10B829B644980065CDB2 /* Texts.swift */; };
+		13E3C87B29AE2D0F00E2807B /* MyGoalSettingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13E3C87A29AE2D0F00E2807B /* MyGoalSettingCell.swift */; };
+		13E3C87F29AE2D8D00E2807B /* MyGoalSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13E3C87E29AE2D8D00E2807B /* MyGoalSettingsController.swift */; };
+		13F98E3529A3AFD300542012 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13F98E3429A3AFD300542012 /* ProfileViewController.swift */; };
+		70B5CFC8869194E954010C80 /* Pods_KAJU.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6287F54BFDEFCB45F2AAC33 /* Pods_KAJU.framework */; };
 		FEBF1DCA2986BB4400FD4760 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEBF1DC92986BB4400FD4760 /* AppDelegate.swift */; };
 		FEBF1DCC2986BB4400FD4760 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEBF1DCB2986BB4400FD4760 /* SceneDelegate.swift */; };
 		FEBF1DCE2986BB4400FD4760 /* EggTimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEBF1DCD2986BB4400FD4760 /* EggTimerViewController.swift */; };
@@ -18,9 +40,51 @@
 		FEE2CDEB2989A4B0002DAA6F /* guitar_alarm_sound.wav in Resources */ = {isa = PBXBuildFile; fileRef = FEE2CDEA2989A4B0002DAA6F /* guitar_alarm_sound.wav */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		138085F229A7E1120093BC16 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 138085ED29A7E1120093BC16 /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 9B6725B782188F18CB76A740433F14E4;
+			remoteInfo = DropDown;
+		};
+		138085F429A7E1120093BC16 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 138085ED29A7E1120093BC16 /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 0BEEDA163BE62B20AC7BC4036D8F5B02;
+			remoteInfo = "Pods-KAJU";
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
-		FE59984D298B0EDF002CB4DF /* CalculatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorViewController.swift; sourceTree = "<group>"; };
-		FE59984F298B1C55002CB4DF /* CalculatorResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorResultViewController.swift; sourceTree = "<group>"; };
+		1311232929AFFA240046EB1D /* PhotoPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPicker.swift; sourceTree = "<group>"; };
+		1311232D29B002590046EB1D /* Editor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Editor.swift; sourceTree = "<group>"; };
+		1311233629B1F70A0046EB1D /* AccountSettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSettingsController.swift; sourceTree = "<group>"; };
+		1311233C29B1FB280046EB1D /* AccountSettingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSettingCell.swift; sourceTree = "<group>"; };
+		1311233E29B21C160046EB1D /* ThemesOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemesOptions.swift; sourceTree = "<group>"; };
+		1311234029B225620046EB1D /* DropDownExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDownExtension.swift; sourceTree = "<group>"; };
+		1311234529B381DB0046EB1D /* AboutUsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutUsController.swift; sourceTree = "<group>"; };
+		1335857A299BD6C90099DAE9 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		1335857D299BDA260099DAE9 /* PinExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinExtension.swift; sourceTree = "<group>"; };
+		1335857F299BE2A40099DAE9 /* ProfileOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ProfileOption.swift; path = KAJU/Extensions/ProfileOption.swift; sourceTree = SOURCE_ROOT; };
+		13358581299BEBD60099DAE9 /* SettingsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCell.swift; sourceTree = "<group>"; };
+		13358583299D55080099DAE9 /* ProfileSettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettingsController.swift; sourceTree = "<group>"; };
+		1354E84629A4C3B400431619 /* ProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCell.swift; sourceTree = "<group>"; };
+		1354E84829A4D5ED00431619 /* ProfileCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ProfileCellModel.swift; path = KAJU/ProfileCellModel.swift; sourceTree = SOURCE_ROOT; };
+		1354E84A29A5087A00431619 /* MyGoalCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGoalCell.swift; sourceTree = "<group>"; };
+		1354E84C29A5403F00431619 /* GoalCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GoalCellModel.swift; path = KAJU/GoalCellModel.swift; sourceTree = SOURCE_ROOT; };
+		1354E84E29A5527700431619 /* AutoLayoutExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoLayoutExtension.swift; sourceTree = "<group>"; };
+		1354E85029A6799D00431619 /* ProfileSettingsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettingsCell.swift; sourceTree = "<group>"; };
+		1354E85229A791B700431619 /* SettingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SettingModel.swift; path = KAJU/SettingModel.swift; sourceTree = SOURCE_ROOT; };
+		138085ED29A7E1120093BC16 /* Pods.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Pods.xcodeproj; path = Pods/Pods.xcodeproj; sourceTree = "<group>"; };
+		138E10B829B644980065CDB2 /* Texts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Texts.swift; path = KAJU/Controller/Texts.swift; sourceTree = SOURCE_ROOT; };
+		13E3C87A29AE2D0F00E2807B /* MyGoalSettingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGoalSettingCell.swift; sourceTree = "<group>"; };
+		13E3C87E29AE2D8D00E2807B /* MyGoalSettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGoalSettingsController.swift; sourceTree = "<group>"; };
+		13F98E3429A3AFD300542012 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		197D400F7543719D5C4F2BE1 /* Pods-KAJU.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KAJU.release.xcconfig"; path = "Target Support Files/Pods-KAJU/Pods-KAJU.release.xcconfig"; sourceTree = "<group>"; };
+		7BBC321EBF827B70E277EC11 /* Pods-KAJU.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KAJU.debug.xcconfig"; path = "Target Support Files/Pods-KAJU/Pods-KAJU.debug.xcconfig"; sourceTree = "<group>"; };
+		C6287F54BFDEFCB45F2AAC33 /* Pods_KAJU.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KAJU.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FEBF1DC62986BB4400FD4760 /* KAJU.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KAJU.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FEBF1DC92986BB4400FD4760 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FEBF1DCB2986BB4400FD4760 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -37,17 +101,57 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				70B5CFC8869194E954010C80 /* Pods_KAJU.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1335857C299BD9B00099DAE9 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				1335857D299BDA260099DAE9 /* PinExtension.swift */,
+				1354E84E29A5527700431619 /* AutoLayoutExtension.swift */,
+				1311234029B225620046EB1D /* DropDownExtension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		138085EE29A7E1120093BC16 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				138085F329A7E1120093BC16 /* DropDown.framework */,
+				138085F529A7E1120093BC16 /* Pods-KAJU */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F82E5C8D6FF023CA59EF61A5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				138085ED29A7E1120093BC16 /* Pods.xcodeproj */,
+				C6287F54BFDEFCB45F2AAC33 /* Pods_KAJU.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FA976A734A3BF2F1721DACB2 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				7BBC321EBF827B70E277EC11 /* Pods-KAJU.debug.xcconfig */,
+				197D400F7543719D5C4F2BE1 /* Pods-KAJU.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		FEBF1DBD2986BB4400FD4760 = {
 			isa = PBXGroup;
 			children = (
 				FEBF1DC82986BB4400FD4760 /* KAJU */,
 				FEBF1DC72986BB4400FD4760 /* Products */,
+				FA976A734A3BF2F1721DACB2 /* Pods */,
+				F82E5C8D6FF023CA59EF61A5 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -62,6 +166,7 @@
 		FEBF1DC82986BB4400FD4760 /* KAJU */ = {
 			isa = PBXGroup;
 			children = (
+				1335857C299BD9B00099DAE9 /* Extensions */,
 				FEBF1DC92986BB4400FD4760 /* AppDelegate.swift */,
 				FEBF1DCB2986BB4400FD4760 /* SceneDelegate.swift */,
 				FEBF1DD72986BB4600FD4760 /* Info.plist */,
@@ -70,6 +175,12 @@
 				FEE2CDE329892A73002DAA6F /* Controller */,
 				FEBF1DD22986BB4600FD4760 /* Assets.xcassets */,
 				FEE2CDEA2989A4B0002DAA6F /* guitar_alarm_sound.wav */,
+				13358581299BEBD60099DAE9 /* SettingsCell.swift */,
+				1354E84629A4C3B400431619 /* ProfileCell.swift */,
+				1354E84A29A5087A00431619 /* MyGoalCell.swift */,
+				13E3C87A29AE2D0F00E2807B /* MyGoalSettingCell.swift */,
+				1354E85029A6799D00431619 /* ProfileSettingsCell.swift */,
+				1311233C29B1FB280046EB1D /* AccountSettingCell.swift */,
 			);
 			path = KAJU;
 			sourceTree = "<group>";
@@ -77,6 +188,11 @@
 		FEE2CDE129892A5B002DAA6F /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				1335857F299BE2A40099DAE9 /* ProfileOption.swift */,
+				1354E84829A4D5ED00431619 /* ProfileCellModel.swift */,
+				1354E84C29A5403F00431619 /* GoalCellModel.swift */,
+				1354E85229A791B700431619 /* SettingModel.swift */,
+				138E10B829B644980065CDB2 /* Texts.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -86,6 +202,7 @@
 			children = (
 				FEBF1DCF2986BB4400FD4760 /* Main.storyboard */,
 				FEBF1DD42986BB4600FD4760 /* LaunchScreen.storyboard */,
+				1311233E29B21C160046EB1D /* ThemesOptions.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -94,8 +211,14 @@
 			isa = PBXGroup;
 			children = (
 				FEBF1DCD2986BB4400FD4760 /* EggTimerViewController.swift */,
-				FE59984D298B0EDF002CB4DF /* CalculatorViewController.swift */,
-				FE59984F298B1C55002CB4DF /* CalculatorResultViewController.swift */,
+				1335857A299BD6C90099DAE9 /* SettingsViewController.swift */,
+				13358583299D55080099DAE9 /* ProfileSettingsController.swift */,
+				13F98E3429A3AFD300542012 /* ProfileViewController.swift */,
+				1311233629B1F70A0046EB1D /* AccountSettingsController.swift */,
+				13E3C87E29AE2D8D00E2807B /* MyGoalSettingsController.swift */,
+				1311232929AFFA240046EB1D /* PhotoPicker.swift */,
+				1311232D29B002590046EB1D /* Editor.swift */,
+				1311234529B381DB0046EB1D /* AboutUsController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -107,9 +230,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = FEBF1DDA2986BB4600FD4760 /* Build configuration list for PBXNativeTarget "KAJU" */;
 			buildPhases = (
+				CC0DBF9F265FC6EAC6052DB3 /* [CP] Check Pods Manifest.lock */,
 				FEBF1DC22986BB4400FD4760 /* Sources */,
 				FEBF1DC32986BB4400FD4760 /* Frameworks */,
 				FEBF1DC42986BB4400FD4760 /* Resources */,
+				39C725FB8539ABA179091310 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -144,14 +269,41 @@
 				Base,
 			);
 			mainGroup = FEBF1DBD2986BB4400FD4760;
+			packageReferences = (
+				138085EC29A7DABC0093BC16 /* XCRemoteSwiftPackageReference "DropDown" */,
+			);
 			productRefGroup = FEBF1DC72986BB4400FD4760 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 138085EE29A7E1120093BC16 /* Products */;
+					ProjectRef = 138085ED29A7E1120093BC16 /* Pods.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				FEBF1DC52986BB4400FD4760 /* KAJU */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		138085F329A7E1120093BC16 /* DropDown.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = DropDown.framework;
+			remoteRef = 138085F229A7E1120093BC16 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		138085F529A7E1120093BC16 /* Pods-KAJU */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			name = "Pods-KAJU";
+			path = Pods_KAJU.framework;
+			remoteRef = 138085F429A7E1120093BC16 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		FEBF1DC42986BB4400FD4760 /* Resources */ = {
@@ -167,16 +319,79 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		39C725FB8539ABA179091310 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-KAJU/Pods-KAJU-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-KAJU/Pods-KAJU-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-KAJU/Pods-KAJU-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CC0DBF9F265FC6EAC6052DB3 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-KAJU-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		FEBF1DC22986BB4400FD4760 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1311233D29B1FB280046EB1D /* AccountSettingCell.swift in Sources */,
+				13E3C87B29AE2D0F00E2807B /* MyGoalSettingCell.swift in Sources */,
+				13358582299BEBD60099DAE9 /* SettingsCell.swift in Sources */,
+				1354E85129A6799D00431619 /* ProfileSettingsCell.swift in Sources */,
+				1311233729B1F70A0046EB1D /* AccountSettingsController.swift in Sources */,
+				1354E84D29A5403F00431619 /* GoalCellModel.swift in Sources */,
+				13358580299BE2A40099DAE9 /* ProfileOption.swift in Sources */,
+				1354E85329A791B700431619 /* SettingModel.swift in Sources */,
 				FEBF1DCE2986BB4400FD4760 /* EggTimerViewController.swift in Sources */,
-				FE599850298B1C55002CB4DF /* CalculatorResultViewController.swift in Sources */,
+				1354E84929A4D5ED00431619 /* ProfileCellModel.swift in Sources */,
+				1354E84B29A5087A00431619 /* MyGoalCell.swift in Sources */,
+				1354E84F29A5527700431619 /* AutoLayoutExtension.swift in Sources */,
+				1311234629B381DB0046EB1D /* AboutUsController.swift in Sources */,
+				1311234129B225620046EB1D /* DropDownExtension.swift in Sources */,
 				FEBF1DCA2986BB4400FD4760 /* AppDelegate.swift in Sources */,
-				FE59984E298B0EDF002CB4DF /* CalculatorViewController.swift in Sources */,
+				1335857B299BD6C90099DAE9 /* SettingsViewController.swift in Sources */,
+				13358584299D55080099DAE9 /* ProfileSettingsController.swift in Sources */,
+				1311232A29AFFA240046EB1D /* PhotoPicker.swift in Sources */,
+				1311232E29B002590046EB1D /* Editor.swift in Sources */,
+				13F98E3529A3AFD300542012 /* ProfileViewController.swift in Sources */,
+				1335857E299BDA260099DAE9 /* PinExtension.swift in Sources */,
+				13E3C87F29AE2D8D00E2807B /* MyGoalSettingsController.swift in Sources */,
+				1311233F29B21C160046EB1D /* ThemesOptions.swift in Sources */,
 				FEBF1DCC2986BB4400FD4760 /* SceneDelegate.swift in Sources */,
+				138E10B929B644980065CDB2 /* Texts.swift in Sources */,
+				1354E84729A4C3B400431619 /* ProfileCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -318,13 +533,17 @@
 		};
 		FEBF1DDB2986BB4600FD4760 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7BBC321EBF827B70E277EC11 /* Pods-KAJU.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 5RBTUYH3X8;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = KAJU/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Please allow acces";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Please allow acces";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -345,13 +564,17 @@
 		};
 		FEBF1DDC2986BB4600FD4760 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 197D400F7543719D5C4F2BE1 /* Pods-KAJU.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 5RBTUYH3X8;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = KAJU/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Please allow acces";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Please allow acces";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -392,6 +615,17 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		138085EC29A7DABC0093BC16 /* XCRemoteSwiftPackageReference "DropDown" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/AssistoLab/DropDown.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.1.5;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
 	};
 	rootObject = FEBF1DBE2986BB4400FD4760 /* Project object */;
 }
