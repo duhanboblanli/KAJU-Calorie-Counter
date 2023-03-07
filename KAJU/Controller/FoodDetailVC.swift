@@ -132,20 +132,7 @@ class FoodDetailVC: UITableViewController {
             nutrientsLabel.text = "🔥\(calInt)kcal   🥖Carbs: \(carbStr)g   🥩Protein: \(proStr)g   🧈Fat: \(fatStr)g"
         }
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
     // MARK: - Table view data source
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections

@@ -16,6 +16,7 @@ class CalculatorViewController: UIViewController {
     var calorieSublabel = ""
     var bmh:Float = 1.2
     var changeCalorieAmount = 0
+    var goalType = ""
     var calculatorBrain = CalculatorBrain()
     var sex = "Male"
     var ColorDarkGreen = UIColor( red: 47/255, green: 136/255, blue: 134/255, alpha: 1)
@@ -37,6 +38,14 @@ class CalculatorViewController: UIViewController {
         setupButtonStyle(button: calculateButton, cornerRadius: 0.096)
         calculateButton.isEnabled = false
         calculateButton.isHighlighted = true
+        if changeCalorieAmount == 400 {
+            goalType = "Build Muscle"
+        } else if changeCalorieAmount == -400 {
+            goalType = "Lose Weight"
+        }
+        else {
+            goalType = "Maintain Weight"
+        }
     }
     
     @IBAction func sexSegmentPressed(_ sender: UISegmentedControl) {
@@ -103,7 +112,9 @@ class CalculatorViewController: UIViewController {
                 "height": height,
                 "age": age,
                 "bmh": bmh,
-                "changeCalorieAmount": changeCalorieAmount]) { err in
+                "changeCalorieAmount": changeCalorieAmount,
+                "goalType": goalType
+             ]) { err in
                     if let err = err {
                         print("Error adding document: \(err)")
                     } else {

@@ -6,8 +6,12 @@
 //
 
 import UIKit
+import FirebaseAuth
+import FirebaseFirestore
 
 class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+  
+    let db = Firestore.firestore()
     
     var profile: ProfileCellModel!
     var goal: GoalCellModel!
@@ -15,10 +19,14 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     let backGroundColor = ThemesOptions.backGroundColor
     let cellBackgColor = ThemesOptions.cellBackgColor
   
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         profile = fetchProfileData()
-        goal = fetchGoalData()
         linkViews()
         configureView()
         configureTableView()
@@ -70,29 +78,55 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         return 0
     }
 
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let profileCell = table.dequeueReusableCell(withIdentifier: ProfileCell.identifier) as! ProfileCell
-        let goalCell = table.dequeueReusableCell(withIdentifier: MyGoalCell.identifier) as! MyGoalCell
-        
-        switch indexPath.section {
-        case 0:
-            profileCell.layer.cornerRadius = 20
-            profileCell.myViewController = self
-            profileCell.setProfile(model: profile)
-            profileCell.selectionStyle = UITableViewCell.SelectionStyle.none
-            profileCell.tintColor = backGroundColor
-            return profileCell
-        case 1:
-            goalCell.backgroundColor = cellBackgColor.withAlphaComponent(0.6)
-            goalCell.layer.cornerRadius = 20
-            goalCell.myViewController = self
-            goalCell.selectionStyle = UITableViewCell.SelectionStyle.none
-            goalCell.setGoalCell(model: goal)
-            return goalCell
-        default:
-            return UITableViewCell()
+        func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+            let profileCell = table.dequeueReusableCell(withIdentifier: ProfileCell.identifier) as! ProfileCell
+            let goalCell = table.dequeueReusableCell(withIdentifier: MyGoalCell.identifier) as! MyGoalCell
+            
+            switch indexPath.section {
+            case 0:
+                profileCell.layer.cornerRadius = 20
+                profileCell.myViewController = self
+                profileCell.setProfile(model: profile)
+                profileCell.selectionStyle = UITableViewCell.SelectionStyle.none
+                profileCell.tintColor = backGroundColor
+                return profileCell
+            case 1:
+                goalCell.backgroundColor = cellBackgColor.withAlphaComponent(0.6)
+                goalCell.layer.cornerRadius = 20
+                goalCell.myViewController = self
+                goalCell.selectionStyle = UITableViewCell.SelectionStyle.none
+                
+                if let currentUserEmail = Auth.auth().currentUser?.email {
+                    let docRef = db.collection("UserInformations").document("\(currentUserEmail)")
+                    docRef.getDocument { (document, error) in
+                        if let document = document, document.exists {
+                            if let data = document.data() {
+                                print("Document data: \(data)")
+                                DispatchQueue.main.async {
+                                    //Breakfast and Nutrients Updated
+                                    if let goalType = data["goalType"], let weight = data["weight"], let calorie = data["calorie"] {
+                                        let goalTypeUnwrapped = goalType as? String ?? ""
+                                        let weightUnwrapped = weight as? Double ?? 0.0
+                                        let weightString = String(format: "%.0f", weightUnwrapped)
+                                        let calorieUnwrapped = calorie as? Int ?? 0
+                                        let localGoal = GoalCellModel(goalType: goalTypeUnwrapped, weight: weightString, calories: "\(calorieUnwrapped)")
+                                        goalCell.setGoalCell(model: localGoal)
+                                        
+                                    }
+                                }
+                            }
+                        } else {
+                            print("Document does not exist.")
+                        }
+                    }
+                }
+                
+                return goalCell
+            default:
+                return UITableViewCell()
+            }
         }
-    }
+    
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.section {
@@ -110,11 +144,8 @@ extension ProfileViewController {
         
         return profile
     }
-    
-    func fetchGoalData() -> GoalCellModel {
-        let goal = GoalCellModel(goalType: "Build Muscle", weight: "65", calories: "2,543")
-        
-        return goal
-    }
 }
+
+
+
 
