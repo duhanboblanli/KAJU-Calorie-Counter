@@ -39,6 +39,7 @@
 		FEBF1DCE2986BB4400FD4760 /* EggTimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEBF1DCD2986BB4400FD4760 /* EggTimerViewController.swift */; };
 		FEBF1DD32986BB4600FD4760 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FEBF1DD22986BB4600FD4760 /* Assets.xcassets */; };
 		FEBF1DD62986BB4600FD4760 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FEBF1DD42986BB4600FD4760 /* LaunchScreen.storyboard */; };
+		FEC0322029B8F74D001C71A5 /* beep_message_alarm.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = FEC0321F29B8F74D001C71A5 /* beep_message_alarm.mp3 */; };
 		FEC1A94A29B7871600342AF6 /* AutoLayoutExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC1A94629B7871600342AF6 /* AutoLayoutExtension.swift */; };
 		FEC1A94B29B7871600342AF6 /* DropDownExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC1A94729B7871600342AF6 /* DropDownExtension.swift */; };
 		FEC1A95129B7877700342AF6 /* SettingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC1A94D29B7877400342AF6 /* SettingModel.swift */; };
@@ -113,6 +114,7 @@
 		FEBF1DD22986BB4600FD4760 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FEBF1DD52986BB4600FD4760 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FEBF1DD72986BB4600FD4760 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FEC0321F29B8F74D001C71A5 /* beep_message_alarm.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = beep_message_alarm.mp3; sourceTree = "<group>"; };
 		FEC1A94629B7871600342AF6 /* AutoLayoutExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoLayoutExtension.swift; sourceTree = "<group>"; };
 		FEC1A94729B7871600342AF6 /* DropDownExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropDownExtension.swift; sourceTree = "<group>"; };
 		FEC1A94D29B7877400342AF6 /* SettingModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingModel.swift; sourceTree = "<group>"; };
@@ -211,6 +213,7 @@
 				FEE2CDE329892A73002DAA6F /* Controller */,
 				FEBF1DD22986BB4600FD4760 /* Assets.xcassets */,
 				FEE2CDEA2989A4B0002DAA6F /* guitar_alarm_sound.wav */,
+				FEC0321F29B8F74D001C71A5 /* beep_message_alarm.mp3 */,
 			);
 			path = KAJU;
 			sourceTree = "<group>";
@@ -405,6 +408,7 @@
 			files = (
 				FEBF1DD62986BB4600FD4760 /* LaunchScreen.storyboard in Resources */,
 				FEE2CDEB2989A4B0002DAA6F /* guitar_alarm_sound.wav in Resources */,
+				FEC0322029B8F74D001C71A5 /* beep_message_alarm.mp3 in Resources */,
 				FE0BB00A299519690062E096 /* GoogleService-Info.plist in Resources */,
 				FE4C750329A175B400723DC6 /* Main.storyboard in Resources */,
 				FEBF1DD32986BB4600FD4760 /* Assets.xcassets in Resources */,

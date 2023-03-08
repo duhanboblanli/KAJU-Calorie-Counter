@@ -11,6 +11,7 @@ target 'KAJU' do
   pod 'ValueStepper'
   pod 'IQKeyboardManagerSwift'
   pod 'DropDown'
+  pod 'CountdownLabel'
   
 end
 

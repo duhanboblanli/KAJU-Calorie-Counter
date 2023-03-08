@@ -7,9 +7,11 @@
 
 import UIKit
 import AVFoundation
+import CountdownLabel
 
 class EggTimerViewController: UIViewController {
     
+    @IBOutlet weak var countDownLabelFall: CountdownLabel!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var secondTitleLabel: UILabel!
     @IBOutlet weak var progressBar: UIProgressView!
@@ -17,7 +19,7 @@ class EggTimerViewController: UIViewController {
     var player: AVAudioPlayer!
     
     //Rafadan,kayısı,katı yumurta haşlama süreleri: 150, 240, 360 saniye
-    let eggTimes = ["Soft": 3, "Medium": 4, "Hard": 6]
+    let eggTimes = ["Soft": 6, "Medium": 240, "Hard": 360]
     
     var secondsRemaining = 0
     var progressPercantage: Float = 0
@@ -29,11 +31,13 @@ class EggTimerViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //self.navigationController?.isNavigationBarHidden = true
+        
+        
     }
 
     @IBAction func hardnessSelected(_ sender: UIButton) {
         
+        sender.shake(duration: 0.7, values: [-12.0, 12.0, -12.0, 12.0, -6.0, 6.0, -3.0, 3.0, 0.0])
         //Önceden çalışmaya devam eden timer varsa sonlandır
         timer.invalidate()
         
@@ -46,16 +50,28 @@ class EggTimerViewController: UIViewController {
         }
         
         timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
+        
     }
     
     @objc func updateTimer() {
         if secondsRemaining > 0 {
             
             secondTitleLabel.text = ""
-            titleLabel.text = "\(secondsRemaining) seconds."
+            countDownLabelFall.setCountDownTime(minutes: TimeInterval(secondsRemaining))
+            countDownLabelFall.animationType = .Fall
+            countDownLabelFall.timeFormat = "mm:ss"
+            countDownLabelFall.start()
+            titleLabel.text = "Time Left:"
             progressPercantage = 1 - (Float(secondsRemaining) / Float(totalTime))
             progressBar.progress = progressPercantage
             secondsRemaining -= 1
+            if secondsRemaining < 3 {
+                let url = Bundle.main.url(forResource: "beep_message_alarm", withExtension: "mp3")
+                            player = try! AVAudioPlayer(contentsOf: url!)
+                            player.play()
+                countDownLabelFall.shake(duration: 0.5, values: [-12.0, 12.0, -12.0, 12.0, -6.0, 6.0, -3.0, 3.0, 0.0])
+                titleLabel.shake(duration: 0.5, values: [-12.0, 12.0, -12.0, 12.0, -6.0, 6.0, -3.0, 3.0, 0.0])
+            }
             
         }
         else {
