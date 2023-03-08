@@ -164,7 +164,6 @@ class PhotoPicker: UIViewController{
         case "Camera":
             imagePickerController.sourceType = .camera
             present(imagePickerController, animated: true)
-            
         case "Delete":
             showSimpleAlert()
         default:

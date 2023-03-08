@@ -112,8 +112,8 @@ class MyGoalCell: UITableViewCell {
         goalValue.anchor(top: goal.topAnchor, left: goal.rightAnchor, right: contentView.rightAnchor, paddingLeft: 4, paddingRight: 8)
         weight.anchor(top: goal.bottomAnchor, left: title.leftAnchor, paddingTop: 8, paddingLeft: 0, width: 65)
         weightValue.anchor(top: weight.topAnchor, left: weight.rightAnchor, right: goalValue.rightAnchor, paddingLeft: 4, paddingRight: 8)
-        calories.anchor(top: weight.bottomAnchor, left: title.leftAnchor, paddingTop: 8, paddingLeft: 0, width: 75)
-        caloriesValue.anchor(top: calories.topAnchor, left: calories.rightAnchor, bottom: contentView.bottomAnchor, right: goalValue.rightAnchor, paddingLeft: 4, paddingBottom: 16, paddingRight: 8)
+        calories.anchor(top: weight.bottomAnchor, left: title.leftAnchor, bottom: contentView.bottomAnchor, paddingTop: 8, paddingBottom: 16, width: 75)
+        caloriesValue.anchor(top: calories.topAnchor, left: calories.rightAnchor, bottom: calories.bottomAnchor, right: goalValue.rightAnchor, paddingLeft: 4)
     }
 }
 

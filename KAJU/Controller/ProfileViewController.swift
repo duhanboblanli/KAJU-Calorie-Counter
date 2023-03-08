@@ -27,6 +27,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     override func viewDidLoad() {
         super.viewDidLoad()
         profile = fetchProfileData()
+        fetchGoalData()
         linkViews()
         configureView()
         configureTableView()
@@ -95,30 +96,10 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
                 goalCell.layer.cornerRadius = 20
                 goalCell.myViewController = self
                 goalCell.selectionStyle = UITableViewCell.SelectionStyle.none
-                
-                if let currentUserEmail = Auth.auth().currentUser?.email {
-                    let docRef = db.collection("UserInformations").document("\(currentUserEmail)")
-                    docRef.getDocument { (document, error) in
-                        if let document = document, document.exists {
-                            if let data = document.data() {
-                                print("Document data: \(data)")
-                                DispatchQueue.main.async {
-                                    //Breakfast and Nutrients Updated
-                                    if let goalType = data["goalType"], let weight = data["weight"], let calorie = data["calorie"] {
-                                        let goalTypeUnwrapped = goalType as? String ?? ""
-                                        let weightUnwrapped = weight as? Double ?? 0.0
-                                        let weightString = String(format: "%.0f", weightUnwrapped)
-                                        let calorieUnwrapped = calorie as? Int ?? 0
-                                        let localGoal = GoalCellModel(goalType: goalTypeUnwrapped, weight: weightString, calories: "\(calorieUnwrapped)")
-                                        goalCell.setGoalCell(model: localGoal)
-                                        
-                                    }
-                                }
-                            }
-                        } else {
-                            print("Document does not exist.")
-                        }
-                    }
+                DispatchQueue.main.async {
+                    //Breakfast and Nutrients Updated
+                    goalCell.setGoalCell(model: self.goal)
+                    
                 }
                 
                 return goalCell
@@ -143,6 +124,28 @@ extension ProfileViewController {
         let profile = ProfileCellModel(profileImage: UIImage(named: "ProfileImage") ?? UIImage(), name: "Abdulkadir Çopur", gender: "Male", diateryType: "Vegetarian")
         
         return profile
+    }
+    
+    func fetchGoalData(){
+        if let currentUserEmail = Auth.auth().currentUser?.email {
+            let docRef = db.collection("UserInformations").document("\(currentUserEmail)")
+                docRef.getDocument { (document, error) in
+                if let document = document, document.exists {
+                    if let data = document.data() {
+                        print("Document data: \(data)")
+                            if let goalType = data["goalType"], let weight = data["weight"], let calorie = data["calorie"] {
+                                let goalTypeUnwrapped = goalType as? String ?? ""
+                                let weightUnwrapped = weight as? Double ?? 0.0
+                                let weightString = String(format: "%.0f", weightUnwrapped)
+                                let calorieUnwrapped = calorie as? Int ?? 0
+                                self.goal = GoalCellModel(goalType: goalTypeUnwrapped, weight: weightString, calories: "\(calorieUnwrapped)")
+                        }
+                    }
+                } else {
+                    print("Document does not exist.")
+                }
+            }
+        }
     }
 }
 
