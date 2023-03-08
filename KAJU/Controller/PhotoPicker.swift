@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class PhotoPicker: UIViewController{
     

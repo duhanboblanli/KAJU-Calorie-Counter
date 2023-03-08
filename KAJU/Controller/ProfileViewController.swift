@@ -8,36 +8,68 @@
 import UIKit
 import FirebaseAuth
 import FirebaseFirestore
+import FirebaseCore
 
 class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
   
-    let db = Firestore.firestore()
-    
-    var profile: ProfileCellModel!
-    var goal: GoalCellModel!
+    let db = DatabaseSingleton.db
+    var profile: ProfileCellModel?
+    var goal: GoalCellModel?
     let table: UITableView = UITableView()
     let backGroundColor = ThemesOptions.backGroundColor
     let cellBackgColor = ThemesOptions.cellBackgColor
-  
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        profile = fetchProfileData()
-        fetchGoalData()
         linkViews()
-        configureView()
+        addRealTimeUpdate()
+        fetchProfileData()
         configureTableView()
+        configureView()
         configureLayout()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+    }
+
+    func addRealTimeUpdate(){
+        if let currentUserEmail = Auth.auth().currentUser?.email {
+            db.collection("UserInformations").document("\(currentUserEmail)")
+                .addSnapshotListener { documentSnapshot, error in
+                    guard let document = documentSnapshot else {
+                      print("Error fetching document: \(error!)")
+                      return
+                    }
+                    guard let data = document.data() else {
+                      print("Document data was empty.")
+                      return
+                    }
+                    print("Current data: \(data)")
+                    self.checkProfileSettingsUpdate(data: data)
+                    self.checkGoalSetttingsUpdate(data: data)
+                    self.table.reloadData()
+                  }
+            }
+    }
+    
+    
+    func checkProfileSettingsUpdate (data: Dictionary<String, Any>){
+        if let name = data["name"]{self.profile?.name = name as? String ?? ""}
+        if let height = data["height"]{self.profile?.height = "\(height)"}
+        if let diateryType = data["diateryType"]{self.profile?.diateryType = diateryType as? String ?? ""}
+        if let sex = data["sex"]{self.profile?.sex = sex as? String ?? ""}
+    }
+    
+    func checkGoalSetttingsUpdate(data: Dictionary<String, Any>){
+        if let goalType = data["goalType"]{self.goal?.goalType = goalType as? String ?? ""}
+        if let calorie = data["calorie"]{self.goal?.calorie = "\(calorie)"}
+        if let weight = data["weight"]{self.goal?.weight = "\(weight)"}
     }
     
     func linkViews(){
         view.backgroundColor = backGroundColor
         view.addSubview(table)
-        
     }
     
     func configureView(){
@@ -79,40 +111,34 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         return 0
     }
 
-        func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-            let profileCell = table.dequeueReusableCell(withIdentifier: ProfileCell.identifier) as! ProfileCell
-            let goalCell = table.dequeueReusableCell(withIdentifier: MyGoalCell.identifier) as! MyGoalCell
-            
-            switch indexPath.section {
-            case 0:
-                profileCell.layer.cornerRadius = 20
-                profileCell.myViewController = self
-                profileCell.setProfile(model: profile)
-                profileCell.selectionStyle = UITableViewCell.SelectionStyle.none
-                profileCell.tintColor = backGroundColor
-                return profileCell
-            case 1:
-                goalCell.backgroundColor = cellBackgColor.withAlphaComponent(0.6)
-                goalCell.layer.cornerRadius = 20
-                goalCell.myViewController = self
-                goalCell.selectionStyle = UITableViewCell.SelectionStyle.none
-                DispatchQueue.main.async {
-                    //Breakfast and Nutrients Updated
-                    goalCell.setGoalCell(model: self.goal)
-                    
-                }
-                
-                return goalCell
-            default:
-                return UITableViewCell()
-            }
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let profileCell = table.dequeueReusableCell(withIdentifier: ProfileCell.identifier) as! ProfileCell
+        let goalCell = table.dequeueReusableCell(withIdentifier: MyGoalCell.identifier) as! MyGoalCell
+        
+        switch indexPath.section {
+        case 0:
+            profileCell.layer.cornerRadius = 20
+            profileCell.myViewController = self
+            profileCell.selectionStyle = UITableViewCell.SelectionStyle.none
+            profileCell.tintColor = backGroundColor
+            DispatchQueue.main.async { profileCell.setProfile(model: self.profile ?? ProfileCellModel(profileImage: UIImage(), name: "", sex: "", diateryType: "", height: ""))}
+            return profileCell
+        case 1:
+            goalCell.backgroundColor = cellBackgColor
+            goalCell.layer.cornerRadius = 20
+            goalCell.myViewController = self
+            goalCell.selectionStyle = UITableViewCell.SelectionStyle.none
+            DispatchQueue.main.async { goalCell.setGoalCell(model: self.goal ?? GoalCellModel(goalType: "", weight: "", calorie: ""))}
+            return goalCell
+        default:
+            return UITableViewCell()
         }
-    
+    }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.section {
         case 0:
-            navigationController?.pushViewController(ProfileSettingsController(), animated: true)
+            navigationController?.pushViewController(ProfileCell.myProfileSettings, animated: true)
         default:
             return
         }
@@ -120,30 +146,26 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
 }
 
 extension ProfileViewController {
-    func fetchProfileData() -> ProfileCellModel {
-        let profile = ProfileCellModel(profileImage: UIImage(named: "ProfileImage") ?? UIImage(), name: "Abdulkadir Çopur", gender: "Male", diateryType: "Vegetarian")
-        
-        return profile
-    }
-    
-    func fetchGoalData(){
+    func fetchProfileData() {
         if let currentUserEmail = Auth.auth().currentUser?.email {
             let docRef = db.collection("UserInformations").document("\(currentUserEmail)")
-                docRef.getDocument { (document, error) in
+            docRef.getDocument { (document, error) in
                 if let document = document, document.exists {
                     if let data = document.data() {
                         print("Document data: \(data)")
-                            if let goalType = data["goalType"], let weight = data["weight"], let calorie = data["calorie"] {
+                        if let goalType = data["goalType"],
+                            let weight = data["weight"],
+                            let calorie = data["calorie"],
+                            let gender = data["sex"],
+                            let height = data["height"]{
                                 let goalTypeUnwrapped = goalType as? String ?? ""
-                                let weightUnwrapped = weight as? Double ?? 0.0
-                                let weightString = String(format: "%.0f", weightUnwrapped)
+                                let weightUnwrapped = weight as? Int ?? 0
                                 let calorieUnwrapped = calorie as? Int ?? 0
-                                self.goal = GoalCellModel(goalType: goalTypeUnwrapped, weight: weightString, calories: "\(calorieUnwrapped)")
-                        }
+                                self.goal = GoalCellModel(goalType: goalTypeUnwrapped, weight: "\(weightUnwrapped)", calorie: "\(calorieUnwrapped)")
+                                self.profile = ProfileCellModel(profileImage: UIImage(named:"defaultProfilePhoto") ?? UIImage(), name: "Enter name", sex: gender as! String, diateryType: "Vegetarian", height: "\(height)")
+                            }
                     }
-                } else {
-                    print("Document does not exist.")
-                }
+                } else { print("Document does not exist.")}
             }
         }
     }

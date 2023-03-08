@@ -10,6 +10,7 @@ import UIKit
 class MyGoalCell: UITableViewCell {
     
     static var identifier = "MyGoalCell"
+    static var myGoalSettings: MyGoalSettingsController!
     var myViewController: UIViewController!
     let backGroundColor = ThemesOptions.backGroundColor
     
@@ -96,11 +97,12 @@ class MyGoalCell: UITableViewCell {
     func setGoalCell(model: GoalCellModel){
         goalValue.text = model.goalType
         weightValue.text = model.weight
-        caloriesValue.text = model.calories
+        caloriesValue.text = model.calorie
+        MyGoalCell.myGoalSettings = MyGoalSettingsController(goalValue: model.goalType, weightValue: model.weight, caloriesValue: model.calorie)
     }
     
     @objc func tapped() {
-        myViewController.navigationController?.pushViewController(MyGoalSettingsController(), animated: true)
+        myViewController.navigationController?.pushViewController(MyGoalCell.myGoalSettings, animated: true)
     }
     
     override func layoutSubviews() {

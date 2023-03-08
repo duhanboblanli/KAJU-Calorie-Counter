@@ -6,9 +6,12 @@
 //
 
 import UIKit
+import FirebaseAuth
+import FirebaseFirestore
 
 class Editor: UIViewController {
     
+    let db = DatabaseSingleton.db
     let backGroundColor = ThemesOptions.backGroundColor
     let cellBackgColor = ThemesOptions.cellBackgColor
     var eyeButton: UIButton?
@@ -134,12 +137,35 @@ class Editor: UIViewController {
     }
     
    @objc func done(){
-       if (textLabel.text == "Password"){
+       switch textLabel.text {
+       case "Name":
+           setAttrValue(key: "name", value: textField.text ?? "")
+       case "Height":
+           setAttrValue(key: "height", value: Int(textField.text ?? "") ?? 0)
+       case "Starting Weight":
+           setAttrValue(key: "weight", value: Int(textField.text ?? "") ?? 0)
+       case "Goal Weight":
+           setAttrValue(key: "goalWeight", value: Int(textField.text ?? "") ?? 0)
+       case "Weekly Goal":
+           setAttrValue(key: "weeklyGoal", value: Int(textField.text ?? "") ?? 0)
+       case "Calory Goal":
+           setAttrValue(key: "caloryGoal", value: Int(textField.text ?? "") ?? 0)
+       case "Password":
+           Auth.auth().currentUser?.updatePassword(to: textField.text ?? "")
            textValue.text = String(repeating: "* ", count: textField.text?.count ?? 0)
            textValue.accessibilityIdentifier = textField.text
-       }else{ textValue.text = textField.text }
-       
+       default:
+           return
+       }
        self.dismiss(animated: true)
+    }
+    
+    func setAttrValue(key: String, value: Any){
+        textValue.text = textField.text
+        if let currentUserEmail = Auth.auth().currentUser?.email {
+            let docRef = db.collection("UserInformations").document("\(currentUserEmail)")
+            docRef.updateData([key: value])
+        }
     }
     
     @objc func cancel(){

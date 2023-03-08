@@ -77,10 +77,10 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             navigationController?.pushViewController(AccountSettingsController(), animated: true)
             
         case 1:
-            navigationController?.pushViewController(ProfileSettingsController(), animated: true)
+            navigationController?.pushViewController(ProfileCell.myProfileSettings, animated: true)
             
         case 2:
-            navigationController?.pushViewController(MyGoalSettingsController(), animated: true)
+            navigationController?.pushViewController(MyGoalCell.myGoalSettings, animated: true)
             
         case 3:
             navigationController?.pushViewController(AboutUsController(), animated: true)

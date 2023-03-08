@@ -71,6 +71,7 @@ class AccountSettingCell: UITableViewCell {
             pValueLabel.accessibilityIdentifier = model.textValue
             pValueLabel.text = String(repeating: "* ", count: model.textValue.count)
         }else{
+            editButton.isHidden = true
             pValueLabel.text = model.textValue
         }
     }

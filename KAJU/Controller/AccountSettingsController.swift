@@ -7,9 +7,14 @@
 
 import UIKit
 import DropDown
+import FirebaseAuth
+import FirebaseFirestore
 
 class AccountSettingsController: UIViewController, UITableViewDelegate, UITableViewDataSource{
     
+    let db = DatabaseSingleton.db
+    private var userPassword = UserDefaults.standard.string(forKey: Auth.auth().currentUser?.email ?? "")
+    private var userEmail = Auth.auth().currentUser?.email
     var accountSettingModels: [SettingModel] = []
     let resetOptions = ["Delete", "Reset"]
     var dropDown = ThemesOptions.dropDown
@@ -116,9 +121,8 @@ class AccountSettingsController: UIViewController, UITableViewDelegate, UITableV
 
 extension AccountSettingsController {
     func fetcData() -> [SettingModel]{
-        let accountSetting1 = SettingModel(textLabel: "Email Adress", textValue: "hello@gmail.com")
-        let accountSetting2 = SettingModel(textLabel: "Password", textValue: "12345")
-
+        let accountSetting1 = SettingModel(textLabel: "Email Adress", textValue: userEmail ?? "hello@gmail.com")
+        let accountSetting2 = SettingModel(textLabel: "Password", textValue: userPassword ?? "")
         return [accountSetting1, accountSetting2]
     }
 }

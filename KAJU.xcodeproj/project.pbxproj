@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		13F883F329B8B10500BBCF25 /* DatabaseSingleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13F883F229B8B10500BBCF25 /* DatabaseSingleton.swift */; };
 		2D850C3F299BFA6F00A525F0 /* FoodModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D850C3E299BFA6F00A525F0 /* FoodModel.swift */; };
 		2D850C41299BFA8E00A525F0 /* FoodApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D850C40299BFA8E00A525F0 /* FoodApiService.swift */; };
 		2D850C43299BFAAD00A525F0 /* FoodViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D850C42299BFAAD00A525F0 /* FoodViewModel.swift */; };
@@ -78,6 +79,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		13F883F229B8B10500BBCF25 /* DatabaseSingleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseSingleton.swift; sourceTree = "<group>"; };
 		19C1B6341DC89EDF1E04D0D4 /* Pods-KAJU.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KAJU.release.xcconfig"; path = "Target Support Files/Pods-KAJU/Pods-KAJU.release.xcconfig"; sourceTree = "<group>"; };
 		2D850C3E299BFA6F00A525F0 /* FoodModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodModel.swift; sourceTree = "<group>"; };
 		2D850C40299BFA8E00A525F0 /* FoodApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodApiService.swift; sourceTree = "<group>"; };
@@ -283,6 +285,7 @@
 				FEC7BF5029A3EED4001B1EC9 /* Recipe Edamam */,
 				FEC7BF4F29A3EEB6001B1EC9 /* Food Edamam */,
 				FEC7BF5229A3F0B3001B1EC9 /* Calculator Model */,
+				13F883F229B8B10500BBCF25 /* DatabaseSingleton.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -484,6 +487,7 @@
 				FEC1A95D29B787C800342AF6 /* AccountSettingCell.swift in Sources */,
 				FEC1A96D29B787F500342AF6 /* Editor.swift in Sources */,
 				FE6FCCFF29A7B6B700FDE008 /* FavoritesCell.swift in Sources */,
+				13F883F329B8B10500BBCF25 /* DatabaseSingleton.swift in Sources */,
 				FEC1A95F29B787C800342AF6 /* SettingsCell.swift in Sources */,
 				FE5E92AB298D1C5400947F7A /* BMI.swift in Sources */,
 				FE5DEF5D299BC5AC00F13802 /* FoodsViewController.swift in Sources */,
