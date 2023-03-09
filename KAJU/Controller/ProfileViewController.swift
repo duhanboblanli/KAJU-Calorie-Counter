@@ -21,9 +21,9 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        linkViews()
         addRealTimeUpdate()
         fetchProfileData()
+        linkViews()
         configureTableView()
         configureView()
         configureLayout()
@@ -64,7 +64,10 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     func checkGoalSetttingsUpdate(data: Dictionary<String, Any>){
         if let goalType = data["goalType"]{self.goal?.goalType = goalType as? String ?? ""}
         if let calorie = data["calorie"]{self.goal?.calorie = "\(calorie)"}
-        if let weight = data["weight"]{self.goal?.weight = "\(weight)"}
+        if let weight = data["weight"]{
+            let weightWrapped = weight as? Double ?? 0
+            self.goal?.weight = String(format: "%.2f", weightWrapped)
+        }
     }
     
     func linkViews(){
@@ -121,14 +124,14 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
             profileCell.myViewController = self
             profileCell.selectionStyle = UITableViewCell.SelectionStyle.none
             profileCell.tintColor = backGroundColor
-            DispatchQueue.main.async { profileCell.setProfile(model: self.profile ?? ProfileCellModel(profileImage: UIImage(), name: "", sex: "", diateryType: "", height: ""))}
+            profileCell.setProfile(model: self.profile ?? ProfileCellModel(profileImage: UIImage(named: "defaultProfilePhoto") ?? UIImage(), name: "", sex: "", diateryType: "", height: ""))
             return profileCell
         case 1:
             goalCell.backgroundColor = cellBackgColor
             goalCell.layer.cornerRadius = 20
             goalCell.myViewController = self
             goalCell.selectionStyle = UITableViewCell.SelectionStyle.none
-            DispatchQueue.main.async { goalCell.setGoalCell(model: self.goal ?? GoalCellModel(goalType: "", weight: "", calorie: ""))}
+            goalCell.setGoalCell(model: self.goal ?? GoalCellModel(goalType: "", weight: "", calorie: ""))
             return goalCell
         default:
             return UITableViewCell()
@@ -154,16 +157,15 @@ extension ProfileViewController {
                     if let data = document.data() {
                         print("Document data: \(data)")
                         if let goalType = data["goalType"],
-                            let weight = data["weight"],
-                            let calorie = data["calorie"],
-                            let gender = data["sex"],
-                            let height = data["height"]{
-                                let goalTypeUnwrapped = goalType as? String ?? ""
-                                let weightUnwrapped = weight as? Int ?? 0
-                                let calorieUnwrapped = calorie as? Int ?? 0
-                                self.goal = GoalCellModel(goalType: goalTypeUnwrapped, weight: "\(weightUnwrapped)", calorie: "\(calorieUnwrapped)")
-                                self.profile = ProfileCellModel(profileImage: UIImage(named:"defaultProfilePhoto") ?? UIImage(), name: "Enter name", sex: gender as! String, diateryType: "Vegetarian", height: "\(height)")
-                            }
+                         let weight = data["weight"],
+                         let calorie = data["calorie"],
+                         let sex = data["sex"],
+                         let height = data["height"]{
+                            let weightWrapped = weight as? Double ?? 0
+                            self.goal = GoalCellModel(goalType: "\(goalType)", weight: String(format: "%.2f", weightWrapped), calorie: "\(calorie)")
+                            self.profile = ProfileCellModel(profileImage: UIImage(named: "defaultProfilePhoto") ?? UIImage(), name: "Enter a name", sex: "\(sex)", diateryType: "Vegan", height: "\(height)")
+                            self.table.reloadData()
+                        }
                     }
                 } else { print("Document does not exist.")}
             }

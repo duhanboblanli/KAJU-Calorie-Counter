@@ -98,7 +98,7 @@ class MyGoalCell: UITableViewCell {
         goalValue.text = model.goalType
         weightValue.text = model.weight
         caloriesValue.text = model.calorie
-        MyGoalCell.myGoalSettings = MyGoalSettingsController(goalValue: model.goalType, weightValue: model.weight, caloriesValue: model.calorie)
+        MyGoalCell.myGoalSettings = MyGoalSettingsController(goalValue: model.goalType , weightValue: model.weight, caloriesValue: model.calorie)
     }
     
     @objc func tapped() {

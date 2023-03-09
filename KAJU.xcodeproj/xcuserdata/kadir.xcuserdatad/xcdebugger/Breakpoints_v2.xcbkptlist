@@ -14,8 +14,8 @@
             filePath = "KAJU/Controller/ProfileViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "24"
-            endingLineNumber = "24"
+            startingLineNumber = "26"
+            endingLineNumber = "26"
             landmarkName = "viewDidLoad()"
             landmarkType = "7">
             <Locations>
@@ -108,114 +108,6 @@
                   startingLineNumber = "12"
                   endingLineNumber = "12"
                   offsetFromSymbolStart = "138">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "49639D6F-430D-411B-9F7D-B843D84B0F54"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "KAJU/Controller/ProfileViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "25"
-            endingLineNumber = "25"
-            landmarkName = "viewDidLoad()"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "49639D6F-430D-411B-9F7D-B843D84B0F54 - 7dda184343732347"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "KAJU.ProfileViewController.lineNumber.getter : Swift.Int"
-                  moduleName = "KAJU"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/kadir/Documents/GitHub/KAJU-Calorie-Counter/KAJU/Controller/ProfileViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "13"
-                  endingLineNumber = "13"
-                  offsetFromSymbolStart = "85">
-               </Location>
-               <Location
-                  uuid = "49639D6F-430D-411B-9F7D-B843D84B0F54 - a75ce89f4cdc7ebb"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "KAJU.ProfileViewController.lineNumber.setter : Swift.Int"
-                  moduleName = "KAJU"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/kadir/Documents/GitHub/KAJU-Calorie-Counter/KAJU/Controller/ProfileViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "13"
-                  endingLineNumber = "13"
-                  offsetFromSymbolStart = "97">
-               </Location>
-               <Location
-                  uuid = "49639D6F-430D-411B-9F7D-B843D84B0F54 - 9e3fa60b64fe0e48"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "KAJU.ProfileViewController.lineNumber.modify : Swift.Int"
-                  moduleName = "KAJU"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/kadir/Documents/GitHub/KAJU-Calorie-Counter/KAJU/Controller/ProfileViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "13"
-                  endingLineNumber = "13"
-                  offsetFromSymbolStart = "0">
-               </Location>
-               <Location
-                  uuid = "49639D6F-430D-411B-9F7D-B843D84B0F54 - 3e8273b54f7c3dbb"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "KAJU.ProfileViewController.lineNumber.modify : Swift.Int with unmangled suffix &quot;.resume.0&quot;"
-                  moduleName = "KAJU"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/kadir/Documents/GitHub/KAJU-Calorie-Counter/KAJU/Controller/ProfileViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "13"
-                  endingLineNumber = "13"
-                  offsetFromSymbolStart = "15">
-               </Location>
-               <Location
-                  uuid = "49639D6F-430D-411B-9F7D-B843D84B0F54 - 330013d08b8d7572"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "KAJU.ProfileViewController.init(nibName: Swift.Optional&lt;Swift.String&gt;, bundle: Swift.Optional&lt;__C.NSBundle&gt;) -&gt; KAJU.ProfileViewController"
-                  moduleName = "KAJU"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/kadir/Documents/GitHub/KAJU-Calorie-Counter/KAJU/Controller/ProfileViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "13"
-                  endingLineNumber = "13"
-                  offsetFromSymbolStart = "266">
-               </Location>
-               <Location
-                  uuid = "49639D6F-430D-411B-9F7D-B843D84B0F54 - c8493b3011bd92eb"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "KAJU.ProfileViewController.init(coder: __C.NSCoder) -&gt; Swift.Optional&lt;KAJU.ProfileViewController&gt;"
-                  moduleName = "KAJU"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/kadir/Documents/GitHub/KAJU-Calorie-Counter/KAJU/Controller/ProfileViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "13"
-                  endingLineNumber = "13"
-                  offsetFromSymbolStart = "223">
                </Location>
             </Locations>
          </BreakpointContent>

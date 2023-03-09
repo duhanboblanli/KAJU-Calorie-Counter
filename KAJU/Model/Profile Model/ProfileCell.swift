@@ -205,7 +205,7 @@ class ProfileCell: UITableViewCell {
         nameValue.text = model.name
         genderLValue.text = model.sex
         diateryValue.text = model.diateryType
-        ProfileCell.myProfileSettings = ProfileSettingsController(nameValue: nameValue.text!, genderValue: genderLValue.text!, diaterValue: diateryValue.text, heightValue: model.height)
+        ProfileCell.myProfileSettings = ProfileSettingsController(nameValue: model.name, genderValue: model.sex, diaterValue: model.diateryType, heightValue: model.height)
         
         switch genderLValue.text{
         case "Male":

@@ -162,13 +162,13 @@ class Editor: UIViewController {
            setAttrValue(key: "height", value: Int(textField.text ?? "") ?? 0)
            self.dismiss(animated: true)
        case "Starting Weight":
-           setAttrValue(key: "weight", value: Int(textField.text ?? "") ?? 0)
+           setAttrValue(key: "weight", value: Double(textField.text ?? "") ?? 0)
            self.dismiss(animated: true)
        case "Goal Weight":
-           setAttrValue(key: "goalWeight", value: Int(textField.text ?? "") ?? 0)
+           setAttrValue(key: "goalWeight", value: Double(textField.text ?? "") ?? 0)
            self.dismiss(animated: true)
        case "Weekly Goal":
-           setAttrValue(key: "weeklyGoal", value: Int(textField.text ?? "") ?? 0)
+           setAttrValue(key: "weeklyGoal", value: Double(textField.text ?? "") ?? 0)
            self.dismiss(animated: true)
        case "Calory Goal":
            setAttrValue(key: "caloryGoal", value: Int(textField.text ?? "") ?? 0)
