@@ -105,6 +105,23 @@ class Editor: UIViewController {
         contentView.addSubview(cancelButton)
     }
     
+    func showSimpleAlert() {
+        let alert = UIAlertController(title: "Are you sure you want to Change ?", message: nil,
+                                      preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.default, handler: { _ in
+            //Cancel Action
+            self.dismiss(animated: true)
+            }))
+            alert.addAction(UIAlertAction(title: "Change",
+                                          style: UIAlertAction.Style.default,
+                                          handler: {(_: UIAlertAction!) in
+                //Change Action
+                Auth.auth().currentUser?.updatePassword(to: self.textField.text ?? "")
+                
+            }))
+            self.present(alert, animated: true, completion: nil)
+        }
+    
     func configureView(){
         titleLabel.text = textLabel.text
         doneButton.addTarget(self, action: #selector(done), for: .touchUpInside)
@@ -140,24 +157,29 @@ class Editor: UIViewController {
        switch textLabel.text {
        case "Name":
            setAttrValue(key: "name", value: textField.text ?? "")
+           self.dismiss(animated: true)
        case "Height":
            setAttrValue(key: "height", value: Int(textField.text ?? "") ?? 0)
+           self.dismiss(animated: true)
        case "Starting Weight":
            setAttrValue(key: "weight", value: Int(textField.text ?? "") ?? 0)
+           self.dismiss(animated: true)
        case "Goal Weight":
            setAttrValue(key: "goalWeight", value: Int(textField.text ?? "") ?? 0)
+           self.dismiss(animated: true)
        case "Weekly Goal":
            setAttrValue(key: "weeklyGoal", value: Int(textField.text ?? "") ?? 0)
+           self.dismiss(animated: true)
        case "Calory Goal":
            setAttrValue(key: "caloryGoal", value: Int(textField.text ?? "") ?? 0)
+           self.dismiss(animated: true)
        case "Password":
-           Auth.auth().currentUser?.updatePassword(to: textField.text ?? "")
+           showSimpleAlert()
            textValue.text = String(repeating: "* ", count: textField.text?.count ?? 0)
            textValue.accessibilityIdentifier = textField.text
        default:
            return
        }
-       self.dismiss(animated: true)
     }
     
     func setAttrValue(key: String, value: Any){
