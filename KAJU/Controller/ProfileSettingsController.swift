@@ -11,10 +11,15 @@ import DropDown
 class ProfileSettingsController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     let tableView: UITableView = UITableView()
+    var nameValue: String!
+    var genderValue: String!
+    var diaterValue: String!
+    var heightValue: String!
+    
     let tableTitle = {
         let label = UILabel()
         label.text = "Profile Settings"
-        label.font = UIFont.boldSystemFont(ofSize: 32)
+        label.font = UIFont(name: "Copperplate Bold", size: 33)
         return label
     }()
     
@@ -29,6 +34,18 @@ class ProfileSettingsController: UIViewController, UITableViewDelegate, UITableV
         configureView()
         layoutViews()
         delegateTableView()
+    }
+    
+    init(nameValue: String!, genderValue: String!, diaterValue: String!, heightValue: String!) {
+        super.init(nibName: nil, bundle: nil)
+        self.nameValue = nameValue
+        self.genderValue = genderValue
+        self.diaterValue = diaterValue
+        self.heightValue = heightValue
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     func delegateTableView(){
@@ -69,10 +86,10 @@ class ProfileSettingsController: UIViewController, UITableViewDelegate, UITableV
 
 extension ProfileSettingsController {
     func fetcData() -> [SettingModel]{
-        let profileSetting1 = SettingModel(textLabel: "Name", textValue: "Kadir Çopur")
-        let profileSetting2 = SettingModel(textLabel: "Gender", textValue: "Male")
-        let profileSetting3 = SettingModel(textLabel: "Dieatary", textValue: "Classic")
-        let profileSetting4 = SettingModel(textLabel: "Height", textValue: "175")
+        let profileSetting1 = SettingModel(textLabel: "Name", textValue: nameValue)
+        let profileSetting2 = SettingModel(textLabel: "Gender", textValue: genderValue)
+        let profileSetting3 = SettingModel(textLabel: "Dieatary", textValue: diaterValue)
+        let profileSetting4 = SettingModel(textLabel: "Height", textValue: heightValue)
         
         return [profileSetting1, profileSetting2, profileSetting3, profileSetting4]
     }

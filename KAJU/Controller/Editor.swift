@@ -6,9 +6,12 @@
 //
 
 import UIKit
+import FirebaseAuth
+import FirebaseFirestore
 
 class Editor: UIViewController {
     
+    let db = DatabaseSingleton.db
     let backGroundColor = ThemesOptions.backGroundColor
     let cellBackgColor = ThemesOptions.cellBackgColor
     var eyeButton: UIButton?
@@ -45,7 +48,9 @@ class Editor: UIViewController {
         let width = CGFloat(76)
         let height = CGFloat(40)
         button.anchor(width: width, height: height)
-        button.setTitle("DONE", for: .normal)
+        button.setTitle("Done", for: .normal)
+        button.titleLabel?.font = .boldSystemFont(ofSize: 18)
+
         button.backgroundColor = ThemesOptions.buttonBackGColor
         button.layer.cornerRadius = 20
         return button
@@ -55,7 +60,8 @@ class Editor: UIViewController {
         let width = CGFloat(88)
         let height = CGFloat(40)
         button.anchor(width: width, height: height)
-        button.setTitle("CANCEL", for: .normal)
+        button.setTitle("Cancel", for: .normal)
+        button.titleLabel?.font = .boldSystemFont(ofSize: 16)
         button.backgroundColor = ThemesOptions.buttonBackGColor
         button.layer.cornerRadius = 20
         return button
@@ -99,6 +105,23 @@ class Editor: UIViewController {
         contentView.addSubview(cancelButton)
     }
     
+    func showSimpleAlert() {
+        let alert = UIAlertController(title: "Are you sure you want to Change ?", message: nil,
+                                      preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.default, handler: { _ in
+            //Cancel Action
+            self.dismiss(animated: true)
+            }))
+            alert.addAction(UIAlertAction(title: "Change",
+                                          style: UIAlertAction.Style.default,
+                                          handler: {(_: UIAlertAction!) in
+                //Change Action
+                Auth.auth().currentUser?.updatePassword(to: self.textField.text ?? "")
+                
+            }))
+            self.present(alert, animated: true, completion: nil)
+        }
+    
     func configureView(){
         titleLabel.text = textLabel.text
         doneButton.addTarget(self, action: #selector(done), for: .touchUpInside)
@@ -131,12 +154,40 @@ class Editor: UIViewController {
     }
     
    @objc func done(){
-       if (textLabel.text == "Password"){
+       switch textLabel.text {
+       case "Name":
+           setAttrValue(key: "name", value: textField.text ?? "")
+           self.dismiss(animated: true)
+       case "Height":
+           setAttrValue(key: "height", value: Int(textField.text ?? "") ?? 0)
+           self.dismiss(animated: true)
+       case "Starting Weight":
+           setAttrValue(key: "weight", value: Int(textField.text ?? "") ?? 0)
+           self.dismiss(animated: true)
+       case "Goal Weight":
+           setAttrValue(key: "goalWeight", value: Int(textField.text ?? "") ?? 0)
+           self.dismiss(animated: true)
+       case "Weekly Goal":
+           setAttrValue(key: "weeklyGoal", value: Int(textField.text ?? "") ?? 0)
+           self.dismiss(animated: true)
+       case "Calory Goal":
+           setAttrValue(key: "caloryGoal", value: Int(textField.text ?? "") ?? 0)
+           self.dismiss(animated: true)
+       case "Password":
+           showSimpleAlert()
            textValue.text = String(repeating: "* ", count: textField.text?.count ?? 0)
            textValue.accessibilityIdentifier = textField.text
-       }else{ textValue.text = textField.text }
-       
-       self.dismiss(animated: true)
+       default:
+           return
+       }
+    }
+    
+    func setAttrValue(key: String, value: Any){
+        textValue.text = textField.text
+        if let currentUserEmail = Auth.auth().currentUser?.email {
+            let docRef = db.collection("UserInformations").document("\(currentUserEmail)")
+            docRef.updateData([key: value])
+        }
     }
     
     @objc func cancel(){

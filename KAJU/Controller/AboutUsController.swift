@@ -183,7 +183,8 @@ class AboutUsController: UIViewController{
         scrollView.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor)
         containerView.anchor(top: scrollView.contentLayoutGuide.topAnchor, left: scrollView.contentLayoutGuide.leftAnchor, bottom: scrollView.contentLayoutGuide.bottomAnchor, right: scrollView.contentLayoutGuide.rightAnchor, width: view.frame.width)
         aboutUsImageView.anchor(top: containerView.topAnchor, left: containerView.leftAnchor, right: containerView.rightAnchor)
-        descTitle.anchor(top: aboutUsImageView.bottomAnchor, left: aboutUsImageView.leftAnchor, bottom: aboutUsDesc.topAnchor, right: aboutUsDesc.rightAnchor, paddingTop: 16, paddingLeft: 32)
+        descTitle.anchor(top: aboutUsImageView.bottomAnchor, left: aboutUsImageView.leftAnchor, bottom: aboutUsDesc.topAnchor, right: aboutUsDesc.rightAnchor, paddingTop: 16, paddingLeft: 19)
+        
         aboutUsDesc.anchor(top: descTitle.bottomAnchor, left: containerView.leftAnchor, right: containerView.rightAnchor, paddingLeft: 16, paddingRight: 16)
         socialMediaContainer.anchor(top: aboutUsDesc.bottomAnchor, paddingTop: 32)
         socialMediaContainer.centerXAnchor.constraint(equalTo: containerView.centerXAnchor).isActive = true
