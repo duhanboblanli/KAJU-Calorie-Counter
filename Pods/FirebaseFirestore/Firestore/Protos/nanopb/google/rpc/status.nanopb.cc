@@ -46,21 +46,19 @@ const pb_field_t google_rpc_Status_fields[4] = {
 
 
 std::string google_rpc_Status::ToString(int indent) const {
-    std::string tostring_header = PrintHeader(indent, "Status", this);
-    std::string tostring_result;
+    std::string header = PrintHeader(indent, "Status", this);
+    std::string result;
 
-    tostring_result += PrintPrimitiveField("code: ", code, indent + 1, false);
-    tostring_result += PrintPrimitiveField("message: ",
-        message, indent + 1, false);
+    result += PrintPrimitiveField("code: ", code, indent + 1, false);
+    result += PrintPrimitiveField("message: ", message, indent + 1, false);
     for (pb_size_t i = 0; i != details_count; ++i) {
-        tostring_result += PrintMessageField("details ",
-            details[i], indent + 1, true);
+        result += PrintMessageField("details ", details[i], indent + 1, true);
     }
 
     bool is_root = indent == 0;
-    if (!tostring_result.empty() || is_root) {
-      std::string tostring_tail = PrintTail(indent);
-      return tostring_header + tostring_result + tostring_tail;
+    if (!result.empty() || is_root) {
+      std::string tail = PrintTail(indent);
+      return header + result + tail;
     } else {
       return "";
     }

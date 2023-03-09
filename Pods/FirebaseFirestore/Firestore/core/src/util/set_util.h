@@ -17,7 +17,6 @@
 #ifndef FIRESTORE_CORE_SRC_UTIL_SET_UTIL_H_
 #define FIRESTORE_CORE_SRC_UTIL_SET_UTIL_H_
 
-#include <functional>
 #include <set>
 
 #include "Firestore/core/src/util/comparison.h"
@@ -42,10 +41,10 @@ namespace util {
  * @param on_remove - A function to invoke for every element that is part of
  * `before` but not `after`.
  */
-template <typename T, typename P = std::less<T>>
-void DiffSets(std::set<T, P> existing,
-              std::set<T, P> new_entries,
-              std::function<util::ComparisonResult(const T&, const T&)> cmp,
+template <typename T>
+void DiffSets(std::set<T> existing,
+              std::set<T> new_entries,
+              Comparator<T> comparator,
               std::function<void(const T&)> on_add,
               std::function<void(const T&)> on_remove) {
   auto existing_iter = existing.cbegin();
@@ -57,12 +56,13 @@ void DiffSets(std::set<T, P> existing,
     bool removed = false;
 
     if (existing_iter != existing.cend() && new_iter != new_entries.cend()) {
-      if (cmp(*existing_iter, *new_iter) == util::ComparisonResult::Ascending) {
+      util::ComparisonResult cmp =
+          comparator.Compare(*existing_iter, *new_iter);
+      if (cmp == util::ComparisonResult::Ascending) {
         // The element was removed if the next element in our ordered
         // walkthrough is only in `existing`.
         removed = true;
-      } else if (cmp(*existing_iter, *new_iter) ==
-                 util::ComparisonResult::Descending) {
+      } else if (cmp == util::ComparisonResult::Descending) {
         // The element was added if the next element in our ordered
         // walkthrough is only in `new_entries`.
         added = true;

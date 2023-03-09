@@ -4072,8 +4072,10 @@ static NSMutableDictionary *gSystemCompletionHandlers = nil;
       // On both the simulator and devices, the path can change to the download file, but the name
       // shouldn't change. Technically, this isn't supported in the fetcher, but the change of
       // URL is expected to happen only across development runs through Xcode.
-      __unused NSString *oldFilename = [_destinationFileURL lastPathComponent];
-      __unused NSString *newFilename = [destinationFileURL lastPathComponent];
+      NSString *oldFilename = [_destinationFileURL lastPathComponent];
+      NSString *newFilename = [destinationFileURL lastPathComponent];
+#pragma unused(oldFilename)
+#pragma unused(newFilename)
       GTMSESSION_ASSERT_DEBUG(
           [oldFilename isEqualToString:newFilename],
           @"Destination File URL cannot be changed after session identifier has been created");

@@ -513,7 +513,8 @@ NSString *const kGTMSessionFetcherUploadLocationObtainedNotification =
     int hasFileHandle = (_uploadFileHandle != nil) ? 1 : 0;
     int hasFileURL = (_uploadFileURL != nil) ? 1 : 0;
     int hasUploadDataProvider = (_uploadDataProvider != nil) ? 1 : 0;
-    __unused int numberOfSources = hasData + hasFileHandle + hasFileURL + hasUploadDataProvider;
+    int numberOfSources = hasData + hasFileHandle + hasFileURL + hasUploadDataProvider;
+#pragma unused(numberOfSources)
     GTMSESSION_ASSERT_DEBUG(numberOfSources == 1, @"Need just one upload source (%d)",
                             numberOfSources);
   }  // @synchronized(self)
@@ -981,8 +982,8 @@ NSString *const kGTMSessionFetcherUploadLocationObtainedNotification =
   // resumable request/response.
   if (self.downloadedData.length > 0) {
     NSData *downloadedData = self.downloadedData;
-    __unused NSString *str = [[NSString alloc] initWithData:downloadedData
-                                                   encoding:NSUTF8StringEncoding];
+    NSString *str = [[NSString alloc] initWithData:downloadedData encoding:NSUTF8StringEncoding];
+#pragma unused(str)
     GTMSESSION_ASSERT_DEBUG(NO, @"unexpected response data (uploading to the wrong URL?)\n%@", str);
   }
 #endif
@@ -1516,8 +1517,9 @@ NSString *const kGTMSessionFetcherUploadLocationObtainedNotification =
 #if DEBUG
     // Verify that if we think all of the uploading data has been sent, the server responded with
     // the "final" upload status.
-    __unused BOOL hasUploadAllData = (newOffset == [self fullUploadLength]);
-    __unused BOOL isFinalStatus = (uploadStatus == kStatusFinal);
+    BOOL hasUploadAllData = (newOffset == [self fullUploadLength]);
+    BOOL isFinalStatus = (uploadStatus == kStatusFinal);
+#pragma unused(hasUploadAllData, isFinalStatus)
     GTMSESSION_ASSERT_DEBUG(hasUploadAllData == isFinalStatus || !hasKnownChunkSize,
                             @"uploadStatus:%@  newOffset:%lld (%lld + %lld)  fullUploadLength:%lld"
                             @" chunkFetcher:%@ requestHeaders:%@ responseHeaders:%@",

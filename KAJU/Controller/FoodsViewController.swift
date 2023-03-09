@@ -69,17 +69,17 @@ class FoodsViewController: UIViewController, UpdateDelegate {
     //Loading Alert Setup
     private func setupActivityIndicator() {
         
-        activityIndicatorContainer = UIView(frame: CGRect(x: 0, y: 0, width: 80, height: 80))
+        activityIndicatorContainer = UIView(frame: CGRect(x: 0, y: 0, width: 60, height: 60))
         activityIndicatorContainer.center.x = view.center.x
         activityIndicatorContainer.center.y = view.center.y
         activityIndicatorContainer.backgroundColor = UIColor.black
-        activityIndicatorContainer.alpha = 0.8
+        activityIndicatorContainer.alpha = 0.7
         activityIndicatorContainer.layer.cornerRadius = 10
           
         // Configure the activity indicator
         activityIndicator = UIActivityIndicatorView()
         activityIndicator.hidesWhenStopped = true
-        activityIndicator.style = UIActivityIndicatorView.Style.large
+        activityIndicator.style = UIActivityIndicatorView.Style.medium
         activityIndicator.color = .white
         
         activityIndicator.translatesAutoresizingMaskIntoConstraints = false

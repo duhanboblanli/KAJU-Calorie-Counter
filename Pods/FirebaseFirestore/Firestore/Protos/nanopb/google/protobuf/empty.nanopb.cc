@@ -43,14 +43,14 @@ const pb_field_t google_protobuf_Empty_fields[1] = {
 
 
 std::string google_protobuf_Empty::ToString(int indent) const {
-    std::string tostring_header = PrintHeader(indent, "Empty", this);
-    std::string tostring_result;
+    std::string header = PrintHeader(indent, "Empty", this);
+    std::string result;
 
 
     bool is_root = indent == 0;
-    if (!tostring_result.empty() || is_root) {
-      std::string tostring_tail = PrintTail(indent);
-      return tostring_header + tostring_result + tostring_tail;
+    if (!result.empty() || is_root) {
+      std::string tail = PrintTail(indent);
+      return header + result + tail;
     } else {
       return "";
     }

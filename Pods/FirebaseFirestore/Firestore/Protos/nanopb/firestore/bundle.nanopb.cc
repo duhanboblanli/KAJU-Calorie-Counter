@@ -114,106 +114,98 @@ const char* EnumToString(
 }
 
 std::string firestore_BundledQuery::ToString(int indent) const {
-    std::string tostring_header = PrintHeader(indent, "BundledQuery", this);
-    std::string tostring_result;
+    std::string header = PrintHeader(indent, "BundledQuery", this);
+    std::string result;
 
-    tostring_result += PrintPrimitiveField("parent: ",
-        parent, indent + 1, false);
+    result += PrintPrimitiveField("parent: ", parent, indent + 1, false);
     switch (which_query_type) {
     case firestore_BundledQuery_structured_query_tag:
-        tostring_result += PrintMessageField("structured_query ",
+        result += PrintMessageField("structured_query ",
             structured_query, indent + 1, true);
         break;
     }
-    tostring_result += PrintEnumField("limit_type: ",
-        limit_type, indent + 1, false);
+    result += PrintEnumField("limit_type: ", limit_type, indent + 1, false);
 
     bool is_root = indent == 0;
-    if (!tostring_result.empty() || is_root) {
-      std::string tostring_tail = PrintTail(indent);
-      return tostring_header + tostring_result + tostring_tail;
+    if (!result.empty() || is_root) {
+      std::string tail = PrintTail(indent);
+      return header + result + tail;
     } else {
       return "";
     }
 }
 
 std::string firestore_NamedQuery::ToString(int indent) const {
-    std::string tostring_header = PrintHeader(indent, "NamedQuery", this);
-    std::string tostring_result;
+    std::string header = PrintHeader(indent, "NamedQuery", this);
+    std::string result;
 
-    tostring_result += PrintPrimitiveField("name: ", name, indent + 1, false);
-    tostring_result += PrintMessageField("bundled_query ",
+    result += PrintPrimitiveField("name: ", name, indent + 1, false);
+    result += PrintMessageField("bundled_query ",
         bundled_query, indent + 1, false);
-    tostring_result += PrintMessageField("read_time ",
-        read_time, indent + 1, false);
+    result += PrintMessageField("read_time ", read_time, indent + 1, false);
 
-    std::string tostring_tail = PrintTail(indent);
-    return tostring_header + tostring_result + tostring_tail;
+    std::string tail = PrintTail(indent);
+    return header + result + tail;
 }
 
 std::string firestore_BundledDocumentMetadata::ToString(int indent) const {
-    std::string tostring_header = PrintHeader(indent, "BundledDocumentMetadata", this);
-    std::string tostring_result;
+    std::string header = PrintHeader(indent, "BundledDocumentMetadata", this);
+    std::string result;
 
-    tostring_result += PrintPrimitiveField("name: ", name, indent + 1, false);
-    tostring_result += PrintMessageField("read_time ",
-        read_time, indent + 1, false);
-    tostring_result += PrintPrimitiveField("exists: ",
-        exists, indent + 1, false);
+    result += PrintPrimitiveField("name: ", name, indent + 1, false);
+    result += PrintMessageField("read_time ", read_time, indent + 1, false);
+    result += PrintPrimitiveField("exists: ", exists, indent + 1, false);
     for (pb_size_t i = 0; i != queries_count; ++i) {
-        tostring_result += PrintPrimitiveField("queries: ",
+        result += PrintPrimitiveField("queries: ",
             queries[i], indent + 1, true);
     }
 
-    std::string tostring_tail = PrintTail(indent);
-    return tostring_header + tostring_result + tostring_tail;
+    std::string tail = PrintTail(indent);
+    return header + result + tail;
 }
 
 std::string firestore_BundleMetadata::ToString(int indent) const {
-    std::string tostring_header = PrintHeader(indent, "BundleMetadata", this);
-    std::string tostring_result;
+    std::string header = PrintHeader(indent, "BundleMetadata", this);
+    std::string result;
 
-    tostring_result += PrintPrimitiveField("id: ", id, indent + 1, false);
-    tostring_result += PrintMessageField("create_time ",
+    result += PrintPrimitiveField("id: ", id, indent + 1, false);
+    result += PrintMessageField("create_time ",
         create_time, indent + 1, false);
-    tostring_result += PrintPrimitiveField("version: ",
-        version, indent + 1, false);
-    tostring_result += PrintPrimitiveField("total_documents: ",
+    result += PrintPrimitiveField("version: ", version, indent + 1, false);
+    result += PrintPrimitiveField("total_documents: ",
         total_documents, indent + 1, false);
-    tostring_result += PrintPrimitiveField("total_bytes: ",
+    result += PrintPrimitiveField("total_bytes: ",
         total_bytes, indent + 1, false);
 
-    std::string tostring_tail = PrintTail(indent);
-    return tostring_header + tostring_result + tostring_tail;
+    std::string tail = PrintTail(indent);
+    return header + result + tail;
 }
 
 std::string firestore_BundleElement::ToString(int indent) const {
-    std::string tostring_header = PrintHeader(indent, "BundleElement", this);
-    std::string tostring_result;
+    std::string header = PrintHeader(indent, "BundleElement", this);
+    std::string result;
 
     switch (which_element_type) {
     case firestore_BundleElement_metadata_tag:
-        tostring_result += PrintMessageField("metadata ",
-            metadata, indent + 1, true);
+        result += PrintMessageField("metadata ", metadata, indent + 1, true);
         break;
     case firestore_BundleElement_named_query_tag:
-        tostring_result += PrintMessageField("named_query ",
+        result += PrintMessageField("named_query ",
             named_query, indent + 1, true);
         break;
     case firestore_BundleElement_document_metadata_tag:
-        tostring_result += PrintMessageField("document_metadata ",
+        result += PrintMessageField("document_metadata ",
             document_metadata, indent + 1, true);
         break;
     case firestore_BundleElement_document_tag:
-        tostring_result += PrintMessageField("document ",
-            document, indent + 1, true);
+        result += PrintMessageField("document ", document, indent + 1, true);
         break;
     }
 
     bool is_root = indent == 0;
-    if (!tostring_result.empty() || is_root) {
-      std::string tostring_tail = PrintTail(indent);
-      return tostring_header + tostring_result + tostring_tail;
+    if (!result.empty() || is_root) {
+      std::string tail = PrintTail(indent);
+      return header + result + tail;
     } else {
       return "";
     }

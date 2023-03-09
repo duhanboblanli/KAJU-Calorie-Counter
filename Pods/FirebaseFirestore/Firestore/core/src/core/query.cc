@@ -68,21 +68,21 @@ bool Query::MatchesAllDocuments() const {
 }
 
 const FieldPath* Query::InequalityFilterField() const {
-  for (const Filter& filter : filters_) {
-    const FieldPath* found = filter.GetFirstInequalityField();
-    if (found) {
-      return found;
+  for (const auto& filter : filters_) {
+    if (filter.IsInequality()) {
+      return &filter.field();
     }
   }
   return nullptr;
 }
 
-absl::optional<Operator> Query::FindOpInsideFilters(
+absl::optional<Operator> Query::FindOperator(
     const std::vector<Operator>& ops) const {
   for (const auto& filter : filters_) {
-    for (const auto& field_filter : filter.GetFlattenedFilters()) {
-      if (absl::c_linear_search(ops, field_filter.op())) {
-        return field_filter.op();
+    if (filter.IsAFieldFilter()) {
+      FieldFilter relation_filter(filter);
+      if (absl::c_linear_search(ops, relation_filter.op())) {
+        return relation_filter.op();
       }
     }
   }
@@ -162,15 +162,16 @@ int32_t Query::limit() const {
 Query Query::AddingFilter(Filter filter) const {
   HARD_ASSERT(!IsDocumentQuery(), "No filter is allowed for document query");
 
-  const FieldPath* new_inequality_field = filter.GetFirstInequalityField();
+  const FieldPath* new_inequality_field = nullptr;
+  if (filter.IsInequality()) {
+    new_inequality_field = &filter.field();
+  }
   const FieldPath* query_inequality_field = InequalityFilterField();
   HARD_ASSERT(!query_inequality_field || !new_inequality_field ||
                   *query_inequality_field == *new_inequality_field,
               "Query must only have one inequality field.");
 
-  HARD_ASSERT(explicit_order_bys_.empty() || !new_inequality_field ||
-                  explicit_order_bys_[0].field() == *new_inequality_field,
-              "First orderBy must match inequality field");
+  // TODO(rsgowman): ensure first orderby must match inequality field
 
   return Query(path_, collection_group_, filters_.push_back(std::move(filter)),
                explicit_order_bys_, limit_, limit_type_, start_at_, end_at_);
