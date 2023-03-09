@@ -10,6 +10,7 @@ import UIKit
 struct ProfileCellModel{
     var profileImage: UIImage
     var name: String
-    var gender: String
+    var sex: String
     var diateryType: String
+    var height: String
 }

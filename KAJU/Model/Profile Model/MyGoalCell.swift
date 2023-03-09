@@ -10,6 +10,7 @@ import UIKit
 class MyGoalCell: UITableViewCell {
     
     static var identifier = "MyGoalCell"
+    static var myGoalSettings: MyGoalSettingsController!
     var myViewController: UIViewController!
     let backGroundColor = ThemesOptions.backGroundColor
     
@@ -96,11 +97,12 @@ class MyGoalCell: UITableViewCell {
     func setGoalCell(model: GoalCellModel){
         goalValue.text = model.goalType
         weightValue.text = model.weight
-        caloriesValue.text = model.calories
+        caloriesValue.text = model.calorie
+        MyGoalCell.myGoalSettings = MyGoalSettingsController(goalValue: model.goalType , weightValue: model.weight, caloriesValue: model.calorie)
     }
     
     @objc func tapped() {
-        myViewController.navigationController?.pushViewController(MyGoalSettingsController(), animated: true)
+        myViewController.navigationController?.pushViewController(MyGoalCell.myGoalSettings, animated: true)
     }
     
     override func layoutSubviews() {
@@ -114,9 +116,8 @@ class MyGoalCell: UITableViewCell {
         
         weight.anchor(top: goal.bottomAnchor, left: title.leftAnchor, paddingTop: 8, paddingLeft: 0, width: 65)
         weightValue.anchor(top: weight.topAnchor, left: weight.rightAnchor, right: goalValue.rightAnchor, paddingLeft: 4, paddingRight: 8)
-        
-        calories.anchor(top: weight.bottomAnchor, left: title.leftAnchor, paddingTop: 8, paddingLeft: 0, width: 75)
-        caloriesValue.anchor(top: calories.topAnchor, left: calories.rightAnchor, bottom: contentView.bottomAnchor, right: goalValue.rightAnchor,paddingTop: 5, paddingLeft: 4, paddingBottom: 16, paddingRight: 8,height: 13)
+        calories.anchor(top: weight.bottomAnchor, left: title.leftAnchor, bottom: contentView.bottomAnchor, paddingTop: 8, paddingBottom: 16, width: 75)
+        caloriesValue.anchor(top: calories.topAnchor, left: calories.rightAnchor, bottom: calories.bottomAnchor, right: goalValue.rightAnchor, paddingLeft: 4)
     }
 }
 

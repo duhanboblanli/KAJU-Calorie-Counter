@@ -7,6 +7,8 @@
 
 import UIKit
 import DropDown
+import FirebaseAuth
+import FirebaseFirestore
 
 class ProfileSettingsCell: UITableViewCell {
     
@@ -84,12 +86,14 @@ class ProfileSettingsCell: UITableViewCell {
             dropDown.show()
             dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
                 pValueLabel.text = item
+                updateDBValue(key: "sex", value: item)
             }
         case "Dieatary":
             dropDown = setDropDown(dataSource: diateries, anchorView: pSettingLabel, bottomOffset: CGPoint(x: 0, y:(pSettingLabel.plainView.bounds.height ) + 36))
             dropDown.show()
             dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
                 pValueLabel.text = item
+                updateDBValue(key: "diateryType", value: item)
             }
         case "Height":
             myViewController.present(Editor(textLabel: pSettingLabel, textValue: pValueLabel), animated: true)

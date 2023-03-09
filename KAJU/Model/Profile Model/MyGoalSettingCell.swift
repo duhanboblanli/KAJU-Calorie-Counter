@@ -7,6 +7,8 @@
 
 import UIKit
 import DropDown
+import FirebaseAuth
+import FirebaseFirestore
 
 class MyGoalSettingCell: UITableViewCell {
     
@@ -79,6 +81,7 @@ class MyGoalSettingCell: UITableViewCell {
             dropDown.show()
             dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
                 pValueLabel.text = item
+                updateDBValue(key: "goalType", value: item)
             }
         case "Starting Weight":
             myViewController.present(Editor(textLabel: pSettingLabel, textValue: pValueLabel), animated: true)
@@ -91,6 +94,7 @@ class MyGoalSettingCell: UITableViewCell {
             dropDown.show()
             dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
                 pValueLabel.text = item
+                updateDBValue(key: "activityLevel", value: item)
             }
             
         case "Weekly Goal":
@@ -110,5 +114,14 @@ class MyGoalSettingCell: UITableViewCell {
         pValueLabel.anchor(top: pSettingLabel.bottomAnchor, left: pSettingLabel.leftAnchor, bottom: contentView.bottomAnchor, right: contentView.rightAnchor)
         editButton.anchor(top: pSettingLabel.topAnchor, bottom: pSettingLabel.bottomAnchor, right: contentView.rightAnchor, paddingTop: 16, paddingRight: 24)
         iconView.anchor(top: editButton.topAnchor, left: editButton.leftAnchor, bottom: editButton.bottomAnchor, right: editButton.rightAnchor,paddingTop: 8, paddingLeft: 8, paddingBottom: 8, paddingRight: 8, width: 28, height: 28)
+    }
+}
+
+extension UIView {
+    func updateDBValue(key: String, value: Any){
+        if let currentUserEmail = Auth.auth().currentUser?.email {
+            let docRef = DatabaseSingleton.db.collection("UserInformations").document("\(currentUserEmail)")
+            docRef.updateData([key: value])
+        }
     }
 }
