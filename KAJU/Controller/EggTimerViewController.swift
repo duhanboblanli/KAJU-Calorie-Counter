@@ -25,6 +25,9 @@ class EggTimerViewController: UIViewController {
     var progressPercantage: Float = 0
     var totalTime = 0
     var hardnessType: String = ""
+    var checkSecondTap: Bool = false
+    var secondTapIndicator = 0
+    var previousHardness: String = ""
     
     //Her farklı butona basıldığında yeni bir timer oluşturulması için kullanılır
     var timer = Timer()
@@ -40,10 +43,18 @@ class EggTimerViewController: UIViewController {
         sender.shake(duration: 0.7, values: [-12.0, 12.0, -12.0, 12.0, -6.0, 6.0, -3.0, 3.0, 0.0])
         //Önceden çalışmaya devam eden timer varsa sonlandır
         timer.invalidate()
-        
+    
         // Soft, Medium, Hard
         if let hardness = sender.currentTitle {
-          
+            if (hardness == previousHardness && secondTapIndicator == 1){
+                secondTapIndicator = 0
+                checkSecondTap = true
+                updateTimer()
+                return
+            }
+            secondTapIndicator = 1
+            previousHardness = hardness
+            checkSecondTap = false
             secondsRemaining = eggTimes[hardness]!
             totalTime = eggTimes[hardness]!
             hardnessType = hardness.lowercased()
@@ -54,37 +65,43 @@ class EggTimerViewController: UIViewController {
     }
     
     @objc func updateTimer() {
-        if secondsRemaining > 0 {
-            
-            secondTitleLabel.text = ""
-            countDownLabelFall.setCountDownTime(minutes: TimeInterval(secondsRemaining))
-            countDownLabelFall.animationType = .Fall
-            countDownLabelFall.timeFormat = "mm:ss"
-            countDownLabelFall.start()
-            titleLabel.text = "Time Left:"
-            progressPercantage = 1 - (Float(secondsRemaining) / Float(totalTime))
-            progressBar.progress = progressPercantage
-            secondsRemaining -= 1
-            if secondsRemaining < 3 {
-                let url = Bundle.main.url(forResource: "beep_message_alarm", withExtension: "mp3")
+        if !checkSecondTap{
+            if secondsRemaining > 0 {
+                secondTitleLabel.text = ""
+                countDownLabelFall.setCountDownTime(minutes: TimeInterval(secondsRemaining))
+                countDownLabelFall.animationType = .Fall
+                countDownLabelFall.timeFormat = "mm:ss"
+                countDownLabelFall.start()
+                titleLabel.text = "Time Left:"
+                progressPercantage = 1 - (Float(secondsRemaining) / Float(totalTime))
+                progressBar.progress = progressPercantage
+                secondsRemaining -= 1
+                if secondsRemaining < 3 {
+                    let url = Bundle.main.url(forResource: "beep_message_alarm", withExtension: "mp3")
+                                player = try! AVAudioPlayer(contentsOf: url!)
+                                player.play()
+                    countDownLabelFall.shake(duration: 0.5, values: [-12.0, 12.0, -12.0, 12.0, -6.0, 6.0, -3.0, 3.0, 0.0])
+                    titleLabel.shake(duration: 0.5, values: [-12.0, 12.0, -12.0, 12.0, -6.0, 6.0, -3.0, 3.0, 0.0])
+                }
+            }
+            else {
+                
+                timer.invalidate()
+                titleLabel.text = "DONE!"
+                secondTitleLabel.text = "Your \(hardnessType) egg is ready. Bon appetit!"
+                progressBar.progress = 1.0
+                
+                let url = Bundle.main.url(forResource: "guitar_alarm_sound", withExtension: "wav")
                             player = try! AVAudioPlayer(contentsOf: url!)
                             player.play()
-                countDownLabelFall.shake(duration: 0.5, values: [-12.0, 12.0, -12.0, 12.0, -6.0, 6.0, -3.0, 3.0, 0.0])
-                titleLabel.shake(duration: 0.5, values: [-12.0, 12.0, -12.0, 12.0, -6.0, 6.0, -3.0, 3.0, 0.0])
             }
-            
         }
-        else {
-            
-            timer.invalidate()
-            titleLabel.text = "DONE!"
-            secondTitleLabel.text = "Your \(hardnessType) egg is ready. Bon appetit!"
-            progressBar.progress = 1.0
-            
-            let url = Bundle.main.url(forResource: "guitar_alarm_sound", withExtension: "wav")
-                        player = try! AVAudioPlayer(contentsOf: url!)
-                        player.play()
-            
+        else{
+            secondTitleLabel.text = "Note: Make sure the water is boiling before starting the timer."
+            titleLabel.text = "How do you like your eggs?"
+            progressBar.progress = 0.0
+            countDownLabelFall.pause()
+            countDownLabelFall.text = ""
         }
     }
     
