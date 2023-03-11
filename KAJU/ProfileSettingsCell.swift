@@ -7,8 +7,6 @@
 
 import UIKit
 import DropDown
-import FirebaseAuth
-import FirebaseFirestore
 
 class ProfileSettingsCell: UITableViewCell {
     
@@ -21,20 +19,19 @@ class ProfileSettingsCell: UITableViewCell {
     
     let pSettingLabel = {
         let label = UILabel()
-        label.font = UIFont(name: "Copperplate Bold", size: 25)
+        label.font = UIFont.systemFont(ofSize: 24)
         label.textColor = ThemesOptions.buttonBackGColor
         return label
     }()
     let pValueLabel = {
         let label = UILabel()
         label.textColor = .white
-        label.font = .systemFont(ofSize: 16)
         return label
     }()
     let editButton = {
         let button = UIButton()
         let size = CGFloat(42)
-        button.tintColor = ThemesOptions.figureColor
+        button.tintColor = .systemMint
         button.backgroundColor = ThemesOptions.cellBackgColor
         button.layer.cornerRadius = size / 2
         return button
@@ -86,14 +83,12 @@ class ProfileSettingsCell: UITableViewCell {
             dropDown.show()
             dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
                 pValueLabel.text = item
-                updateDBValue(key: "sex", value: item)
             }
         case "Dieatary":
             dropDown = setDropDown(dataSource: diateries, anchorView: pSettingLabel, bottomOffset: CGPoint(x: 0, y:(pSettingLabel.plainView.bounds.height ) + 36))
             dropDown.show()
             dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
                 pValueLabel.text = item
-                updateDBValue(key: "diateryType", value: item)
             }
         case "Height":
             myViewController.present(Editor(textLabel: pSettingLabel, textValue: pValueLabel), animated: true)

@@ -10,7 +10,6 @@ import UIKit
 class MyGoalCell: UITableViewCell {
     
     static var identifier = "MyGoalCell"
-    static var myGoalSettings: MyGoalSettingsController!
     var myViewController: UIViewController!
     let backGroundColor = ThemesOptions.backGroundColor
     
@@ -62,7 +61,7 @@ class MyGoalCell: UITableViewCell {
     let editButton = {
         let button = UIButton()
         button.setTitle("EDIT", for: .normal)
-        button.titleLabel?.font = .boldSystemFont(ofSize: 16)
+        button.titleLabel?.makeLargeText(fontSize: 16)
         button.layer.cornerRadius = 10
         button.backgroundColor = ThemesOptions.buttonBackGColor
         return button
@@ -97,27 +96,24 @@ class MyGoalCell: UITableViewCell {
     func setGoalCell(model: GoalCellModel){
         goalValue.text = model.goalType
         weightValue.text = model.weight
-        caloriesValue.text = model.calorie
-        MyGoalCell.myGoalSettings = MyGoalSettingsController(goalValue: model.goalType , weightValue: model.weight, caloriesValue: model.calorie)
+        caloriesValue.text = model.calories
     }
     
     @objc func tapped() {
-        myViewController.navigationController?.pushViewController(MyGoalCell.myGoalSettings, animated: true)
+        myViewController.navigationController?.pushViewController(MyGoalSettingsController(), animated: true)
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        title.anchor(top: contentView.topAnchor, left: contentView.leftAnchor, paddingTop: 16 ,paddingLeft: 24)
+        title.anchor(top: contentView.topAnchor, left: contentView.leftAnchor, paddingTop: 16 ,paddingLeft: 16)
         editButton.anchor(top: title.topAnchor, bottom: title.bottomAnchor, right: contentView.rightAnchor, paddingRight: 16)
         editButton.widthAnchor.constraint(equalToConstant: 64).isActive = true
-        
-        goal.anchor(top: title.bottomAnchor, left: title.leftAnchor, paddingTop: 16, paddingLeft: 0, width: 45)
+        goal.anchor(top: title.bottomAnchor, left: title.leftAnchor, paddingTop: 16, paddingLeft: 8, width: 45)
         goalValue.anchor(top: goal.topAnchor, left: goal.rightAnchor, right: contentView.rightAnchor, paddingLeft: 4, paddingRight: 8)
-        
-        weight.anchor(top: goal.bottomAnchor, left: title.leftAnchor, paddingTop: 8, paddingLeft: 0, width: 65)
+        weight.anchor(top: goal.bottomAnchor, left: title.leftAnchor, paddingTop: 8, paddingLeft: 8, width: 65)
         weightValue.anchor(top: weight.topAnchor, left: weight.rightAnchor, right: goalValue.rightAnchor, paddingLeft: 4, paddingRight: 8)
-        calories.anchor(top: weight.bottomAnchor, left: title.leftAnchor, bottom: contentView.bottomAnchor, paddingTop: 8, paddingBottom: 16, width: 75)
-        caloriesValue.anchor(top: calories.topAnchor, left: calories.rightAnchor, bottom: calories.bottomAnchor, right: goalValue.rightAnchor, paddingLeft: 4)
+        calories.anchor(top: weight.bottomAnchor, left: title.leftAnchor, paddingTop: 8, paddingLeft: 8, width: 75)
+        caloriesValue.anchor(top: calories.topAnchor, left: calories.rightAnchor, bottom: contentView.bottomAnchor, right: goalValue.rightAnchor, paddingLeft: 4, paddingBottom: 16, paddingRight: 8)
     }
 }
 

@@ -15,20 +15,19 @@ class AccountSettingCell: UITableViewCell {
     
     let pSettingLabel = {
         let label = UILabel()
-        label.font = UIFont(name: "Copperplate Bold", size: 25)
+        label.font = UIFont.systemFont(ofSize: 24)
         label.textColor = ThemesOptions.buttonBackGColor
         return label
     }()
     let pValueLabel = {
         let label = UILabel()
         label.textColor = .white
-        label.font = .systemFont(ofSize: 16)
         return label
     }()
     let editButton = {
         let button = UIButton()
         let size = CGFloat(42)
-        button.tintColor = ThemesOptions.figureColor
+        button.tintColor = .systemMint
         button.backgroundColor = ThemesOptions.cellBackgColor
         button.layer.cornerRadius = size / 2
         return button
@@ -71,7 +70,6 @@ class AccountSettingCell: UITableViewCell {
             pValueLabel.accessibilityIdentifier = model.textValue
             pValueLabel.text = String(repeating: "* ", count: model.textValue.count)
         }else{
-            editButton.isHidden = true
             pValueLabel.text = model.textValue
         }
     }

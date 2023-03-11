@@ -1,40 +1,36 @@
 //
-//  ProfileSettingsCell.swift
+//  MyGoalSettingCell.swift
 //  KAJU
 //
-//  Created by kadir on 22.02.2023.
+//  Created by kadir on 28.02.2023.
 //
 
 import UIKit
 import DropDown
-import FirebaseAuth
-import FirebaseFirestore
 
-class ProfileSettingsCell: UITableViewCell {
+class MyGoalSettingCell: UITableViewCell {
     
-    static let identifier = "ProfileSettingsCell"
+    static let identifier = "MyGoalSettingCell"
     var myViewController: UIViewController!
     var dropDown = ThemesOptions.dropDown
-    let genders = ["Male", "Female"]
-    let diateries = ["Vegatarian", "Vegan", "Classic"]
+    let activityLevel = ["Low", "Moderate", "High", "Very High"]
+    let goal = ["Lose Weight", "Build Muscle", "Maintain Weight"]
     let cellBackgColor = ThemesOptions.cellBackgColor
     
     let pSettingLabel = {
         let label = UILabel()
-        label.font = UIFont(name: "Copperplate Bold", size: 25)
+        label.font = UIFont.systemFont(ofSize: 24)
         label.textColor = ThemesOptions.buttonBackGColor
         return label
     }()
     let pValueLabel = {
         let label = UILabel()
         label.textColor = .white
-        label.font = .systemFont(ofSize: 16)
         return label
     }()
     let editButton = {
         let button = UIButton()
         let size = CGFloat(42)
-        button.tintColor = ThemesOptions.figureColor
         button.backgroundColor = ThemesOptions.cellBackgColor
         button.layer.cornerRadius = size / 2
         return button
@@ -47,7 +43,6 @@ class ProfileSettingsCell: UITableViewCell {
         return imageView
     }()
     
-
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         linkViews()
@@ -76,34 +71,41 @@ class ProfileSettingsCell: UITableViewCell {
         pValueLabel.text = "\(model.textValue)"
     }
     
-    @objc func edit(){
-
+    @objc func edit(){        
         switch editButton.accessibilityIdentifier{
-        case "Name":
-            myViewController.present(Editor(textLabel: pSettingLabel, textValue: pValueLabel), animated: true)
-        case "Gender":
-            dropDown = setDropDown(dataSource: genders, anchorView: pSettingLabel, bottomOffset: CGPoint(x: 0, y:(pSettingLabel.plainView.bounds.height ) + 36))
+        case "Goal":
+            dropDown = setDropDown(dataSource: goal, anchorView: pSettingLabel, bottomOffset: CGPoint(x: 0, y:(pSettingLabel.plainView.bounds.height ) + 36))
             dropDown.show()
             dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
                 pValueLabel.text = item
-                updateDBValue(key: "sex", value: item)
             }
-        case "Dieatary":
-            dropDown = setDropDown(dataSource: diateries, anchorView: pSettingLabel, bottomOffset: CGPoint(x: 0, y:(pSettingLabel.plainView.bounds.height ) + 36))
+        case "Starting Weight":
+            myViewController.present(Editor(textLabel: pSettingLabel, textValue: pValueLabel), animated: true)
+            
+        case "Goal Weight":
+            myViewController.present(Editor(textLabel: pSettingLabel, textValue: pValueLabel), animated: true)
+            
+        case "Activity Level":
+            dropDown = setDropDown(dataSource: activityLevel, anchorView: pSettingLabel, bottomOffset: CGPoint(x: 0, y:(pSettingLabel.plainView.bounds.height ) + 36))
             dropDown.show()
             dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
                 pValueLabel.text = item
-                updateDBValue(key: "diateryType", value: item)
             }
-        case "Height":
+            
+        case "Weekly Goal":
             myViewController.present(Editor(textLabel: pSettingLabel, textValue: pValueLabel), animated: true)
+
+        case "Calory Goal":
+            myViewController.present(Editor(textLabel: pSettingLabel, textValue: pValueLabel), animated: true)
+
         default:
             return
         }
      }
      
     override func layoutSubviews() {
-        pSettingLabel.anchor(top: contentView.topAnchor, left: contentView.leftAnchor, bottom: pValueLabel.topAnchor, paddingTop: 16, paddingLeft: 16, paddingBottom: 8)
+        pSettingLabel.anchor(top: contentView.topAnchor, left: contentView.leftAnchor, bottom: pValueLabel.topAnchor, paddingTop: 16,
+            paddingLeft: 16, paddingBottom: 8)
         pValueLabel.anchor(top: pSettingLabel.bottomAnchor, left: pSettingLabel.leftAnchor, bottom: contentView.bottomAnchor, right: contentView.rightAnchor)
         editButton.anchor(top: pSettingLabel.topAnchor, bottom: pSettingLabel.bottomAnchor, right: contentView.rightAnchor, paddingTop: 16, paddingRight: 24)
         iconView.anchor(top: editButton.topAnchor, left: editButton.leftAnchor, bottom: editButton.bottomAnchor, right: editButton.rightAnchor,paddingTop: 8, paddingLeft: 8, paddingBottom: 8, paddingRight: 8, width: 28, height: 28)

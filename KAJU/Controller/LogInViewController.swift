@@ -28,6 +28,7 @@ class LogInViewController: UIViewController {
     @IBAction func loginPressed(_ sender: UIButton) {
         
         if let email = emailTextField.text, let password = passwordTextField.text {
+            UserDefaults.standard.set(password, forKey: email)
             Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
                 if let e = error {
                     self.errorTextField.text = e.localizedDescription

@@ -6,20 +6,17 @@
 //
 
 import UIKit
-import FirebaseAuth
 
 class ProfileCell: UITableViewCell {
     
     var myViewController: UIViewController!
-    static var myProfileSettings: UIViewController!
     var alertPhotoPicker: PhotoPicker!
     static var identifier = "ProfileCell"
-    private var profilePrawValue = UserDefaults.standard.value(forKey: "profileP\(Auth.auth().currentUser?.email ?? "")")
     
     let profileImage: UIImageView = {
         let imageView = UIImageView()
-        let size = CGFloat(150)
         imageView.translatesAutoresizingMaskIntoConstraints = false
+        let size = CGFloat(150)
         imageView.layer.cornerRadius = CGFloat(size / 2)
         imageView.layer.borderWidth = 3
         imageView.anchor(width: size, height: size)
@@ -31,7 +28,7 @@ class ProfileCell: UITableViewCell {
     let backGroundView = {
         let view = UIView()
         view.layer.cornerRadius = 20
-        view.backgroundColor = ThemesOptions.cellBackgColor
+        view.backgroundColor = ThemesOptions.cellBackgColor.withAlphaComponent(0.6)
         return view
     }()
     
@@ -193,7 +190,6 @@ class ProfileCell: UITableViewCell {
     
     func configureView(){
         editPhotoButton.addTarget(self, action: #selector(showOpt), for: .touchUpInside)
-        //profileImage.image = UIImagePickerController.InfoKey[]
     }
     
     @objc func showOpt(){
@@ -203,9 +199,8 @@ class ProfileCell: UITableViewCell {
     func setProfile(model: ProfileCellModel){
         profileImage.image = model.profileImage
         nameValue.text = model.name
-        genderLValue.text = model.sex
+        genderLValue.text = model.gender
         diateryValue.text = model.diateryType
-        ProfileCell.myProfileSettings = ProfileSettingsController(nameValue: model.name, genderValue: model.sex, diaterValue: model.diateryType, heightValue: model.height)
         
         switch genderLValue.text{
         case "Male":
