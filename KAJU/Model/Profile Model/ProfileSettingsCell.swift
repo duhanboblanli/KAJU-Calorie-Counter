@@ -16,7 +16,7 @@ class ProfileSettingsCell: UITableViewCell {
     var myViewController: UIViewController!
     var dropDown = ThemesOptions.dropDown
     let genders = ["Male", "Female"]
-    let diateries = ["Vegatarian", "Vegan", "Classic"]
+    let diateries = ["Vegetarian", "Vegan", "Classic"]
     let cellBackgColor = ThemesOptions.cellBackgColor
     
     let pSettingLabel = {
