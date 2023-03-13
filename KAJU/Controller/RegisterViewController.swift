@@ -35,6 +35,7 @@ class RegisterViewController: UIViewController {
                     self.errorTextField.text = e.localizedDescription
                 }else {
                     //Navigate to the nextViewController
+                    UserDefaults.standard.set(password, forKey: email)
                     self.performSegue(withIdentifier: "RegisterToCalculate", sender: self)
                 }
             }
