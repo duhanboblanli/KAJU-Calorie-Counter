@@ -201,12 +201,15 @@ class ProfileCell: UITableViewCell {
             docRef.getDocument { (document, error) in
                 if let document = document, document.exists {
                     if let data = document.data() {
-                        guard let url = data["profileImgURL"] else{ return }
-                        self.profileImage.sd_setImage(with: self.profileRef.reference(withPath: url as! String), placeholderImage: UIImage(named: "defaultProfilePhoto"))
+                        if let url = data["profileImgURL"]{
+                            self.profileImage.sd_setImage(with: self.profileRef.reference(withPath: url as! String), placeholderImage: UIImage(named: "defaultProfilePhoto"))
+                         }else{
+                             self.profileImage.image = UIImage(named: "defaultProfilePhoto")
+                         }
                     }
                 }
             }
-        } else { profileImage.image = UIImage(named: "defaultProfilePhoto") }
+        }
     }
     
     @objc func showOpt(){

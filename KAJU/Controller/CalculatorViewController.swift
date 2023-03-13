@@ -104,7 +104,7 @@ class CalculatorViewController: UIViewController {
         let calorieFloat = Float(calorie) ?? 0.0
         let calorieInt = Int(calorieFloat)
         if let currentUserEmail = Auth.auth().currentUser?.email {
-             db.collection("UserInformations").document("\(currentUserEmail)").updateData([
+             db.collection("UserInformations").document("\(currentUserEmail)").setData([
                 "UserEmail": currentUserEmail,
                 "calorie": calorieInt,
                 "sex": sex,
