@@ -7,14 +7,17 @@
 
 import UIKit
 import FirebaseAuth
+import FirebaseStorageUI
 
 class ProfileCell: UITableViewCell {
     
+    let profileRef = DatabaseSingleton.storage
+    let db = DatabaseSingleton.db
+    private var userEmail = Auth.auth().currentUser?.email
     var myViewController: UIViewController!
     static var myProfileSettings: UIViewController!
     var alertPhotoPicker: PhotoPicker!
     static var identifier = "ProfileCell"
-    private var profilePrawValue = UserDefaults.standard.value(forKey: "profileP\(Auth.auth().currentUser?.email ?? "")")
     
     let profileImage: UIImageView = {
         let imageView = UIImageView()
@@ -193,7 +196,17 @@ class ProfileCell: UITableViewCell {
     
     func configureView(){
         editPhotoButton.addTarget(self, action: #selector(showOpt), for: .touchUpInside)
-        //profileImage.image = UIImagePickerController.InfoKey[]
+        if let email = userEmail {
+            let docRef = db.collection("UserInformations").document("\(email)")
+            docRef.getDocument { (document, error) in
+                if let document = document, document.exists {
+                    if let data = document.data() {
+                        guard let url = data["profileImgURL"] else{ return }
+                        self.profileImage.sd_setImage(with: self.profileRef.reference(withPath: url as! String), placeholderImage: UIImage(named: "defaultProfilePhoto"))
+                    }
+                }
+            }
+        } else { profileImage.image = UIImage(named: "defaultProfilePhoto") }
     }
     
     @objc func showOpt(){
@@ -201,7 +214,6 @@ class ProfileCell: UITableViewCell {
     }
     
     func setProfile(model: ProfileCellModel){
-        profileImage.image = model.profileImage
         nameValue.text = model.name
         genderLValue.text = model.sex
         diateryValue.text = model.diateryType
@@ -236,31 +248,95 @@ class ProfileCell: UITableViewCell {
     }
     
     override func layoutSubviews() {
-        backGroundView.anchor(top: profileImage.centerYAnchor, left: contentView.leftAnchor, bottom: contentView.bottomAnchor, right: contentView.rightAnchor)
+        backGroundView.anchor(top: profileImage.centerYAnchor,
+                              left: contentView.leftAnchor,
+                              bottom: contentView.bottomAnchor,
+                              right: contentView.rightAnchor)
+        
         profileImage.anchor(top: contentView.topAnchor)
+        
+        editPhotoButton.anchor(bottom: profileImage.bottomAnchor,
+                               right: profileImage.rightAnchor,
+                               paddingRight: 8)
+        
+        photoImage.anchor(top: editPhotoButton.topAnchor,
+                          left: editPhotoButton.leftAnchor,
+                          bottom: editPhotoButton.bottomAnchor,
+                          right: editPhotoButton.rightAnchor,
+                          paddingTop: 8,
+                          paddingLeft: 8,
+                          paddingBottom: 8,
+                          paddingRight: 8,
+                          width: 28,
+                          height: 28)
+        
+        nameContainer.anchor(top: profileImage.bottomAnchor,
+                             left: contentView.leftAnchor,
+                             paddingTop: 16,
+                             paddingLeft: 32)
+        
+        nameIcon.anchor(top: nameContainer.topAnchor,
+                        left: nameContainer.leftAnchor,
+                        paddingTop: 2,
+                        paddingLeft: 2)
+        
+        nameLabel.anchor(top: nameContainer.topAnchor,
+                         left: nameIcon.rightAnchor,
+                         paddingLeft: 4)
+        
+        nameValue.anchor(top: nameContainer.topAnchor,
+                         left: nameContainer.rightAnchor,
+                         bottom: nameContainer.bottomAnchor,
+                         right: contentView.rightAnchor,
+                         paddingLeft: 0,
+                         paddingRight: 32)
+        
+        genderContainer.anchor(top: nameContainer.bottomAnchor,
+                               left: nameContainer.leftAnchor,
+                               paddingTop: 8)
+        genderIcon.anchor(top: genderContainer.topAnchor,
+                          left: genderContainer.leftAnchor,
+                          paddingTop: 2,
+                          paddingLeft: 2)
+        
+        genderLabel.anchor(left: genderIcon.rightAnchor,
+                           paddingLeft: 4)
+        
+        genderLValue.anchor(top: genderContainer.topAnchor,
+                            left: genderContainer.rightAnchor,
+                            bottom: genderContainer.bottomAnchor,
+                            right: contentView.rightAnchor,
+                            paddingRight: 32)
+        
+        diateryContainer.anchor(top: genderContainer.bottomAnchor,
+                                left: nameContainer.leftAnchor,
+                                bottom: contentView.bottomAnchor,
+                                paddingTop: 8,
+                                paddingBottom: 16)
+        
+        diateryIcon.anchor(top: diateryContainer.topAnchor,
+                           left: diateryContainer.leftAnchor,
+                           paddingTop: 2,
+                           paddingLeft: 2)
+        
+        diateryLabel.anchor(left: diateryIcon.rightAnchor,
+                            paddingLeft: 4)
+        
+        diateryValue.anchor(top: diateryContainer.topAnchor,
+                            left: diateryContainer.rightAnchor,
+                            bottom: diateryContainer.bottomAnchor,
+                            right: contentView.rightAnchor,
+                            paddingRight: 32)
+        
         profileImage.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
-        editPhotoButton.anchor(bottom: profileImage.bottomAnchor, right: profileImage.rightAnchor, paddingRight: 8)
-        photoImage.anchor(top: editPhotoButton.topAnchor, left: editPhotoButton.leftAnchor, bottom: editPhotoButton.bottomAnchor, right: editPhotoButton.rightAnchor, paddingTop: 8, paddingLeft: 8, paddingBottom: 8, paddingRight: 8, width: 28, height: 28)
-        nameContainer.anchor(top: profileImage.bottomAnchor, left: contentView.leftAnchor, paddingTop: 16, paddingLeft: 32)
-        nameIcon.anchor(top: nameContainer.topAnchor, left: nameContainer.leftAnchor, paddingTop: 2, paddingLeft: 2)
         nameIcon.centerYAnchor.constraint(equalTo: nameContainer.centerYAnchor).isActive = true
-        nameLabel.anchor(top: nameContainer.topAnchor, left: nameIcon.rightAnchor, paddingLeft: 4)
         nameLabel.centerYAnchor.constraint(equalTo: nameContainer.centerYAnchor).isActive = true
-        nameValue.anchor(top: nameContainer.topAnchor, left: nameContainer.rightAnchor, bottom: nameContainer.bottomAnchor, right: contentView.rightAnchor, paddingLeft: 0, paddingRight: 32)
         nameValue.centerYAnchor.constraint(equalTo: nameContainer.centerYAnchor).isActive = true
-        genderContainer.anchor(top: nameContainer.bottomAnchor, left: nameContainer.leftAnchor, paddingTop: 8)
-        genderIcon.anchor(top: genderContainer.topAnchor, left: genderContainer.leftAnchor, paddingTop: 2, paddingLeft: 2)
         genderIcon.centerYAnchor.constraint(equalTo: genderContainer.centerYAnchor).isActive = true
-        genderLabel.anchor(left: genderIcon.rightAnchor, paddingLeft: 4)
         genderLabel.centerYAnchor.constraint(equalTo: genderContainer.centerYAnchor).isActive = true
-        genderLValue.anchor(top: genderContainer.topAnchor, left: genderContainer.rightAnchor, bottom: genderContainer.bottomAnchor,right: contentView.rightAnchor, paddingRight: 32)
         genderLValue.centerYAnchor.constraint(equalTo: genderContainer.centerYAnchor).isActive = true
-        diateryContainer.anchor(top: genderContainer.bottomAnchor, left: nameContainer.leftAnchor, bottom: contentView.bottomAnchor, paddingTop: 8, paddingBottom: 16)
-        diateryIcon.anchor(top: diateryContainer.topAnchor, left: diateryContainer.leftAnchor, paddingTop: 2, paddingLeft: 2)
         diateryIcon.centerYAnchor.constraint(equalTo: diateryContainer.centerYAnchor).isActive = true
-        diateryLabel.anchor(left: diateryIcon.rightAnchor, paddingLeft: 4)
         diateryLabel.centerYAnchor.constraint(equalTo: diateryContainer.centerYAnchor).isActive = true
-        diateryValue.anchor(top: diateryContainer.topAnchor, left: diateryContainer.rightAnchor, bottom: diateryContainer.bottomAnchor, right: contentView.rightAnchor, paddingRight: 32)
         diateryValue.centerYAnchor.constraint(equalTo: diateryContainer.centerYAnchor).isActive = true
     }
 }
@@ -270,3 +346,4 @@ extension UILabel {
         self.font = UIFont.systemFont(ofSize: CGFloat(fontSize))
     }
 }
+

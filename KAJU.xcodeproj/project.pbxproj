@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		13A1FD5129BF261800FF2485 /* PasswordEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A1FD5029BF261800FF2485 /* PasswordEditor.swift */; };
 		13F883F329B8B10500BBCF25 /* DatabaseSingleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13F883F229B8B10500BBCF25 /* DatabaseSingleton.swift */; };
 		2D850C3F299BFA6F00A525F0 /* FoodModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D850C3E299BFA6F00A525F0 /* FoodModel.swift */; };
 		2D850C41299BFA8E00A525F0 /* FoodApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D850C40299BFA8E00A525F0 /* FoodApiService.swift */; };
@@ -80,6 +81,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		13A1FD5029BF261800FF2485 /* PasswordEditor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasswordEditor.swift; sourceTree = "<group>"; };
 		13F883F229B8B10500BBCF25 /* DatabaseSingleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseSingleton.swift; sourceTree = "<group>"; };
 		19C1B6341DC89EDF1E04D0D4 /* Pods-KAJU.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KAJU.release.xcconfig"; path = "Target Support Files/Pods-KAJU/Pods-KAJU.release.xcconfig"; sourceTree = "<group>"; };
 		2D850C3E299BFA6F00A525F0 /* FoodModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodModel.swift; sourceTree = "<group>"; };
@@ -336,6 +338,7 @@
 				FEC1A96529B787EE00342AF6 /* Editor.swift */,
 				FEC1A96929B787F400342AF6 /* MyGoalSettingsController.swift */,
 				FEC1A96329B787EA00342AF6 /* PhotoPicker.swift */,
+				13A1FD5029BF261800FF2485 /* PasswordEditor.swift */,
 				FEC1A96A29B787F500342AF6 /* ProfileSettingsController.swift */,
 				FEC1A96829B787F200342AF6 /* ProfileViewController.swift */,
 				FEC1A96729B787F100342AF6 /* SettingsViewController.swift */,
@@ -496,6 +499,7 @@
 				FE5E92AB298D1C5400947F7A /* BMI.swift in Sources */,
 				FE5DEF5D299BC5AC00F13802 /* FoodsViewController.swift in Sources */,
 				FE160F5529A28A6400876278 /* RecipeViewModel.swift in Sources */,
+				13A1FD5129BF261800FF2485 /* PasswordEditor.swift in Sources */,
 				FEC1A95429B7877700342AF6 /* ProfileCellModel.swift in Sources */,
 				FE160F5329A2876D00876278 /* RecipeApiService.swift in Sources */,
 				FEC7BF5E29A3F147001B1EC9 /* RecipeTableViewCell.swift in Sources */,

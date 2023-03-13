@@ -163,7 +163,7 @@ extension ProfileViewController {
                            let height = data["height"]{
                             let weightWrapped = weight as? Double ?? 0
                             self.goal = GoalCellModel(goalType: "\(goalType)", weight: String(format: "%.2f", weightWrapped), calorie: "\(calorie)")
-                            self.profile = ProfileCellModel(profileImage: UIImage(named: "defaultProfilePhoto") ?? UIImage(), name: "Enter a name", sex: "\(sex)", diateryType: "Vegan", height: "\(height)")
+                            self.profile = ProfileCellModel(profileImage: UIImage(named: "defaultProfilePhoto") ?? UIImage(), name: data["name"] as? String ?? "Enter a name", sex: "\(sex)", diateryType: data["diateryType"] as? String ?? "", height: "\(height)")
                             self.table.reloadData()
                         }
                     }

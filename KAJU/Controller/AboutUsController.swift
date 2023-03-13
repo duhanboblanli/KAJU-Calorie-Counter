@@ -180,27 +180,79 @@ class AboutUsController: UIViewController{
     }
     
     override func viewDidLayoutSubviews() {
-        scrollView.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor)
-        containerView.anchor(top: scrollView.contentLayoutGuide.topAnchor, left: scrollView.contentLayoutGuide.leftAnchor, bottom: scrollView.contentLayoutGuide.bottomAnchor, right: scrollView.contentLayoutGuide.rightAnchor, width: view.frame.width)
-        aboutUsImageView.anchor(top: containerView.topAnchor, left: containerView.leftAnchor, right: containerView.rightAnchor)
-        descTitle.anchor(top: aboutUsImageView.bottomAnchor, left: aboutUsImageView.leftAnchor, bottom: aboutUsDesc.topAnchor, right: aboutUsDesc.rightAnchor, paddingTop: 16, paddingLeft: 19)
         
-        aboutUsDesc.anchor(top: descTitle.bottomAnchor, left: containerView.leftAnchor, right: containerView.rightAnchor, paddingLeft: 16, paddingRight: 16)
-        socialMediaContainer.anchor(top: aboutUsDesc.bottomAnchor, paddingTop: 32)
+        scrollView.anchor(top: view.topAnchor,
+                          left: view.leftAnchor,
+                          bottom: view.bottomAnchor,
+                          right: view.rightAnchor)
+        
+        containerView.anchor(top: scrollView.contentLayoutGuide.topAnchor,
+                             left: scrollView.contentLayoutGuide.leftAnchor,
+                             bottom: scrollView.contentLayoutGuide.bottomAnchor,
+                             right: scrollView.contentLayoutGuide.rightAnchor,
+                             width: view.frame.width)
+        
+        aboutUsImageView.anchor(top: containerView.topAnchor,
+                                left: containerView.leftAnchor,
+                                right: containerView.rightAnchor)
+        
+        descTitle.anchor(top: aboutUsImageView.bottomAnchor,
+                         left: aboutUsImageView.leftAnchor,
+                         bottom: aboutUsDesc.topAnchor,
+                         right: aboutUsDesc.rightAnchor,
+                         paddingTop: 16,
+                         paddingLeft: 19)
+        
+        aboutUsDesc.anchor(top: descTitle.bottomAnchor,
+                           left: containerView.leftAnchor,
+                           right: containerView.rightAnchor,
+                           paddingLeft: 16, paddingRight: 16)
+        
+        socialMediaContainer.anchor(top: aboutUsDesc.bottomAnchor,
+                                    paddingTop: 32)
+        
+        facebookButton.anchor(left: socialMediaContainer.leftAnchor,
+                              paddingLeft: 16)
+        
+        instagramButton.anchor(left: facebookButton.rightAnchor,
+                               paddingLeft: 32)
+        
+        twitterButton.anchor(left: instagramButton.rightAnchor,
+                             paddingLeft: 32)
+        
+        discordButton.anchor(left: twitterButton.rightAnchor,
+                             right: socialMediaContainer.rightAnchor,
+                             paddingLeft: 32,
+                             paddingRight: 16)
+        
         socialMediaContainer.centerXAnchor.constraint(equalTo: containerView.centerXAnchor).isActive = true
-        facebookButton.anchor(left: socialMediaContainer.leftAnchor, paddingLeft: 16)
         facebookButton.centerYAnchor.constraint(equalTo: socialMediaContainer.centerYAnchor).isActive = true
-        instagramButton.anchor(left: facebookButton.rightAnchor, paddingLeft: 32)
         instagramButton.centerYAnchor.constraint(equalTo: socialMediaContainer.centerYAnchor).isActive = true
-        twitterButton.anchor(left: instagramButton.rightAnchor, paddingLeft: 32)
         twitterButton.centerYAnchor.constraint(equalTo: socialMediaContainer.centerYAnchor).isActive = true
-        discordButton.anchor(left: twitterButton.rightAnchor, right: socialMediaContainer.rightAnchor, paddingLeft: 32, paddingRight: 16)
         discordButton.centerYAnchor.constraint(equalTo: socialMediaContainer.centerYAnchor).isActive = true
-        appVersionContainer.anchor(top: socialMediaContainer.bottomAnchor, left: containerView.leftAnchor, right: containerView.rightAnchor, paddingTop: 32)
-        appVersionLabel.anchor(top: appVersionContainer.topAnchor, left: appVersionContainer.leftAnchor, paddingLeft: 24)
-        appVersionValue.anchor(top: appVersionLabel.bottomAnchor, left: appVersionLabel.leftAnchor, bottom: appVersionContainer.bottomAnchor)
-        policyButton.anchor(top: appVersionContainer.bottomAnchor, left: containerView.leftAnchor, right: containerView.rightAnchor, paddingTop: 16)
-        spacer.anchor(top: policyButton.bottomAnchor, left: containerView.leftAnchor, bottom: containerView.bottomAnchor, right: containerView.rightAnchor)
+        
+        appVersionContainer.anchor(top: socialMediaContainer.bottomAnchor,
+                                   left: containerView.leftAnchor,
+                                   right: containerView.rightAnchor,
+                                   paddingTop: 32)
+        
+        appVersionLabel.anchor(top: appVersionContainer.topAnchor,
+                               left: appVersionContainer.leftAnchor,
+                               paddingLeft: 24)
+        
+        appVersionValue.anchor(top: appVersionLabel.bottomAnchor,
+                               left: appVersionLabel.leftAnchor,
+                               bottom: appVersionContainer.bottomAnchor)
+        
+        policyButton.anchor(top: appVersionContainer.bottomAnchor,
+                            left: containerView.leftAnchor,
+                            right: containerView.rightAnchor,
+                            paddingTop: 16)
+        
+        spacer.anchor(top: policyButton.bottomAnchor,
+                      left: containerView.leftAnchor,
+                      bottom: containerView.bottomAnchor,
+                      right: containerView.rightAnchor)
     }
 }
 
