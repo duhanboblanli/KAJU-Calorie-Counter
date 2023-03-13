@@ -86,10 +86,8 @@ class AccountSettingCell: UITableViewCell {
     
     @objc func edit(){
         switch editButton.accessibilityIdentifier {
-        case "Email Adress":
-            myViewController.present(Editor(textLabel: pSettingLabel, textValue: pValueLabel), animated: true)
         case "Password":
-            myViewController.present(Editor(textLabel: pSettingLabel, textValue: pValueLabel), animated: true)
+            myViewController.present(PasswordEditor(textLabel: pSettingLabel, textValue: pValueLabel), animated: true)
         default:
             return
         }

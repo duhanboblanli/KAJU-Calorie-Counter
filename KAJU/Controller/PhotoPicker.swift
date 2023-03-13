@@ -7,9 +7,13 @@
 
 import UIKit
 import FirebaseAuth
+import FirebaseStorageUI
 
 class PhotoPicker: UIViewController{
     
+    let profileRef = DatabaseSingleton.storage
+    let db = DatabaseSingleton.db
+    private var userEmail = Auth.auth().currentUser?.email
     let cellBackgColor = ThemesOptions.cellBackgColor
     let backGroundColor = ThemesOptions.backGroundColor
     var imageView: UIImageView!
@@ -183,31 +187,68 @@ class PhotoPicker: UIViewController{
                                           handler: {(_: UIAlertAction!) in
                 //Sign out action
                 self.imageView.image = self.defaultPersonImage.image
+                guard let image = UIImage(named: "defaultProfilePhoto") else { return }
+                self.uploadPhoto(image: image)
                 self.dismissAlert()
             }))
             self.present(alert, animated: true, completion: nil)
         }
     
     func configureLayout(){
-        galleryButton.anchor(top: containerView.topAnchor, bottom: galleryLabel.topAnchor, right: containerView.centerXAnchor, paddingTop: 16, paddingBottom: 4, paddingRight: 32)
-        galleryIcon.anchor(top: galleryButton.topAnchor, left: galleryButton.leftAnchor, bottom: galleryButton.bottomAnchor, right: galleryButton.rightAnchor, paddingTop: 8, paddingLeft: 8, paddingBottom: 8, paddingRight: 8)
-        galleryLabel.anchor(top: galleryButton.bottomAnchor, bottom: containerView.bottomAnchor, paddingBottom: 8)
+        
+        galleryButton.anchor(top: containerView.topAnchor,
+                             bottom: galleryLabel.topAnchor,
+                             right: containerView.centerXAnchor,
+                             paddingTop: 16,
+                             paddingBottom: 4,
+                             paddingRight: 32)
+        
+        galleryIcon.anchor(top: galleryButton.topAnchor,
+                           left: galleryButton.leftAnchor,
+                           bottom: galleryButton.bottomAnchor,
+                           right: galleryButton.rightAnchor,
+                           paddingTop: 8,
+                           paddingLeft: 8,
+                           paddingBottom: 8,
+                           paddingRight: 8)
+        
+        galleryLabel.anchor(top: galleryButton.bottomAnchor,
+                            bottom: containerView.bottomAnchor,
+                            paddingBottom: 8)
+        cameraButton.anchor(top: galleryButton.topAnchor,
+                            left: containerView.centerXAnchor,
+                            bottom: cameraLabel.topAnchor,
+                            paddingLeft: 32,
+                            paddingBottom: 4)
+        
+        cameraIcon.anchor(top: cameraButton.topAnchor,
+                          left: cameraButton.leftAnchor,
+                          bottom: cameraButton.bottomAnchor,
+                          right: cameraButton.rightAnchor,
+                          paddingTop: 8,
+                          paddingLeft: 8,
+                          paddingBottom: 8,
+                          paddingRight: 8)
+        
+        cameraLabel.anchor(top: cameraButton.bottomAnchor,
+                           bottom: galleryLabel.bottomAnchor)
+        
+        deletePPButton.anchor(top: containerView.topAnchor,
+                              right: containerView.rightAnchor,
+                              paddingTop: 12,
+                              paddingRight: 12)
+        
         galleryLabel.centerXAnchor.constraint(equalTo: galleryButton.centerXAnchor).isActive = true
-        cameraButton.anchor(top: galleryButton.topAnchor, left: containerView.centerXAnchor, bottom: cameraLabel.topAnchor, paddingLeft: 32, paddingBottom: 4)
-        cameraIcon.anchor(top: cameraButton.topAnchor,  left: cameraButton.leftAnchor, bottom: cameraButton.bottomAnchor, right: cameraButton.rightAnchor, paddingTop: 8, paddingLeft: 8, paddingBottom: 8, paddingRight: 8)
-        cameraLabel.anchor(top: cameraButton.bottomAnchor, bottom: galleryLabel.bottomAnchor)
         cameraLabel.centerXAnchor.constraint(equalTo: cameraButton.centerXAnchor).isActive = true
-        deletePPButton.anchor(top: containerView.topAnchor, right: containerView.rightAnchor, paddingTop: 12, paddingRight: 12)
     }
-    
 }
 
 extension PhotoPicker: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
-        if let image = info[.editedImage] as? UIImage {
-            imageView.image = image
-        }
+        guard let image = info[.editedImage] as? UIImage else { return }
+        imageView.image = image
+        uploadPhoto(image: image)
         picker.dismiss(animated: true, completion: nil)
         dismiss(animated: true)
     }
@@ -215,4 +256,33 @@ extension PhotoPicker: UIImagePickerControllerDelegate, UINavigationControllerDe
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true, completion: nil)
     }
+    
+    func uploadPhoto(image: UIImage){
+        let imageName = UUID().uuidString
+        let imagePath = getDocumentsDirectory().appendingPathComponent(imageName)
+
+        if let jpegData = image.jpegData(compressionQuality: 0.75),
+           let email = userEmail {
+            try? jpegData.write(to: imagePath)
+            // Upload Image
+            UserDefaults.standard.set(imageName, forKey: "\(email).profileImg")
+            let path = "images/\(email).\(imageName)"
+            let docRef = db.collection("UserInformations").document("\(email)")
+            docRef.updateData(["profileImgURL": path])
+            let uploadTask = profileRef.reference(withPath: path).putData(jpegData, metadata: nil) { (metadata, error) in
+              guard let metadata = metadata else {
+                // Uh-oh, an error occurred!
+                return
+              }
+              // Metadata contains file metadata such as size, content-type.
+                _ = metadata.size
+            }
+        }
+    }
+    
+    func getDocumentsDirectory() -> URL {
+        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        return paths[0]
+    }
 }
+
