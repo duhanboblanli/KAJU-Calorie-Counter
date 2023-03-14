@@ -11,6 +11,22 @@ class FoodsViewController: UIViewController, UpdateDelegate {
     
     var query = "egg"
     
+    let ColorHardDarkGreen = UIColor( red: 40/255, green: 71/255, blue: 92/255, alpha: 1)
+    let ColorDarkGreen = UIColor( red: 47/255, green: 136/255, blue: 134/255, alpha: 1)
+    let ColorLightGreen = UIColor( red: 132/255, green: 198/255, blue: 155/255, alpha: 1)
+    
+    
+    @IBOutlet weak var recentsButtonView: UIView!
+    @IBOutlet weak var favoritesButtonView: UIView!
+    @IBOutlet weak var recentsButton: UIButton!
+    @IBOutlet weak var favoritesButton: UIButton!
+    @IBOutlet weak var recentsLabel: UILabel!
+    @IBOutlet weak var favoritesLabel: UILabel!
+    @IBOutlet weak var favoritesBottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var recentsBottomConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var favoritesView: UIView!
+    @IBOutlet weak var recentsView: UIView!
     @IBOutlet weak var tableView: UITableView!
     //For search and autoComplete
     @IBOutlet weak var searchBar: UISearchBar!
@@ -89,6 +105,31 @@ class FoodsViewController: UIViewController, UpdateDelegate {
         // Constraints
         activityIndicator.centerXAnchor.constraint(equalTo: activityIndicatorContainer.centerXAnchor).isActive = true
         activityIndicator.centerYAnchor.constraint(equalTo: activityIndicatorContainer.centerYAnchor).isActive = true
+    }
+    @IBAction func firstTabPressed(_ sender: UIButton) {
+        recentsView.isHidden = false
+        favoritesView.isHidden = true
+        recentsBottomConstraint.constant = 4.0
+        favoritesBottomConstraint.constant = 3.0
+        recentsButtonView.backgroundColor = ColorDarkGreen
+        favoritesButtonView.backgroundColor = ColorHardDarkGreen
+        recentsLabel.textColor = ColorDarkGreen
+        favoritesLabel.textColor = UIColor.lightGray
+    }
+    
+    @IBAction func secondTabPressed(_ sender: UIButton) {
+        recentsView.isHidden = true
+        favoritesView.isHidden = false
+        recentsBottomConstraint.constant = 3.0
+        favoritesBottomConstraint.constant = 4.0
+        recentsButtonView.backgroundColor = ColorHardDarkGreen
+        favoritesButtonView.backgroundColor = ColorDarkGreen
+        recentsLabel.textColor = UIColor.lightGray
+        favoritesLabel.textColor = ColorDarkGreen
+        /*DispatchQueue.main.async { [self] in
+            setupFetchRequest()
+        }*/
+        
     }
 } // ends of FoodsViewController
 
