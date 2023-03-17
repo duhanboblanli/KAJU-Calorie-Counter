@@ -46,6 +46,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return container
     }()
     
+    lazy var persistentContainer2: NSPersistentContainer = {
+        let container = NSPersistentContainer(name: "RecentFoodsOffline")
+        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
+            if let error = error as NSError? {
+                fatalError("Unresolved error \(error), \(error.userInfo)")
+            }
+        })
+        return container
+    }()
+    
     // MARK: - Core Data Saving support
 
     func saveContext () {

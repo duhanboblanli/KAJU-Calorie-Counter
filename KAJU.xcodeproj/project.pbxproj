@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		13A1FD5129BF261800FF2485 /* PasswordEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A1FD5029BF261800FF2485 /* PasswordEditor.swift */; };
 		13F883F329B8B10500BBCF25 /* DatabaseSingleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13F883F229B8B10500BBCF25 /* DatabaseSingleton.swift */; };
+		2D7D7B4B29C32EE500027653 /* RecentFoodsOffline.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2D7D7B4929C32EE500027653 /* RecentFoodsOffline.xcdatamodeld */; };
 		2D850C3F299BFA6F00A525F0 /* FoodModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D850C3E299BFA6F00A525F0 /* FoodModel.swift */; };
 		2D850C41299BFA8E00A525F0 /* FoodApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D850C40299BFA8E00A525F0 /* FoodApiService.swift */; };
 		2D850C43299BFAAD00A525F0 /* FoodViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D850C42299BFAAD00A525F0 /* FoodViewModel.swift */; };
@@ -84,6 +85,7 @@
 		13A1FD5029BF261800FF2485 /* PasswordEditor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasswordEditor.swift; sourceTree = "<group>"; };
 		13F883F229B8B10500BBCF25 /* DatabaseSingleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseSingleton.swift; sourceTree = "<group>"; };
 		19C1B6341DC89EDF1E04D0D4 /* Pods-KAJU.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KAJU.release.xcconfig"; path = "Target Support Files/Pods-KAJU/Pods-KAJU.release.xcconfig"; sourceTree = "<group>"; };
+		2D7D7B4A29C32EE500027653 /* RecentFoodsOffline.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = RecentFoodsOffline.xcdatamodel; sourceTree = "<group>"; };
 		2D850C3E299BFA6F00A525F0 /* FoodModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodModel.swift; sourceTree = "<group>"; };
 		2D850C40299BFA8E00A525F0 /* FoodApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodApiService.swift; sourceTree = "<group>"; };
 		2D850C42299BFAAD00A525F0 /* FoodViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodViewModel.swift; sourceTree = "<group>"; };
@@ -248,6 +250,7 @@
 				2D850C40299BFA8E00A525F0 /* FoodApiService.swift */,
 				2D850C42299BFAAD00A525F0 /* FoodViewModel.swift */,
 				2DF9F2F7299D1B530023AB7C /* FoodTableViewCell.swift */,
+				2D7D7B4929C32EE500027653 /* RecentFoodsOffline.xcdatamodeld */,
 			);
 			path = "Food Edamam";
 			sourceTree = "<group>";
@@ -492,6 +495,7 @@
 				FEC1A95E29B787C800342AF6 /* ProfileCell.swift in Sources */,
 				FE599850298B1C55002CB4DF /* CalculatorResultViewController.swift in Sources */,
 				FEC1A95D29B787C800342AF6 /* AccountSettingCell.swift in Sources */,
+				2D7D7B4B29C32EE500027653 /* RecentFoodsOffline.xcdatamodeld in Sources */,
 				FEC1A96D29B787F500342AF6 /* Editor.swift in Sources */,
 				FE6FCCFF29A7B6B700FDE008 /* FavoritesCell.swift in Sources */,
 				13F883F329B8B10500BBCF25 /* DatabaseSingleton.swift in Sources */,
@@ -775,6 +779,16 @@
 /* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
+		2D7D7B4929C32EE500027653 /* RecentFoodsOffline.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				2D7D7B4A29C32EE500027653 /* RecentFoodsOffline.xcdatamodel */,
+			);
+			currentVersion = 2D7D7B4A29C32EE500027653 /* RecentFoodsOffline.xcdatamodel */;
+			path = RecentFoodsOffline.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
 		FE93498A29A78E3A00316B22 /* Food_and_Recipe.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
