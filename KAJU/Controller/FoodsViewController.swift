@@ -6,10 +6,13 @@
 //
 
 import UIKit
+import CoreData
 
 class FoodsViewController: UIViewController, UpdateDelegate {
     
     var query = "egg"
+    
+    var searchEnable = false
     
     let ColorHardDarkGreen = UIColor( red: 40/255, green: 71/255, blue: 92/255, alpha: 1)
     let ColorDarkGreen = UIColor( red: 47/255, green: 136/255, blue: 134/255, alpha: 1)
@@ -40,6 +43,15 @@ class FoodsViewController: UIViewController, UpdateDelegate {
     private var foodViewModel = FoodViewModel()
     private var images: [UIImage]?
     
+    // For random discover recipes
+    var foods2 = [FoodStruct]()
+    
+    // For favorites local recipes
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    var foods: [FoodEntity] = []
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
@@ -49,6 +61,23 @@ class FoodsViewController: UIViewController, UpdateDelegate {
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "autoCompleteCell")
         searchBar.searchTextField.attributedPlaceholder = NSAttributedString(string: "Search For A Food", attributes: [NSAttributedString.Key.foregroundColor: UIColor( red: 170/255, green: 170/255, blue: 170/255, alpha: 1)])
         LoadFoodsData(with: query)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.tabBarController?.tabBar.isHidden = false
+        setupFetchRequest()
+    }
+    //Localdaki verileri çek
+    private func setupFetchRequest() {
+        let fetchRequest: NSFetchRequest<FoodEntity> = FoodEntity.fetchRequest()
+        fetchRequest.returnsObjectsAsFaults = false
+        fetchRequest.sortDescriptors = []
+        if let result = try? appDelegate.persistentContainer2.viewContext.fetch(fetchRequest) {
+            foods = result
+            //favTableView.reloadData()
+        }
+        
     }
     
     func didUpdate(sender: FoodViewModel) {
@@ -166,16 +195,27 @@ extension FoodsViewController: UIScrollViewDelegate{
 //MARK: - UITableViewDataSource, UITableViewDelegate
 extension FoodsViewController: UITableViewDataSource, UITableViewDelegate {
     
+    func fitTheFood(foodTarget: FoodEntity)->FoodStruct{
+        let food = FoodStruct(label: foodTarget.title, calorie: Float(foodTarget.calories), image: UIImage(data: foodTarget.image!), carbs: Float(foodTarget.carbs), fat: Float(foodTarget.fats), protein: Float(foodTarget.proteins), wholeGram: Float(foodTarget.wholeGram), measureLabel: foodTarget.measureLabel)
+        return food
+    }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-       
-        if foodSearchSuggestions.count == 0 {
-            let food = foodViewModel.cellForRowAt(indexPath: indexPath)
-            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-            let nextViewController = storyBoard.instantiateViewController(withIdentifier: "FoodDetailVC") as! FoodDetailVC
+        
+        var food: FoodStruct
+        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+        let nextViewController = storyBoard.instantiateViewController(withIdentifier: "FoodDetailVC") as! FoodDetailVC
+        if !searchEnable && foodSearchSuggestions.count == 0{
+            food = fitTheFood(foodTarget: foods[indexPath.row])
             nextViewController.food = food
             nextViewController.query = self.query
             self.navigationController?.pushViewController(nextViewController, animated: true)
-            
+        }
+        else if foodSearchSuggestions.count == 0 {
+            food = foodViewModel.cellForRowAt(indexPath: indexPath)
+            nextViewController.food = food
+            nextViewController.query = self.query
+            self.navigationController?.pushViewController(nextViewController, animated: true)
         }
         else {
             searchBar.text = foodSearchSuggestions[indexPath.row]
@@ -187,7 +227,10 @@ extension FoodsViewController: UITableViewDataSource, UITableViewDelegate {
     // Tablo görünümde kaç hücre ya da kaç satır istiyoruz burda belirtilir
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         var numberOfRow = 1
-        if foodSearchSuggestions.count == 0 {
+        if !searchEnable && foodSearchSuggestions.count == 0{
+            numberOfRow = foods.count
+        }
+        else if foodSearchSuggestions.count == 0 {
             numberOfRow = foodViewModel.numberOfRowsInSection(section: section)
         }
         else {
@@ -199,7 +242,15 @@ extension FoodsViewController: UITableViewDataSource, UITableViewDelegate {
     // Belirlenen tablo cell indexinde gönderilen celli döndürür
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if foodSearchSuggestions.count == 0 {
+        if !searchEnable && foodSearchSuggestions.count == 0{
+            var foodCell : FoodTableViewCell // Declare the cell
+            foodCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! FoodTableViewCell // Initialize cell
+            let food = fitTheFood(foodTarget: foods[indexPath.row])
+            foodCell.setCellWithValuesOf(food)
+            return foodCell
+            
+        }
+        else if foodSearchSuggestions.count == 0 {
             var foodCell : FoodTableViewCell // Declare the cell
             foodCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! FoodTableViewCell // Initialize cell
             let food = foodViewModel.cellForRowAt(indexPath: indexPath)
@@ -220,12 +271,17 @@ extension FoodsViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if foodSearchSuggestions.count == 0 {
-                return 100
-            }else {
-                return 35
-            }
+        if !searchEnable && foodSearchSuggestions.count == 0{
+            return 100
         }
+        else if foodSearchSuggestions.count == 0 {
+            return 100
+        }
+        else{
+            return 35
+        }
+    }
+        
 
 } // ends of extension: TableView
 
@@ -234,6 +290,7 @@ extension FoodsViewController: UISearchBarDelegate {
     
     // Arama için query oluşturan fonksiyon
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchEnable = true
         
         if let searchQuery = searchBar.text {
             if searchQuery != "" {
@@ -257,14 +314,19 @@ extension FoodsViewController: UISearchBarDelegate {
         searchBar.endEditing(true)
     }
     
+    
     // Autocomplete için kullanılacak
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
        
             if searchText.count >= 3 {
+                searchEnable = true
                 currentSearchTask?.cancel()
                 currentSearchTask = foodViewModel.autoCompleteFoodSearch(searchQuery: searchText) { (foodSearchSuggestions, error) in
                     self.foodSearchSuggestions = foodSearchSuggestions
                     print("foodSearchSuggestions:",self.foodSearchSuggestions)
+                    if foodSearchSuggestions.isEmpty{
+                        self.searchEnable = false
+                    }
                     DispatchQueue.main.async {
                         self.tableView.reloadData()
                     }
@@ -272,6 +334,7 @@ extension FoodsViewController: UISearchBarDelegate {
                 currentSearchTask?.resume()
             }
             else {
+                searchEnable = false
                 foodSearchSuggestions = []
                 tableView.reloadData()
             }
@@ -286,6 +349,8 @@ extension FoodsViewController: UISearchBarDelegate {
             searchBar.showsCancelButton = false
             searchBar.text = ""
             searchBar.resignFirstResponder()
+            searchEnable = false
+        tableView.reloadData()
     }
 } // ends of extension: UISearchBarDelegate
 

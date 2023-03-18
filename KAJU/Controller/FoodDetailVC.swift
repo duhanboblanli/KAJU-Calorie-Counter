@@ -74,6 +74,27 @@ class FoodDetailVC: UITableViewController {
         foodImageView.image = image
     }
     
+    func saveAction() {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let imageData = image.pngData()
+        let foodEntity = FoodEntity(context: appDelegate.persistentContainer2.viewContext)
+        foodEntity.title = food.label
+        foodEntity.calories = Int64(food.calorie!)
+        foodEntity.carbs = Int64(food.carbs!)
+        foodEntity.fats = Int64(food.fat!)
+        foodEntity.proteins = Int64(food.protein!)
+        foodEntity.wholeGram = Int64(food.wholeGram!)
+        foodEntity.measureLabel = food.measureLabel
+        foodEntity.image = imageData
+        
+        do {
+            try appDelegate.persistentContainer2.viewContext.save()
+            presentAlert(title: "Food added to diary 🤩", message: "")
+        } catch {
+            presentAlert(title: "Unable to add food", message: "")
+        }
+    }
+    
     
     // currentCal = currentBreakfastCal + currentLunchCal + currentDinnerCal + currentSnacksCal
     // breakfast lunch dinner snacks değerleri burada db'den gelen calorie değerleri ile güncellenecek
@@ -109,6 +130,7 @@ class FoodDetailVC: UITableViewController {
                     }
                 }
         }
+        saveAction()
     }
     
     
