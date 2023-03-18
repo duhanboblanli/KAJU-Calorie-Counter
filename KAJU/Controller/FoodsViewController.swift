@@ -323,7 +323,7 @@ extension FoodsViewController: UISearchBarDelegate {
     // Arama için query oluşturan fonksiyon
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchEnable = true
-        
+        self.searchBar.showsCancelButton = true
         if let searchQuery = searchBar.text {
             if searchQuery != "" {
                 foodSearchSuggestions = []
@@ -341,7 +341,6 @@ extension FoodsViewController: UISearchBarDelegate {
             searchBar.endEditing(true)
         }
 //        showActivityIndicator(show: false)
-        self.searchBar.showsCancelButton = false
         searchBar.text = ""
         searchBar.endEditing(true)
     }
@@ -378,7 +377,6 @@ extension FoodsViewController: UISearchBarDelegate {
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-            searchBar.showsCancelButton = false
             searchBar.text = ""
             searchBar.resignFirstResponder()
             searchEnable = false
