@@ -10,8 +10,11 @@ import Foundation
 import ValueStepper
 import FirebaseAuth
 import FirebaseFirestore
+import CoreData
 
 class FoodDetailVC: UITableViewController {
+    
+    var RECENTS_LIMIT = 20
     
     var query = "egg"
     var foodType = "currentBreakfastCal"
@@ -26,6 +29,7 @@ class FoodDetailVC: UITableViewController {
     var amount = 0.0
     var favFood: FavFoodEntity!
     var favFoods: [FavFoodEntity]!
+    var recentFoods: [FoodEntity]!
     
     var isFav: Bool = false
     var isFav2: Bool = false
@@ -81,6 +85,20 @@ class FoodDetailVC: UITableViewController {
         }
         foodImageView.image = image
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setupFetchRequest()
+    }
+    // Fetch the local data
+    private func setupFetchRequest() {
+        //Recents
+        let fetchRequest: NSFetchRequest<FoodEntity> = FoodEntity.fetchRequest()
+        fetchRequest.returnsObjectsAsFaults = false
+        fetchRequest.sortDescriptors = []
+        if let result = try? appDelegate.persistentContainer2.viewContext.fetch(fetchRequest) {
+            recentFoods = result
+        }
+    }
     
     override func viewWillDisappear(_ animated: Bool) {
         if !isFav && isFav2 {
@@ -93,6 +111,20 @@ class FoodDetailVC: UITableViewController {
     }
     
     func saveActionAddToDiary() {
+        var inRecent = false
+        var lastIndex = 1
+        if !recentFoods.isEmpty{
+            lastIndex = Int(recentFoods[recentFoods.count-1].index)
+            for food2 in recentFoods{
+                if food.label == food2.title{
+                    inRecent = true
+                    appDelegate.persistentContainer2.viewContext.delete(food2)
+                }
+            }
+        }
+        if !inRecent && recentFoods.count == RECENTS_LIMIT{
+            appDelegate.persistentContainer2.viewContext.delete(recentFoods[0])
+        }
         let imageData = image.pngData()
         let foodEntity = FoodEntity(context: appDelegate.persistentContainer2.viewContext)
         foodEntity.title = food.label
@@ -103,7 +135,7 @@ class FoodDetailVC: UITableViewController {
         foodEntity.wholeGram = Int64(food.wholeGram!)
         foodEntity.measureLabel = food.measureLabel
         foodEntity.image = imageData
-        
+        foodEntity.index = Int64(lastIndex-1)
         do {
             try appDelegate.persistentContainer2.viewContext.save()
             presentAlert(title: "Food added to diary 🤩", message: "")
@@ -125,7 +157,6 @@ class FoodDetailVC: UITableViewController {
         
         do {
             try appDelegate.persistentContainer3.viewContext.save()
-            presentAlert(title: "Food added to diary 🤩", message: "")
         } catch {
             presentAlert(title: "Unable to add food", message: "")
         }

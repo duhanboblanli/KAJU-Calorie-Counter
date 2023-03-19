@@ -52,8 +52,6 @@ class FoodsViewController: UIViewController, UpdateDelegate {
     var recentFoods: [FoodEntity] = []
     var favFoods: [FavFoodEntity] = []
     
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
@@ -70,6 +68,7 @@ class FoodsViewController: UIViewController, UpdateDelegate {
         super.viewWillAppear(animated)
         self.tabBarController?.tabBar.isHidden = false
         setupFetchRequest()
+        setupFetchRequest2()
     }
     // Fetch the local data
     private func setupFetchRequest() {
@@ -79,7 +78,11 @@ class FoodsViewController: UIViewController, UpdateDelegate {
         fetchRequest.sortDescriptors = []
         if let result = try? appDelegate.persistentContainer2.viewContext.fetch(fetchRequest) {
             recentFoods = result
+            recentFoods.sort {
+                $0.index < $1.index
+            }
         }
+        tableView.reloadData()
     }
     private func setupFetchRequest2() {
         //Favorites
