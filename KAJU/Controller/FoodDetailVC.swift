@@ -10,8 +10,11 @@ import Foundation
 import ValueStepper
 import FirebaseAuth
 import FirebaseFirestore
+import CoreData
 
 class FoodDetailVC: UITableViewController {
+    
+    var RECENTS_LIMIT = 20
     
     var query = "egg"
     var foodType = "currentBreakfastCal"
@@ -24,6 +27,14 @@ class FoodDetailVC: UITableViewController {
     var targetFat:Float = 0.0
     var targetPro:Float = 0.0
     var amount = 0.0
+    var favFood: FavFoodEntity!
+    var favFoods: [FavFoodEntity]!
+    var recentFoods: [FoodEntity]!
+    
+    var isFav: Bool = false
+    var isFav2: Bool = false
+    
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     @IBOutlet weak var foodImageView: UIImageView!
     @IBOutlet weak var foodNameTitle: UILabel!
@@ -34,6 +45,7 @@ class FoodDetailVC: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        favoriteAction()
         stepper.enableManualEditing = true
         if query == "egg" {
             foodType = "currentBreakfastCal"
@@ -73,9 +85,46 @@ class FoodDetailVC: UITableViewController {
         }
         foodImageView.image = image
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setupFetchRequest()
+    }
+    // Fetch the local data
+    private func setupFetchRequest() {
+        //Recents
+        let fetchRequest: NSFetchRequest<FoodEntity> = FoodEntity.fetchRequest()
+        fetchRequest.returnsObjectsAsFaults = false
+        fetchRequest.sortDescriptors = []
+        if let result = try? appDelegate.persistentContainer2.viewContext.fetch(fetchRequest) {
+            recentFoods = result
+        }
+    }
     
-    func saveAction() {
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    override func viewWillDisappear(_ animated: Bool) {
+        if !isFav && isFav2 {
+            saveActionAddToFavs()
+        }
+        else if isFav && !isFav2{
+            self.appDelegate.persistentContainer3.viewContext.delete(favFood)
+            try? self.appDelegate.persistentContainer3.viewContext.save()
+        }
+    }
+    
+    func saveActionAddToDiary() {
+        var inRecent = false
+        var lastIndex = 1
+        if !recentFoods.isEmpty{
+            lastIndex = Int(recentFoods[recentFoods.count-1].index)
+            for food2 in recentFoods{
+                if food.label == food2.title{
+                    inRecent = true
+                    appDelegate.persistentContainer2.viewContext.delete(food2)
+                }
+            }
+        }
+        if !inRecent && recentFoods.count == RECENTS_LIMIT{
+            appDelegate.persistentContainer2.viewContext.delete(recentFoods[0])
+        }
         let imageData = image.pngData()
         let foodEntity = FoodEntity(context: appDelegate.persistentContainer2.viewContext)
         foodEntity.title = food.label
@@ -86,13 +135,61 @@ class FoodDetailVC: UITableViewController {
         foodEntity.wholeGram = Int64(food.wholeGram!)
         foodEntity.measureLabel = food.measureLabel
         foodEntity.image = imageData
-        
+        foodEntity.index = Int64(lastIndex-1)
         do {
             try appDelegate.persistentContainer2.viewContext.save()
             presentAlert(title: "Food added to diary 🤩", message: "")
         } catch {
             presentAlert(title: "Unable to add food", message: "")
         }
+    }
+    func saveActionAddToFavs() {
+        let imageData = image.pngData()
+        let favFoodEntity = FavFoodEntity(context: appDelegate.persistentContainer3.viewContext)
+        favFoodEntity.title = food.label
+        favFoodEntity.calories = Int64(food.calorie!)
+        favFoodEntity.carbs = Int64(food.carbs!)
+        favFoodEntity.fats = Int64(food.fat!)
+        favFoodEntity.proteins = Int64(food.protein!)
+        favFoodEntity.wholeGram = Int64(food.wholeGram!)
+        favFoodEntity.measureLabel = food.measureLabel
+        favFoodEntity.image = imageData
+        
+        do {
+            try appDelegate.persistentContainer3.viewContext.save()
+        } catch {
+            presentAlert(title: "Unable to add food", message: "")
+        }
+    }
+    
+    
+    
+    func favoriteAction(){
+        for (i,fav) in favFoods.enumerated() {
+            if fav.title == food.label {
+                isFav = true
+                isFav2 = true
+                favFood = favFoods[i]
+            }
+        }
+        if isFav {
+            navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Favorited", style: .plain, target: self, action: #selector(self.unfavorite(_:)))
+        }
+        else{
+            navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Favorite", style: .plain, target: self, action: #selector(self.favorite(_:)))
+        }
+    }
+    // Change the button label and action if clicked
+    @objc func favorite(_ sender: UITapGestureRecognizer) {
+        isFav2 = true
+        navigationItem.rightBarButtonItem?.title = "Favorited"
+        navigationItem.rightBarButtonItem?.action = #selector(self.unfavorite(_:))
+    }
+    
+    @objc func unfavorite(_ sender: UITapGestureRecognizer) {
+        isFav2 = false
+        navigationItem.rightBarButtonItem?.title = "Favorite"
+        navigationItem.rightBarButtonItem?.action = #selector(self.favorite(_:))
     }
     
     
@@ -130,7 +227,7 @@ class FoodDetailVC: UITableViewController {
                     }
                 }
         }
-        saveAction()
+        saveActionAddToDiary()
     }
     
     
