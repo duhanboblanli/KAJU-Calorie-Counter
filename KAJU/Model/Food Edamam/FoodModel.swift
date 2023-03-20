@@ -24,6 +24,7 @@ struct FoodsData: Decodable {
 }
 struct ParsedData: Decodable {
     let food: Food
+    
     private enum CodingKeys: String, CodingKey {
         case food = "food"
     }
