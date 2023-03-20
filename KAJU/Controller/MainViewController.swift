@@ -360,6 +360,7 @@ class MainViewController: UITableViewController {
         "FoodsViewController") as?
             FoodsViewController {
             vc.query = "egg"
+            vc.mealType = 0
             self.navigationController?.pushViewController(vc,animated:true)
         }
     }
@@ -368,6 +369,7 @@ class MainViewController: UITableViewController {
         let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
         let nextViewController = storyBoard.instantiateViewController(withIdentifier: "FoodsViewController") as! FoodsViewController
         nextViewController.query = "penne"
+        nextViewController.mealType = 1
         self.navigationController?.pushViewController(nextViewController, animated: true)
     }
     
@@ -375,6 +377,7 @@ class MainViewController: UITableViewController {
         let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
         let nextViewController = storyBoard.instantiateViewController(withIdentifier: "FoodsViewController") as! FoodsViewController
         nextViewController.query = "fish"
+        nextViewController.mealType = 2
         self.navigationController?.pushViewController(nextViewController, animated: true)
     }
     
@@ -382,6 +385,7 @@ class MainViewController: UITableViewController {
         let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
         let nextViewController = storyBoard.instantiateViewController(withIdentifier: "FoodsViewController") as! FoodsViewController
         nextViewController.query = "apple"
+        nextViewController.mealType = 3
         self.navigationController?.pushViewController(nextViewController, animated: true)
     }
     

@@ -14,22 +14,27 @@ class FoodsViewController: UIViewController, UpdateDelegate {
     
     var searchEnable = false
     var favEnable = false
+    var recentsEnable = false
+    
+    // 0: breakfast, 1: lunch, 2: dinner, 3: snacks
+    var mealType = 0
     
     let ColorHardDarkGreen = UIColor( red: 40/255, green: 71/255, blue: 92/255, alpha: 1)
     let ColorDarkGreen = UIColor( red: 47/255, green: 136/255, blue: 134/255, alpha: 1)
     let ColorLightGreen = UIColor( red: 132/255, green: 198/255, blue: 155/255, alpha: 1)
     
-    
+    @IBOutlet weak var frequentsButtonView: UIView!
     @IBOutlet weak var recentsButtonView: UIView!
     @IBOutlet weak var favoritesButtonView: UIView!
+    @IBOutlet weak var frequentsButton: UIButton!
     @IBOutlet weak var recentsButton: UIButton!
     @IBOutlet weak var favoritesButton: UIButton!
+    @IBOutlet weak var frequentsLabel: UILabel!
     @IBOutlet weak var recentsLabel: UILabel!
     @IBOutlet weak var favoritesLabel: UILabel!
-    @IBOutlet weak var favoritesBottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var frequentsBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var recentsBottomConstraint: NSLayoutConstraint!
-    
-    @IBOutlet weak var favoritesView: UIView!
+    @IBOutlet weak var favoritesBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var recentsView: UIView!
     @IBOutlet weak var tableView: UITableView!
     //For search and autoComplete
@@ -44,16 +49,20 @@ class FoodsViewController: UIViewController, UpdateDelegate {
     private var foodViewModel = FoodViewModel()
     private var images: [UIImage]?
     
-    // For random discover recipes
-    var foods2 = [FoodStruct]()
-    
-    // For favorites local recipes
+    // For favorites local foods
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    
+    // food lists
+    var frequentFoodIdList: [String] = []
     var recentFoods: [FoodEntity] = []
     var favFoods: [FavFoodEntity] = []
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        favoritesBottomConstraint.constant = 4.0
+        recentsBottomConstraint.constant = 3.0
+        favoritesBottomConstraint.constant = 3.0
         tableView.delegate = self
         tableView.dataSource = self
         searchBar.delegate = self
@@ -100,6 +109,10 @@ class FoodsViewController: UIViewController, UpdateDelegate {
     }
     
     private func LoadFoodsData(with searchQuery: String) {
+        foodViewModel.fetchDefaultFoodData(mealType: mealType){ [weak self] in
+            self?.tableView.dataSource = self
+            self?.tableView.reloadData()
+        }
         // Called at the beginning to do an API call and fill targetFoods
         setupActivityIndicator()
         showActivityIndicator(show: true)
@@ -108,6 +121,7 @@ class FoodsViewController: UIViewController, UpdateDelegate {
             self?.tableView.reloadData()
             self?.showActivityIndicator(show: false)
         }
+        
     }
 
     // Loading alert functionality
@@ -151,22 +165,45 @@ class FoodsViewController: UIViewController, UpdateDelegate {
         activityIndicator.centerYAnchor.constraint(equalTo: activityIndicatorContainer.centerYAnchor).isActive = true
     }
     @IBAction func firstTabPressed(_ sender: UIButton) {
+        //print("brekfiiii: ", foodViewModel.breakfastFrequentFoods.description)
         favEnable = false
+        recentsEnable = false
+        frequentsBottomConstraint.constant = 4.0
+        recentsBottomConstraint.constant = 3.0
+        favoritesBottomConstraint.constant = 3.0
+        frequentsButtonView.backgroundColor = ColorDarkGreen
+        recentsButtonView.backgroundColor = ColorHardDarkGreen
+        favoritesButtonView.backgroundColor = ColorHardDarkGreen
+        frequentsLabel.textColor = ColorDarkGreen
+        recentsLabel.textColor = UIColor.lightGray
+        favoritesLabel.textColor = UIColor.lightGray
+        tableView.reloadData()
+    }
+    @IBAction func secondTabPressed(_ sender: UIButton) {
+        favEnable = false
+        recentsEnable = true
+        frequentsBottomConstraint.constant = 3.0
         recentsBottomConstraint.constant = 4.0
         favoritesBottomConstraint.constant = 3.0
+        frequentsButtonView.backgroundColor = ColorHardDarkGreen
         recentsButtonView.backgroundColor = ColorDarkGreen
         favoritesButtonView.backgroundColor = ColorHardDarkGreen
+        frequentsLabel.textColor = UIColor.lightGray
         recentsLabel.textColor = ColorDarkGreen
         favoritesLabel.textColor = UIColor.lightGray
         tableView.reloadData()
     }
     
-    @IBAction func secondTabPressed(_ sender: UIButton) {
+    @IBAction func thirdTabPressed(_ sender: UIButton) {
         favEnable = true
+        recentsEnable = false
         recentsBottomConstraint.constant = 3.0
+        frequentsBottomConstraint.constant = 3.0
         favoritesBottomConstraint.constant = 4.0
+        frequentsButtonView.backgroundColor = ColorHardDarkGreen
         recentsButtonView.backgroundColor = ColorHardDarkGreen
         favoritesButtonView.backgroundColor = ColorDarkGreen
+        frequentsLabel.textColor = UIColor.lightGray
         recentsLabel.textColor = UIColor.lightGray
         favoritesLabel.textColor = ColorDarkGreen
         DispatchQueue.main.async { [self] in
@@ -227,8 +264,11 @@ extension FoodsViewController: UITableViewDataSource, UITableViewDelegate {
             if favEnable && !searchEnable{
                 food = fitTheFood2(foodTarget: favFoods[indexPath.row])
             }
-            else if !searchEnable{
+            else if recentsEnable && !searchEnable{
                 food = fitTheFood(foodTarget: recentFoods[indexPath.row])
+            }
+            else if !searchEnable{
+                food = foodViewModel.frequentFoods[indexPath.row]
             }
             else{
                 food = foodViewModel.cellForRowAt(indexPath: indexPath)
@@ -247,14 +287,18 @@ extension FoodsViewController: UITableViewDataSource, UITableViewDelegate {
     
     // Tablo görünümde kaç hücre ya da kaç satır istiyoruz burda belirtilir
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print("brekfiiii: ", self.foodViewModel.frequentFoods.description)
         var numberOfRow = 1
         
         if favEnable && !searchEnable && foodSearchSuggestions.count == 0{
             numberOfRow = favFoods.count
             print("favEnabled: ", numberOfRow.description)
         }
-        else if !searchEnable && foodSearchSuggestions.count == 0{
+        else if recentsEnable && !searchEnable && foodSearchSuggestions.count == 0{
             numberOfRow = recentFoods.count
+        }
+        else if !searchEnable && foodSearchSuggestions.count == 0{
+            numberOfRow = foodViewModel.frequentFoods.count
         }
         else if foodSearchSuggestions.count == 0 {
             numberOfRow = foodViewModel.numberOfRowsInSection(section: section)
@@ -274,13 +318,20 @@ extension FoodsViewController: UITableViewDataSource, UITableViewDelegate {
             foodCell.setCellWithValuesOf(food)
             return foodCell
         }
-        else if !searchEnable && foodSearchSuggestions.count == 0{
+        else if recentsEnable && !searchEnable && foodSearchSuggestions.count == 0{
             var foodCell : FoodTableViewCell // Declare the cell
             foodCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! FoodTableViewCell // Initialize cell
             let food = fitTheFood(foodTarget: recentFoods[indexPath.row])
             foodCell.setCellWithValuesOf(food)
             return foodCell
             
+        }
+        else if !searchEnable && foodSearchSuggestions.count == 0{
+            var foodCell : FoodTableViewCell // Declare the cell
+            foodCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! FoodTableViewCell // Initialize cell
+            let food = foodViewModel.frequentFoods[indexPath.row]
+            foodCell.setCellWithValuesOf(food)
+            return foodCell
         }
         else if foodSearchSuggestions.count == 0 {
             var foodCell : FoodTableViewCell // Declare the cell
@@ -307,6 +358,9 @@ extension FoodsViewController: UITableViewDataSource, UITableViewDelegate {
             return 100
         }
         else if favEnable && !searchEnable && foodSearchSuggestions.count == 0{
+            return 100
+        }
+        else if recentsEnable && !searchEnable && foodSearchSuggestions.count == 0{
             return 100
         }
         else if foodSearchSuggestions.count == 0 {

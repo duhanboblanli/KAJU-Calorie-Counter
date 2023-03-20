@@ -109,7 +109,7 @@ class FoodDetailVC: UITableViewController {
             try? self.appDelegate.persistentContainer3.viewContext.save()
         }
     }
-    
+    // save to diary
     func saveActionAddToDiary() {
         var inRecent = false
         var lastIndex = 1
