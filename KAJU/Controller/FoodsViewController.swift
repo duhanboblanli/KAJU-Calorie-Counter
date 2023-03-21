@@ -109,13 +109,14 @@ class FoodsViewController: UIViewController, UpdateDelegate {
     }
     
     private func LoadFoodsData(with searchQuery: String) {
+        setupActivityIndicator()
         foodViewModel.fetchDefaultFoodData(mealType: mealType){ [weak self] in
             self?.tableView.dataSource = self
             self?.tableView.reloadData()
+            self?.showActivityIndicator(show: true)
         }
-        // Called at the beginning to do an API call and fill targetFoods
-        setupActivityIndicator()
         showActivityIndicator(show: true)
+        // Called at the beginning to do an API call and fill targetFoods
         foodViewModel.fetchSearchedFoodData(searchQuery:searchQuery,pagination: false){ [weak self] in
             self?.tableView.dataSource = self
             self?.tableView.reloadData()
@@ -227,7 +228,7 @@ extension FoodsViewController: UIScrollViewDelegate{
     }
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let position = scrollView.contentOffset.y
-        if position > (tableView.contentSize.height-100-scrollView.frame.size.height){
+        if searchEnable && position > (tableView.contentSize.height-100-scrollView.frame.size.height){
             
             guard !foodViewModel.apiService.isPaginating else {
                 // we are already fetching more data
