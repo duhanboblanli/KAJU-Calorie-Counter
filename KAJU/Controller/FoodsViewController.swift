@@ -166,7 +166,7 @@ class FoodsViewController: UIViewController, UpdateDelegate {
         activityIndicator.centerYAnchor.constraint(equalTo: activityIndicatorContainer.centerYAnchor).isActive = true
     }
     @IBAction func firstTabPressed(_ sender: UIButton) {
-        //print("brekfiiii: ", foodViewModel.breakfastFrequentFoods.description)
+        tableView.setContentOffset(.zero, animated: true)
         favEnable = false
         recentsEnable = false
         frequentsBottomConstraint.constant = 4.0
@@ -181,6 +181,7 @@ class FoodsViewController: UIViewController, UpdateDelegate {
         tableView.reloadData()
     }
     @IBAction func secondTabPressed(_ sender: UIButton) {
+        tableView.setContentOffset(.zero, animated: true)
         favEnable = false
         recentsEnable = true
         frequentsBottomConstraint.constant = 3.0
@@ -196,6 +197,7 @@ class FoodsViewController: UIViewController, UpdateDelegate {
     }
     
     @IBAction func thirdTabPressed(_ sender: UIButton) {
+        tableView.setContentOffset(.zero, animated: true)
         favEnable = true
         recentsEnable = false
         recentsBottomConstraint.constant = 3.0
