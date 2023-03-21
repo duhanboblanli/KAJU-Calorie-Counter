@@ -12,6 +12,8 @@ protocol UpdateDelegate {
 }
 
 class FoodViewModel {
+    var check = 0
+    var check2 = false
     var delegate: UpdateDelegate?
     var apiService = FoodApiService()
     // The list of fetch foods - list type is FoodApiModel FoodData struct
@@ -113,8 +115,32 @@ class FoodViewModel {
                         self!.fetchFoodImage(url: url2,food: food, index: currentCount! + i){ [weak self] in
                         }
                     }
-                    
-                    //self?.Images = Array(repeating: UIImage(named: "background")!, count: listOf.games.count)
+                    if !(self!.check2) && theListWithoutImagelessFoods.count < 10{
+                        print("lalalala show must go on")
+                        DispatchQueue.main.async {
+                            self?.check2 = true
+                        }
+                    }
+                    print("lalalalaBIRINCI BIRINCI" + self!.check.description + self!.check2.description)
+                    if self!.check < 10 && self!.check2{
+                        print("lalalalaIKINCI IKINCI" + self!.check.description + self!.check2.description)
+                        DispatchQueue.main.async {
+                            self?.check = self!.check + theListWithoutImagelessFoods.count
+                            if self!.check >= 10{
+                                print("lalalalaUCUNCU UCUNCU" + self!.check.description + self!.check2.description)
+                                self?.check2 = false
+                                self!.check = 0
+                            }
+                            else{
+                                
+                                print("lalalalaDORDUNCU DORDUNCU" + self!.check.description + self!.check2.description)
+                                self?.fetchFoodData(pagination: true){ [weak self] in
+                                    print("lalalalalaBESINCI BESINCI" + self!.check.description + self!.check2.description)
+                                }
+                            }
+                        }
+                        
+                    }
                     completion()
                 case .failure(let error):
                     // Something is wrong with the JSON file or the model
@@ -150,7 +176,6 @@ class FoodViewModel {
                             theListWithoutImagelessFoods.append(food)
                         }
                     }
-                    print("yassss", theListWithoutImagelessFoods.count)
                     var url2 = ""
                     self?.nextPageUrl = (listOf._links.next?.href)!
                     //FoodStruct
@@ -159,8 +184,29 @@ class FoodViewModel {
                         self!.fetchFoodImage(url: url2,food: food, index: currentCount! + i){ [weak self] in
                         }
                     }
-                    
-                    //self?.Images = Array(repeating: UIImage(named: "background")!, count: listOf.games.count)
+                    if !(self!.check2) && theListWithoutImagelessFoods.count < 10{
+                        print("ZAA**lalalala show must go on")
+                        self?.check2 = true
+                    }
+                    print("lalalalaZAA**BIRINCI BIRINCI" + self!.check.description + self!.check2.description)
+                    if self!.check < 10 && self!.check2{
+                        print("lalalalaZAA**IKINCI IKINCI" + self!.check.description + self!.check2.description)
+                        self?.check = self!.check + theListWithoutImagelessFoods.count
+                        if self!.check > 10{
+                            print("lalalalalalZAA**UCUNCU UCUNCU" + self!.check.description + self!.check2.description)
+                            self?.check2 = false
+                            self!.check = 0
+                        }
+                        else{
+                            DispatchQueue.main.async {
+                                print("lalalalaZAA**DORDUNCU DORDUNCU" + self!.check.description + self!.check2.description)
+                                self?.fetchFoodData(pagination: true){ [weak self] in
+                                    print("lalalalalaZAA**BESINCI BESINCI" + self!.check.description + self!.check2.description)
+                                }
+                            }
+                        }
+                        
+                    }
                     completion()
                 case .failure(let error):
                     // Something is wrong with the JSON file or the model
