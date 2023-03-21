@@ -383,6 +383,24 @@ extension FoodsViewController: UITableViewDataSource, UITableViewDelegate {
             return 35
         }
     }
+    
+    // Sola kaydırarak silme işlevi
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        
+        var action = UISwipeActionsConfiguration()
+        if favEnable && !searchEnable{
+            let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { (action, view, completionHandler) in
+                let foodToDelete = self.favFoods[indexPath.row]
+                self.appDelegate.persistentContainer3.viewContext.delete(foodToDelete)
+                try? self.appDelegate.persistentContainer3.viewContext.save()
+                self.favFoods.remove(at: indexPath.row)
+                self.tableView.deleteRows(at: [indexPath], with: .automatic)
+                completionHandler(true)
+            }
+            action =  UISwipeActionsConfiguration(actions: [deleteAction])
+        }
+        return action
+    }
         
 
 } // ends of extension: TableView
