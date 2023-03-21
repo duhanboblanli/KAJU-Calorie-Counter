@@ -293,10 +293,22 @@ extension FoodsViewController: UITableViewDataSource, UITableViewDelegate {
         
         if favEnable && !searchEnable && foodSearchSuggestions.count == 0{
             numberOfRow = favFoods.count
+            if numberOfRow != 0 {
+                tableView.restore()
+            }
+            else {
+                tableView.setEmptyView(title: "You don't have any saved favorite foods.", message: "Your saved favorite foods will be in here.")
+            }
             print("favEnabled: ", numberOfRow.description)
         }
         else if recentsEnable && !searchEnable && foodSearchSuggestions.count == 0{
             numberOfRow = recentFoods.count
+            if numberOfRow != 0 {
+                tableView.restore()
+            }
+            else {
+                tableView.setEmptyView(title: "You don't have any foods that added to your diary.", message: "Your recent foods that you added to diary will be in here.")
+            }
         }
         else if !searchEnable && foodSearchSuggestions.count == 0{
             numberOfRow = foodViewModel.frequentFoods.count
