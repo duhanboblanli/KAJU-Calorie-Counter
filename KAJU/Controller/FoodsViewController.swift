@@ -319,6 +319,7 @@ extension FoodsViewController: UITableViewDataSource, UITableViewDelegate {
         }
         else if foodSearchSuggestions.count == 0 {
             numberOfRow = foodViewModel.numberOfRowsInSection(section: section)
+            print("lalalalal", numberOfRow.description)
         }
         else {
             numberOfRow = foodSearchSuggestions.count
