@@ -100,7 +100,7 @@ class FoodViewModel {
                 switch result{
                 case .success(let listOf):
                     
-                    let currentCount = self?.targetFoods.count
+                    var currentCount = self?.targetFoods.count
                     var url2 = ""
                     self?.targetFoods.append(contentsOf: listOf.hints)
                     self?.nextPageUrl = (listOf._links.next?.href)!
@@ -108,12 +108,14 @@ class FoodViewModel {
                     self?.targetFoods1 = self!.targetFoods1 + Array(repeating: FoodStruct(label: "", calorie: 0.0, image: UIImage(named: "imagePlaceholder"), carbs: 0.0, fat: 0.0, protein: 0.0,wholeGram: 0.0,measureLabel: ""), count: listOf.hints.count)
                     for (i, food) in listOf.hints.enumerated(){
                         if food.food.image == nil{
-                            url2 = "https://www.edamam.com/food-img/541/541e46e44ba61aec8bcd599df94c0eed.jpg"
+                            self?.targetFoods.removeLast()
+                            currentCount = currentCount! - 1
+                            //url2 = "https://www.edamam.com/food-img/541/541e46e44ba61aec8bcd599df94c0eed.jpg"
                         }
                         else {
                             url2 = food.food.image!
-                        }
-                        self!.fetchFoodImage(url: url2, index: currentCount! + i){ [weak self] in
+                            self!.fetchFoodImage(url: url2, index: currentCount! + i){ [weak self] in
+                            }
                         }
                     }
                     
@@ -146,7 +148,7 @@ class FoodViewModel {
                 switch result{
                 case .success(let listOf):
                     
-                    let currentCount = self?.targetFoods.count
+                    var currentCount = self?.targetFoods.count
                     var url2 = ""
                     self?.targetFoods.append(contentsOf: listOf.hints)
                     self?.nextPageUrl = (listOf._links.next?.href)!
@@ -155,13 +157,16 @@ class FoodViewModel {
                     for (i, food) in listOf.hints.enumerated(){
                         print("UUUUUUUU", i)
                         if food.food.image == nil{
-                            url2 = "https://www.edamam.com/food-img/541/541e46e44ba61aec8bcd599df94c0eed.jpg"
+                            self?.targetFoods.removeLast()
+                            currentCount = currentCount! - 1
+                            //url2 = "https://www.edamam.com/food-img/541/541e46e44ba61aec8bcd599df94c0eed.jpg"
                         }
                         else {
                             url2 = food.food.image!
+                            self!.fetchFoodImage(url: url2, index: currentCount! + i){ [weak self] in
+                            }
                         }
-                        self!.fetchFoodImage(url: url2, index: currentCount! + i){ [weak self] in
-                        }
+                        
                     }
                     
                     //self?.Images = Array(repeating: UIImage(named: "background")!, count: listOf.games.count)
