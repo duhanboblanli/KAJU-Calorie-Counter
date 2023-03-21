@@ -4,7 +4,6 @@
 //
 //  Created by Umut Ulaş Demir on 14.02.2023.
 //
-
 import Foundation
 import UIKit
 
@@ -16,9 +15,8 @@ class FoodViewModel {
     var delegate: UpdateDelegate?
     var apiService = FoodApiService()
     // The list of fetch foods - list type is FoodApiModel FoodData struct
-    private var targetFoods = [FoodData]()
     // The list of stored foods - list type is FoodApiModel FoodStruct struct
-    private var targetFoods1 = [FoodStruct]()
+    private var targetFoods1: [FoodStruct] = []
     private let food_app_id = "1587e073"
     private let food_app_key = "602facc0a5347c2e83c1a5932bcb13bc"
     private var nextPageUrl: String = ""
@@ -99,23 +97,20 @@ class FoodViewModel {
                 print(result)
                 switch result{
                 case .success(let listOf):
-                    
-                    var currentCount = self?.targetFoods.count
-                    var url2 = ""
-                    self?.targetFoods.append(contentsOf: listOf.hints)
-                    self?.nextPageUrl = (listOf._links.next?.href)!
-                    // FoodStruct
-                    self?.targetFoods1 = self!.targetFoods1 + Array(repeating: FoodStruct(label: "", calorie: 0.0, image: UIImage(named: "imagePlaceholder"), carbs: 0.0, fat: 0.0, protein: 0.0,wholeGram: 0.0,measureLabel: ""), count: listOf.hints.count)
-                    for (i, food) in listOf.hints.enumerated(){
-                        if food.food.image == nil{
-                            self?.targetFoods.removeLast()
-                            currentCount = currentCount! - 1
-                            //url2 = "https://www.edamam.com/food-img/541/541e46e44ba61aec8bcd599df94c0eed.jpg"
+                    var currentCount = self?.targetFoods1.count
+                    var theListWithoutImagelessFoods: [FoodData] = []
+                    for (i,food) in listOf.hints.enumerated(){
+                        if food.food.image != nil{
+                            theListWithoutImagelessFoods.append(food)
                         }
-                        else {
-                            url2 = food.food.image!
-                            self!.fetchFoodImage(url: url2, index: currentCount! + i){ [weak self] in
-                            }
+                    }
+                    print("yassss", theListWithoutImagelessFoods.count)
+                    var url2 = ""
+                    self?.nextPageUrl = (listOf._links.next?.href)!
+                    //FoodStruct
+                    for (i, food) in theListWithoutImagelessFoods.enumerated(){
+                        url2 = food.food.image!
+                        self!.fetchFoodImage(url: url2,food: food, index: currentCount! + i){ [weak self] in
                         }
                     }
                     
@@ -148,25 +143,21 @@ class FoodViewModel {
                 switch result{
                 case .success(let listOf):
                     
-                    var currentCount = self?.targetFoods.count
+                    var currentCount = self?.targetFoods1.count
+                    var theListWithoutImagelessFoods: [FoodData] = []
+                    for food in listOf.hints{
+                        if food.food.image != nil{
+                            theListWithoutImagelessFoods.append(food)
+                        }
+                    }
+                    print("yassss", theListWithoutImagelessFoods.count)
                     var url2 = ""
-                    self?.targetFoods.append(contentsOf: listOf.hints)
                     self?.nextPageUrl = (listOf._links.next?.href)!
                     //FoodStruct
-                    self?.targetFoods1 = self!.targetFoods1 + Array(repeating: FoodStruct(label: "", calorie: 0.0, image: UIImage(named: "imagePlaceholder"), carbs: 0.0, fat: 0.0, protein: 0.0,wholeGram: 0.0,measureLabel: ""), count: listOf.hints.count)
-                    for (i, food) in listOf.hints.enumerated(){
-                        print("UUUUUUUU", i)
-                        if food.food.image == nil{
-                            self?.targetFoods.removeLast()
-                            currentCount = currentCount! - 1
-                            //url2 = "https://www.edamam.com/food-img/541/541e46e44ba61aec8bcd599df94c0eed.jpg"
+                    for (i, food) in theListWithoutImagelessFoods.enumerated(){
+                        url2 = food.food.image!
+                        self!.fetchFoodImage(url: url2,food: food, index: currentCount! + i){ [weak self] in
                         }
-                        else {
-                            url2 = food.food.image!
-                            self!.fetchFoodImage(url: url2, index: currentCount! + i){ [weak self] in
-                            }
-                        }
-                        
                     }
                     
                     //self?.Images = Array(repeating: UIImage(named: "background")!, count: listOf.games.count)
@@ -179,16 +170,16 @@ class FoodViewModel {
         }
         
         // The API call to get the foods images
-        func fetchFoodImage(url: String, index: Int, completion: @escaping () -> ()) {
+        func fetchFoodImage(url: String, food: FoodData, index: Int, completion: @escaping () -> ()) {
             
-            let food = self.targetFoods[index].food
-            let measures = self.targetFoods[index].measures
+            let foodData = food.food
+            let measures = food.measures
             apiService.getImageDataFrom(url: url) { [weak self] (result) in
                 print(result)
                 switch result{
                 case .success(let listOf):
                     //FoodStruct değerlerin atanması
-                    self?.targetFoods1[index] = FoodStruct(label: food.label,calorie: food.nutrients?.ENERC_KCAL,image: listOf, carbs: food.nutrients?.CHOCDF, fat: food.nutrients?.FAT, protein: food.nutrients?.PROCNT,wholeGram: measures[0].weight,measureLabel: measures[0].label)
+                    self?.targetFoods1.append(FoodStruct(label: foodData.label,calorie: foodData.nutrients?.ENERC_KCAL,image: listOf, carbs: foodData.nutrients?.CHOCDF, fat: foodData.nutrients?.FAT, protein: foodData.nutrients?.PROCNT,wholeGram: measures[0].weight,measureLabel: measures[0].label))
                     self?.delegate!.didUpdate(sender: self!)
                     //self?.targetFoods1.append(contentsOf: FoodStruct(label: food.label,
                     //                                              calorie: food.nutrients?.ENERC_KCAL,image: listOf))
@@ -249,11 +240,11 @@ class FoodViewModel {
             }
 
             func clearData(){
-                targetFoods.removeAll()
+                targetFoods1.removeAll()
             }
             
-            func getFoods()->[FoodData]{
-                return targetFoods
+            func getFoods()->[FoodStruct]{
+                return targetFoods1
             }
             
             func getNextPage()->String{
@@ -261,14 +252,14 @@ class FoodViewModel {
             }
             
             func getCount()->Int{
-                return targetFoods.count
+                return targetFoods1.count
             }
 
             // Return the number of foods in targetFoods
             func numberOfRowsInSection(section: Int) -> Int {
-                if targetFoods.count != 0 {
-                    print("Total foods count: ",targetFoods.count)
-                    return targetFoods.count
+                if targetFoods1.count != 0 {
+                    print("Total foods count: ",targetFoods1.count)
+                    return targetFoods1.count
                 }
                 return 0
             }
