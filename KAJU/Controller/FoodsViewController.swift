@@ -109,13 +109,14 @@ class FoodsViewController: UIViewController, UpdateDelegate {
     }
     
     private func LoadFoodsData(with searchQuery: String) {
+        setupActivityIndicator()
         foodViewModel.fetchDefaultFoodData(mealType: mealType){ [weak self] in
             self?.tableView.dataSource = self
             self?.tableView.reloadData()
+            self?.showActivityIndicator(show: true)
         }
-        // Called at the beginning to do an API call and fill targetFoods
-        setupActivityIndicator()
         showActivityIndicator(show: true)
+        // Called at the beginning to do an API call and fill targetFoods
         foodViewModel.fetchSearchedFoodData(searchQuery:searchQuery,pagination: false){ [weak self] in
             self?.tableView.dataSource = self
             self?.tableView.reloadData()
@@ -227,7 +228,7 @@ extension FoodsViewController: UIScrollViewDelegate{
     }
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let position = scrollView.contentOffset.y
-        if position > (tableView.contentSize.height-100-scrollView.frame.size.height){
+        if searchEnable && position > (tableView.contentSize.height-100-scrollView.frame.size.height){
             
             guard !foodViewModel.apiService.isPaginating else {
                 // we are already fetching more data
@@ -280,7 +281,7 @@ extension FoodsViewController: UITableViewDataSource, UITableViewDelegate {
         }
         else {
             searchBar.text = foodSearchSuggestions[indexPath.row]
-            foodSearchSuggestions = []
+            self.searchBarSearchButtonClicked(self.searchBar)
             tableView.reloadData()
         }
     }
@@ -292,10 +293,22 @@ extension FoodsViewController: UITableViewDataSource, UITableViewDelegate {
         
         if favEnable && !searchEnable && foodSearchSuggestions.count == 0{
             numberOfRow = favFoods.count
+            if numberOfRow != 0 {
+                tableView.restore()
+            }
+            else {
+                tableView.setEmptyView(title: "You don't have any saved favorite foods.", message: "Your saved favorite foods will be in here.")
+            }
             print("favEnabled: ", numberOfRow.description)
         }
         else if recentsEnable && !searchEnable && foodSearchSuggestions.count == 0{
             numberOfRow = recentFoods.count
+            if numberOfRow != 0 {
+                tableView.restore()
+            }
+            else {
+                tableView.setEmptyView(title: "You don't have any foods that added to your diary.", message: "Your recent foods that you added to diary will be in here.")
+            }
         }
         else if !searchEnable && foodSearchSuggestions.count == 0{
             numberOfRow = foodViewModel.frequentFoods.count
@@ -370,6 +383,24 @@ extension FoodsViewController: UITableViewDataSource, UITableViewDelegate {
             return 35
         }
     }
+    
+    // Sola kaydırarak silme işlevi
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        
+        var action = UISwipeActionsConfiguration()
+        if favEnable && !searchEnable{
+            let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { (action, view, completionHandler) in
+                let foodToDelete = self.favFoods[indexPath.row]
+                self.appDelegate.persistentContainer3.viewContext.delete(foodToDelete)
+                try? self.appDelegate.persistentContainer3.viewContext.save()
+                self.favFoods.remove(at: indexPath.row)
+                self.tableView.deleteRows(at: [indexPath], with: .automatic)
+                completionHandler(true)
+            }
+            action =  UISwipeActionsConfiguration(actions: [deleteAction])
+        }
+        return action
+    }
         
 
 } // ends of extension: TableView
@@ -380,7 +411,7 @@ extension FoodsViewController: UISearchBarDelegate {
     // Arama için query oluşturan fonksiyon
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchEnable = true
-        self.searchBar.showsCancelButton = true
+        searchBar.setShowsCancelButton(true, animated: true)
         if let searchQuery = searchBar.text {
             if searchQuery != "" {
                 foodSearchSuggestions = []
@@ -429,14 +460,16 @@ extension FoodsViewController: UISearchBarDelegate {
     }
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-            self.searchBar.showsCancelButton = true
-            searchBar.placeholder = "Search For A Food"
+        searchBar.setShowsCancelButton(true, animated: true)
+        searchBar.placeholder = "Search For A Food"
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-            searchBar.text = ""
-            searchBar.resignFirstResponder()
-            searchEnable = false
+        searchBar.text = ""
+        searchBar.resignFirstResponder()
+        searchEnable = false
+        foodSearchSuggestions = []
+        searchBar.setShowsCancelButton(false, animated: true)
         tableView.reloadData()
     }
 } // ends of extension: UISearchBarDelegate
