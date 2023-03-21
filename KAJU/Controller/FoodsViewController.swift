@@ -10,6 +10,8 @@ import CoreData
 
 class FoodsViewController: UIViewController, UpdateDelegate {
     
+    var foodCount = 0
+    
     var query = "egg"
     
     var searchEnable = false
@@ -238,9 +240,9 @@ extension FoodsViewController: UIScrollViewDelegate{
             }
             self.tableView.tableFooterView = createSpinnerFooter()
             foodViewModel.fetchFoodData(pagination: true){ [weak self] in
-                self?.tableView.tableFooterView = nil
                 self?.tableView.dataSource = self
                 self?.tableView.reloadData()
+                self?.tableView.tableFooterView = nil
             }
         }
     }
@@ -331,13 +333,16 @@ extension FoodsViewController: UITableViewDataSource, UITableViewDelegate {
             foodCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! FoodTableViewCell // Initialize cell
             let food = fitTheFood2(foodTarget: favFoods[indexPath.row])
             foodCell.setCellWithValuesOf(food)
+            foodCell.separatorInset.bottom = tableView.bounds.size.width
             return foodCell
         }
         else if recentsEnable && !searchEnable && foodSearchSuggestions.count == 0{
+            
             var foodCell : FoodTableViewCell // Declare the cell
             foodCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! FoodTableViewCell // Initialize cell
             let food = fitTheFood(foodTarget: recentFoods[indexPath.row])
             foodCell.setCellWithValuesOf(food)
+            foodCell.separatorInset.bottom = tableView.bounds.size.width
             return foodCell
             
         }
@@ -346,6 +351,7 @@ extension FoodsViewController: UITableViewDataSource, UITableViewDelegate {
             foodCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! FoodTableViewCell // Initialize cell
             let food = foodViewModel.frequentFoods[indexPath.row]
             foodCell.setCellWithValuesOf(food)
+            foodCell.separatorInset.bottom = tableView.bounds.size.width
             return foodCell
         }
         else if foodSearchSuggestions.count == 0 {
@@ -353,12 +359,15 @@ extension FoodsViewController: UITableViewDataSource, UITableViewDelegate {
             foodCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! FoodTableViewCell // Initialize cell
             let food = foodViewModel.cellForRowAt(indexPath: indexPath)
             foodCell.setCellWithValuesOf(food)
+            foodCell.separatorInset.bottom = tableView.bounds.size.width
             return foodCell
             
         }
         else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "autoCompleteCell")!
             
+            let cell = tableView.dequeueReusableCell(withIdentifier: "autoCompleteCell")!
+            print("right?")
+            self.tableView.separatorStyle = .singleLine
             cell.contentView.backgroundColor = UIColor( red: 26/255, green: 47/255, blue: 75/255, alpha: 1)
             cell.textLabel?.numberOfLines = 1
             cell.textLabel?.font = UIFont(name: "Verdana", size: 16)
