@@ -281,7 +281,7 @@ extension FoodsViewController: UITableViewDataSource, UITableViewDelegate {
         }
         else {
             searchBar.text = foodSearchSuggestions[indexPath.row]
-            foodSearchSuggestions = []
+            self.searchBarSearchButtonClicked(self.searchBar)
             tableView.reloadData()
         }
     }
@@ -381,7 +381,7 @@ extension FoodsViewController: UISearchBarDelegate {
     // Arama için query oluşturan fonksiyon
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchEnable = true
-        self.searchBar.showsCancelButton = true
+        searchBar.setShowsCancelButton(true, animated: true)
         if let searchQuery = searchBar.text {
             if searchQuery != "" {
                 foodSearchSuggestions = []
@@ -430,14 +430,16 @@ extension FoodsViewController: UISearchBarDelegate {
     }
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-            self.searchBar.showsCancelButton = true
-            searchBar.placeholder = "Search For A Food"
+        searchBar.setShowsCancelButton(true, animated: true)
+        searchBar.placeholder = "Search For A Food"
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-            searchBar.text = ""
-            searchBar.resignFirstResponder()
-            searchEnable = false
+        searchBar.text = ""
+        searchBar.resignFirstResponder()
+        searchEnable = false
+        foodSearchSuggestions = []
+        searchBar.setShowsCancelButton(false, animated: true)
         tableView.reloadData()
     }
 } // ends of extension: UISearchBarDelegate
