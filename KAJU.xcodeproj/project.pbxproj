@@ -13,8 +13,8 @@
 		2D850C3F299BFA6F00A525F0 /* FoodModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D850C3E299BFA6F00A525F0 /* FoodModel.swift */; };
 		2D850C41299BFA8E00A525F0 /* FoodApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D850C40299BFA8E00A525F0 /* FoodApiService.swift */; };
 		2D850C43299BFAAD00A525F0 /* FoodViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D850C42299BFAAD00A525F0 /* FoodViewModel.swift */; };
+		2D8A39CB29CB9FF100897B18 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2D8A39C929CB9FF100897B18 /* Main.storyboard */; };
 		2D91D95629C5BD100095C9AA /* FavoriteFoodsOffline.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2D91D95429C5BD100095C9AA /* FavoriteFoodsOffline.xcdatamodeld */; };
-		2DBCA23C29CB918700B0653E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2DBCA23B29CB918700B0653E /* Main.storyboard */; };
 		2DBCA23E29CB91A400B0653E /* BurnedCalTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DBCA23D29CB91A400B0653E /* BurnedCalTracker.swift */; };
 		2DF9F2F8299D1B530023AB7C /* FoodTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DF9F2F7299D1B530023AB7C /* FoodTableViewCell.swift */; };
 		33BBF98882CBF449C942A21C /* Pods_KAJU.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAF2C5DAE50E9AB50509E94F /* Pods_KAJU.framework */; };
@@ -91,8 +91,8 @@
 		2D850C3E299BFA6F00A525F0 /* FoodModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodModel.swift; sourceTree = "<group>"; };
 		2D850C40299BFA8E00A525F0 /* FoodApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodApiService.swift; sourceTree = "<group>"; };
 		2D850C42299BFAAD00A525F0 /* FoodViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodViewModel.swift; sourceTree = "<group>"; };
+		2D8A39CA29CB9FF100897B18 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2D91D95529C5BD100095C9AA /* FavoriteFoodsOffline.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FavoriteFoodsOffline.xcdatamodel; sourceTree = "<group>"; };
-		2DBCA23B29CB918700B0653E /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = ../../../../Desktop/Main.storyboard; sourceTree = "<group>"; };
 		2DBCA23D29CB91A400B0653E /* BurnedCalTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurnedCalTracker.swift; sourceTree = "<group>"; };
 		2DF9F2F7299D1B530023AB7C /* FoodTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodTableViewCell.swift; sourceTree = "<group>"; };
 		86387DEFE4A93B11BD601BE5 /* Pods-KAJU.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KAJU.debug.xcconfig"; path = "Target Support Files/Pods-KAJU/Pods-KAJU.debug.xcconfig"; sourceTree = "<group>"; };
@@ -312,7 +312,7 @@
 				FEE9E14F299DAB87007FA5FB /* RecipeTableView.swift */,
 				FEFFFD2629A63C770001999E /* CustomHeaderCell.swift */,
 				FE9BCD7629A6C2A400D88351 /* InstructionsHeaderCell.swift */,
-				2DBCA23B29CB918700B0653E /* Main.storyboard */,
+				2D8A39C929CB9FF100897B18 /* Main.storyboard */,
 				FEBF1DD42986BB4600FD4760 /* LaunchScreen.storyboard */,
 				FEA6096829ACF985005E7820 /* CircleButton.swift */,
 			);
@@ -421,10 +421,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2DBCA23C29CB918700B0653E /* Main.storyboard in Resources */,
 				FEBF1DD62986BB4600FD4760 /* LaunchScreen.storyboard in Resources */,
 				FEE2CDEB2989A4B0002DAA6F /* guitar_alarm_sound.wav in Resources */,
 				FEC0322029B8F74D001C71A5 /* beep_message_alarm.mp3 in Resources */,
+				2D8A39CB29CB9FF100897B18 /* Main.storyboard in Resources */,
 				FE0BB00A299519690062E096 /* GoogleService-Info.plist in Resources */,
 				FEBF1DD32986BB4600FD4760 /* Assets.xcassets in Resources */,
 			);
@@ -551,6 +551,14 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		2D8A39C929CB9FF100897B18 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2D8A39CA29CB9FF100897B18 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
 		FEBF1DD42986BB4600FD4760 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
