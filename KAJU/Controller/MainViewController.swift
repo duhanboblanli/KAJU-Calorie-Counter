@@ -112,6 +112,13 @@ class MainViewController: UITableViewController {
  
     }
     
+    @objc
+        func burnedTapFunction(sender:UITapGestureRecognizer) {
+            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+            let nextViewController = storyBoard.instantiateViewController(withIdentifier: "BurnedCalTracker") as! BurnedCalTracker
+            self.navigationController?.pushViewController(nextViewController, animated: true)
+        }
+    
     // breakfast, dinners vs. total değerleri ekler
     func calculateTotalValues() {
         let carbsCalorie = Float(totalCal) * Float(0.5)
@@ -199,6 +206,10 @@ class MainViewController: UITableViewController {
     
     
     private func define(){
+        
+        let burnedTap = UITapGestureRecognizer(target: self, action: #selector(MainViewController.burnedTapFunction))
+        calorieBurned.isUserInteractionEnabled = true
+        calorieBurned.addGestureRecognizer(burnedTap)
         
         //addBreakfastButton.addTarget(self, action: "addBreakfastButtonClicked:", for: .touchUpInside)
         

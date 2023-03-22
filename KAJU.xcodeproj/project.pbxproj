@@ -14,6 +14,8 @@
 		2D850C41299BFA8E00A525F0 /* FoodApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D850C40299BFA8E00A525F0 /* FoodApiService.swift */; };
 		2D850C43299BFAAD00A525F0 /* FoodViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D850C42299BFAAD00A525F0 /* FoodViewModel.swift */; };
 		2D91D95629C5BD100095C9AA /* FavoriteFoodsOffline.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2D91D95429C5BD100095C9AA /* FavoriteFoodsOffline.xcdatamodeld */; };
+		2DBCA23C29CB918700B0653E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2DBCA23B29CB918700B0653E /* Main.storyboard */; };
+		2DBCA23E29CB91A400B0653E /* BurnedCalTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DBCA23D29CB91A400B0653E /* BurnedCalTracker.swift */; };
 		2DF9F2F8299D1B530023AB7C /* FoodTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DF9F2F7299D1B530023AB7C /* FoodTableViewCell.swift */; };
 		33BBF98882CBF449C942A21C /* Pods_KAJU.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAF2C5DAE50E9AB50509E94F /* Pods_KAJU.framework */; };
 		FE08EA90298F06EC008BDC6A /* CalculatorBrain.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE08EA8F298F06EC008BDC6A /* CalculatorBrain.swift */; };
@@ -27,7 +29,6 @@
 		FE32926D2991AF740075A5B8 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE32926C2991AF740075A5B8 /* WelcomeViewController.swift */; };
 		FE41A2012997ABA200892346 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE41A2002997ABA200892346 /* TabBarController.swift */; };
 		FE44DF0229B5DDC3005CD7C1 /* FoodDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE44DF0129B5DDC3005CD7C1 /* FoodDetailVC.swift */; };
-		FE4C750329A175B400723DC6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FEBF1DCF2986BB4400FD4760 /* Main.storyboard */; };
 		FE59984E298B0EDF002CB4DF /* CalculatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE59984D298B0EDF002CB4DF /* CalculatorViewController.swift */; };
 		FE599850298B1C55002CB4DF /* CalculatorResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE59984F298B1C55002CB4DF /* CalculatorResultViewController.swift */; };
 		FE5DEF5D299BC5AC00F13802 /* FoodsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5DEF5C299BC5AC00F13802 /* FoodsViewController.swift */; };
@@ -91,6 +92,8 @@
 		2D850C40299BFA8E00A525F0 /* FoodApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodApiService.swift; sourceTree = "<group>"; };
 		2D850C42299BFAAD00A525F0 /* FoodViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodViewModel.swift; sourceTree = "<group>"; };
 		2D91D95529C5BD100095C9AA /* FavoriteFoodsOffline.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FavoriteFoodsOffline.xcdatamodel; sourceTree = "<group>"; };
+		2DBCA23B29CB918700B0653E /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = ../../../../Desktop/Main.storyboard; sourceTree = "<group>"; };
+		2DBCA23D29CB91A400B0653E /* BurnedCalTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurnedCalTracker.swift; sourceTree = "<group>"; };
 		2DF9F2F7299D1B530023AB7C /* FoodTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodTableViewCell.swift; sourceTree = "<group>"; };
 		86387DEFE4A93B11BD601BE5 /* Pods-KAJU.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KAJU.debug.xcconfig"; path = "Target Support Files/Pods-KAJU/Pods-KAJU.debug.xcconfig"; sourceTree = "<group>"; };
 		CAF2C5DAE50E9AB50509E94F /* Pods_KAJU.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KAJU.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -118,7 +121,6 @@
 		FEBF1DC92986BB4400FD4760 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FEBF1DCB2986BB4400FD4760 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		FEBF1DCD2986BB4400FD4760 /* EggTimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EggTimerViewController.swift; sourceTree = "<group>"; };
-		FEBF1DD02986BB4400FD4760 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		FEBF1DD22986BB4600FD4760 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FEBF1DD52986BB4600FD4760 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FEBF1DD72986BB4600FD4760 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -310,7 +312,7 @@
 				FEE9E14F299DAB87007FA5FB /* RecipeTableView.swift */,
 				FEFFFD2629A63C770001999E /* CustomHeaderCell.swift */,
 				FE9BCD7629A6C2A400D88351 /* InstructionsHeaderCell.swift */,
-				FEBF1DCF2986BB4400FD4760 /* Main.storyboard */,
+				2DBCA23B29CB918700B0653E /* Main.storyboard */,
 				FEBF1DD42986BB4600FD4760 /* LaunchScreen.storyboard */,
 				FEA6096829ACF985005E7820 /* CircleButton.swift */,
 			);
@@ -348,6 +350,7 @@
 				FEC1A96A29B787F500342AF6 /* ProfileSettingsController.swift */,
 				FEC1A96829B787F200342AF6 /* ProfileViewController.swift */,
 				FEC1A96729B787F100342AF6 /* SettingsViewController.swift */,
+				2DBCA23D29CB91A400B0653E /* BurnedCalTracker.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -418,11 +421,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2DBCA23C29CB918700B0653E /* Main.storyboard in Resources */,
 				FEBF1DD62986BB4600FD4760 /* LaunchScreen.storyboard in Resources */,
 				FEE2CDEB2989A4B0002DAA6F /* guitar_alarm_sound.wav in Resources */,
 				FEC0322029B8F74D001C71A5 /* beep_message_alarm.mp3 in Resources */,
 				FE0BB00A299519690062E096 /* GoogleService-Info.plist in Resources */,
-				FE4C750329A175B400723DC6 /* Main.storyboard in Resources */,
 				FEBF1DD32986BB4600FD4760 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -503,6 +506,7 @@
 				FE6FCCFF29A7B6B700FDE008 /* FavoritesCell.swift in Sources */,
 				13F883F329B8B10500BBCF25 /* DatabaseSingleton.swift in Sources */,
 				FEC1A95F29B787C800342AF6 /* SettingsCell.swift in Sources */,
+				2DBCA23E29CB91A400B0653E /* BurnedCalTracker.swift in Sources */,
 				FE5E92AB298D1C5400947F7A /* BMI.swift in Sources */,
 				FE5DEF5D299BC5AC00F13802 /* FoodsViewController.swift in Sources */,
 				FE160F5529A28A6400876278 /* RecipeViewModel.swift in Sources */,
@@ -547,14 +551,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		FEBF1DCF2986BB4400FD4760 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				FEBF1DD02986BB4400FD4760 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		FEBF1DD42986BB4600FD4760 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
