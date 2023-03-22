@@ -50,6 +50,13 @@ class FoodDetailVC: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.contentInsetAdjustmentBehavior = .never
+        tableView.contentInset = UIEdgeInsets(top: self.tabBarController!.tabBar.frame.size.height,left: 0,bottom: 0,right: 0)
+        /*if #available(iOS 15.0, *) {
+            tableView.sectionHeaderTopPadding = 70
+        } else {
+            // Fallback on earlier versions
+        }*/
         favoriteAction()
         stepper.minimumValue = 0.1
         stepper.stepValue = 0.1
