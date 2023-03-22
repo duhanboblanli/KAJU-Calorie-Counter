@@ -19,6 +19,9 @@ class FoodDetailVC: UITableViewController {
     var query = "egg"
     var foodType = "currentBreakfastCal"
     
+    var previousValue = 1.0
+    var valueCheck = true
+    
     let db = Firestore.firestore()
     var food: FoodStruct!
     var image = UIImage()
@@ -30,6 +33,8 @@ class FoodDetailVC: UITableViewController {
     var favFood: FavFoodEntity!
     var favFoods: [FavFoodEntity]!
     var recentFoods: [FoodEntity]!
+    
+    var floatActive = true
     
     var isFav: Bool = false
     var isFav2: Bool = false
@@ -46,6 +51,8 @@ class FoodDetailVC: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         favoriteAction()
+        stepper.minimumValue = 0.1
+        stepper.stepValue = 0.1
         stepper.enableManualEditing = true
         if query == "egg" {
             foodType = "currentBreakfastCal"
@@ -233,14 +240,34 @@ class FoodDetailVC: UITableViewController {
     
     @IBAction func stepperValueChanged(_ sender: ValueStepper) {
         
+        if sender.value >= 2{
+            sender.value = round(sender.value)
+        }
+        else if sender.value > 1 && valueCheck{
+            sender.value = 2
+            valueCheck = false
+            sender.stepValue = 1
+        }
+        else{
+            valueCheck = true
+            sender.stepValue = 0.1
+        }
+        print("steps amk: ", sender.value)
         amount = sender.value
         if let title = food.label, let wholeGram = food.wholeGram, let measureLabel = food.measureLabel {
-            foodNameTitle.text = "\(Int(amount)) \(measureLabel) \(title) (\(Int(wholeGram)*Int(amount))g)"
+    
+            if amount >= 1{
+                foodNameTitle.text = "\(Int(amount)) \(measureLabel) \(title) (\(Int(wholeGram*Float(amount)))g)"
+            }
+            else{
+                foodNameTitle.text = "\(Float(amount)) \(measureLabel) \(title) (\(Int(wholeGram*Float(amount)))g)"
+            }
+            
         }
         
         if let calorie = food.calorie, let carbs = food.carbs, let protein = food.protein, let fat = food.fat, let wholeGram = food.wholeGram {
             let multiple = wholeGram / 100
-            let calInt = Int((calorie * multiple).rounded()) * Int(amount)
+            let calInt = Int(calorie * multiple * Float(amount))
             let carbFloat = (carbs * multiple) * Float(amount)
             targetCarb += carbFloat
             let carbStr = String(format: "%.1f", carbFloat)

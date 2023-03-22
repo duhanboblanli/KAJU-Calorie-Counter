@@ -68,7 +68,6 @@ class FoodViewModel {
                 print(result)
                 switch result{
                 case .success(let listOf):
-                    print("brekfestrjhjhjhjhjhjhjhhj")
                     self!.fetchFoodImage2(url: listOf.hints[0].food.image!,food: listOf.hints[0].food , measure: listOf.hints[0].measures[0], index: i){ [weak self] in
                         //self?.Images = Array(repeating: UIImage(named: "background")!, count: listOf.games.count)
                     }
@@ -106,7 +105,6 @@ class FoodViewModel {
                             theListWithoutImagelessFoods.append(food)
                         }
                     }
-                    print("yassss", theListWithoutImagelessFoods.count)
                     var url2 = ""
                     self?.nextPageUrl = (listOf._links.next?.href)!
                     //FoodStruct
@@ -116,26 +114,19 @@ class FoodViewModel {
                         }
                     }
                     if !(self!.check2) && theListWithoutImagelessFoods.count < 10{
-                        print("lalalala show must go on")
                         DispatchQueue.main.async {
                             self?.check2 = true
                         }
                     }
-                    print("lalalalaBIRINCI BIRINCI" + self!.check.description + self!.check2.description)
                     if self!.check < 10 && self!.check2{
-                        print("lalalalaIKINCI IKINCI" + self!.check.description + self!.check2.description)
                         DispatchQueue.main.async {
                             self?.check = self!.check + theListWithoutImagelessFoods.count
                             if self!.check >= 10{
-                                print("lalalalaUCUNCU UCUNCU" + self!.check.description + self!.check2.description)
                                 self?.check2 = false
                                 self!.check = 0
                             }
                             else{
-                                
-                                print("lalalalaDORDUNCU DORDUNCU" + self!.check.description + self!.check2.description)
                                 self?.fetchFoodData(pagination: true){ [weak self] in
-                                    print("lalalalalaBESINCI BESINCI" + self!.check.description + self!.check2.description)
                                 }
                             }
                         }
@@ -168,7 +159,6 @@ class FoodViewModel {
                 print(result)
                 switch result{
                 case .success(let listOf):
-                    
                     var currentCount = self?.targetFoods1.count
                     var theListWithoutImagelessFoods: [FoodData] = []
                     for food in listOf.hints{
@@ -185,27 +175,20 @@ class FoodViewModel {
                         }
                     }
                     if !(self!.check2) && theListWithoutImagelessFoods.count < 10{
-                        print("ZAA**lalalala show must go on")
                         self?.check2 = true
                     }
-                    print("lalalalaZAA**BIRINCI BIRINCI" + self!.check.description + self!.check2.description)
                     if self!.check < 10 && self!.check2{
-                        print("lalalalaZAA**IKINCI IKINCI" + self!.check.description + self!.check2.description)
                         self?.check = self!.check + theListWithoutImagelessFoods.count
                         if self!.check > 10{
-                            print("lalalalalalZAA**UCUNCU UCUNCU" + self!.check.description + self!.check2.description)
                             self?.check2 = false
                             self!.check = 0
                         }
                         else{
                             DispatchQueue.main.async {
-                                print("lalalalaZAA**DORDUNCU DORDUNCU" + self!.check.description + self!.check2.description)
                                 self?.fetchFoodData(pagination: true){ [weak self] in
-                                    print("lalalalalaZAA**BESINCI BESINCI" + self!.check.description + self!.check2.description)
                                 }
                             }
                         }
-                        
                     }
                     completion()
                 case .failure(let error):
