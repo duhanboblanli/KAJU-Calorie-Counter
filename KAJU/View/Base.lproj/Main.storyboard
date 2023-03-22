@@ -2605,7 +2605,7 @@
         <scene sceneID="wUy-gG-2eC">
             <objects>
                 <tableViewController storyboardIdentifier="FoodDetailVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="M9j-Gz-vAD" customClass="FoodDetailVC" customModule="KAJU" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" indicatorStyle="black" dataMode="static" style="insetGrouped" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" id="msS-1a-c0A">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" indicatorStyle="black" dataMode="static" style="insetGrouped" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" id="msS-1a-c0A">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.1019607843" green="0.1843137255" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -2735,7 +2735,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tnV-j3-uc8">
-                                                    <rect key="frame" x="0.0" y="13" width="374" height="59"/>
+                                                    <rect key="frame" x="0.0" y="5" width="374" height="59"/>
                                                     <color key="backgroundColor" red="0.1843137255" green="0.53333333329999999" blue="0.52549019610000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="72" id="avY-XL-AOB"/>
@@ -2758,10 +2758,10 @@
                                             </subviews>
                                             <color key="backgroundColor" red="0.15686274510000001" green="0.2784313725" blue="0.36078431370000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                             <constraints>
-                                                <constraint firstAttribute="bottom" secondItem="tnV-j3-uc8" secondAttribute="bottom" id="3hU-s2-8fl"/>
+                                                <constraint firstAttribute="bottom" secondItem="tnV-j3-uc8" secondAttribute="bottom" constant="8" id="3hU-s2-8fl"/>
                                                 <constraint firstAttribute="trailing" secondItem="tnV-j3-uc8" secondAttribute="trailing" id="Jy0-Bd-8wh"/>
                                                 <constraint firstItem="tnV-j3-uc8" firstAttribute="leading" secondItem="H68-0t-ZWP" secondAttribute="leading" id="NJQ-83-CdO"/>
-                                                <constraint firstItem="tnV-j3-uc8" firstAttribute="top" secondItem="H68-0t-ZWP" secondAttribute="top" constant="13" id="mUh-pw-hfX"/>
+                                                <constraint firstItem="tnV-j3-uc8" firstAttribute="top" secondItem="H68-0t-ZWP" secondAttribute="top" constant="5" id="mUh-pw-hfX"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
