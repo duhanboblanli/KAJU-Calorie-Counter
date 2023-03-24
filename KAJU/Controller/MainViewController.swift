@@ -81,7 +81,6 @@ class MainViewController: UITableViewController {
     var totalBurnedCal = 0
     var currentBurnedCal = 0
     
-    var currentDayDb = 0
     var currentDayReal = 0
     
     @IBOutlet weak var burnedLabel: UILabel!
@@ -212,7 +211,6 @@ class MainViewController: UITableViewController {
                                     if self.currentDayReal != currentDay as? Int{
                                         self.resetData()
                                     }
-                                    self.currentDayDb = currentDay as? Int ?? 0
                                 }
                                 
                                 // db'den current değer eklendikten sonra değer sıfırlanmalı
