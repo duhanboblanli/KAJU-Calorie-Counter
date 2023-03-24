@@ -15,6 +15,7 @@ class DetailViewController: UIViewController {
     let ColorDarkGreen = UIColor( red: 40/255, green: 71/255, blue: 92/255, alpha: 1) //rgb(40, 71, 92)
     let ColorGreen = UIColor( red: 47/255, green: 136/255, blue: 134/255, alpha: 1) //rgb(47, 136, 134)
     let ColorLightGreen = UIColor( red: 132/255, green: 198/255, blue: 155/255, alpha: 1) //rgb(132, 198, 155)
+    let ColorOrange = UIColor( red: 255/255, green: 56/255, blue: 51/255, alpha: 1)
     
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     var recipe: Recipe!
@@ -24,6 +25,7 @@ class DetailViewController: UIViewController {
     var isSavedRecipe = false
     var foodRecipe: FoodRecipe! // Type, local databasede tanımlı; detail viewde tıklanan recipe
     let instructionsButton = UIButton()
+    let addToDiaryButton = UIButton()
     let tableView = UITableView.init(frame: CGRect.zero, style: .grouped)
     // For favorites
     var isFav = false
@@ -120,8 +122,10 @@ class DetailViewController: UIViewController {
     
     private func setupView() {
         view.backgroundColor = ColorHardDarkGreen
+        setupAddToDiaryButton()
         setupInstructionButton()
         setupTableView()
+        
     }
     
     private func setupTableView() {
@@ -148,7 +152,8 @@ class DetailViewController: UIViewController {
         instructionsButton.translatesAutoresizingMaskIntoConstraints = false
         instructionsButton.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor, constant: 0).isActive = true
         instructionsButton.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor, constant: 0).isActive = true
-        instructionsButton.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor,constant: -4).isActive = true
+        //instructionsButton.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor,constant: -4).isActive = true
+        instructionsButton.bottomAnchor.constraint(equalTo: addToDiaryButton.topAnchor, constant: 0).isActive = true
         instructionsButton.heightAnchor.constraint(equalToConstant: 35).isActive = true
         instructionsButton.layer.cornerRadius = 11
         instructionsButton.layer.borderWidth = 0.3
@@ -157,6 +162,21 @@ class DetailViewController: UIViewController {
         instructionsButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18.5)
         instructionsButton.backgroundColor = ColorGreen
         instructionsButton.addTarget(self, action: #selector(showInstructionsAction), for: .touchUpInside)
+    }
+    private func setupAddToDiaryButton() {
+        view.addSubview(addToDiaryButton)
+        addToDiaryButton.translatesAutoresizingMaskIntoConstraints = false
+        addToDiaryButton.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor, constant: 0).isActive = true
+        addToDiaryButton.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor, constant: 0).isActive = true
+        addToDiaryButton.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor,constant: -4).isActive = true
+        addToDiaryButton.heightAnchor.constraint(equalToConstant: 35).isActive = true
+        addToDiaryButton.layer.cornerRadius = 11
+        addToDiaryButton.layer.borderWidth = 0.3
+        addToDiaryButton.setTitle("Add To Diary", for: .normal)
+        addToDiaryButton.setTitleColor(.white, for: .normal)
+        addToDiaryButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18.5)
+        addToDiaryButton.backgroundColor = ColorOrange
+        addToDiaryButton.addTarget(self, action: #selector(addToDiaryAction), for: .touchUpInside)
     }
     
     // Save buttona daha basılmamışsa bu action'ı sağlayan buton yarat
@@ -205,7 +225,13 @@ class DetailViewController: UIViewController {
             presentAlert(title: "Unable to Save the Recipe", message: "")
         }
     }
-    
+    @objc func addToDiaryAction() {
+        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+        let nextViewController = storyBoard.instantiateViewController(withIdentifier: "FoodDetailVC") as! FoodDetailVC
+        nextViewController.isRecipe = true
+        nextViewController.food = FoodStruct(label: recipe.title, calorie: Float(recipe.calories!), image: image, carbs: Float(recipe.carbs!), fat: Float(recipe.fat!), protein: Float(recipe.protein!), wholeGram: 0.0, measureLabel: "")
+        self.navigationController?.pushViewController(nextViewController, animated: true)
+    }
     // Instruction buttona basıldığında oluşacak action
     @objc func showInstructionsAction() {
         // Recipe local databasede kayıtlıysa Recipe Instructionları local databaseden al

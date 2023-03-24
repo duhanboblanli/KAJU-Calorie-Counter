@@ -22,6 +22,8 @@ class FoodDetailVC: UITableViewController {
     var previousValue = 1.0
     var valueCheck = true
     
+    var isRecipe = false
+    
     let db = Firestore.firestore()
     var food: FoodStruct!
     var image = UIImage()
@@ -80,7 +82,10 @@ class FoodDetailVC: UITableViewController {
         }
         
         if let calorie = food.calorie, let carbs = food.carbs, let protein = food.protein, let fat = food.fat, let wholeGram = food.wholeGram {
-            let multiple = wholeGram / 100
+            var multiple = wholeGram / 100
+            if isRecipe{
+                multiple = 1
+            }
             let calInt = Int((calorie * multiple).rounded())
             let carbFloat = (carbs * multiple)
             let carbStr = String(format: "%.1f", carbFloat)
@@ -115,12 +120,14 @@ class FoodDetailVC: UITableViewController {
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        if !isFav && isFav2 {
-            saveActionAddToFavs()
-        }
-        else if isFav && !isFav2{
-            self.appDelegate.persistentContainer3.viewContext.delete(favFood)
-            try? self.appDelegate.persistentContainer3.viewContext.save()
+        if !isRecipe{
+            if !isFav && isFav2 {
+                saveActionAddToFavs()
+            }
+            else if isFav && !isFav2{
+                self.appDelegate.persistentContainer3.viewContext.delete(favFood)
+                try? self.appDelegate.persistentContainer3.viewContext.save()
+            }
         }
     }
     // save to diary
@@ -179,18 +186,20 @@ class FoodDetailVC: UITableViewController {
     
     
     func favoriteAction(){
-        for (i,fav) in favFoods.enumerated() {
-            if fav.title == food.label {
-                isFav = true
-                isFav2 = true
-                favFood = favFoods[i]
+        if !isRecipe{
+            for (i,fav) in favFoods.enumerated() {
+                if fav.title == food.label {
+                    isFav = true
+                    isFav2 = true
+                    favFood = favFoods[i]
+                }
             }
-        }
-        if isFav {
-            navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Favorited", style: .plain, target: self, action: #selector(self.unfavorite(_:)))
-        }
-        else{
-            navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Favorite", style: .plain, target: self, action: #selector(self.favorite(_:)))
+            if isFav {
+                navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Favorited", style: .plain, target: self, action: #selector(self.unfavorite(_:)))
+            }
+            else{
+                navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Favorite", style: .plain, target: self, action: #selector(self.favorite(_:)))
+            }
         }
     }
     // Change the button label and action if clicked
@@ -215,7 +224,10 @@ class FoodDetailVC: UITableViewController {
         print(targetCal,targetCarb,targetPro,targetFat)
         let amount = stepper.value
             if let calorie = food.calorie, let carbs = food.carbs, let protein = food.protein, let fat = food.fat, let wholeGram = food.wholeGram {
-                let multiple = wholeGram / 100
+                var multiple = wholeGram / 100
+                if isRecipe{
+                    multiple = 1
+                }
                 let calInt = Int((calorie * multiple).rounded()) * Int(amount)
                 targetCal += calInt
                 let carbFloat = (carbs * multiple) * Float(amount)
@@ -241,7 +253,9 @@ class FoodDetailVC: UITableViewController {
                     }
                 }
         }
-        saveActionAddToDiary()
+        if !isRecipe{
+            saveActionAddToDiary()
+        }
     }
     
     
