@@ -17,6 +17,7 @@ class RecipeTableViewCell: UITableViewCell {
     // Update the Cell UI Views
     func updateUI(recipe: Recipe, recipeCell: RecipeTableViewCell) {
         
+        
         if let title = recipe.title {
             recipeCell.name.text = title
         }

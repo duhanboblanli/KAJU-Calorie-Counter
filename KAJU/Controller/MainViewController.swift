@@ -13,6 +13,7 @@ class MainViewController: UITableViewController {
     
     let strokeColorDarkGreen = UIColor( red: 47/255, green: 160/255, blue: 134/255, alpha: 1).cgColor
     let db = Firestore.firestore()
+
     
     // Views for shapes autolayout constraints
     @IBOutlet weak var totalCalView: UIView!
@@ -77,6 +78,12 @@ class MainViewController: UITableViewController {
     var totalCal =  0
     var currentCal = 0
     
+    var totalBurnedCal = 0
+    var currentBurnedCal = 0
+    
+    var currentDayReal = 0
+    
+    @IBOutlet weak var burnedLabel: UILabel!
     @IBOutlet weak var breakfastCalLabel: UILabel!
     @IBOutlet weak var snacksCalLabel: UILabel!
     @IBOutlet weak var dinnerCalLabel: UILabel!
@@ -99,6 +106,7 @@ class MainViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        currentDayReal = Date().get(.minute, .day, .month, .year).day!
         // DB verilerini çeker, define(), loadprogressBars() çağırır
         loadData()
     }
@@ -106,6 +114,7 @@ class MainViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.navigationItem.setHidesBackButton(true, animated: true)
         carbsProgressBar.progressTintColor = UIColor( red: 47/255, green: 160/255, blue: 134/255, alpha: 1)
         fatProgressBar.progressTintColor = UIColor( red: 47/255, green: 160/255, blue: 134/255, alpha: 1)
         proteinProgressBar.progressTintColor = UIColor( red: 47/255, green: 160/255, blue: 134/255, alpha: 1)
@@ -137,6 +146,28 @@ class MainViewController: UITableViewController {
         totalSnacksCal = Int(Float(totalCal) * Float(0.05))
     }
     
+    private func resetData(){
+        if let currentUserEmail = Auth.auth().currentUser?.email {
+            self.db.collection("UserInformations").document("\(currentUserEmail)").updateData([
+                "currentBreakfastCal": 0,
+                "currentLunchCal": 0,
+                "currentDinnerCal": 0,
+                "currentSnacksCal": 0,
+                "currentCarbs": 0.0,
+                "currentPro": 0.0,
+                "currentFat": 0.0,
+                "currentBurnedCal": 0,
+                "currentDay": currentDayReal
+             ]) { err in
+                    if let err = err {
+                        print("Error adding document: \(err)")
+                    } else {
+                        print("Document successfully written!")
+                    }
+                }
+        }
+    }
+    
     // Load firebase db
     private func loadData() {
         
@@ -155,27 +186,36 @@ class MainViewController: UITableViewController {
                             DispatchQueue.main.async {
                                 self.totalCal = calorie as? Int ?? 0
                                 //Breakfast and Nutrients Updated
-                                if let currentBreakfastCal = data["currentBreakfastCal"], let currentCarb = data["currentCarbs"], let currentFat = data["currentFat"], let currentPro = data["currentPro"] {
-                                    self.currentBreakfastCal += currentBreakfastCal as? Int ?? 0
-                                    self.currentCarbsG += currentCarb as? Float ?? 0.0
-                                    self.currentFatG += currentFat as? Float ?? 0.0
-                                    self.currentProteinG += currentPro as? Float ?? 0.0
+                                if let currentBreakfastCal = data["currentBreakfastCal"],let currentCarb = data["currentCarbs"], let currentFat = data["currentFat"], let currentPro = data["currentPro"] {
+                                    self.currentBreakfastCal = currentBreakfastCal as? Int ?? 0
+                                    self.currentCarbsG = Float(currentCarb as? Float64 ?? 0.0)
+                                    self.currentFatG = Float(currentFat as? Float64 ?? 0.0)
+                                    self.currentProteinG = Float(currentPro as? Float64 ?? 0.0)
                                 }// Lunch Cal Updated
                                 if let currentLunchCal = data["currentLunchCal"] {
-                                    self.currentLunchCal += currentLunchCal as? Int ?? 0
+                                    self.currentLunchCal = currentLunchCal as? Int ?? 0
                                     
                                 }// Dinner Cal Updated
                                 if let currentDinnerCal = data["currentDinnerCal"] {
-                                    self.currentDinnerCal += currentDinnerCal as? Int ?? 0
+                                    self.currentDinnerCal = currentDinnerCal as? Int ?? 0
                                    
                                 }// Snacks Cal Updated
                                 if let currentSnacksCal = data["currentSnacksCal"] {
-                                    self.currentSnacksCal += currentSnacksCal as? Int ?? 0
+                                    self.currentSnacksCal = currentSnacksCal as? Int ?? 0
                                 
+                                }// Burned Cal Updated
+                                if let currentBurnedCal = data["currentBurnedCal"] {
+                                    self.currentBurnedCal = currentBurnedCal as? Int ?? 0
                                 }
+                                if let currentDay = data["currentDay"] {
+                                    if self.currentDayReal != currentDay as? Int{
+                                        self.resetData()
+                                    }
+                                }
+                                
                                 // db'den current değer eklendikten sonra değer sıfırlanmalı
                                 // yoksa her viewDidLoad'da değer tekrar eklenir
-                                if let currentUserEmail = Auth.auth().currentUser?.email {
+                                /*if let currentUserEmail = Auth.auth().currentUser?.email {
                                     self.db.collection("UserInformations").document("\(currentUserEmail)").updateData([
                                         "currentBreakfastCal": 0,
                                         "currentLunchCal": 0,
@@ -183,7 +223,8 @@ class MainViewController: UITableViewController {
                                         "currentSnacksCal": 0,
                                         "currentCarbs": 0.0,
                                         "currentPro": 0.0,
-                                        "currentFat": 0.0
+                                        "currentFat": 0.0,
+                                        "currentBurnedCal": 0
                                      ]) { err in
                                             if let err = err {
                                                 print("Error adding document: \(err)")
@@ -191,7 +232,7 @@ class MainViewController: UITableViewController {
                                                 print("Document successfully written!")
                                             }
                                         }
-                                }
+                                }*/
                                 self.define()
                                 self.loadProgressBars()
                             }
@@ -210,6 +251,9 @@ class MainViewController: UITableViewController {
         let burnedTap = UITapGestureRecognizer(target: self, action: #selector(MainViewController.burnedTapFunction))
         calorieBurned.isUserInteractionEnabled = true
         calorieBurned.addGestureRecognizer(burnedTap)
+        let burnedTap2 = UITapGestureRecognizer(target: self, action: #selector(MainViewController.burnedTapFunction))
+        burnedLabel.isUserInteractionEnabled = true
+        burnedLabel.addGestureRecognizer(burnedTap2)
         
         //addBreakfastButton.addTarget(self, action: "addBreakfastButtonClicked:", for: .touchUpInside)
         
@@ -221,8 +265,9 @@ class MainViewController: UITableViewController {
         print("insideDefine:\(totalCal)")
         print("insideDefine:\(currentCal)")
         calculateTotalValues()
-        calorieRemaining.text = abs((totalCal - currentCal)).description
+        calorieRemaining.text = abs((totalCal + currentBurnedCal - currentCal)).description
         calorieEaten.text = currentCal.description
+        calorieBurned.text = currentBurnedCal.description
         let currentCarbsGStr = String(format: "%.1f", currentCarbsG)
         carbsLabel.text = currentCarbsGStr + " / " + totalCarbsG.description + " g"
         let currentProGStr = String(format: "%.1f", currentProteinG)
@@ -403,7 +448,7 @@ class MainViewController: UITableViewController {
     private func loadProgressBars() {
         // Load Total Calorie Bar
         print("insideLoadProgressBar:\(totalCal)")
-        var currentRate = 1-CGFloat(totalCal-currentCal)/CGFloat(totalCal)
+        var currentRate = 1-CGFloat(totalCal+currentBurnedCal-currentCal)/CGFloat(totalCal)
         var startAngle = CGFloat.pi*3/4
         var progress = CGFloat.pi*3/2*CGFloat(currentRate)
         var currentEndAngle = startAngle + progress
@@ -558,3 +603,12 @@ class MainViewController: UITableViewController {
     
 }
 
+extension Date {
+    func get(_ components: Calendar.Component..., calendar: Calendar = Calendar.current) -> DateComponents {
+        return calendar.dateComponents(Set(components), from: self)
+    }
+
+    func get(_ component: Calendar.Component, calendar: Calendar = Calendar.current) -> Int {
+        return calendar.component(component, from: self)
+    }
+}
