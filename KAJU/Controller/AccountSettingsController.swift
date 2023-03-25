@@ -90,8 +90,33 @@ class AccountSettingsController: UIViewController, UITableViewDelegate, UITableV
     }
     
     @objc func logOutAccount(){
-        
+        showSimpleAlert()
     }
+    
+    func showSimpleAlert() {
+        let alert = UIAlertController(title: "Are you sure you want to Log Out ?", message: nil,
+                                      preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.default, handler: { _ in
+            //Cancel Action
+            }))
+            alert.addAction(UIAlertAction(title: "Log Out",
+                                          style: UIAlertAction.Style.destructive,
+                                          handler: {(_: UIAlertAction!) in
+                let auth = Auth.auth()
+                //Sign out action
+                do {
+                    try auth.signOut()
+                    let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+                    let rootViewController: UIViewController = storyboard.instantiateViewController(withIdentifier: "nRoot")
+                    self.view.window?.rootViewController = rootViewController
+                    self.navigationController?.popToRootViewController(animated: true)
+
+                }catch _{}
+            }))
+        self.present(alert, animated: true, completion: nil)
+    }
+        
+
     
     func configureLayout(){
         tableTitle.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, bottom: tableView.topAnchor, right: view.rightAnchor, paddingTop: 32, paddingLeft: 16, paddingBottom: 16, paddingRight: 16)
