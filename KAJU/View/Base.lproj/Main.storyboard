@@ -1792,7 +1792,7 @@
         <scene sceneID="t9C-Ju-GPw">
             <objects>
                 <tableViewController storyboardIdentifier="MainViewController" id="hsl-iQ-Lzd" customClass="MainViewController" customModule="KAJU" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="insetGrouped" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" id="d7x-bm-tll">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="insetGrouped" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="16" estimatedSectionHeaderHeight="-1" sectionFooterHeight="16" estimatedSectionFooterHeight="-1" id="d7x-bm-tll">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="813"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.1019607843" green="0.1843137255" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -1801,7 +1801,7 @@
                             <tableViewSection id="GoN-h6-8ud">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="203" id="VhB-sZ-8UN">
-                                        <rect key="frame" x="20" y="18" width="374" height="203"/>
+                                        <rect key="frame" x="20" y="16" width="374" height="203"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="VhB-sZ-8UN" id="2ln-fC-ZFX">
                                             <rect key="frame" x="0.0" y="0.0" width="374" height="203"/>
@@ -1990,7 +1990,7 @@
                             <tableViewSection id="KtR-vJ-be1">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="85" id="9tg-xi-wOH">
-                                        <rect key="frame" x="20" y="257" width="374" height="85"/>
+                                        <rect key="frame" x="20" y="251" width="374" height="85"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="9tg-xi-wOH" id="ZXK-bR-Cza">
                                             <rect key="frame" x="0.0" y="0.0" width="374" height="85"/>
@@ -2075,7 +2075,7 @@
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="85" id="xzg-tN-eDH">
-                                        <rect key="frame" x="20" y="342" width="374" height="85"/>
+                                        <rect key="frame" x="20" y="336" width="374" height="85"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="xzg-tN-eDH" id="fFJ-ij-bLj">
                                             <rect key="frame" x="0.0" y="0.0" width="374" height="85"/>
@@ -2160,7 +2160,7 @@
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="85" id="i2i-Lk-RNc">
-                                        <rect key="frame" x="20" y="427" width="374" height="85"/>
+                                        <rect key="frame" x="20" y="421" width="374" height="85"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="i2i-Lk-RNc" id="ino-o8-Wn8">
                                             <rect key="frame" x="0.0" y="0.0" width="374" height="85"/>
@@ -2245,7 +2245,7 @@
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="85" id="re3-YZ-byF">
-                                        <rect key="frame" x="20" y="512" width="374" height="85"/>
+                                        <rect key="frame" x="20" y="506" width="374" height="85"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="re3-YZ-byF" id="zS1-IO-krZ">
                                             <rect key="frame" x="0.0" y="0.0" width="374" height="85"/>
@@ -2327,6 +2327,85 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
+                            <tableViewSection id="IDn-pS-b4f">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="60" id="aaH-UV-a4c">
+                                        <rect key="frame" x="20" y="623" width="374" height="60"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="aaH-UV-a4c" id="jwS-d5-S1a">
+                                            <rect key="frame" x="0.0" y="0.0" width="374" height="60"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZsO-HB-5Bs">
+                                                    <rect key="frame" x="283" y="15" width="71" height="30"/>
+                                                    <color key="tintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <buttonConfiguration key="configuration" style="plain"/>
+                                                    <connections>
+                                                        <action selector="caloryBurnedButtonPressed:" destination="hsl-iQ-Lzd" eventType="touchUpInside" id="mhd-c2-7Oe"/>
+                                                    </connections>
+                                                </button>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Calories Burned" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TSC-GR-lTM">
+                                                    <rect key="frame" x="101" y="15" width="161" height="30"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vc6-Ki-buG">
+                                                    <rect key="frame" x="34" y="17" width="52" height="26"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="🔥" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gTY-nR-6Bn">
+                                                            <rect key="frame" x="0.0" y="0.0" width="52" height="26"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="35" id="2qP-s7-fdP"/>
+                                                                <constraint firstAttribute="width" constant="35" id="pbW-uy-aF9"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstAttribute="bottomMargin" secondItem="gTY-nR-6Bn" secondAttribute="bottom" constant="-8" id="7dY-x6-03T"/>
+                                                        <constraint firstItem="gTY-nR-6Bn" firstAttribute="top" secondItem="Vc6-Ki-buG" secondAttribute="topMargin" constant="-8" id="DI8-TO-nhF"/>
+                                                        <constraint firstItem="gTY-nR-6Bn" firstAttribute="leading" secondItem="Vc6-Ki-buG" secondAttribute="leadingMargin" constant="-8" id="fmz-pc-jpX"/>
+                                                        <constraint firstAttribute="trailingMargin" secondItem="gTY-nR-6Bn" secondAttribute="trailing" constant="-8" id="wgl-GF-FSo"/>
+                                                    </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="strokeStart">
+                                                            <real key="value" value="0.0"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="strokeEnd">
+                                                            <real key="value" value="1"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="strokeColor">
+                                                            <color key="value" systemColor="systemPinkColor"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="lineWidth">
+                                                            <real key="value" value="1"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </view>
+                                            </subviews>
+                                            <color key="backgroundColor" red="0.15686274510000001" green="0.2784313725" blue="0.36078431370000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="ZsO-HB-5Bs" secondAttribute="trailing" constant="20" symbolic="YES" id="7AC-ak-6Sn"/>
+                                                <constraint firstAttribute="bottom" secondItem="TSC-GR-lTM" secondAttribute="bottom" constant="15" id="7cp-dY-u1H"/>
+                                                <constraint firstItem="ZsO-HB-5Bs" firstAttribute="leading" secondItem="jwS-d5-S1a" secondAttribute="leading" constant="283" id="8Gp-0G-rX8"/>
+                                                <constraint firstItem="TSC-GR-lTM" firstAttribute="top" secondItem="jwS-d5-S1a" secondAttribute="top" constant="15" id="9Ii-rW-9bn"/>
+                                                <constraint firstItem="TSC-GR-lTM" firstAttribute="leading" secondItem="jwS-d5-S1a" secondAttribute="leading" constant="101" id="9pZ-dG-OXt"/>
+                                                <constraint firstItem="Vc6-Ki-buG" firstAttribute="top" secondItem="jwS-d5-S1a" secondAttribute="topMargin" constant="6" id="AUY-rm-QI2"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="Vc6-Ki-buG" secondAttribute="bottom" constant="6" id="SCf-IN-RNQ"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="Vc6-Ki-buG" secondAttribute="trailing" constant="268" id="UBA-tg-JTb"/>
+                                                <constraint firstAttribute="trailing" secondItem="TSC-GR-lTM" secondAttribute="trailing" constant="112" id="k9k-cR-qqI"/>
+                                                <constraint firstItem="ZsO-HB-5Bs" firstAttribute="top" secondItem="jwS-d5-S1a" secondAttribute="top" constant="15" id="lzH-nZ-hLP"/>
+                                                <constraint firstItem="Vc6-Ki-buG" firstAttribute="leading" secondItem="jwS-d5-S1a" secondAttribute="leadingMargin" constant="14" id="n7i-v8-jia"/>
+                                                <constraint firstAttribute="bottom" secondItem="ZsO-HB-5Bs" secondAttribute="bottom" constant="15" id="u4X-LE-bDK"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
                         </sections>
                         <connections>
                             <outlet property="dataSource" destination="hsl-iQ-Lzd" id="GcW-Al-Std"/>
@@ -2359,7 +2438,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="coY-ef-4QL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1100" y="809.15492957746483"/>
+            <point key="canvasLocation" x="-1100" y="808.92857142857144"/>
         </scene>
         <!--Foods View Controller-->
         <scene sceneID="uyc-iH-is8">
@@ -2646,7 +2725,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="374" height="100"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter the Calory                   You Burned Today:" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="20" translatesAutoresizingMaskIntoConstraints="NO" id="vB6-G2-8lm">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter the Calorie                   You Burned Today:" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="20" translatesAutoresizingMaskIntoConstraints="NO" id="vB6-G2-8lm">
                                                     <rect key="frame" x="0.0" y="0.0" width="374" height="94"/>
                                                     <color key="backgroundColor" red="0.15686274510000001" green="0.2784313725" blue="0.36078431370000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="30"/>

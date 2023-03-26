@@ -411,6 +411,13 @@ class MainViewController: UITableViewController {
     } // ends of func define()
     
  
+    
+    @IBAction func caloryBurnedButtonPressed(_ sender: UIButton) {
+        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+        let nextViewController = storyBoard.instantiateViewController(withIdentifier: "BurnedCalTracker") as! BurnedCalTracker
+        self.navigationController?.pushViewController(nextViewController, animated: true)
+    }
+    
     private func addBreakfastButtonClicked() {
         if let vc = storyboard?.instantiateViewController(identifier:
         "FoodsViewController") as?
@@ -532,15 +539,15 @@ class MainViewController: UITableViewController {
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 2
+        return 3
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        if section == 0 {
-            return 1
+        if section == 1 {
+            return 4
         }
-        return 4
+        return 1
     }
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 5
