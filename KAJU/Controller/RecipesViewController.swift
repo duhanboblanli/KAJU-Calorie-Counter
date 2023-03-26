@@ -92,7 +92,7 @@ class RecipesViewController: UIViewController, UISearchBarDelegate {
     // 3.harf ve sonrası autoComplete tableView reload eder
     @IBAction func searchBarTextDidChange(_ sender: UITextField) {
         if let searchText = sender.text {
-            if searchText.count >= 3 {
+            if searchText.count >= 0 {
                 discoverTableView.separatorStyle = UITableViewCell.SeparatorStyle.singleLine
                 discoverTableView.separatorColor = ColorLightGreen
                 scrollTopButton.isHidden = true

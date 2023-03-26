@@ -30,10 +30,6 @@ class DetailViewController: UIViewController {
     // For favorites
     var isFav = false
     var favoriteRecipes: [FoodRecipe] = []
-    //MARK:- Core Data setup
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -125,7 +121,6 @@ class DetailViewController: UIViewController {
         setupAddToDiaryButton()
         setupInstructionButton()
         setupTableView()
-        
     }
     
     private func setupTableView() {
@@ -150,11 +145,12 @@ class DetailViewController: UIViewController {
     private func setupInstructionButton() {
         view.addSubview(instructionsButton)
         instructionsButton.translatesAutoresizingMaskIntoConstraints = false
-        instructionsButton.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor, constant: 0).isActive = true
+        instructionsButton.trailingAnchor.constraint(equalTo: addToDiaryButton.trailingAnchor, constant: -54).isActive = true
         instructionsButton.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor, constant: 0).isActive = true
-        //instructionsButton.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor,constant: -4).isActive = true
-        instructionsButton.bottomAnchor.constraint(equalTo: addToDiaryButton.topAnchor, constant: 0).isActive = true
+        instructionsButton.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor,constant: -4).isActive = true
+        //instructionsButton.bottomAnchor.constraint(equalTo: addToDiaryButton.topAnchor, constant: 0).isActive = true
         instructionsButton.heightAnchor.constraint(equalToConstant: 35).isActive = true
+        //instructionsButton.widthAnchor.constraint(equalToConstant: 150).isActive = true
         instructionsButton.layer.cornerRadius = 11
         instructionsButton.layer.borderWidth = 0.3
         instructionsButton.setTitle("Instructions", for: .normal)
@@ -167,15 +163,16 @@ class DetailViewController: UIViewController {
         view.addSubview(addToDiaryButton)
         addToDiaryButton.translatesAutoresizingMaskIntoConstraints = false
         addToDiaryButton.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor, constant: 0).isActive = true
-        addToDiaryButton.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor, constant: 0).isActive = true
+       //addToDiaryButton.leadingAnchor.constraint(equalTo: instructionsButton.leadingAnchor, constant: 0).isActive = true
         addToDiaryButton.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor,constant: -4).isActive = true
         addToDiaryButton.heightAnchor.constraint(equalToConstant: 35).isActive = true
+        addToDiaryButton.widthAnchor.constraint(equalToConstant: 50).isActive = true
         addToDiaryButton.layer.cornerRadius = 11
         addToDiaryButton.layer.borderWidth = 0.3
-        addToDiaryButton.setTitle("Add To Diary", for: .normal)
+        addToDiaryButton.setTitle("➕", for: .normal)
         addToDiaryButton.setTitleColor(.white, for: .normal)
         addToDiaryButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18.5)
-        addToDiaryButton.backgroundColor = ColorOrange
+        addToDiaryButton.backgroundColor = ColorGreen
         addToDiaryButton.addTarget(self, action: #selector(addToDiaryAction), for: .touchUpInside)
     }
     

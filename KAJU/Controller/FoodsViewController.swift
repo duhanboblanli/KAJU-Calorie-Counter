@@ -54,7 +54,7 @@ class FoodsViewController: UIViewController, UpdateDelegate {
     // For favorites local foods
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
-    // food lists
+    // Food lists
     var frequentFoodIdList: [String] = []
     var recentFoods: [FoodEntity] = []
     var favFoods: [FavFoodEntity] = []
@@ -440,7 +440,6 @@ extension FoodsViewController: UISearchBarDelegate {
             searchBar.text = ""
             searchBar.endEditing(true)
         }
-//        showActivityIndicator(show: false)
         searchBar.text = ""
         searchBar.endEditing(true)
     }
@@ -449,7 +448,7 @@ extension FoodsViewController: UISearchBarDelegate {
     // Autocomplete için kullanılacak
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
        
-            if searchText.count >= 3 {
+            if searchText.count >= 0 {
                 searchEnable = true
                 currentSearchTask?.cancel()
                 currentSearchTask = foodViewModel.autoCompleteFoodSearch(searchQuery: searchText) { (foodSearchSuggestions, error) in
