@@ -8,7 +8,20 @@
 import UIKit
 
 struct Texts {
-    static let aboutString = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+    static let aboutString =
+    """
+Our motive for developing this app was to help people who are pretty confused while cooking and also want to keep track of how many of their calories come from it. We hope it will be useful to people who fight against unhealthy diets and waste a lot of time finding healthy recipes.
+
+Contributors:
+
+- Kadir Çopur
+- Duhan Boblanlı
+- Umut Ulaş Demir
+"""
+    
+    
+    
+    
     static let dunoMatchPass = "Password isn't matching with old one !"
     static let shortPass = "Password length must be at least 6 characters !"
     static let passChanged = "Password is changed succesfully"
