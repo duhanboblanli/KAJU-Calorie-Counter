@@ -18,6 +18,7 @@ class MyGoalCell: UITableViewCell {
         let label = UILabel()
         label.text = "My Goals"
         label.font = UIFont.boldSystemFont(ofSize: 22)
+        label.textColor = .white
         return label
     }()
     let goal = {
