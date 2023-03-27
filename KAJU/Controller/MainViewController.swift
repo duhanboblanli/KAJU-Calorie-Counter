@@ -13,7 +13,8 @@ class MainViewController: UITableViewController {
     
     let strokeColorDarkGreen = UIColor( red: 47/255, green: 160/255, blue: 134/255, alpha: 1).cgColor
     let db = Firestore.firestore()
-
+    
+    let user = Auth.auth().currentUser
     
     // Views for shapes autolayout constraints
     @IBOutlet weak var totalCalView: UIView!
@@ -106,6 +107,7 @@ class MainViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        check()
         currentDayReal = Date().get(.minute, .day, .month, .year).day!
         // DB verilerini çeker, define(), loadprogressBars() çağırır
         loadData()
@@ -119,6 +121,23 @@ class MainViewController: UITableViewController {
         fatProgressBar.progressTintColor = UIColor( red: 47/255, green: 160/255, blue: 134/255, alpha: 1)
         proteinProgressBar.progressTintColor = UIColor( red: 47/255, green: 160/255, blue: 134/255, alpha: 1)
  
+    }
+    private func check(){
+        if user == nil{
+            print("user not exist")
+            if self.presentingViewController != nil {
+                self.dismiss(animated: false, completion: {
+                   self.navigationController!.popToRootViewController(animated: true)
+                })
+            }
+            else {
+                self.navigationController!.popToRootViewController(animated: true)
+            }
+
+        }
+        else{
+            print("user exist")
+        }
     }
     
     @objc
