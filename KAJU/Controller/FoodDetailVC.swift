@@ -80,7 +80,7 @@ class FoodDetailVC: UITableViewController {
         if let calorie = food.calorie, let carbs = food.carbs, let protein = food.protein, let fat = food.fat, let wholeGram = food.wholeGram {
             var multiple = wholeGram / 100
             if isRecipe{
-                multiple = 1
+                multiple = 1.0
             }
             let calInt = Int((calorie * multiple).rounded())
             let carbFloat = (carbs * multiple)
@@ -222,7 +222,7 @@ class FoodDetailVC: UITableViewController {
             if let calorie = food.calorie, let carbs = food.carbs, let protein = food.protein, let fat = food.fat, let wholeGram = food.wholeGram {
                 var multiple = wholeGram / 100
                 if isRecipe{
-                    multiple = 1
+                    multiple = 1.0
                 }
                 let calInt = Int((calorie * multiple).rounded()) * Int(amount)
                 targetCal += calInt
@@ -269,21 +269,27 @@ class FoodDetailVC: UITableViewController {
             valueCheck = true
             sender.stepValue = 0.1
         }
-        print("steps amk: ", sender.value)
         amount = sender.value
         if let title = food.label, let wholeGram = food.wholeGram, let measureLabel = food.measureLabel {
     
+            var lastPart = ""
+            if !isRecipe{
+                lastPart = "(\(Int(wholeGram*Float(amount)))g)"
+            }
             if amount >= 1{
-                foodNameTitle.text = "\(Int(amount)) \(measureLabel) \(title) (\(Int(wholeGram*Float(amount)))g)"
+                foodNameTitle.text = "\(Int(amount)) \(measureLabel) \(title) \(lastPart)"
             }
             else{
-                foodNameTitle.text = "\(Float(amount)) \(measureLabel) \(title) (\(Int(wholeGram*Float(amount)))g)"
+                foodNameTitle.text = "\(Float(amount)) \(measureLabel) \(title) \(lastPart)"
             }
             
         }
         
         if let calorie = food.calorie, let carbs = food.carbs, let protein = food.protein, let fat = food.fat, let wholeGram = food.wholeGram {
-            let multiple = wholeGram / 100
+            var multiple = wholeGram / 100
+            if isRecipe{
+                multiple = 1.0
+            }
             let calInt = Int(calorie * multiple * Float(amount))
             let carbFloat = (carbs * multiple) * Float(amount)
             targetCarb += carbFloat
