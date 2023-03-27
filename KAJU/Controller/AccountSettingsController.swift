@@ -146,7 +146,7 @@ class AccountSettingsController: UIViewController, UITableViewDelegate, UITableV
 
 extension AccountSettingsController {
     func fetcData() -> [SettingModel]{
-        let accountSetting1 = SettingModel(textLabel: "Email Adress", textValue: userEmail ?? "hello@gmail.com")
+        let accountSetting1 = SettingModel(textLabel: "Email Adress", textValue: userEmail ?? "")
         let accountSetting2 = SettingModel(textLabel: "Password", textValue: userPassword ?? "")
         return [accountSetting1, accountSetting2]
     }

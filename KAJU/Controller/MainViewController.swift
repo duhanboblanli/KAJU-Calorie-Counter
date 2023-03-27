@@ -13,7 +13,8 @@ class MainViewController: UITableViewController {
     
     let strokeColorDarkGreen = UIColor( red: 47/255, green: 160/255, blue: 134/255, alpha: 1).cgColor
     let db = Firestore.firestore()
-
+    
+    let user = Auth.auth().currentUser
     
     // Views for shapes autolayout constraints
     @IBOutlet weak var totalCalView: UIView!
@@ -103,17 +104,61 @@ class MainViewController: UITableViewController {
     @IBOutlet weak var addLunchButton: UIButton!
     @IBOutlet weak var addBreakfastButton: UIButton!
     
+    var activityIndicatorContainer: UIView!
+    var activityIndicator: UIActivityIndicatorView!
+    
+    var view2: UIView!
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        setupActivityIndicator()
+        showActivityIndicator(show: true)
         currentDayReal = Date().get(.minute, .day, .month, .year).day!
         // DB verilerini çeker, define(), loadprogressBars() çağırır
         loadData()
+        
+    }
+    
+    // Loading alert functionality
+    private func showActivityIndicator(show: Bool) {
+      if show {
+        DispatchQueue.main.async{
+            self.activityIndicator.startAnimating()
+        }
+      } else {
+            DispatchQueue.main.async{
+                self.activityIndicator.stopAnimating()
+                self.activityIndicatorContainer.removeFromSuperview()
+            }
+        }
+    }
+    //Loading Alert Setup
+    private func setupActivityIndicator() {
+        
+        activityIndicatorContainer = UIView(frame: CGRect(x: 0, y: 0, width: 60, height: 60))
+        activityIndicatorContainer.center.x = view.center.x
+        activityIndicatorContainer.center.y = view.center.y
+        activityIndicatorContainer.backgroundColor = UIColor.black
+        activityIndicatorContainer.alpha = 0.7
+        activityIndicatorContainer.layer.cornerRadius = 10
+          
+        // Configure the activity indicator
+        activityIndicator = UIActivityIndicatorView()
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.style = UIActivityIndicatorView.Style.medium
+        activityIndicator.color = .white
+        
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        activityIndicatorContainer.addSubview(activityIndicator)
+        view.addSubview(activityIndicatorContainer)
+            
+        // Constraints
+        activityIndicator.centerXAnchor.constraint(equalTo: activityIndicatorContainer.centerXAnchor).isActive = true
+        activityIndicator.centerYAnchor.constraint(equalTo: activityIndicatorContainer.centerYAnchor).isActive = true
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.navigationItem.setHidesBackButton(true, animated: true)
         carbsProgressBar.progressTintColor = UIColor( red: 47/255, green: 160/255, blue: 134/255, alpha: 1)
         fatProgressBar.progressTintColor = UIColor( red: 47/255, green: 160/255, blue: 134/255, alpha: 1)
@@ -403,11 +448,12 @@ class MainViewController: UITableViewController {
         //view.layer.addSublayer(totalCalTrackLayer)
         totalCalView.layer.addSublayer(totalCalTrackLayer)
         
-       if currentCal >= totalCal{
+       if currentCal >= (totalCal  + currentBurnedCal){
             remainingTitle.text = "Over"
             totalCalTrackLayer.strokeColor = UIColor.orange.cgColor
-            currentCal = totalCal
+            currentCal = totalCal + currentBurnedCal
         }
+        showActivityIndicator(show: false)
     } // ends of func define()
     
  
@@ -454,8 +500,8 @@ class MainViewController: UITableViewController {
     
     private func loadProgressBars() {
         // Load Total Calorie Bar
-        print("insideLoadProgressBar:\(totalCal)")
-        var currentRate = 1-CGFloat(totalCal+currentBurnedCal-currentCal)/CGFloat(totalCal)
+        print("insideLoadProgressBar:\(totalCal)" + "insideLoadProgressBar:\(currentCal)" + "insideLoadProgressBar:\(currentBurnedCal)")
+        var currentRate = 1-CGFloat(totalCal+currentBurnedCal-currentCal)/CGFloat(totalCal+currentBurnedCal)
         var startAngle = CGFloat.pi*3/4
         var progress = CGFloat.pi*3/2*CGFloat(currentRate)
         var currentEndAngle = startAngle + progress

@@ -74,7 +74,12 @@ class FoodDetailVC: UITableViewController {
         
        
         if let title = food.label, let wholeGram = food.wholeGram, let measureLabel = food.measureLabel {
-            foodNameTitle.text = "1 \(measureLabel) \(title) (\(Int(wholeGram))g)"
+            var lastPart = ""
+            if !isRecipe{
+                
+                lastPart = "(\(Int(wholeGram))g)"
+            }
+            foodNameTitle.text = "1 \(measureLabel) \(title) \(lastPart)"
         }
         
         if let calorie = food.calorie, let carbs = food.carbs, let protein = food.protein, let fat = food.fat, let wholeGram = food.wholeGram {
