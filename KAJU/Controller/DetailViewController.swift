@@ -222,11 +222,20 @@ class DetailViewController: UIViewController {
             presentAlert(title: "Unable to Save the Recipe", message: "")
         }
     }
+    func fitTheFood(recipeTarget: FoodRecipe)->FoodStruct{
+        let food = FoodStruct(label: recipeTarget.title, calorie: Float(recipeTarget.calories), image: UIImage(data: foodRecipe.image!), carbs: Float(recipeTarget.carbs), fat: Float(recipeTarget.fats), protein: Float(recipeTarget.proteins), wholeGram: 0.0, measureLabel: "")
+        return food
+    }
     @objc func addToDiaryAction() {
         let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
         let nextViewController = storyBoard.instantiateViewController(withIdentifier: "FoodDetailVC") as! FoodDetailVC
         nextViewController.isRecipe = true
-        nextViewController.food = FoodStruct(label: recipe.title, calorie: Float(recipe.calories!), image: image, carbs: Float(recipe.carbs!), fat: Float(recipe.fat!), protein: Float(recipe.protein!), wholeGram: 1.0, measureLabel: "")
+        if !isSavedRecipe{
+            nextViewController.food = FoodStruct(label: recipe.title, calorie: Float(recipe.calories!), image: image, carbs: Float(recipe.carbs!), fat: Float(recipe.fat!), protein: Float(recipe.protein!), wholeGram: 1.0, measureLabel: "")
+        }else{
+            nextViewController.food = fitTheFood(recipeTarget: foodRecipe)
+        }
+        
         self.navigationController?.pushViewController(nextViewController, animated: true)
     }
     // Instruction buttona basıldığında oluşacak action
