@@ -226,7 +226,7 @@ class DetailViewController: UIViewController {
         let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
         let nextViewController = storyBoard.instantiateViewController(withIdentifier: "FoodDetailVC") as! FoodDetailVC
         nextViewController.isRecipe = true
-        nextViewController.food = FoodStruct(label: recipe.title, calorie: Float(recipe.calories!), image: image, carbs: Float(recipe.carbs!), fat: Float(recipe.fat!), protein: Float(recipe.protein!), wholeGram: 0.0, measureLabel: "")
+        nextViewController.food = FoodStruct(label: recipe.title, calorie: Float(recipe.calories!), image: image, carbs: Float(recipe.carbs!), fat: Float(recipe.fat!), protein: Float(recipe.protein!), wholeGram: 1.0, measureLabel: "")
         self.navigationController?.pushViewController(nextViewController, animated: true)
     }
     // Instruction buttona basıldığında oluşacak action
