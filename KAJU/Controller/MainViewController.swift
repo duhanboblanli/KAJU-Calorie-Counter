@@ -104,31 +104,66 @@ class MainViewController: UITableViewController {
     @IBOutlet weak var addLunchButton: UIButton!
     @IBOutlet weak var addBreakfastButton: UIButton!
     
+    var activityIndicatorContainer: UIView!
+    var activityIndicator: UIActivityIndicatorView!
+    
+    var view2: UIView!
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        setupActivityIndicator()
+        showActivityIndicator(show: true)
         currentDayReal = Date().get(.minute, .day, .month, .year).day!
         // DB verilerini çeker, define(), loadprogressBars() çağırır
         loadData()
+        
+    }
+    
+    // Loading alert functionality
+    private func showActivityIndicator(show: Bool) {
+      if show {
+        DispatchQueue.main.async{
+            self.activityIndicator.startAnimating()
+        }
+      } else {
+            DispatchQueue.main.async{
+                self.activityIndicator.stopAnimating()
+                self.activityIndicatorContainer.removeFromSuperview()
+            }
+        }
+    }
+    //Loading Alert Setup
+    private func setupActivityIndicator() {
+        
+        activityIndicatorContainer = UIView(frame: CGRect(x: 0, y: 0, width: 60, height: 60))
+        activityIndicatorContainer.center.x = view.center.x
+        activityIndicatorContainer.center.y = view.center.y
+        activityIndicatorContainer.backgroundColor = UIColor.black
+        activityIndicatorContainer.alpha = 0.7
+        activityIndicatorContainer.layer.cornerRadius = 10
+          
+        // Configure the activity indicator
+        activityIndicator = UIActivityIndicatorView()
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.style = UIActivityIndicatorView.Style.medium
+        activityIndicator.color = .white
+        
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        activityIndicatorContainer.addSubview(activityIndicator)
+        view.addSubview(activityIndicatorContainer)
+            
+        // Constraints
+        activityIndicator.centerXAnchor.constraint(equalTo: activityIndicatorContainer.centerXAnchor).isActive = true
+        activityIndicator.centerYAnchor.constraint(equalTo: activityIndicatorContainer.centerYAnchor).isActive = true
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        check()
         self.navigationItem.setHidesBackButton(true, animated: true)
         carbsProgressBar.progressTintColor = UIColor( red: 47/255, green: 160/255, blue: 134/255, alpha: 1)
         fatProgressBar.progressTintColor = UIColor( red: 47/255, green: 160/255, blue: 134/255, alpha: 1)
         proteinProgressBar.progressTintColor = UIColor( red: 47/255, green: 160/255, blue: 134/255, alpha: 1)
  
-    }
-    private func check(){
-        if user == nil{
-            print("user not exist")
-            
-        }
-        else{
-            print("user exist")
-        }
     }
     
     @objc
@@ -418,6 +453,7 @@ class MainViewController: UITableViewController {
             totalCalTrackLayer.strokeColor = UIColor.orange.cgColor
             currentCal = totalCal
         }
+        showActivityIndicator(show: false)
     } // ends of func define()
     
  
