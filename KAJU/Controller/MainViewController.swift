@@ -448,10 +448,10 @@ class MainViewController: UITableViewController {
         //view.layer.addSublayer(totalCalTrackLayer)
         totalCalView.layer.addSublayer(totalCalTrackLayer)
         
-       if currentCal >= totalCal{
+       if currentCal >= (totalCal  + currentBurnedCal){
             remainingTitle.text = "Over"
             totalCalTrackLayer.strokeColor = UIColor.orange.cgColor
-            currentCal = totalCal
+            currentCal = totalCal + currentBurnedCal
         }
         showActivityIndicator(show: false)
     } // ends of func define()
@@ -500,8 +500,8 @@ class MainViewController: UITableViewController {
     
     private func loadProgressBars() {
         // Load Total Calorie Bar
-        print("insideLoadProgressBar:\(totalCal)")
-        var currentRate = 1-CGFloat(totalCal+currentBurnedCal-currentCal)/CGFloat(totalCal)
+        print("insideLoadProgressBar:\(totalCal)" + "insideLoadProgressBar:\(currentCal)" + "insideLoadProgressBar:\(currentBurnedCal)")
+        var currentRate = 1-CGFloat(totalCal+currentBurnedCal-currentCal)/CGFloat(totalCal+currentBurnedCal)
         var startAngle = CGFloat.pi*3/4
         var progress = CGFloat.pi*3/2*CGFloat(currentRate)
         var currentEndAngle = startAngle + progress
