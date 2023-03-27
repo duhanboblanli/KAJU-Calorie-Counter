@@ -107,7 +107,6 @@ class MainViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        check()
         currentDayReal = Date().get(.minute, .day, .month, .year).day!
         // DB verilerini çeker, define(), loadprogressBars() çağırır
         loadData()
@@ -115,7 +114,7 @@ class MainViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        check()
         self.navigationItem.setHidesBackButton(true, animated: true)
         carbsProgressBar.progressTintColor = UIColor( red: 47/255, green: 160/255, blue: 134/255, alpha: 1)
         fatProgressBar.progressTintColor = UIColor( red: 47/255, green: 160/255, blue: 134/255, alpha: 1)
@@ -125,15 +124,7 @@ class MainViewController: UITableViewController {
     private func check(){
         if user == nil{
             print("user not exist")
-            if self.presentingViewController != nil {
-                self.dismiss(animated: false, completion: {
-                   self.navigationController!.popToRootViewController(animated: true)
-                })
-            }
-            else {
-                self.navigationController!.popToRootViewController(animated: true)
-            }
-
+            
         }
         else{
             print("user exist")
