@@ -48,6 +48,7 @@ class AccountSettingsController: UIViewController, UITableViewDelegate, UITableV
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         accountSettingModels = fetcData()
         linkViews()
         configureView()
@@ -106,13 +107,17 @@ class AccountSettingsController: UIViewController, UITableViewDelegate, UITableV
     }
     
     func delete(){
-        
+     
         self.user!.delete { error in
           if let error = error {
-            // An error happened.
+              let alert = UIAlertController(title: "Deletion unsuccessfull!", message: "Sorry for inconvenience situation. Deletion of an account is sensitive process. You should be re-sign into your account.", preferredStyle: UIAlertController.Style.alert)
+              alert.addAction(UIAlertAction(title: "Click", style: UIAlertAction.Style.default, handler: nil))
+              self.present(alert, animated: true, completion: nil)
+            
               print(error)
           } else {
             // Account deleted.
+              self.deleteAllOnlineData()
               self.deleteAllOfflineData()
               let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
               let rootViewController: UIViewController = storyboard.instantiateViewController(withIdentifier: "nRoot")
@@ -134,6 +139,13 @@ class AccountSettingsController: UIViewController, UITableViewDelegate, UITableV
             self.navigationController?.popToRootViewController(animated: true)
 
         }catch _{}
+    }
+    
+    func deleteAllOnlineData(){
+        if let currentUserEmail = Auth.auth().currentUser?.email {
+            let docRef = db.collection("UserInformations").document("\(currentUserEmail)")
+            docRef.delete()
+        }
     }
     
     func deleteAllOfflineData(){

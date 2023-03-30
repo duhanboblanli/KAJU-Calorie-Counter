@@ -168,6 +168,7 @@ class FoodsViewController: UIViewController, UpdateDelegate {
         activityIndicator.centerYAnchor.constraint(equalTo: activityIndicatorContainer.centerYAnchor).isActive = true
     }
     @IBAction func firstTabPressed(_ sender: UIButton) {
+        self.tableView.separatorStyle = .singleLine
         tableView.setContentOffset(.zero, animated: true)
         favEnable = false
         recentsEnable = false
@@ -183,6 +184,7 @@ class FoodsViewController: UIViewController, UpdateDelegate {
         tableView.reloadData()
     }
     @IBAction func secondTabPressed(_ sender: UIButton) {
+        self.tableView.separatorStyle = .singleLine
         tableView.setContentOffset(.zero, animated: true)
         favEnable = false
         recentsEnable = true
@@ -199,6 +201,7 @@ class FoodsViewController: UIViewController, UpdateDelegate {
     }
     
     @IBAction func thirdTabPressed(_ sender: UIButton) {
+        self.tableView.separatorStyle = .singleLine
         tableView.setContentOffset(.zero, animated: true)
         favEnable = true
         recentsEnable = false

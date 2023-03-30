@@ -41,7 +41,7 @@ class WelcomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupButtonStyle(button: getStartedButton, cornerRadius: 0.046)
+        setupButtonStyle(button: getStartedButton, cornerRadius: 0.096)
         setupButtonStyle(button: logInButton, cornerRadius: 0.09)
         
         //Title Label Animation With For Loop

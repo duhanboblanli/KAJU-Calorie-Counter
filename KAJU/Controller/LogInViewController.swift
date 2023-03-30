@@ -17,7 +17,7 @@ class LogInViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupButtonStyle(button: logInButton, cornerRadius: 0.046)
+        setupButtonStyle(button: logInButton, cornerRadius: 0.096)
         emailTextField.delegate = self
         passwordTextField.delegate = self
         emailTextField.backgroundColor = UIColor.white
