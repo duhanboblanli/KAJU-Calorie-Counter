@@ -292,7 +292,6 @@ extension FoodsViewController: UITableViewDataSource, UITableViewDelegate {
     
     // Tablo görünümde kaç hücre ya da kaç satır istiyoruz burda belirtilir
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print("brekfiiii: ", self.foodViewModel.frequentFoods.description)
         var numberOfRow = 1
         
         if favEnable && !searchEnable && foodSearchSuggestions.count == 0{
