@@ -27,7 +27,7 @@ class ActivenessViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupButtonStyle(button: activenessNextButton, cornerRadius: 0.096)
+        setupButtonStyle(button: activenessNextButton, cornerRadius: 0.046)
         activenessNextButton.isEnabled = false
         activenessNextButton.isHighlighted = true
         //Height 82, soft kare görünüm

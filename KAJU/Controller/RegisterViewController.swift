@@ -20,7 +20,7 @@ class RegisterViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupButtonStyle(button: signUpButton, cornerRadius: 0.096)
+        setupButtonStyle(button: signUpButton, cornerRadius: 0.046)
         emailTextField.delegate = self
         passwordTextField.delegate = self
         emailTextField.tag = 1
