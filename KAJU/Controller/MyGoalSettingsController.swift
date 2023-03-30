@@ -17,6 +17,7 @@ class MyGoalSettingsController: UIViewController, UITableViewDelegate, UITableVi
         let label = UILabel()
         label.text = "My Goal Settings"
         label.font = UIFont(name: "Copperplate Bold", size: 33)
+        label.textColor = .white
         return label
     }()
     

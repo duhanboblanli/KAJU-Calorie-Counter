@@ -36,6 +36,7 @@ class AboutUsController: UIViewController{
         let height = CGFloat(120)
         textView.anchor(height: height)
         textView.font = UIFont.systemFont(ofSize: 16)
+        textView.textColor = .white
         textView.isEditable = false
         textView.backgroundColor = .clear
         textView.translatesAutoresizingMaskIntoConstraints = true
@@ -90,11 +91,13 @@ class AboutUsController: UIViewController{
         let label = UILabel()
         label.text = "App Version"
         label.font = UIFont.systemFont(ofSize: 20)
+        label.textColor = .white
         return label
     }()
     let appVersionValue = {
         let label = UILabel()
         label.text = "0.0.1"
+        label.textColor = .white
         return label
     }()
     let descTitle = {
@@ -103,6 +106,8 @@ class AboutUsController: UIViewController{
         label.anchor(height: height)
         label.text = "About KAJU"
         label.font = UIFont.systemFont(ofSize: 30)
+        label.textColor = .white
+        
         return label
     }()
     let spacer = {
@@ -121,6 +126,7 @@ class AboutUsController: UIViewController{
         policyBText.anchor(left: button.leftAnchor, paddingLeft: 24)
         policyBText.centerYAnchor.constraint(equalTo: button.centerYAnchor).isActive = true
         policyBText.font = UIFont.systemFont(ofSize: 20)
+        policyBText.textColor = .white
         return button
     }()
     
