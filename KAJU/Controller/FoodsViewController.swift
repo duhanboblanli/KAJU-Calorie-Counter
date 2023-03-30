@@ -7,12 +7,20 @@
 
 import UIKit
 import CoreData
+import FirebaseAuth
+import FirebaseFirestore
+
 
 class FoodsViewController: UIViewController, UpdateDelegate {
+    
+    let RECENTS_LIMIT = 20
+    let db = Firestore.firestore()
     
     var foodCount = 0
     
     var query = "egg"
+    
+    var foodType: String = "currentBreakfastCal"
     
     var searchEnable = false
     var favEnable = false
@@ -62,6 +70,7 @@ class FoodsViewController: UIViewController, UpdateDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        checkFoodType()
         favoritesBottomConstraint.constant = 4.0
         recentsBottomConstraint.constant = 3.0
         favoritesBottomConstraint.constant = 3.0
@@ -73,6 +82,21 @@ class FoodsViewController: UIViewController, UpdateDelegate {
         searchBar.searchTextField.attributedPlaceholder = NSAttributedString(string: "Search For A Food", attributes: [NSAttributedString.Key.foregroundColor: UIColor( red: 170/255, green: 170/255, blue: 170/255, alpha: 1)])
         LoadFoodsData(with: query)
         tableView.reloadData()
+    }
+    
+    func checkFoodType(){
+        if query == "egg" {
+            foodType = "currentBreakfastCal"
+            
+        } else if query == "penne" {
+            foodType = "currentLunchCal"
+        }
+        else if query == "fish" {
+            foodType = "currentDinnerCal"
+        }
+        else if query == "apple" {
+            foodType = "currentSnacksCal"
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -252,7 +276,94 @@ extension FoodsViewController: UIScrollViewDelegate{
 } // ends of extension: UIScrollViewDelegate
 
 //MARK: - UITableViewDataSource, UITableViewDelegate
-extension FoodsViewController: UITableViewDataSource, UITableViewDelegate {
+extension FoodsViewController: UITableViewDataSource, UITableViewDelegate, CellDelegate {
+    func directAddFunction(food: FoodStruct){
+        var targetCal: Int = 0
+        var targetCarb: Float = 0.0
+        var targetPro: Float = 0.0
+        var targetFat: Float = 0.0
+        navigationController?.popViewController(animated: true)
+            if let calorie = food.calorie, let carbs = food.carbs, let protein = food.protein, let fat = food.fat, let wholeGram = food.wholeGram {
+                var multiple = wholeGram / 100
+                let calInt = Int((calorie * multiple).rounded())
+                targetCal = calInt
+                let carbFloat = carbs * multiple
+                targetCarb = carbFloat
+                let proFloat = protein * multiple
+                targetPro = proFloat
+                let fatFloat = fat * multiple
+                targetFat = fatFloat
+            }
+        //Verilerin updatelenmesi(increment işlemi)
+        if let currentUserEmail = Auth.auth().currentUser?.email {
+             db.collection("UserInformations").document("\(currentUserEmail)").updateData([
+                foodType: FieldValue.increment(Int64(targetCal)),
+                "currentCarbs": FieldValue.increment(Float64(targetCarb)),
+                "currentPro": FieldValue.increment(Float64(targetPro)),
+                "currentFat": FieldValue.increment(Float64(targetFat))
+             ]) { err in
+                    if let err = err {
+                        print("Error adding document: \(err)")
+                    } else {
+                        print("Document successfully written!")
+                    }
+                }
+            saveActionAddToDiary(food: food)
+        }
+    }
+    func saveActionAddToDiary(food: FoodStruct) {
+        var inRecent = false
+        var lastIndex = 1
+        if !recentFoods.isEmpty{
+            lastIndex = Int(recentFoods[recentFoods.count-1].index)
+            for food2 in recentFoods{
+                if food.label == food2.title{
+                    inRecent = true
+                    appDelegate.persistentContainer2.viewContext.delete(food2)
+                }
+            }
+        }
+        if !inRecent && recentFoods.count == RECENTS_LIMIT{
+            appDelegate.persistentContainer2.viewContext.delete(recentFoods[0])
+        }
+        let imageData = food.image!.pngData()
+        let foodEntity = FoodEntity(context: appDelegate.persistentContainer2.viewContext)
+        foodEntity.title = food.label
+        foodEntity.calories = Int64(food.calorie!)
+        foodEntity.carbs = Int64(food.carbs!)
+        foodEntity.fats = Int64(food.fat!)
+        foodEntity.proteins = Int64(food.protein!)
+        foodEntity.wholeGram = Int64(food.wholeGram!)
+        foodEntity.measureLabel = food.measureLabel
+        foodEntity.image = imageData
+        foodEntity.index = Int64(lastIndex-1)
+        do {
+            try appDelegate.persistentContainer2.viewContext.save()
+            presentAlert(title: "Food added to diary 🤩", message: "")
+        } catch {
+            presentAlert(title: "Unable to add food", message: "")
+        }
+    }
+    func directAddTap(_ cell: FoodTableViewCell) {
+        print("sex var2")
+        let index = self.tableView.indexPath(for: cell)
+        var food: FoodStruct
+        if favEnable && !searchEnable && foodSearchSuggestions.count == 0{
+            food = fitTheFood2(foodTarget: favFoods[index!.row])
+        }
+        else if recentsEnable && !searchEnable && foodSearchSuggestions.count == 0{
+            food = fitTheFood(foodTarget: recentFoods[index!.row])
+        }
+        else if !searchEnable && foodSearchSuggestions.count == 0{
+            food = foodViewModel.frequentFoods[index!.row]
+        }
+        else{
+            food = foodViewModel.cellForRowAt(indexPath: index!)
+        }
+        print("sex var: ", food.label)
+        directAddFunction(food: food)
+    }
+    
     
     func fitTheFood(foodTarget: FoodEntity)->FoodStruct{
         let food = FoodStruct(label: foodTarget.title, calorie: Float(foodTarget.calories), image: UIImage(data: foodTarget.image!), carbs: Float(foodTarget.carbs), fat: Float(foodTarget.fats), protein: Float(foodTarget.proteins), wholeGram: Float(foodTarget.wholeGram), measureLabel: foodTarget.measureLabel)
@@ -321,13 +432,13 @@ extension FoodsViewController: UITableViewDataSource, UITableViewDelegate {
         }
         else if foodSearchSuggestions.count == 0 {
             numberOfRow = foodViewModel.numberOfRowsInSection(section: section)
-            print("lalalalal", numberOfRow.description)
         }
         else {
             numberOfRow = foodSearchSuggestions.count
         }
         return numberOfRow
     }
+    
     
     // Belirlenen tablo cell indexinde gönderilen celli döndürür
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -337,6 +448,7 @@ extension FoodsViewController: UITableViewDataSource, UITableViewDelegate {
             let food = fitTheFood2(foodTarget: favFoods[indexPath.row])
             foodCell.setCellWithValuesOf(food)
             foodCell.separatorInset.bottom = tableView.bounds.size.width
+            foodCell.delegate = self
             return foodCell
         }
         else if recentsEnable && !searchEnable && foodSearchSuggestions.count == 0{
@@ -346,6 +458,7 @@ extension FoodsViewController: UITableViewDataSource, UITableViewDelegate {
             let food = fitTheFood(foodTarget: recentFoods[indexPath.row])
             foodCell.setCellWithValuesOf(food)
             foodCell.separatorInset.bottom = tableView.bounds.size.width
+            foodCell.delegate = self
             return foodCell
             
         }
@@ -355,6 +468,7 @@ extension FoodsViewController: UITableViewDataSource, UITableViewDelegate {
             let food = foodViewModel.frequentFoods[indexPath.row]
             foodCell.setCellWithValuesOf(food)
             foodCell.separatorInset.bottom = tableView.bounds.size.width
+            foodCell.delegate = self
             return foodCell
         }
         else if foodSearchSuggestions.count == 0 {
@@ -363,6 +477,7 @@ extension FoodsViewController: UITableViewDataSource, UITableViewDelegate {
             let food = foodViewModel.cellForRowAt(indexPath: indexPath)
             foodCell.setCellWithValuesOf(food)
             foodCell.separatorInset.bottom = tableView.bounds.size.width
+            foodCell.delegate = self
             return foodCell
             
         }
