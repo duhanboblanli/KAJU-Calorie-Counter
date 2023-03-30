@@ -974,7 +974,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="aAM-tH-Wcf">
-                                <rect key="frame" x="67" y="455" width="280.5" height="51"/>
+                                <rect key="frame" x="67" y="428" width="280.5" height="105"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="🍏 Daily Calorie Goal" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="wrv-1o-oc5">
                                         <rect key="frame" x="0.0" y="0.0" width="280.5" height="43"/>
@@ -986,7 +986,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="249" horizontalCompressionResistancePriority="1000" text="1882" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TWC-Vj-qzP" customClass="CLTypingLabel" customModule="CLTypingLabel">
-                                        <rect key="frame" x="140" y="51" width="0.0" height="0.0"/>
+                                        <rect key="frame" x="87" y="51" width="106" height="54"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="45"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -994,7 +994,7 @@
                                 </subviews>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="According to your choices, your goal is to maintain your weight." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="MFo-mA-Mz5">
-                                <rect key="frame" x="24" y="522" width="366" height="43"/>
+                                <rect key="frame" x="24" y="549" width="366" height="43"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="43" id="UOP-jI-hch"/>
                                 </constraints>
@@ -2593,20 +2593,29 @@
                                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h5A-Ea-OB7">
+                                                            <rect key="frame" x="330" y="33" width="50" height="35"/>
+                                                            <color key="tintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <buttonConfiguration key="configuration" style="plain"/>
+                                                        </button>
                                                     </subviews>
                                                     <color key="backgroundColor" red="0.1019607843" green="0.1843137255" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <color key="tintColor" red="0.1019607843" green="0.1843137255" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <constraints>
+                                                        <constraint firstItem="h5A-Ea-OB7" firstAttribute="leading" secondItem="8y7-3a-eod" secondAttribute="leading" constant="330" id="0Tc-qz-0To"/>
                                                         <constraint firstItem="GND-F5-c4x" firstAttribute="leading" secondItem="8y7-3a-eod" secondAttribute="leading" constant="110" id="5x6-4Y-IeI"/>
                                                         <constraint firstAttribute="bottom" secondItem="0xO-yf-SEe" secondAttribute="bottom" constant="12.333333333333343" id="66E-xf-g6G"/>
+                                                        <constraint firstItem="h5A-Ea-OB7" firstAttribute="top" secondItem="8y7-3a-eod" secondAttribute="top" constant="33" id="B3X-OI-sRU"/>
                                                         <constraint firstItem="N22-eR-NBl" firstAttribute="top" secondItem="8y7-3a-eod" secondAttribute="top" constant="12" id="HRV-c1-XBV"/>
                                                         <constraint firstAttribute="bottom" secondItem="N22-eR-NBl" secondAttribute="bottom" priority="999" constant="40" id="JN3-1l-7RV"/>
+                                                        <constraint firstAttribute="trailing" secondItem="h5A-Ea-OB7" secondAttribute="trailing" constant="34" id="LTv-KW-8p0"/>
                                                         <constraint firstAttribute="bottom" secondItem="GND-F5-c4x" secondAttribute="bottom" constant="21" id="LWs-bf-7xR"/>
                                                         <constraint firstItem="0xO-yf-SEe" firstAttribute="leading" secondItem="8y7-3a-eod" secondAttribute="leading" constant="20" symbolic="YES" id="O9h-Vv-KRX"/>
                                                         <constraint firstItem="0xO-yf-SEe" firstAttribute="top" secondItem="8y7-3a-eod" secondAttribute="top" constant="12.666666666666664" id="ZSP-32-9O9"/>
                                                         <constraint firstAttribute="trailing" secondItem="GND-F5-c4x" secondAttribute="trailing" constant="209" id="cuF-hk-egU"/>
                                                         <constraint firstItem="N22-eR-NBl" firstAttribute="leading" secondItem="8y7-3a-eod" secondAttribute="leading" constant="110.66666666666663" id="e5b-3U-thg"/>
                                                         <constraint firstAttribute="trailing" secondItem="N22-eR-NBl" secondAttribute="trailing" constant="85" id="lZ9-d8-ue1"/>
+                                                        <constraint firstAttribute="bottom" secondItem="h5A-Ea-OB7" secondAttribute="bottom" constant="32" id="pN9-ff-UMx"/>
                                                         <constraint firstAttribute="trailing" secondItem="0xO-yf-SEe" secondAttribute="trailing" constant="298" id="tK7-zv-hAz"/>
                                                         <constraint firstItem="GND-F5-c4x" firstAttribute="top" secondItem="8y7-3a-eod" secondAttribute="top" constant="62" id="ysj-RQ-YQA"/>
                                                     </constraints>
