@@ -16,8 +16,6 @@ class AccountSettingsController: UIViewController, UITableViewDelegate, UITableV
     private var userPassword = UserDefaults.standard.string(forKey: Auth.auth().currentUser?.email ?? "")
     private var userEmail = Auth.auth().currentUser?.email
     var accountSettingModels: [SettingModel] = []
-    let resetOptions = ["Delete", "Reset"]
-    var dropDown = ThemesOptions.dropDown
     let backGroundColor = ThemesOptions.backGroundColor
     let cellBackgColor = ThemesOptions.cellBackgColor
     let tableView: UITableView = UITableView()
@@ -28,19 +26,13 @@ class AccountSettingsController: UIViewController, UITableViewDelegate, UITableV
         label.font = UIFont(name: "Copperplate Bold", size: 33)
         return label
     }()
-    let resetButton = {
+    let deleteButton = {
         let button = UIButton()
-        button.setTitle("Reset", for: .normal)
+        button.setTitle("Delete", for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 22)
         button.backgroundColor = ThemesOptions.buttonBackGColor
         button.layer.cornerRadius = 20
         return button
-    }()
-    let resetButtonImage = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(systemName: "chevron.down")
-        imageView.tintColor = .white
-        return imageView
     }()
     let logOutButton = {
         let button = UIButton()
@@ -63,15 +55,14 @@ class AccountSettingsController: UIViewController, UITableViewDelegate, UITableV
     func linkViews(){
         view.addSubview(tableView)
         view.addSubview(tableTitle)
-        view.addSubview(resetButton)
+        view.addSubview(deleteButton)
         view.addSubview(logOutButton)
-        resetButton.addSubview(resetButtonImage)
     }
     
     func configureView(){
         view.backgroundColor = backGroundColor
         navigationItem.largeTitleDisplayMode = .never
-        resetButton.addTarget(self, action: #selector(resetAccount), for: .touchUpInside)
+        deleteButton.addTarget(self, action: #selector(deleteAccount), for: .touchUpInside)
         logOutButton.addTarget(self, action: #selector(logOutAccount), for: .touchUpInside)
     }
     
@@ -82,50 +73,71 @@ class AccountSettingsController: UIViewController, UITableViewDelegate, UITableV
         tableView.backgroundColor = backGroundColor
     }
     
-    @objc func resetAccount(){
-        dropDown = setDropDown(dataSource: resetOptions, anchorView: resetButton, bottomOffset: CGPoint(x: 0, y:(resetButton.plainView.bounds.height ) + 8))
-        dropDown.show()
-        dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
-        }
+    @objc func deleteAccount(){
+        showSimpleAlert(title: "Are you sure you want to Delete ?", firstResponse: "Cancel", secondResponse: "Delete")
     }
     
     @objc func logOutAccount(){
-        showSimpleAlert()
+        showSimpleAlert(title: "Are you sure you want to Log Out ?", firstResponse: "Cancel", secondResponse: "Log Out")
     }
     
-    func showSimpleAlert() {
-        let alert = UIAlertController(title: "Are you sure you want to Log Out ?", message: nil,
+    func showSimpleAlert(title: String, firstResponse: String, secondResponse: String) {
+        let alert = UIAlertController(title: title, message: nil,
                                       preferredStyle: UIAlertController.Style.alert)
-        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.default, handler: { _ in
+        alert.addAction(UIAlertAction(title: firstResponse, style: UIAlertAction.Style.default, handler: { _ in
             //Cancel Action
             }))
-            alert.addAction(UIAlertAction(title: "Log Out",
+            alert.addAction(UIAlertAction(title: secondResponse,
                                           style: UIAlertAction.Style.destructive,
                                           handler: {(_: UIAlertAction!) in
-                let auth = Auth.auth()
-                //Sign out action
-                do {
-                    try auth.signOut()
-                    let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-                    let rootViewController: UIViewController = storyboard.instantiateViewController(withIdentifier: "nRoot")
-                    self.view.window?.rootViewController = rootViewController
-                    self.navigationController?.popToRootViewController(animated: true)
-
-                }catch _{}
+                switch secondResponse {
+                case "Log Out":
+                    self.logOut()
+                case "Delete":
+                    self.delete()
+                default:
+                    return
+                }
             }))
         self.present(alert, animated: true, completion: nil)
     }
-        
-
     
+    func delete(){
+        let user = Auth.auth().currentUser
+        
+        user?.delete { error in
+          if let error = error {
+            // An error happened.
+              print(error)
+          } else {
+            // Account deleted.
+              let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+              let rootViewController: UIViewController = storyboard.instantiateViewController(withIdentifier: "nRoot")
+              self.view.window?.rootViewController = rootViewController
+              self.navigationController?.popToRootViewController(animated: true)
+          }
+        }
+    }
+    
+    func logOut(){
+        let auth = Auth.auth()
+        //Sign out action
+        do {
+            try auth.signOut()
+            let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+            let rootViewController: UIViewController = storyboard.instantiateViewController(withIdentifier: "nRoot")
+            self.view.window?.rootViewController = rootViewController
+            self.navigationController?.popToRootViewController(animated: true)
+
+        }catch _{}
+    }
+        
     func configureLayout(){
         tableTitle.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, bottom: tableView.topAnchor, right: view.rightAnchor, paddingTop: 32, paddingLeft: 16, paddingBottom: 16, paddingRight: 16)
-        tableView.anchor(top: tableTitle.bottomAnchor, left: tableTitle.leftAnchor, bottom: resetButton.topAnchor, right: tableTitle.rightAnchor)
-        resetButton.anchor(width: 256, height: 48)
-        resetButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        resetButtonImage.anchor(right: resetButton.rightAnchor, paddingRight: 32, width: 20, height: 20)
-        resetButtonImage.centerYAnchor.constraint(equalTo: resetButton.centerYAnchor).isActive = true
-        logOutButton.anchor(top: resetButton.bottomAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, paddingTop: 32, paddingBottom: 32, width: 256, height: 48)
+        tableView.anchor(top: tableTitle.bottomAnchor, left: tableTitle.leftAnchor, bottom: deleteButton.topAnchor, right: tableTitle.rightAnchor)
+        deleteButton.anchor(width: 256, height: 48)
+        deleteButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        logOutButton.anchor(top: deleteButton.bottomAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, paddingTop: 32, paddingBottom: 32, width: 256, height: 48)
         logOutButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
     }
     
@@ -151,3 +163,4 @@ extension AccountSettingsController {
         return [accountSetting1, accountSetting2]
     }
 }
+
