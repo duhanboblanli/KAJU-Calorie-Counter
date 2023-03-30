@@ -17,11 +17,21 @@ class LogInViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupButtonStyle(button: logInButton, cornerRadius: 0.096)
+        setupButtonStyle(button: logInButton, cornerRadius: 0.046)
         emailTextField.delegate = self
-         passwordTextField.delegate = self
-         emailTextField.tag = 1
-         passwordTextField.tag = 2
+        passwordTextField.delegate = self
+        emailTextField.backgroundColor = UIColor.white
+        passwordTextField.backgroundColor = UIColor.white
+        emailTextField.attributedPlaceholder = NSAttributedString(
+            string: "email@example.com",
+            attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray]
+        )
+        passwordTextField.attributedPlaceholder = NSAttributedString(
+            string: "password",
+            attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray]
+        )
+        emailTextField.tag = 1
+        passwordTextField.tag = 2
     }
     
     

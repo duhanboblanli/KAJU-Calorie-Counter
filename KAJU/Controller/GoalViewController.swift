@@ -20,7 +20,7 @@ class GoalViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupButtonStyle(button: goalNextButton, cornerRadius: 0.096)
+        setupButtonStyle(button: goalNextButton, cornerRadius: 0.046)
         goalNextButton.isEnabled = false
         goalNextButton.isHighlighted = true
         //Height 82, soft kare görünüm

@@ -9,9 +9,10 @@ import UIKit
 import DropDown
 import FirebaseAuth
 import FirebaseFirestore
+import CoreData
 
 class AccountSettingsController: UIViewController, UITableViewDelegate, UITableViewDataSource{
-    
+    let user = Auth.auth().currentUser
     let db = DatabaseSingleton.db
     private var userPassword = UserDefaults.standard.string(forKey: Auth.auth().currentUser?.email ?? "")
     private var userEmail = Auth.auth().currentUser?.email
@@ -19,6 +20,8 @@ class AccountSettingsController: UIViewController, UITableViewDelegate, UITableV
     let backGroundColor = ThemesOptions.backGroundColor
     let cellBackgColor = ThemesOptions.cellBackgColor
     let tableView: UITableView = UITableView()
+    
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     let tableTitle = {
         let label = UILabel()
@@ -74,7 +77,7 @@ class AccountSettingsController: UIViewController, UITableViewDelegate, UITableV
     }
     
     @objc func deleteAccount(){
-        showSimpleAlert(title: "Are you sure you want to Delete ?", firstResponse: "Cancel", secondResponse: "Delete")
+        showSimpleAlert(title: "Are you sure you want to Delete ? ", firstResponse: "Cancel", secondResponse: "Delete")
     }
     
     @objc func logOutAccount(){
@@ -82,7 +85,7 @@ class AccountSettingsController: UIViewController, UITableViewDelegate, UITableV
     }
     
     func showSimpleAlert(title: String, firstResponse: String, secondResponse: String) {
-        let alert = UIAlertController(title: title, message: nil,
+        let alert = UIAlertController(title: title, message: "Your offline data that consisting of favorite foods, recent foods and favorite recipes will be gone!",
                                       preferredStyle: UIAlertController.Style.alert)
         alert.addAction(UIAlertAction(title: firstResponse, style: UIAlertAction.Style.default, handler: { _ in
             //Cancel Action
@@ -103,14 +106,14 @@ class AccountSettingsController: UIViewController, UITableViewDelegate, UITableV
     }
     
     func delete(){
-        let user = Auth.auth().currentUser
         
-        user?.delete { error in
+        self.user!.delete { error in
           if let error = error {
             // An error happened.
               print(error)
           } else {
             // Account deleted.
+              self.deleteAllOfflineData()
               let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
               let rootViewController: UIViewController = storyboard.instantiateViewController(withIdentifier: "nRoot")
               self.view.window?.rootViewController = rootViewController
@@ -123,6 +126,7 @@ class AccountSettingsController: UIViewController, UITableViewDelegate, UITableV
         let auth = Auth.auth()
         //Sign out action
         do {
+            deleteAllOfflineData()
             try auth.signOut()
             let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
             let rootViewController: UIViewController = storyboard.instantiateViewController(withIdentifier: "nRoot")
@@ -130,6 +134,29 @@ class AccountSettingsController: UIViewController, UITableViewDelegate, UITableV
             self.navigationController?.popToRootViewController(animated: true)
 
         }catch _{}
+    }
+    
+    func deleteAllOfflineData(){
+        let context1 = self.appDelegate.persistentContainer
+        let context2 = self.appDelegate.persistentContainer2
+        let context3 = self.appDelegate.persistentContainer3
+        deleteOfflineData("FoodRecipe", context1)
+        deleteOfflineData("FoodEntity", context2)
+        deleteOfflineData("FavFoodEntity", context3)
+    }
+    func deleteOfflineData(_ entity:String,_ container: NSPersistentContainer) {
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entity)
+        fetchRequest.returnsObjectsAsFaults = false
+        do {
+            let results = try container.viewContext.fetch(fetchRequest)
+            for object in results {
+                guard let objectData = object as? NSManagedObject else {continue}
+                container.viewContext.delete(objectData)
+            }
+            try? container.viewContext.save()
+        } catch let error {
+            print("Detele all data in \(entity) error :", error)
+        }
     }
         
     func configureLayout(){
