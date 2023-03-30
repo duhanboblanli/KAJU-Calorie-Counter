@@ -22,7 +22,6 @@ class FoodTableViewCell: UITableViewCell {
     @IBOutlet weak var name: UILabel!
     
     @IBAction func directAddPressed(_ sender: Any) {
-        print("sex var")
         delegate?.directAddTap(self)
     }
     /*override func awakeFromNib() {
