@@ -26,6 +26,7 @@ class AccountSettingsController: UIViewController, UITableViewDelegate, UITableV
     let tableTitle = {
         let label = UILabel()
         label.text = "Account Settings"
+        label.textColor = .white
         label.font = UIFont(name: "Copperplate Bold", size: 33)
         return label
     }()
