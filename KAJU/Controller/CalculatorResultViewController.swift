@@ -28,7 +28,7 @@ class CalculatorResultViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupButtonStyle(button: resultNextButton, cornerRadius: 0.046)
+        setupButtonStyle(button: resultNextButton, cornerRadius: 0.096)
         
         if let bmiValue {
             //Title Label Animation With For Loop

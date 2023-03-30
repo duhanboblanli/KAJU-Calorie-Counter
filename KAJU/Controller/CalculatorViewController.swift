@@ -35,7 +35,7 @@ class CalculatorViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupButtonStyle(button: calculateButton, cornerRadius: 0.046)
+        setupButtonStyle(button: calculateButton, cornerRadius: 0.096)
         calculateButton.isEnabled = false
         calculateButton.isHighlighted = true
         if changeCalorieAmount == 400 {
