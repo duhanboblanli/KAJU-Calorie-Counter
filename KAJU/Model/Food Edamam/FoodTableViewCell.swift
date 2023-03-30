@@ -7,13 +7,24 @@
 
 import UIKit
 
+protocol CellDelegate: AnyObject {
+    func directAddTap(_ cell: FoodTableViewCell)
+}
+
 class FoodTableViewCell: UITableViewCell {
     
     
+    weak var delegate: CellDelegate?
+    
+    @IBOutlet weak var addButton: UIButton!
     @IBOutlet weak var foodImage: UIImageView!
     @IBOutlet weak var calorie: UILabel!
     @IBOutlet weak var name: UILabel!
     
+    @IBAction func directAddPressed(_ sender: Any) {
+        print("sex var")
+        delegate?.directAddTap(self)
+    }
     /*override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -24,6 +35,7 @@ class FoodTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }*/
+    
     
     func setCellWithValuesOf(_ foodData:FoodStruct) {
         updateUI(label: foodData.label, calorie: foodData.calorie, image: foodData.image)

@@ -2597,6 +2597,9 @@
                                                             <rect key="frame" x="330" y="33" width="50" height="35"/>
                                                             <color key="tintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <buttonConfiguration key="configuration" style="plain"/>
+                                                            <connections>
+                                                                <action selector="directAddPressed:" destination="ZRS-fa-A24" eventType="touchUpInside" id="jfH-tG-Z8q"/>
+                                                            </connections>
                                                         </button>
                                                     </subviews>
                                                     <color key="backgroundColor" red="0.1019607843" green="0.1843137255" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -2622,6 +2625,7 @@
                                                 </tableViewCellContentView>
                                                 <color key="backgroundColor" red="0.1019607843" green="0.1843137255" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <connections>
+                                                    <outlet property="addButton" destination="h5A-Ea-OB7" id="IcN-cm-Zeq"/>
                                                     <outlet property="calorie" destination="GND-F5-c4x" id="NTE-c0-T2s"/>
                                                     <outlet property="foodImage" destination="0xO-yf-SEe" id="La8-kW-u4s"/>
                                                     <outlet property="name" destination="N22-eR-NBl" id="VHV-i6-YLf"/>

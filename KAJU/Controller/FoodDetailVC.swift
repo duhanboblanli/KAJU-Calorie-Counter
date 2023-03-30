@@ -14,7 +14,7 @@ import CoreData
 
 class FoodDetailVC: UITableViewController {
     
-    var RECENTS_LIMIT = 20
+    let RECENTS_LIMIT = 20
     
     var query = "egg"
     var foodType = "currentBreakfastCal"
