@@ -345,7 +345,6 @@ extension FoodsViewController: UITableViewDataSource, UITableViewDelegate, CellD
         }
     }
     func directAddTap(_ cell: FoodTableViewCell) {
-        print("sex var2")
         let index = self.tableView.indexPath(for: cell)
         var food: FoodStruct
         if favEnable && !searchEnable && foodSearchSuggestions.count == 0{
@@ -360,7 +359,6 @@ extension FoodsViewController: UITableViewDataSource, UITableViewDelegate, CellD
         else{
             food = foodViewModel.cellForRowAt(indexPath: index!)
         }
-        print("sex var: ", food.label)
         directAddFunction(food: food)
     }
     

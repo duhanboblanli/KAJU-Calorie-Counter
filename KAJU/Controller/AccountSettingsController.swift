@@ -111,10 +111,9 @@ class AccountSettingsController: UIViewController, UITableViewDelegate, UITableV
      
         self.user!.delete { error in
           if let error = error {
-              let alert = UIAlertController(title: "Deletion unsuccessfull!", message: "Sorry for inconvenience situation. Deletion of an account is sensitive process. You should be re-sign into your account.", preferredStyle: UIAlertController.Style.alert)
+              let alert = UIAlertController(title: "Deletion unsuccessfull!", message: "Sorry for inconvenience situation. Deletion of an account is sensitive process. You should be re-signed into your account.", preferredStyle: UIAlertController.Style.alert)
               alert.addAction(UIAlertAction(title: "Click", style: UIAlertAction.Style.default, handler: nil))
               self.present(alert, animated: true, completion: nil)
-            
               print(error)
           } else {
             // Account deleted.
