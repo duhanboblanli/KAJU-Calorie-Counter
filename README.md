@@ -19,7 +19,7 @@ Also, user can get recipes and foods with a single search. User can get the nutr
 Our motive for developing this app was to help people who are pretty confused while cooking and also want to keep track of how many of their calories come from it. 
 We hope it will be useful to people who fight against unhealthy diets and waste a lot of time finding healthy recipes.
 
-# Steps to run 📲
+# Steps to Run 📲
 
 * Clone or download the app from this repository. 💾
 * Open project file in terminal. 💻
