@@ -77,7 +77,7 @@ class AccountSettingsController: UIViewController, UITableViewDelegate, UITableV
     }
     
     @objc func deleteAccount(){
-        showSimpleAlert(title: "Are you sure you want to Delete ?", firstResponse: "Cancel", secondResponse: "Delete")
+        showSimpleAlert(title: "Are you sure you want to Delete ? ", firstResponse: "Cancel", secondResponse: "Delete")
     }
     
     @objc func logOutAccount(){
@@ -85,7 +85,7 @@ class AccountSettingsController: UIViewController, UITableViewDelegate, UITableV
     }
     
     func showSimpleAlert(title: String, firstResponse: String, secondResponse: String) {
-        let alert = UIAlertController(title: title, message: nil,
+        let alert = UIAlertController(title: title, message: "Your offline data that consisting of favorite foods, recent foods and favorite recipes will be gone!",
                                       preferredStyle: UIAlertController.Style.alert)
         alert.addAction(UIAlertAction(title: firstResponse, style: UIAlertAction.Style.default, handler: { _ in
             //Cancel Action

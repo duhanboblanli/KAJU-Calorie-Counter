@@ -23,6 +23,16 @@ class RegisterViewController: UIViewController {
         setupButtonStyle(button: signUpButton, cornerRadius: 0.046)
         emailTextField.delegate = self
         passwordTextField.delegate = self
+        emailTextField.backgroundColor = UIColor.white
+        emailTextField.attributedPlaceholder = NSAttributedString(
+            string: "email@example.com",
+            attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray]
+        )
+        passwordTextField.attributedPlaceholder = NSAttributedString(
+            string: "password",
+            attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray]
+        )
+        passwordTextField.backgroundColor = UIColor.white
         emailTextField.tag = 1
         passwordTextField.tag = 2
     }
