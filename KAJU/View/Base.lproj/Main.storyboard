@@ -1788,7 +1788,7 @@
             </objects>
             <point key="canvasLocation" x="-1306" y="-1414"/>
         </scene>
-        <!--Today-->
+        <!--Diary-->
         <scene sceneID="t9C-Ju-GPw">
             <objects>
                 <tableViewController storyboardIdentifier="MainViewController" id="hsl-iQ-Lzd" customClass="MainViewController" customModule="KAJU" customModuleProvider="target" sceneMemberID="viewController">
@@ -2412,7 +2412,7 @@
                             <outlet property="delegate" destination="hsl-iQ-Lzd" id="Zxw-2v-JnK"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Today" id="3NA-xm-gpf"/>
+                    <navigationItem key="navigationItem" title="Diary" id="3NA-xm-gpf"/>
                     <connections>
                         <outlet property="breakfastCalLabel" destination="q6M-L9-ajD" id="Lak-Na-s5B"/>
                         <outlet property="breakfastView" destination="5F0-Gw-RcZ" id="Tcr-98-XZl"/>
@@ -2630,10 +2630,14 @@
                                     </tableView>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstItem="IPb-Lu-vgx" firstAttribute="leading" secondItem="bFU-gF-Eo2" secondAttribute="leading" id="6Bz-MX-7XD"/>
                                     <constraint firstAttribute="bottom" secondItem="IPb-Lu-vgx" secondAttribute="bottom" id="KXW-1B-m1s"/>
                                     <constraint firstItem="IPb-Lu-vgx" firstAttribute="top" secondItem="bFU-gF-Eo2" secondAttribute="top" id="KzN-u6-DCe"/>
                                     <constraint firstItem="IPb-Lu-vgx" firstAttribute="leading" secondItem="bFU-gF-Eo2" secondAttribute="leading" id="NBH-a0-wep"/>
+                                    <constraint firstAttribute="trailing" secondItem="IPb-Lu-vgx" secondAttribute="trailing" id="QQk-W6-VLt"/>
+                                    <constraint firstAttribute="bottom" secondItem="IPb-Lu-vgx" secondAttribute="bottom" id="cCX-hO-DZa"/>
                                     <constraint firstAttribute="trailing" secondItem="IPb-Lu-vgx" secondAttribute="trailing" id="p43-lX-jLi"/>
+                                    <constraint firstItem="IPb-Lu-vgx" firstAttribute="top" secondItem="bFU-gF-Eo2" secondAttribute="top" id="vhT-6A-cMY"/>
                                 </constraints>
                             </view>
                         </subviews>

@@ -310,7 +310,7 @@ extension FoodsViewController: UITableViewDataSource, UITableViewDelegate {
                 tableView.restore()
             }
             else {
-                tableView.setEmptyView(title: "You don't have any foods that added to your diary.", message: "Your recent foods that you added to diary will be in here.")
+                tableView.setEmptyView(title: "You don't have any foods you added to diary.", message: "Your recent foods that added to diary will be in here.")
             }
         }
         else if !searchEnable && foodSearchSuggestions.count == 0{
@@ -421,6 +421,15 @@ extension FoodsViewController: UISearchBarDelegate {
     
     // Arama için query oluşturan fonksiyon
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        if favEnable{
+            favoritesLabel.text = "Search"
+        }
+        else if recentsEnable{
+            recentsLabel.text = "Search"
+        }
+        else{
+            frequentsLabel.text = "Search"
+        }
         searchEnable = true
         searchBar.setShowsCancelButton(true, animated: true)
         if let searchQuery = searchBar.text {
@@ -476,6 +485,15 @@ extension FoodsViewController: UISearchBarDelegate {
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchBar.text = ""
+        if favEnable{
+            favoritesLabel.text = "Favorites"
+        }
+        else if recentsEnable{
+            recentsLabel.text = "Recents"
+        }
+        else{
+            frequentsLabel.text = "Frequents"
+        }
         searchBar.resignFirstResponder()
         searchEnable = false
         foodSearchSuggestions = []
