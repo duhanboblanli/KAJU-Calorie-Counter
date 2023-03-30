@@ -1370,7 +1370,7 @@
                                 <rect key="frame" x="0.0" y="339" width="414" height="177"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="email@example.com" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ijY-ef-vMo">
-                                        <rect key="frame" x="48" y="30" width="318" height="45"/>
+                                        <rect key="frame" x="36" y="30" width="342" height="45"/>
                                         <color key="tintColor" red="0.1843137255" green="0.53333333329999999" blue="0.52549019610000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="22"/>
@@ -1384,10 +1384,10 @@
                                     </textField>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="right" secondItem="ijY-ef-vMo" secondAttribute="right" constant="48" id="42a-kT-Rhx"/>
+                                    <constraint firstAttribute="right" secondItem="ijY-ef-vMo" secondAttribute="right" constant="36" id="42a-kT-Rhx"/>
                                     <constraint firstAttribute="height" constant="177" id="51k-5N-fLu"/>
                                     <constraint firstAttribute="bottom" secondItem="ijY-ef-vMo" secondAttribute="bottom" constant="102" id="Fkd-XK-EGL"/>
-                                    <constraint firstItem="ijY-ef-vMo" firstAttribute="left" secondItem="0Bs-7E-jDl" secondAttribute="left" constant="48" id="cfy-fy-fIr"/>
+                                    <constraint firstItem="ijY-ef-vMo" firstAttribute="left" secondItem="0Bs-7E-jDl" secondAttribute="left" constant="36" id="cfy-fy-fIr"/>
                                     <constraint firstItem="ijY-ef-vMo" firstAttribute="top" secondItem="0Bs-7E-jDl" secondAttribute="top" constant="30" id="qe5-hy-Q9y"/>
                                 </constraints>
                             </view>
@@ -1395,7 +1395,7 @@
                                 <rect key="frame" x="0.0" y="426" width="414" height="177"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="123456" borderStyle="roundedRect" placeholder="password" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tA3-51-UMe">
-                                        <rect key="frame" x="49" y="10" width="317" height="45"/>
+                                        <rect key="frame" x="36" y="10" width="342" height="45"/>
                                         <color key="tintColor" red="0.1843137255" green="0.53333333329999999" blue="0.52549019610000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="22"/>
@@ -1424,8 +1424,8 @@
                                     <constraint firstAttribute="height" constant="177" id="TtI-pK-Vd1"/>
                                     <constraint firstAttribute="bottom" secondItem="tA3-51-UMe" secondAttribute="bottom" constant="122" id="XPq-bj-sAf"/>
                                     <constraint firstAttribute="trailing" secondItem="gHX-uK-pnV" secondAttribute="trailing" constant="24" id="bSI-hA-2ff"/>
-                                    <constraint firstAttribute="right" secondItem="tA3-51-UMe" secondAttribute="right" constant="48" id="cUS-WT-Za3"/>
-                                    <constraint firstItem="tA3-51-UMe" firstAttribute="left" secondItem="eKQ-p4-UEh" secondAttribute="left" constant="49" id="la8-gf-yCq"/>
+                                    <constraint firstAttribute="right" secondItem="tA3-51-UMe" secondAttribute="right" constant="36" id="cUS-WT-Za3"/>
+                                    <constraint firstItem="tA3-51-UMe" firstAttribute="left" secondItem="eKQ-p4-UEh" secondAttribute="left" constant="36" id="la8-gf-yCq"/>
                                 </constraints>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" baselineRelativeArrangement="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NSf-AM-o0F">
