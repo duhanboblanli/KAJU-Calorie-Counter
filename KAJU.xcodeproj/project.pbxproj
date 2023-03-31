@@ -16,6 +16,7 @@
 		2D8A39CB29CB9FF100897B18 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2D8A39C929CB9FF100897B18 /* Main.storyboard */; };
 		2D91D95629C5BD100095C9AA /* FavoriteFoodsOffline.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2D91D95429C5BD100095C9AA /* FavoriteFoodsOffline.xcdatamodeld */; };
 		2DBCA23E29CB91A400B0653E /* BurnedCalTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DBCA23D29CB91A400B0653E /* BurnedCalTracker.swift */; };
+		2DDDE99329D6FC2900960DB9 /* UIDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DDDE99229D6FC2900960DB9 /* UIDevice.swift */; };
 		2DF9F2F8299D1B530023AB7C /* FoodTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DF9F2F7299D1B530023AB7C /* FoodTableViewCell.swift */; };
 		33BBF98882CBF449C942A21C /* Pods_KAJU.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAF2C5DAE50E9AB50509E94F /* Pods_KAJU.framework */; };
 		FE08EA90298F06EC008BDC6A /* CalculatorBrain.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE08EA8F298F06EC008BDC6A /* CalculatorBrain.swift */; };
@@ -94,6 +95,7 @@
 		2D8A39CA29CB9FF100897B18 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2D91D95529C5BD100095C9AA /* FavoriteFoodsOffline.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FavoriteFoodsOffline.xcdatamodel; sourceTree = "<group>"; };
 		2DBCA23D29CB91A400B0653E /* BurnedCalTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurnedCalTracker.swift; sourceTree = "<group>"; };
+		2DDDE99229D6FC2900960DB9 /* UIDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDevice.swift; sourceTree = "<group>"; };
 		2DF9F2F7299D1B530023AB7C /* FoodTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodTableViewCell.swift; sourceTree = "<group>"; };
 		86387DEFE4A93B11BD601BE5 /* Pods-KAJU.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KAJU.debug.xcconfig"; path = "Target Support Files/Pods-KAJU/Pods-KAJU.debug.xcconfig"; sourceTree = "<group>"; };
 		CAF2C5DAE50E9AB50509E94F /* Pods_KAJU.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KAJU.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -351,6 +353,7 @@
 				FEC1A96829B787F200342AF6 /* ProfileViewController.swift */,
 				FEC1A96729B787F100342AF6 /* SettingsViewController.swift */,
 				2DBCA23D29CB91A400B0653E /* BurnedCalTracker.swift */,
+				2DDDE99229D6FC2900960DB9 /* UIDevice.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -502,6 +505,7 @@
 				FE599850298B1C55002CB4DF /* CalculatorResultViewController.swift in Sources */,
 				FEC1A95D29B787C800342AF6 /* AccountSettingCell.swift in Sources */,
 				2D7D7B4B29C32EE500027653 /* RecentFoodsOffline.xcdatamodeld in Sources */,
+				2DDDE99329D6FC2900960DB9 /* UIDevice.swift in Sources */,
 				FEC1A96D29B787F500342AF6 /* Editor.swift in Sources */,
 				FE6FCCFF29A7B6B700FDE008 /* FavoritesCell.swift in Sources */,
 				13F883F329B8B10500BBCF25 /* DatabaseSingleton.swift in Sources */,

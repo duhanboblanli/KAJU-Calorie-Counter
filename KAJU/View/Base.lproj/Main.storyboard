@@ -725,10 +725,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="t52-fq-oX4">
-                                <rect key="frame" x="20" y="237" width="374" height="540"/>
+                                <rect key="frame" x="20" y="237" width="374" height="508"/>
                                 <subviews>
                                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="yzE-eL-pR2">
-                                        <rect key="frame" x="0.0" y="0.0" width="374" height="61"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="374" height="56.5"/>
                                         <color key="backgroundColor" red="0.1843137255" green="0.53333333329999999" blue="0.52549019610000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="60" id="u3t-hD-v9e"/>
@@ -743,16 +743,16 @@
                                         </connections>
                                     </segmentedControl>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="gJX-2T-wX0" userLabel="Age Stack View">
-                                        <rect key="frame" x="0.0" y="80" width="374" height="60"/>
+                                        <rect key="frame" x="0.0" y="75.5" width="374" height="55.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="📆 Age" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iEN-3v-8z7" userLabel="AgeLabel">
-                                                <rect key="frame" x="0.0" y="0.0" width="57" height="60"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="57" height="55.5"/>
                                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="50" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Max-Vq-Jzn" userLabel="AgeValueLabel">
-                                                <rect key="frame" x="353.5" y="0.0" width="20.5" height="60"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="25" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Max-Vq-Jzn" userLabel="AgeValueLabel">
+                                                <rect key="frame" x="354" y="0.0" width="20" height="55.5"/>
                                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -763,7 +763,7 @@
                                         </constraints>
                                     </stackView>
                                     <slider opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="50" minValue="2" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="FI5-E8-tY9" userLabel="Age Horizontal Slider">
-                                        <rect key="frame" x="-2" y="160" width="378" height="61"/>
+                                        <rect key="frame" x="-2" y="151" width="378" height="56.5"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="60" id="pLF-kB-Uz4"/>
                                         </constraints>
@@ -774,16 +774,16 @@
                                         </connections>
                                     </slider>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="WFh-Ag-dIb" userLabel="Height Stack View">
-                                        <rect key="frame" x="0.0" y="240" width="374" height="60"/>
+                                        <rect key="frame" x="0.0" y="226.5" width="374" height="55"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="📏Height" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hfu-Aa-RsS" userLabel="HeightLabel">
-                                                <rect key="frame" x="0.0" y="0.0" width="73" height="60"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="73" height="55"/>
                                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="1.50m" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6gs-Qi-L12" userLabel="HeightValueLabel">
-                                                <rect key="frame" x="329" y="0.0" width="45" height="60"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="1.80m" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6gs-Qi-L12" userLabel="HeightValueLabel">
+                                                <rect key="frame" x="328.5" y="0.0" width="45.5" height="55"/>
                                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -794,7 +794,7 @@
                                         </constraints>
                                     </stackView>
                                     <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1.5" minValue="0.5" maxValue="2.5" translatesAutoresizingMaskIntoConstraints="NO" id="FeE-aY-IAj" userLabel="Height Horizontal Slider">
-                                        <rect key="frame" x="-2" y="320" width="378" height="61"/>
+                                        <rect key="frame" x="-2" y="301.5" width="378" height="56.5"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="60" id="mAU-br-H7A"/>
                                         </constraints>
@@ -805,16 +805,16 @@
                                         </connections>
                                     </slider>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="Elz-cp-MBg" userLabel="Weight Stack View">
-                                        <rect key="frame" x="0.0" y="400" width="374" height="60"/>
+                                        <rect key="frame" x="0.0" y="377" width="374" height="55.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="⚖️Weight" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QRR-EA-rdj" userLabel="WeightLabel">
-                                                <rect key="frame" x="0.0" y="0.0" width="76" height="60"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="76" height="55.5"/>
                                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="100Kg" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JAv-0G-KeR" userLabel="WeightValueLabel">
-                                                <rect key="frame" x="326.5" y="0.0" width="47.5" height="60"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="75Kg" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JAv-0G-KeR" userLabel="WeightValueLabel">
+                                                <rect key="frame" x="335" y="0.0" width="39" height="55.5"/>
                                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -825,7 +825,7 @@
                                         </constraints>
                                     </stackView>
                                     <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="100" minValue="3" maxValue="200" translatesAutoresizingMaskIntoConstraints="NO" id="VB2-eK-jlt" userLabel="Weight Horizontal Slider">
-                                        <rect key="frame" x="-2" y="480" width="378" height="61"/>
+                                        <rect key="frame" x="-2" y="452.5" width="378" height="56.5"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="60" id="w2n-qx-Bpz"/>
                                         </constraints>
@@ -859,7 +859,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" highlighted="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xCF-wR-6Hz">
-                                <rect key="frame" x="10" y="822" width="394" height="72"/>
+                                <rect key="frame" x="10" y="790" width="394" height="72"/>
                                 <color key="backgroundColor" red="0.15686274510000001" green="0.2784313725" blue="0.36078431370000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="72" id="Wwp-jF-kzm"/>
@@ -906,7 +906,9 @@
                         <outlet property="calculateButton" destination="xCF-wR-6Hz" id="UXM-gx-DuZ"/>
                         <outlet property="heightLabel" destination="6gs-Qi-L12" id="1Yv-jJ-YHo"/>
                         <outlet property="heightSlider" destination="FeE-aY-IAj" id="k7m-Rf-wqF"/>
+                        <outlet property="nextButtonConstraint" destination="04l-VL-dNt" id="qhU-8R-WvI"/>
                         <outlet property="sexSegment" destination="yzE-eL-pR2" id="o30-HN-DLB"/>
+                        <outlet property="topConstraint" destination="17j-hl-Dxv" id="rXV-Vt-GLC"/>
                         <outlet property="weightLabel" destination="JAv-0G-KeR" id="Cix-3T-oz1"/>
                         <outlet property="weightSlider" destination="VB2-eK-jlt" id="B3v-SE-H7F"/>
                     </connections>
@@ -1028,6 +1030,7 @@
                         <outlet property="bmiLabel" destination="fRe-n5-i5s" id="aak-kg-jHo"/>
                         <outlet property="calorieLabel" destination="TWC-Vj-qzP" id="Hd7-VD-wf1"/>
                         <outlet property="calorieSublabel" destination="MFo-mA-Mz5" id="Srz-nA-JXQ"/>
+                        <outlet property="nextButtonConstraint" destination="hic-1K-Eat" id="izo-TT-nOu"/>
                         <outlet property="resultLabel" destination="8wL-v6-V2L" id="Xj3-tb-G5T"/>
                         <outlet property="resultNextButton" destination="fi3-au-OQq" id="wcn-NG-4lM"/>
                     </connections>
@@ -1184,6 +1187,7 @@
                         <outlet property="firstInfoLabel" destination="huJ-YT-nKk" id="BZf-eh-aeu"/>
                         <outlet property="getStartedButton" destination="KTn-fc-L4X" id="8qh-Ne-RMo"/>
                         <outlet property="infoLabel" destination="M5H-zT-ZYy" id="L1C-en-2UY"/>
+                        <outlet property="logInBottomConstraint" destination="b4I-KF-YZ4" id="a3p-dq-vPe"/>
                         <outlet property="logInButton" destination="4re-L7-k8R" id="Hbp-eb-Zqf"/>
                         <outlet property="thirdInfoLabel" destination="xdO-00-WSI" id="lPJ-eM-OiJ"/>
                         <outlet property="titleLabel" destination="CWT-O1-Xi1" id="Yyz-ZC-GJn"/>
@@ -1334,9 +1338,11 @@
                     <navigationItem key="navigationItem" id="CEv-Ro-vfL"/>
                     <connections>
                         <outlet property="emailTextField" destination="cPP-aR-pB8" id="vfG-lp-qwv"/>
+                        <outlet property="emailTopConstraint" destination="33u-gi-VvH" id="sFN-4F-gd9"/>
                         <outlet property="errorTextField" destination="MOA-Lx-yAc" id="Jg9-AV-3f5"/>
                         <outlet property="passwordTextField" destination="wPn-fx-6k0" id="Zrg-cw-x9W"/>
                         <outlet property="signUpButton" destination="0ht-op-WRz" id="RM0-FU-ZXt"/>
+                        <outlet property="signUpButtonBottomConstraint" destination="2z1-cp-ZB5" id="vaZ-ij-leA"/>
                         <segue destination="I9V-XP-KOK" kind="show" identifier="RegisterToCalculate" id="g8F-Pf-216"/>
                     </connections>
                 </viewController>
@@ -1488,8 +1494,10 @@
                     <navigationItem key="navigationItem" id="pHD-hU-yOT"/>
                     <connections>
                         <outlet property="emailTextField" destination="ijY-ef-vMo" id="EhV-IN-Gtp"/>
+                        <outlet property="emailTopConstraint" destination="puB-vq-Djs" id="jtY-Xa-bu1"/>
                         <outlet property="errorTextField" destination="gHX-uK-pnV" id="F25-25-uMG"/>
                         <outlet property="logInButton" destination="Ag8-Fz-2ku" id="VLE-Ge-Jpp"/>
+                        <outlet property="logInButtonBottomConstraint" destination="eYW-KG-Jx0" id="FRG-6b-w2g"/>
                         <outlet property="passwordTextField" destination="tA3-51-UMe" id="6RK-Qj-cYL"/>
                         <segue destination="UJr-Yb-ZAg" kind="show" identifier="LoginToCalculate" id="Qk9-am-Qfa"/>
                     </connections>
@@ -1631,10 +1639,14 @@
                     </view>
                     <navigationItem key="navigationItem" id="JpV-6l-o51"/>
                     <connections>
+                        <outlet property="downMiddleConstraint" destination="iy2-6P-4e1" id="oPR-eh-9bq"/>
                         <outlet property="gainMuscleButton" destination="uDJ-1k-TGd" id="80x-BC-s7O"/>
                         <outlet property="goalNextButton" destination="2qK-wx-NcH" id="VBH-Nr-yI6"/>
                         <outlet property="loseWeightButton" destination="KFE-M9-2VN" id="nvz-8j-tWo"/>
+                        <outlet property="middleConstraint" destination="hUl-6J-p15" id="rCe-Ur-6WC"/>
+                        <outlet property="nextButtonConstraint" destination="Daw-BB-qXM" id="BLd-hk-dvf"/>
                         <outlet property="protectWeightButton" destination="hS2-Wg-DOK" id="kEL-8k-F8T"/>
+                        <outlet property="topConstraint" destination="czc-Ci-I8c" id="a96-2H-e3b"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="B88-QV-i4r" sceneMemberID="firstResponder"/>
@@ -1650,7 +1662,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" highlighted="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v6p-mN-wEd">
-                                <rect key="frame" x="10" y="790" width="394" height="72"/>
+                                <rect key="frame" x="10" y="730" width="394" height="72"/>
                                 <color key="backgroundColor" red="0.15686274510000001" green="0.2784313725" blue="0.36078431370000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="72" id="Ens-Sq-BUV"/>
@@ -1682,10 +1694,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="G92-xa-tcB">
-                                <rect key="frame" x="24" y="252" width="366" height="478"/>
+                                <rect key="frame" x="24" y="252" width="366" height="418"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Du4-98-ylc">
-                                        <rect key="frame" x="0.0" y="0.0" width="366" height="97"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="366" height="82"/>
                                         <color key="backgroundColor" red="0.15686274510000001" green="0.2784313725" blue="0.36078431370000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="82" id="GtW-X1-9iB"/>
@@ -1700,7 +1712,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iiU-L2-M7O">
-                                        <rect key="frame" x="0.0" y="127" width="366" height="97"/>
+                                        <rect key="frame" x="0.0" y="112" width="366" height="82"/>
                                         <color key="backgroundColor" red="0.15686274510000001" green="0.2784313725" blue="0.36078431370000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="82" id="xJV-5d-AKT"/>
@@ -1715,7 +1727,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QOM-IS-6nr">
-                                        <rect key="frame" x="0.0" y="254" width="366" height="97"/>
+                                        <rect key="frame" x="0.0" y="224" width="366" height="82"/>
                                         <color key="backgroundColor" red="0.15686274510000001" green="0.2784313725" blue="0.36078431370000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="82" id="SdB-wS-PnF"/>
@@ -1730,7 +1742,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oxD-H5-mQP">
-                                        <rect key="frame" x="0.0" y="381" width="366" height="97"/>
+                                        <rect key="frame" x="0.0" y="336" width="366" height="82"/>
                                         <color key="backgroundColor" red="0.15686274510000001" green="0.2784313725" blue="0.36078431370000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="82" id="gxu-u2-yhM"/>
@@ -1775,8 +1787,12 @@
                     <connections>
                         <outlet property="activeButton" destination="QOM-IS-6nr" id="Y6Y-nP-x7Z"/>
                         <outlet property="activenessNextButton" destination="v6p-mN-wEd" id="Uon-s8-d0V"/>
+                        <outlet property="downMiddleConstraint" destination="BKw-SH-Pvt" id="0py-2y-kp9"/>
                         <outlet property="lightlyActiveButton" destination="Du4-98-ylc" id="41s-P3-xni"/>
+                        <outlet property="middleConstraint" destination="NfW-v0-aqT" id="ijR-Bv-tDe"/>
                         <outlet property="moderatelyActiveButton" destination="iiU-L2-M7O" id="IST-52-jEI"/>
+                        <outlet property="nextButtonConstraint" destination="auN-MF-KNT" id="yhI-j3-yxO"/>
+                        <outlet property="topConstraint" destination="G2I-Ep-lwE" id="ewr-g2-4lB"/>
                         <outlet property="veryActiveButton" destination="oxD-H5-mQP" id="SUR-Lb-14P"/>
                     </connections>
                 </viewController>
@@ -3048,7 +3064,7 @@
         <designable name="xiS-Vn-AJh"/>
     </designables>
     <inferredMetricsTieBreakers>
-        <segue reference="Qk9-am-Qfa"/>
+        <segue reference="aeQ-V9-k0H"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Egg-Breakfast-PNG-Download-Image" width="3642" height="2733"/>

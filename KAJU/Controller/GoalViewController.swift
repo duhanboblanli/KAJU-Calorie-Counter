@@ -9,14 +9,31 @@ import UIKit
 
 class GoalViewController: UIViewController {
     
+    @IBOutlet weak var downMiddleConstraint: NSLayoutConstraint!
+    @IBOutlet weak var middleConstraint: NSLayoutConstraint!
+    @IBOutlet weak var topConstraint: NSLayoutConstraint!
+    @IBOutlet weak var nextButtonConstraint: NSLayoutConstraint!
     var changeCalorieAmount = 0
     var calorieSublabel = "According to your choices, your goal is to maintain your weight."
     var ColorDarkGreen = UIColor( red: 47/255, green: 136/255, blue: 134/255, alpha: 1)
+    var ColorSelected = UIColor( red: 132/255, green: 198/255, blue: 155/255, alpha: 0.3)
+    var ColorDarkBlue = UIColor( red: 40/255, green: 71/255, blue: 92/255, alpha: 1)
     
     @IBOutlet weak var goalNextButton: UIButton!
     @IBOutlet weak var loseWeightButton: UIButton!
     @IBOutlet weak var protectWeightButton: UIButton!
     @IBOutlet weak var gainMuscleButton: UIButton!
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        if !UIDevice.hasNotch{
+            print("model:", UIDevice.hasNotch)
+            nextButtonConstraint.constant = -25
+            topConstraint.constant = 15
+            middleConstraint.constant = 60
+            downMiddleConstraint.constant = 60
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,19 +53,20 @@ class GoalViewController: UIViewController {
     @IBAction func loseWeightPressed(_ sender: UIButton) {
         changeCalorieAmount = -400
         calorieSublabel = "According to your choices, your goal is to lose your weight."
-        protectWeightButton.isSelected = false
-        gainMuscleButton.isSelected = false
-        loseWeightButton.isSelected = true
+        protectWeightButton.backgroundColor = ColorDarkBlue
+        gainMuscleButton.backgroundColor = ColorDarkBlue
+        loseWeightButton.backgroundColor = ColorSelected
         goalNextButton.isEnabled = true
         goalNextButton.isHighlighted = false
         goalNextButton.backgroundColor = ColorDarkGreen
     }
     @IBAction func protectWeightPressed(_ sender: UIButton) {
+        
         changeCalorieAmount = 0
         calorieSublabel = "According to your choices, your goal is to maintain your weight."
-        loseWeightButton.isSelected = false
-        gainMuscleButton.isSelected = false
-        protectWeightButton.isSelected = true
+        protectWeightButton.backgroundColor = ColorSelected
+        gainMuscleButton.backgroundColor = ColorDarkBlue
+        loseWeightButton.backgroundColor = ColorDarkBlue
         goalNextButton.isEnabled = true
         goalNextButton.isHighlighted = false
         goalNextButton.backgroundColor = ColorDarkGreen
@@ -56,9 +74,9 @@ class GoalViewController: UIViewController {
     @IBAction func gainMusclePressed(_ sender: UIButton) {
         changeCalorieAmount = 400
         calorieSublabel = "According to your choices, your goal is to gain muscle."
-        protectWeightButton.isSelected = false
-        loseWeightButton.isSelected = false
-        gainMuscleButton.isSelected = true
+        protectWeightButton.backgroundColor = ColorDarkBlue
+        gainMuscleButton.backgroundColor = ColorSelected
+        loseWeightButton.backgroundColor = ColorDarkBlue
         goalNextButton.isEnabled = true
         goalNextButton.isHighlighted = false
         goalNextButton.backgroundColor = ColorDarkGreen
