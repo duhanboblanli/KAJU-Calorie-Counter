@@ -13,13 +13,24 @@ import FirebaseAuth
 
 class RegisterViewController: UIViewController {
     
+    @IBOutlet weak var emailTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var signUpButtonBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var signUpButton: UIButton!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var errorTextField: UILabel!
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        if !UIDevice.hasNotch{
+            print("model:", UIDevice.hasNotch)
+            signUpButtonBottomConstraint.constant = -25
+            emailTopConstraint.constant = 200
+        }
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         setupButtonStyle(button: signUpButton, cornerRadius: 0.096)
         emailTextField.delegate = self
         passwordTextField.delegate = self

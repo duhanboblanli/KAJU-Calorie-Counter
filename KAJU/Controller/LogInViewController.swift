@@ -10,10 +10,21 @@ import FirebaseAuth
 
 class LogInViewController: UIViewController {
     
+    @IBOutlet weak var emailTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var logInButtonBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var logInButton: UIButton!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var errorTextField: UILabel!
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        if !UIDevice.hasNotch{
+            print("model:", UIDevice.hasNotch)
+            logInButtonBottomConstraint.constant = -25
+            emailTopConstraint.constant = 200
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

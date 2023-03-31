@@ -10,6 +10,7 @@ import CLTypingLabel
 
 class CalculatorResultViewController: UIViewController {
     
+    @IBOutlet weak var nextButtonConstraint: NSLayoutConstraint!
     var bmiValue: String?
     var advice: String?
     var color: UIColor?
@@ -24,6 +25,14 @@ class CalculatorResultViewController: UIViewController {
     @IBOutlet weak var calorieSublabel: UILabel!
     
     @IBOutlet weak var resultNextButton: UIButton!
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        if !UIDevice.hasNotch{
+            print("model:", UIDevice.hasNotch)
+            nextButtonConstraint.constant = -25
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

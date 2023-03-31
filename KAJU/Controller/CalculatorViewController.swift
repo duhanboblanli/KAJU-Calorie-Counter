@@ -11,6 +11,8 @@ import FirebaseFirestore
 
 class CalculatorViewController: UIViewController {
     
+    @IBOutlet weak var topConstraint: NSLayoutConstraint!
+    @IBOutlet weak var nextButtonConstraint: NSLayoutConstraint!
     let db = Firestore.firestore()
     
     var calorieSublabel = ""
@@ -32,6 +34,18 @@ class CalculatorViewController: UIViewController {
     @IBOutlet weak var weightSlider: UISlider!
     
     @IBOutlet weak var sexSegment: UISegmentedControl!
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        if !UIDevice.hasNotch{
+            print("model:", UIDevice.hasNotch)
+            nextButtonConstraint.constant = 25
+            topConstraint.constant = 15
+        }
+        ageSlider.value = 25
+        heightSlider.value = 1.80
+        weightSlider.value = 75
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

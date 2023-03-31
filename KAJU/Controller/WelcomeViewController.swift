@@ -10,6 +10,7 @@ import FirebaseAuth
 
 class WelcomeViewController: UIViewController {
 
+    @IBOutlet weak var logInBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var infoLabel: UILabel!
     @IBOutlet weak var getStartedButton: UIButton!
@@ -23,6 +24,10 @@ class WelcomeViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+        if !UIDevice.hasNotch{
+            print("model:", UIDevice.hasNotch)
+            logInBottomConstraint.constant = -20
+        }
         check()
     }
     private func check(){

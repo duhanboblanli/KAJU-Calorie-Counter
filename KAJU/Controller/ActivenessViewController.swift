@@ -14,16 +14,33 @@ class ActivenessViewController: UIViewController {
     //Orta düzeyde hareketli olup çok oturmuyorsanız, BMH’nızı 1.4 ile çarpın.
     //Yüksek düzeyde aktifseniz ve düzenli spor yapıyorsanız, BMH’ınızı 1.5 ile çarpın.
     
+    @IBOutlet weak var downMiddleConstraint: NSLayoutConstraint!
+    @IBOutlet weak var middleConstraint: NSLayoutConstraint!
+    @IBOutlet weak var topConstraint: NSLayoutConstraint!
+    @IBOutlet weak var nextButtonConstraint: NSLayoutConstraint!
     var changeCalorieAmount = 0
     var calorieSublabel = ""
     var bmh:Float = 0.0
     var ColorDarkGreen = UIColor( red: 47/255, green: 136/255, blue: 134/255, alpha: 1)
+    var ColorSelected = UIColor( red: 132/255, green: 198/255, blue: 155/255, alpha: 0.3)
+    var ColorDarkBlue = UIColor( red: 40/255, green: 71/255, blue: 92/255, alpha: 1)
     
     @IBOutlet weak var lightlyActiveButton: UIButton!
     @IBOutlet weak var moderatelyActiveButton: UIButton!
     @IBOutlet weak var activeButton: UIButton!
     @IBOutlet weak var veryActiveButton: UIButton!
     @IBOutlet weak var activenessNextButton: UIButton!
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        if !UIDevice.hasNotch{
+            print("model:", UIDevice.hasNotch)
+            nextButtonConstraint.constant = -25
+            topConstraint.constant = 15
+            middleConstraint.constant = 35
+            downMiddleConstraint.constant = 35
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,16 +56,15 @@ class ActivenessViewController: UIViewController {
         moderatelyActiveButton.setTitle("🧑‍🏫 Moderately active", for: UIControl.State())
         activeButton.setTitle("🧑‍💼 Active", for: UIControl.State())
         veryActiveButton.setTitle("👷 Very active", for: UIControl.State())
-        
     }
     
     
     @IBAction func lightlyActivePressed(_ sender: UIButton) {
         bmh = 1.2
-        lightlyActiveButton.isSelected = true
-        moderatelyActiveButton.isSelected = false
-        activeButton.isSelected = false
-        veryActiveButton.isSelected = false
+        lightlyActiveButton.backgroundColor = ColorSelected
+        moderatelyActiveButton.backgroundColor = ColorDarkBlue
+        activeButton.backgroundColor = ColorDarkBlue
+        veryActiveButton.backgroundColor = ColorDarkBlue
         activenessNextButton.isEnabled = true
         activenessNextButton.isHighlighted = false
         activenessNextButton.backgroundColor = ColorDarkGreen
@@ -56,10 +72,10 @@ class ActivenessViewController: UIViewController {
     
     @IBAction func moderatelyActivePressed(_ sender: UIButton) {
         bmh = 1.3
-        moderatelyActiveButton.isSelected = true
-        lightlyActiveButton.isSelected = false
-        activeButton.isSelected = false
-        veryActiveButton.isSelected = false
+        lightlyActiveButton.backgroundColor = ColorDarkBlue
+        moderatelyActiveButton.backgroundColor = ColorSelected
+        activeButton.backgroundColor = ColorDarkBlue
+        veryActiveButton.backgroundColor = ColorDarkBlue
         activenessNextButton.isEnabled = true
         activenessNextButton.isHighlighted = false
         activenessNextButton.backgroundColor = ColorDarkGreen
@@ -67,10 +83,10 @@ class ActivenessViewController: UIViewController {
     
     @IBAction func activePressed(_ sender: UIButton) {
         bmh = 1.4
-        activeButton.isSelected = true
-        moderatelyActiveButton.isSelected = false
-        lightlyActiveButton.isSelected = false
-        veryActiveButton.isSelected = false
+        lightlyActiveButton.backgroundColor = ColorDarkBlue
+        moderatelyActiveButton.backgroundColor = ColorDarkBlue
+        activeButton.backgroundColor = ColorSelected
+        veryActiveButton.backgroundColor = ColorDarkBlue
         activenessNextButton.isEnabled = true
         activenessNextButton.isHighlighted = false
         activenessNextButton.backgroundColor = ColorDarkGreen
@@ -78,10 +94,10 @@ class ActivenessViewController: UIViewController {
     
     @IBAction func veryActivePressed(_ sender: Any) {
         bmh = 1.5
-        veryActiveButton.isSelected = true
-        moderatelyActiveButton.isSelected = false
-        activeButton.isSelected = false
-        lightlyActiveButton.isSelected = false
+        lightlyActiveButton.backgroundColor = ColorDarkBlue
+        moderatelyActiveButton.backgroundColor = ColorDarkBlue
+        activeButton.backgroundColor = ColorDarkBlue
+        veryActiveButton.backgroundColor = ColorSelected
         activenessNextButton.isEnabled = true
         activenessNextButton.isHighlighted = false
         activenessNextButton.backgroundColor = ColorDarkGreen
