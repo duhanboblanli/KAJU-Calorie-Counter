@@ -253,7 +253,8 @@ class MainViewController: UITableViewController {
                                     self.currentBurnedCal = currentBurnedCal as? Int ?? 0
                                 }
                                 if let currentDay = data["currentDay"] {
-                                    if self.currentDayReal != currentDay as? Int{
+                                    let x = currentDay as? Int ?? 0
+                                    if self.currentDayReal != x{
                                         self.resetData()
                                     }
                                 }

@@ -13,6 +13,7 @@ import CoreData
 
 class AccountSettingsController: UIViewController, UITableViewDelegate, UITableViewDataSource{
     let user = Auth.auth().currentUser
+    var docCopy: [String : Any]?
     let db = DatabaseSingleton.db
     private var userPassword = UserDefaults.standard.string(forKey: Auth.auth().currentUser?.email ?? "")
     private var userEmail = Auth.auth().currentUser?.email
@@ -49,7 +50,6 @@ class AccountSettingsController: UIViewController, UITableViewDelegate, UITableV
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         accountSettingModels = fetcData()
         linkViews()
         configureView()
@@ -86,7 +86,7 @@ class AccountSettingsController: UIViewController, UITableViewDelegate, UITableV
         showSimpleAlert(title: "Are you sure you want to Log Out ?", firstResponse: "Cancel", secondResponse: "Log Out")
     }
     
-    func showSimpleAlert(title: String, firstResponse: String, secondResponse: String) {
+    func showSimpleAlert(title: String, firstResponse: String, secondResponse: String){
         let alert = UIAlertController(title: title, message: "Your offline data that consisting of favorite foods, recent foods and favorite recipes will be gone!",
                                       preferredStyle: UIAlertController.Style.alert)
         alert.addAction(UIAlertAction(title: firstResponse, style: UIAlertAction.Style.default, handler: { _ in
@@ -106,23 +106,23 @@ class AccountSettingsController: UIViewController, UITableViewDelegate, UITableV
             }))
         self.present(alert, animated: true, completion: nil)
     }
-    
-    func delete(){
-        self.user!.delete { error in
-          if let error = error {
-              let alert = UIAlertController(title: "Deletion unsuccessfull!", message: "Sorry for inconvenience situation. Deletion of an account is sensitive process. You should be re-signed into your account.", preferredStyle: UIAlertController.Style.alert)
-              alert.addAction(UIAlertAction(title: "Okay", style: UIAlertAction.Style.default, handler: nil))
-              self.present(alert, animated: true, completion: nil)
-              print(error)
-          } else {
-            // Account deleted.
-              self.deleteAllOnlineData()
-              self.deleteAllOfflineData()
-              let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-              let rootViewController: UIViewController = storyboard.instantiateViewController(withIdentifier: "nRoot")
-              self.view.window?.rootViewController = rootViewController
-              self.navigationController?.popToRootViewController(animated: true)
-          }
+    func delete() {
+            self.user!.delete { error in
+                if let error = error {
+                    let alert = UIAlertController(title: "Deletion unsuccessfull!", message: "Sorry for inconvenience situation. Deletion of an account is sensitive process. You should be re-signed into your account.", preferredStyle: UIAlertController.Style.alert)
+                    alert.addAction(UIAlertAction(title: "Okay", style: UIAlertAction.Style.default, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
+                    print(error)
+                } else {
+                    // Account deleted.
+                    print("Account deleted.")
+                    self.deleteAllOnlineData()
+                    self.deleteAllOfflineData()
+                    let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+                    let rootViewController: UIViewController = storyboard.instantiateViewController(withIdentifier: "nRoot")
+                    self.view.window?.rootViewController = rootViewController
+                    self.navigationController?.popToRootViewController(animated: true)
+                }
         }
     }
     
@@ -141,9 +141,20 @@ class AccountSettingsController: UIViewController, UITableViewDelegate, UITableV
     }
     
     func deleteAllOnlineData(){
-        if let currentUserEmail = Auth.auth().currentUser?.email {
-            let docRef = db.collection("UserInformations").document("\(currentUserEmail)")
-            docRef.delete()
+        
+        if let currentUserEmail = userEmail {
+            let docRef = self.db.collection("UserInformations").document(currentUserEmail)
+            
+                docRef.delete(){ err in
+                    if let err = err {
+                        print("Errorqe removing document: \(err)")
+                    }
+                    else {
+                        print("Errorqenot successfully removed!")
+                    }
+                }
+            
+            
         }
     }
     

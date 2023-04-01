@@ -127,7 +127,15 @@ class CalculatorViewController: UIViewController {
                 "age": age,
                 "bmh": bmh,
                 "changeCalorieAmount": changeCalorieAmount,
-                "goalType": goalType
+                "goalType": goalType,
+                "currentDay": Date().get(.minute, .day, .month, .year).day!,
+                "currentCarbs": 0.0,
+                "currentPro": 0.0,
+                "currentFat": 0.0,
+                "currentBreakfastCal": 0,
+                "currentLunchCal": 0,
+                "currentDinnerCal": 0,
+                "currentSnacksCal": 0,
              ]) { err in
                     if let err = err {
                         print("Error adding document: \(err)")
