@@ -12,7 +12,10 @@ class MyGoalSettingsController: UIViewController, UITableViewDelegate, UITableVi
     let tableView: UITableView = UITableView()
     var goalValue: String!
     var weightValue: String!
-    var caloriesValue: String!
+    var activenessValue: String!
+    var goalWeightValue: String!
+    var weeklyGoalValue: String!
+    var goalCaloryValue: String!
     let viewTitle = {
         let label = UILabel()
         label.text = "My Goal Settings"
@@ -35,11 +38,14 @@ class MyGoalSettingsController: UIViewController, UITableViewDelegate, UITableVi
         configureLayout()
     }
     
-    init(goalValue: String, weightValue: String, caloriesValue: String) {
+    init(goalValue: String, weightValue: String, goalCaloryValue: String, activenessValue: String, goalWeightValue: String, weeklyGoalValue: String) {
         super.init(nibName: nil, bundle: nil)
         self.goalValue = goalValue
         self.weightValue = weightValue
-        self.caloriesValue = caloriesValue
+        self.goalCaloryValue = goalCaloryValue
+        self.activenessValue = activenessValue
+        self.goalWeightValue = goalWeightValue
+        self.weeklyGoalValue = weeklyGoalValue
     }
     
     required init?(coder: NSCoder) {
@@ -87,10 +93,10 @@ extension MyGoalSettingsController {
     func fetcData() -> [SettingModel]{
         let goalSetting1 = SettingModel(textLabel: "Goal", textValue: goalValue)
         let goalSetting2 = SettingModel(textLabel: "Starting Weight", textValue: weightValue)
-        let goalSetting3 = SettingModel(textLabel: "Goal Weight", textValue: "0")
-        let goalSetting4 = SettingModel(textLabel: "Activity Level", textValue: "Moderate")
-        let goalSetting5 = SettingModel(textLabel: "Weekly Goal", textValue: "0.5")
-        let goalSetting6 = SettingModel(textLabel: "Calory Goal", textValue: caloriesValue)
+        let goalSetting3 = SettingModel(textLabel: "Goal Weight", textValue: goalWeightValue)
+        let goalSetting4 = SettingModel(textLabel: "Activity Level", textValue: activenessValue)
+        let goalSetting5 = SettingModel(textLabel: "Weekly Goal", textValue: weeklyGoalValue)
+        let goalSetting6 = SettingModel(textLabel: "Calory Goal", textValue: goalCaloryValue)
         
         return [goalSetting1, goalSetting2, goalSetting3, goalSetting4, goalSetting5, goalSetting6]
     }

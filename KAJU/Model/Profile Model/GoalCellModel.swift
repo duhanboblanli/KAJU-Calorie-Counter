@@ -10,5 +10,8 @@ import UIKit
 struct GoalCellModel {
     var goalType: String
     var weight: String
-    var calorie: String
+    var activeness: String
+    var goalWeight: String
+    var weeklyGoal: String
+    var calorieGoal: String
 }

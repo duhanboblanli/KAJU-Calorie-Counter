@@ -136,6 +136,9 @@ class CalculatorViewController: UIViewController {
                 "currentLunchCal": 0,
                 "currentDinnerCal": 0,
                 "currentSnacksCal": 0,
+                "weeklyGoal": 0,
+                "caloryGoal": 0,
+                "goalWeight": 0.0
              ]) { err in
                     if let err = err {
                         print("Error adding document: \(err)")
