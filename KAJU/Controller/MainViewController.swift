@@ -119,6 +119,7 @@ class MainViewController: UITableViewController {
         
     }
     
+    
     // Loading alert functionality
     private func showActivityIndicator(show: Bool) {
       if show {
@@ -253,7 +254,8 @@ class MainViewController: UITableViewController {
                                     self.currentBurnedCal = currentBurnedCal as? Int ?? 0
                                 }
                                 if let currentDay = data["currentDay"] {
-                                    if self.currentDayReal != currentDay as? Int{
+                                    let x = currentDay as? Int ?? 0
+                                    if self.currentDayReal != x{
                                         self.resetData()
                                     }
                                 }
@@ -447,8 +449,8 @@ class MainViewController: UITableViewController {
         totalCalTrackLayer.strokeEnd = 0
         //view.layer.addSublayer(totalCalTrackLayer)
         totalCalView.layer.addSublayer(totalCalTrackLayer)
-        
        if currentCal >= (totalCal  + currentBurnedCal){
+           
             remainingTitle.text = "Over"
             totalCalTrackLayer.strokeColor = UIColor.orange.cgColor
             currentCal = totalCal + currentBurnedCal

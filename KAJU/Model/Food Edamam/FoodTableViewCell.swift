@@ -21,6 +21,10 @@ class FoodTableViewCell: UITableViewCell {
     @IBOutlet weak var calorie: UILabel!
     @IBOutlet weak var name: UILabel!
     
+    func buttonAdded(){
+        self.contentView.addSubview(addButton)
+    }
+    
     @IBAction func directAddPressed(_ sender: Any) {
         delegate?.directAddTap(self)
     }

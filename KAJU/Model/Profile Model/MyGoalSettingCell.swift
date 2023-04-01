@@ -81,6 +81,17 @@ class MyGoalSettingCell: UITableViewCell {
             dropDown.show()
             dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
                 pValueLabel.text = item
+                var changeCaloryAmount:Int = 0
+                switch item{
+                case "Lose Weight":
+                    changeCaloryAmount = -400
+                case "Build Muscle":
+                    changeCaloryAmount = 400
+                case "Maintain Weight":
+                    changeCaloryAmount = 0
+                default: print("error happened while choosing goal type")
+                }
+                updateDBValue(key: "changeCalorieAmount", value: changeCaloryAmount)
                 updateDBValue(key: "goalType", value: item)
             }
         case "Starting Weight":
@@ -94,7 +105,20 @@ class MyGoalSettingCell: UITableViewCell {
             dropDown.show()
             dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
                 pValueLabel.text = item
-                updateDBValue(key: "activityLevel", value: item)
+                var bmh:Float = 0.0
+                switch item{
+                case "Low":
+                    bmh = 1.2
+                case "Moderate":
+                    bmh = 1.3
+                case "High":
+                    bmh = 1.4
+                case "Very High":
+                    bmh = 1.5
+                default: print("error happened")
+                }
+                updateDBValue(key: "bmh", value: bmh)
+                updateDBValue(key: "activeness", value: item)
             }
             
         case "Weekly Goal":
@@ -124,4 +148,5 @@ extension UIView {
             docRef.updateData([key: value])
         }
     }
+    
 }

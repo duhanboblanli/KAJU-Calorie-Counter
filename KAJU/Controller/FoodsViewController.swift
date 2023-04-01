@@ -446,6 +446,7 @@ extension FoodsViewController: UITableViewDataSource, UITableViewDelegate, CellD
             let food = fitTheFood2(foodTarget: favFoods[indexPath.row])
             foodCell.setCellWithValuesOf(food)
             foodCell.separatorInset.bottom = tableView.bounds.size.width
+            foodCell.buttonAdded()
             foodCell.delegate = self
             return foodCell
         }
@@ -456,6 +457,7 @@ extension FoodsViewController: UITableViewDataSource, UITableViewDelegate, CellD
             let food = fitTheFood(foodTarget: recentFoods[indexPath.row])
             foodCell.setCellWithValuesOf(food)
             foodCell.separatorInset.bottom = tableView.bounds.size.width
+            foodCell.buttonAdded()
             foodCell.delegate = self
             return foodCell
             
@@ -466,6 +468,7 @@ extension FoodsViewController: UITableViewDataSource, UITableViewDelegate, CellD
             let food = foodViewModel.frequentFoods[indexPath.row]
             foodCell.setCellWithValuesOf(food)
             foodCell.separatorInset.bottom = tableView.bounds.size.width
+            foodCell.buttonAdded()
             foodCell.delegate = self
             return foodCell
         }
@@ -475,6 +478,7 @@ extension FoodsViewController: UITableViewDataSource, UITableViewDelegate, CellD
             let food = foodViewModel.cellForRowAt(indexPath: indexPath)
             foodCell.setCellWithValuesOf(food)
             foodCell.separatorInset.bottom = tableView.bounds.size.width
+            foodCell.buttonAdded()
             foodCell.delegate = self
             return foodCell
             

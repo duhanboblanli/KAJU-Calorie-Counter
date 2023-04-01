@@ -28,7 +28,6 @@ struct CalculatorBrain {
     //10 * ağırlık (kg) + 6.25 * boy (cm) – 5 * yaş (y) + s (kcal / gün) --> burada s, erkekler için +5 ve kadınlar için -161’dir.
     
     mutating func calculateCalorie(_ sex: String,_ weight: Float,_ height: Float,_ age: Float,_ bmh: Float, _ changeCalorieAmount: Int) {
-        
         if sex == "Male" {
             calorie = (10*weight) + (6.25 * height) - (5*age) + 5
             calorie! *= bmh
