@@ -8,14 +8,14 @@
 import UIKit
 
 class MyGoalSettingsController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-     
+
     let tableView: UITableView = UITableView()
     var goalValue: String!
     var weightValue: String!
     var activenessValue: String!
     var goalWeightValue: String!
     var weeklyGoalValue: String!
-    var goalCaloryValue: String!
+    var goalCalorieValue: String!
     let viewTitle = {
         let label = UILabel()
         label.text = "My Goal Settings"
@@ -31,6 +31,9 @@ class MyGoalSettingsController: UIViewController, UITableViewDelegate, UITableVi
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        define()
+    }
+    func define(){
         goalSettingModels = fetcData()
         linkViews()
         delegateTableView()
@@ -42,7 +45,7 @@ class MyGoalSettingsController: UIViewController, UITableViewDelegate, UITableVi
         super.init(nibName: nil, bundle: nil)
         self.goalValue = goalValue
         self.weightValue = weightValue
-        self.goalCaloryValue = goalCaloryValue
+        self.goalCalorieValue = goalCaloryValue
         self.activenessValue = activenessValue
         self.goalWeightValue = goalWeightValue
         self.weeklyGoalValue = weeklyGoalValue
@@ -96,7 +99,7 @@ extension MyGoalSettingsController {
         let goalSetting3 = SettingModel(textLabel: "Goal Weight", textValue: goalWeightValue)
         let goalSetting4 = SettingModel(textLabel: "Activity Level", textValue: activenessValue)
         let goalSetting5 = SettingModel(textLabel: "Weekly Goal", textValue: weeklyGoalValue)
-        let goalSetting6 = SettingModel(textLabel: "Calory Goal", textValue: goalCaloryValue)
+        let goalSetting6 = SettingModel(textLabel: "Calorie Goal", textValue: goalCalorieValue)
         
         return [goalSetting1, goalSetting2, goalSetting3, goalSetting4, goalSetting5, goalSetting6]
     }

@@ -10,12 +10,17 @@ import DropDown
 import FirebaseAuth
 import FirebaseFirestore
 
+
+
 class MyGoalSettingCell: UITableViewCell {
     
+
+    let db = Firestore.firestore()
     static let identifier = "MyGoalSettingCell"
     var myViewController: UIViewController!
     var dropDown = ThemesOptions.dropDown
     let activityLevel = ["Low", "Moderate", "High", "Very High"]
+    var calorie = ["Adviced", "Manuel"]
     let goal = ["Lose Weight", "Build Muscle", "Maintain Weight"]
     let cellBackgColor = ThemesOptions.cellBackgColor
     
@@ -74,7 +79,7 @@ class MyGoalSettingCell: UITableViewCell {
         pValueLabel.text = "\(model.textValue)"
     }
     
-    @objc func edit(){        
+    @objc func edit(){
         switch editButton.accessibilityIdentifier{
         case "Goal":
             dropDown = setDropDown(dataSource: goal, anchorView: pSettingLabel, bottomOffset: CGPoint(x: 0, y:(pSettingLabel.plainView.bounds.height ) + 36))
@@ -124,9 +129,22 @@ class MyGoalSettingCell: UITableViewCell {
         case "Weekly Goal":
             myViewController.present(Editor(textLabel: pSettingLabel, textValue: pValueLabel), animated: true)
 
-        case "Calory Goal":
-            myViewController.present(Editor(textLabel: pSettingLabel, textValue: pValueLabel), animated: true)
-
+        case "Calorie Goal":
+            dropDown = setDropDown(dataSource: calorie, anchorView: pSettingLabel, bottomOffset: CGPoint(x: 0, y:(pSettingLabel.plainView.bounds.height ) + 36))
+            dropDown.show()
+            dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
+                self.pValueLabel.text = "Adviced"
+                switch item{
+                case "Adviced":
+                    updateDBValue(key: "adviced", value: true)
+                case "Manuel":
+                    
+                    myViewController.present(Editor(textLabel: pSettingLabel, textValue: pValueLabel, zero: true), animated: true)
+                default: print("error happened")
+                }
+                
+            }
+                
         default:
             return
         }

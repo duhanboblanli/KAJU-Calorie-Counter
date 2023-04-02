@@ -98,8 +98,17 @@ class MyGoalCell: UITableViewCell {
     func setGoalCell(model: GoalCellModel){
         goalValue.text = model.goalType
         weightValue.text = model.weight
-        caloriesValue.text = model.calorieGoal
-        MyGoalCell.myGoalSettings = MyGoalSettingsController(goalValue: model.goalType , weightValue: model.weight, goalCaloryValue: model.calorieGoal, activenessValue: model.activeness, goalWeightValue: model.goalWeight, weeklyGoalValue: model.weeklyGoal)
+        var calorieGoal: String = ""
+        if model.isAdviced{
+            caloriesValue.text = model.advicedCalorieGoal
+            calorieGoal = "Adviced"
+        }else{
+            caloriesValue.text = model.manuelCalorieGoal
+            calorieGoal = "Manuel"
+        }
+        
+        MyGoalCell.myGoalSettings = MyGoalSettingsController(goalValue: model.goalType , weightValue: model.weight, goalCaloryValue: calorieGoal, activenessValue: model.activeness, goalWeightValue: model.goalWeight, weeklyGoalValue: model.weeklyGoal
+        )
     }
     
     @objc func tapped() {

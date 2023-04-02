@@ -11,6 +11,7 @@ import FirebaseFirestore
 
 class Editor: UIViewController {
     
+    var startFromZero = false
     let db = DatabaseSingleton.db
     let backGroundColor = ThemesOptions.backGroundColor
     let cellBackgColor = ThemesOptions.cellBackgColor
@@ -72,7 +73,13 @@ class Editor: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        textField.text = textValue.text
+        if !startFromZero{
+            textField.text = textValue.text
+        }
+        else{
+            textField.text = ""
+        }
+        
         let isInt = Float(textValue.text ?? "") ?? nil
         if(isInt != nil){textField.keyboardType = .numberPad}
         configureView()
@@ -84,6 +91,13 @@ class Editor: UIViewController {
         modalPresentationStyle = .overFullScreen
         self.textLabel = textLabel
         self.textValue = textValue
+    }
+    init(textLabel: UILabel, textValue: UILabel, zero: Bool) {
+        super.init(nibName: nil, bundle: nil)
+        modalPresentationStyle = .overFullScreen
+        self.textLabel = textLabel
+        self.textValue = textValue
+        self.startFromZero = zero
     }
     
     required init?(coder: NSCoder) {
@@ -122,16 +136,27 @@ class Editor: UIViewController {
        case "Weekly Goal":
            setAttrValue(key: "weeklyGoal", value: Double(textField.text ?? "") ?? 0)
            self.dismiss(animated: true)
-       case "Calory Goal":
-           setAttrValue(key: "caloryGoal", value: Int(textField.text ?? "") ?? 0)
+       case "Calorie Goal":
+           setAttrValue(key: "calorieGoal", value: Int(textField.text ?? "") ?? 0)
+           updateDBValue(key: "adviced", value: true)
            self.dismiss(animated: true)
        default:
            return
        }
     }
-    
+    func updateDBValue(key: String, value: Any){
+        if let currentUserEmail = Auth.auth().currentUser?.email {
+            let docRef = DatabaseSingleton.db.collection("UserInformations").document("\(currentUserEmail)")
+            docRef.updateData([key: value])
+        }
+    }
     func setAttrValue(key: String, value: Any){
-        textValue.text = textField.text
+        if key != "calorieGoal"{
+            textValue.text = textField.text
+        }else{
+            textValue.text = "Manuel"
+        }
+        
         if let currentUserEmail = Auth.auth().currentUser?.email {
             let docRef = db.collection("UserInformations").document("\(currentUserEmail)")
             docRef.updateData([key: value])
