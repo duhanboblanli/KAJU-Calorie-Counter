@@ -153,8 +153,6 @@ class AccountSettingsController: UIViewController, UITableViewDelegate, UITableV
                         print("Errorqenot successfully removed!")
                     }
                 }
-            
-            
         }
     }
     
