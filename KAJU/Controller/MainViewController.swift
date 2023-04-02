@@ -459,6 +459,9 @@ class MainViewController: UITableViewController {
             totalCalTrackLayer.strokeColor = UIColor.orange.cgColor
             currentCal = totalCal + currentBurnedCal
         }
+        else{
+            remainingTitle.text = "Remaining"
+        }
         showActivityIndicator(show: false)
     } // ends of func define()
     
