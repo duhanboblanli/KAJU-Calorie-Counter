@@ -455,7 +455,6 @@ class MainViewController: UITableViewController {
         //view.layer.addSublayer(totalCalTrackLayer)
         totalCalView.layer.addSublayer(totalCalTrackLayer)
        if currentCal >= (totalCal  + currentBurnedCal){
-           
             remainingTitle.text = "Over"
             totalCalTrackLayer.strokeColor = UIColor.orange.cgColor
             currentCal = totalCal + currentBurnedCal
