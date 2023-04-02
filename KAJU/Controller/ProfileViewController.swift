@@ -10,8 +10,12 @@ import FirebaseAuth
 import FirebaseFirestore
 import FirebaseCore
 
+
+
 class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    
+
+
+
     let db = DatabaseSingleton.db
     var profile: ProfileCellModel?
     var goal: GoalCellModel?
@@ -55,7 +59,6 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     
     func checkProfileSettingsUpdate (data: Dictionary<String, Any>){
-        updateCalorie(data: data)
         if let name = data["name"]{self.profile?.name = name as? String ?? ""}
         if let height = data["height"]{self.profile?.height = "\(height)"}
         if let diateryType = data["diateryType"]{self.profile?.diateryType = diateryType as? String ?? ""}
@@ -63,8 +66,13 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func checkGoalSetttingsUpdate(data: Dictionary<String, Any>){
+        updateCalorie(data: data)
         if let goalType = data["goalType"]{self.goal?.goalType = goalType as? String ?? ""}
-        if let calorie = data["caloryGoal"]{self.goal?.calorieGoal = "\(calorie)"}
+        if let manuelCalorie = data["calorieGoal"]{self.goal?.manuelCalorieGoal = "\(manuelCalorie)"}
+        if let advicedCalorie = data["calorie"]{self.goal?.advicedCalorieGoal = "\(advicedCalorie)"}
+        if let isAdviced = data["adviced"]{self.goal?.isAdviced = isAdviced as! Bool}
+        
+        
         if let weight = data["weight"]{
             let weightWrapped = weight as? Double ?? 0
             self.goal?.weight = String(format: "%.2f", weightWrapped)
@@ -144,7 +152,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
             goalCell.layer.cornerRadius = 20
             goalCell.myViewController = self
             goalCell.selectionStyle = UITableViewCell.SelectionStyle.none
-            goalCell.setGoalCell(model: self.goal ?? GoalCellModel(goalType: "", weight: "", activeness: "", goalWeight: "", weeklyGoal: "", calorieGoal: ""))
+            goalCell.setGoalCell(model: self.goal ?? GoalCellModel(goalType: "", weight: "", activeness: "", goalWeight: "", weeklyGoal: "", manuelCalorieGoal: "", advicedCalorieGoal: "", isAdviced: true))
             return goalCell
         default:
             return UITableViewCell()
@@ -174,9 +182,10 @@ extension ProfileViewController {
                            let calorie = data["calorie"],
                            let sex = data["sex"],
                            let bmh = data["bmh"],
+                           let isAdviced = data["adviced"],
                            let weeklyGoal = data["weeklyGoal"],
                            let goalWeight = data["goalWeight"],
-                           let caloryGoal = data["caloryGoal"],
+                           let caloryGoal = data["calorieGoal"],
                            let height = data["height"]{
                             let weightWrapped = weight as? Double ?? 0
                             var activeness: String = "Moderate"
@@ -187,7 +196,7 @@ extension ProfileViewController {
                             case 1.5: activeness = "Very High"
                             default: print("Error happened while choosing activeness")
                             }
-                            self.goal = GoalCellModel(goalType: "\(goalType)", weight: String(format: "%.2f", weightWrapped), activeness: "\(activeness)", goalWeight: "\(goalWeight)" , weeklyGoal: "\(weeklyGoal)",calorieGoal: "\(caloryGoal)")
+                            self.goal = GoalCellModel(goalType: "\(goalType)", weight: String(format: "%.2f", weightWrapped), activeness: "\(activeness)", goalWeight: "\(goalWeight)" , weeklyGoal: "\(weeklyGoal)",manuelCalorieGoal: "\(caloryGoal)", advicedCalorieGoal: "\(calorie)", isAdviced: isAdviced as! Bool)
                             self.profile = ProfileCellModel(profileImage: UIImage(named: "defaultProfilePhoto") ?? UIImage(), name: data["name"] as? String ?? "Enter a name", sex: "\(sex)", diateryType: data["diateryType"] as? String ?? "Classic", height: "\(height)")
                             self.table.reloadData()
                         }

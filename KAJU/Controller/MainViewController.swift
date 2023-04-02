@@ -228,9 +228,14 @@ class MainViewController: UITableViewController {
                     if let data = document.data() {
                         print("Document data: \(data)")
     
-                        if let calorie = data["calorie"]{
+                        if let calorie = data["calorie"],let isAdviced = data["adviced"], let manuelCalorie = data["calorieGoal"]{
                             DispatchQueue.main.async {
-                                self.totalCal = calorie as? Int ?? 0
+                                if isAdviced as! Bool {
+                                    self.totalCal = calorie as? Int ?? 0
+                                }
+                                else{
+                                    self.totalCal = manuelCalorie as? Int ?? 0
+                                }
                                 //Breakfast and Nutrients Updated
                                 if let currentBreakfastCal = data["currentBreakfastCal"],let currentCarb = data["currentCarbs"], let currentFat = data["currentFat"], let currentPro = data["currentPro"] {
                                     self.currentBreakfastCal = currentBreakfastCal as? Int ?? 0

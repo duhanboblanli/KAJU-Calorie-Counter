@@ -137,7 +137,8 @@ class CalculatorViewController: UIViewController {
                 "currentDinnerCal": 0,
                 "currentSnacksCal": 0,
                 "weeklyGoal": 0,
-                "caloryGoal": 0,
+                "calorieGoal": 0,
+                "adviced": true,
                 "goalWeight": 0.0
              ]) { err in
                     if let err = err {
