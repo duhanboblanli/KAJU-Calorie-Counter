@@ -138,7 +138,7 @@ class Editor: UIViewController {
            self.dismiss(animated: true)
        case "Calorie Goal":
            setAttrValue(key: "calorieGoal", value: Int(textField.text ?? "") ?? 0)
-           updateDBValue(key: "adviced", value: true)
+           updateDBValue(key: "adviced", value: false)
            self.dismiss(animated: true)
        default:
            return
