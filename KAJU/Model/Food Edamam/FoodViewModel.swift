@@ -10,11 +10,15 @@ import UIKit
 protocol UpdateDelegate {
     func didUpdate(sender: FoodViewModel)
 }
+protocol ErrorDelegate {
+    func didError(sender: FoodViewModel)
+}
 
 class FoodViewModel {
     var check = 0
     var check2 = false
-    var delegate: UpdateDelegate?
+    var updateDelegate: UpdateDelegate?
+    var errorDelegate: ErrorDelegate?
     var apiService = FoodApiService()
     // The list of fetch foods - list type is FoodApiModel FoodData struct
     // The list of stored foods - list type is FoodApiModel FoodStruct struct
@@ -192,6 +196,7 @@ class FoodViewModel {
                     }
                     completion()
                 case .failure(let error):
+                    self?.errorDelegate?.didError(sender: self!)
                     // Something is wrong with the JSON file or the model
                     print("Error processing json data: \(error)")
                 }
@@ -209,7 +214,7 @@ class FoodViewModel {
                 case .success(let listOf):
                     //FoodStruct değerlerin atanması
                     self?.targetFoods1.append(FoodStruct(label: foodData.label,calorie: foodData.nutrients?.ENERC_KCAL,image: listOf, carbs: foodData.nutrients?.CHOCDF, fat: foodData.nutrients?.FAT, protein: foodData.nutrients?.PROCNT,wholeGram: measures[0].weight,measureLabel: measures[0].label))
-                    self?.delegate!.didUpdate(sender: self!)
+                    self?.updateDelegate!.didUpdate(sender: self!)
                     //self?.targetFoods1.append(contentsOf: FoodStruct(label: food.label,
                     //                                              calorie: food.nutrients?.ENERC_KCAL,image: listOf))
                 case .failure(let error):
@@ -228,7 +233,7 @@ class FoodViewModel {
                 //FoodStruct değerlerin atanması
                 self?.frequentFoods.append(FoodStruct(label: food.label,calorie: food.nutrients?.ENERC_KCAL,image: listOf, carbs: food.nutrients?.CHOCDF, fat: food.nutrients?.FAT, protein: food.nutrients?.PROCNT,wholeGram: measure.weight,measureLabel: measure.label
                                                             ))
-                self?.delegate!.didUpdate(sender: self!)
+                self?.updateDelegate!.didUpdate(sender: self!)
                 //self?.targetFoods1.append(contentsOf: FoodStruct(label: food.label,
                 //                                              calorie: food.nutrients?.ENERC_KCAL,image: listOf))
             case .failure(let error):

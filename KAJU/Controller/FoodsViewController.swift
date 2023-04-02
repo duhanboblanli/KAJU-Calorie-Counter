@@ -77,7 +77,8 @@ class FoodsViewController: UIViewController, UpdateDelegate {
         tableView.delegate = self
         tableView.dataSource = self
         searchBar.delegate = self
-        foodViewModel.delegate = self
+        foodViewModel.updateDelegate = self
+        foodViewModel.errorDelegate = self
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "autoCompleteCell")
         searchBar.searchTextField.attributedPlaceholder = NSAttributedString(string: "Search For A Food", attributes: [NSAttributedString.Key.foregroundColor: UIColor( red: 170/255, green: 170/255, blue: 170/255, alpha: 1)])
         LoadFoodsData(with: query)
@@ -428,7 +429,7 @@ extension FoodsViewController: UITableViewDataSource, UITableViewDelegate, CellD
         else if !searchEnable && foodSearchSuggestions.count == 0{
             numberOfRow = foodViewModel.frequentFoods.count
         }
-        else if foodSearchSuggestions.count == 0 {
+        else if searchEnable {
             numberOfRow = foodViewModel.numberOfRowsInSection(section: section)
         }
         else {
@@ -472,7 +473,7 @@ extension FoodsViewController: UITableViewDataSource, UITableViewDelegate, CellD
             foodCell.delegate = self
             return foodCell
         }
-        else if foodSearchSuggestions.count == 0 {
+        else if searchEnable {
             var foodCell : FoodTableViewCell // Declare the cell
             foodCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! FoodTableViewCell // Initialize cell
             let food = foodViewModel.cellForRowAt(indexPath: indexPath)
@@ -484,9 +485,7 @@ extension FoodsViewController: UITableViewDataSource, UITableViewDelegate, CellD
             
         }
         else {
-            
             let cell = tableView.dequeueReusableCell(withIdentifier: "autoCompleteCell")!
-            print("right?")
             self.tableView.separatorStyle = .singleLine
             cell.contentView.backgroundColor = UIColor( red: 26/255, green: 47/255, blue: 75/255, alpha: 1)
             cell.textLabel?.numberOfLines = 1
@@ -507,7 +506,7 @@ extension FoodsViewController: UITableViewDataSource, UITableViewDelegate, CellD
         else if recentsEnable && !searchEnable && foodSearchSuggestions.count == 0{
             return 100
         }
-        else if foodSearchSuggestions.count == 0 {
+        else if searchEnable {
             return 100
         }
         else{
@@ -537,7 +536,20 @@ extension FoodsViewController: UITableViewDataSource, UITableViewDelegate, CellD
 } // ends of extension: TableView
 
 //MARK: - UISearchBarDelegate
-extension FoodsViewController: UISearchBarDelegate {
+extension FoodsViewController: UISearchBarDelegate, ErrorDelegate {
+    func didError(sender: FoodViewModel) {
+        showActivityIndicator(show: false)
+        DispatchQueue.main.async {
+            self.foodSearchSuggestions = []
+            self.searchEnable = false
+            self.tableView.reloadData()
+        }
+        //searchEnable = false
+        //self.searchBar.placeholder = "Search For A Food"
+        //searchBarCancelButtonClicked(self.searchBar)
+        //tableView.reloadData()
+    }
+    
     
     // Arama için query oluşturan fonksiyon
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
@@ -562,7 +574,7 @@ extension FoodsViewController: UISearchBarDelegate {
                 LoadFoodsData(with: configuretedQuery)
             } else {
                 DispatchQueue.main.async {
-                    self.searchBar.placeholder = "Type Something!"
+                    self.searchBar.placeholder = "Search For A Food!"
                 }
             }
             searchBar.text = ""
@@ -576,14 +588,14 @@ extension FoodsViewController: UISearchBarDelegate {
     // Autocomplete için kullanılacak
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
        
-            if searchText.count >= 0 {
-                searchEnable = true
+            if searchText.count > 0 {
+                //searchEnable = true
                 currentSearchTask?.cancel()
                 currentSearchTask = foodViewModel.autoCompleteFoodSearch(searchQuery: searchText) { (foodSearchSuggestions, error) in
                     self.foodSearchSuggestions = foodSearchSuggestions
                     print("foodSearchSuggestions:",self.foodSearchSuggestions)
                     if foodSearchSuggestions.isEmpty{
-                        self.searchEnable = false
+                        //self.searchEnable = false
                     }
                     DispatchQueue.main.async {
                         self.tableView.reloadData()
@@ -592,7 +604,8 @@ extension FoodsViewController: UISearchBarDelegate {
                 currentSearchTask?.resume()
             }
             else {
-                searchEnable = false
+                currentSearchTask?.cancel()
+                //searchEnable = false
                 foodSearchSuggestions = []
                 tableView.reloadData()
             }
