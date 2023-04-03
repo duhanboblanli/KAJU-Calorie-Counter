@@ -10,6 +10,7 @@ import FirebaseCore
 import FirebaseFirestore
 import IQKeyboardManagerSwift
 import CoreData
+import FirebaseAuth
 
 
 @main
@@ -31,8 +32,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
+        print("END!")
         self.saveContext()
-    }
+            }
     
     // MARK: - Core Data stack
 

@@ -6,8 +6,16 @@
 //
 
 import UIKit
+import FirebaseAuth
 
-class GoalViewController: UIViewController {
+
+
+
+class GoalViewController: UIViewController{
+    
+    
+    var check = false
+    var user = Auth.auth().currentUser
     
     @IBOutlet weak var downMiddleConstraint: NSLayoutConstraint!
     @IBOutlet weak var middleConstraint: NSLayoutConstraint!
@@ -24,6 +32,17 @@ class GoalViewController: UIViewController {
     @IBOutlet weak var protectWeightButton: UIButton!
     @IBOutlet weak var gainMuscleButton: UIButton!
     
+    
+    func animate(){
+        let transition = CATransition()
+            transition.duration = 0.3
+        transition.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
+        transition.type = CATransitionType.reveal
+        transition.endProgress = 0.5
+        transition.fillMode = CAMediaTimingFillMode.backwards
+        navigationController?.view.layer.add(transition, forKey: nil)
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         if !UIDevice.hasNotch{
@@ -37,6 +56,14 @@ class GoalViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        if check{
+            let alert = UIAlertController(title: "Your registration has been suspended!", message: "", preferredStyle: UIAlertController.Style.alert)
+            alert.addAction(UIAlertAction(title: "Okay", style: UIAlertAction.Style.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }
+        
+        
+        self.navigationItem.setHidesBackButton(false, animated: false)
         setupButtonStyle(button: goalNextButton, cornerRadius: 0.096)
         goalNextButton.isEnabled = false
         goalNextButton.isHighlighted = true
