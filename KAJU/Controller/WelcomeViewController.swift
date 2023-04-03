@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import FirebaseAuth
 
 class WelcomeViewController: UIViewController {
 
@@ -22,25 +21,17 @@ class WelcomeViewController: UIViewController {
     var counter = 0
     var timer: Timer?
     
+
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+        let backButton = UIBarButtonItem(title: "", style: .plain, target: navigationController, action: nil)
+        navigationItem.leftBarButtonItem = backButton
         if !UIDevice.hasNotch{
             print("model:", UIDevice.hasNotch)
             logInBottomConstraint.constant = -20
         }
-        check()
-    }
-    private func check(){
-        if Auth.auth().currentUser == nil{
-            
-            
-        }
-        else{
-            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-            let nextViewController = storyBoard.instantiateViewController(withIdentifier: "FirstResponder") as! TabBarController
-            self.navigationController?.pushViewController(nextViewController, animated: true)
-            print("user exist")
-        }
+        //check()
     }
     
     override func viewDidLoad() {

@@ -62,15 +62,16 @@ class FoodsViewController: UIViewController, UpdateDelegate {
     // For favorites local foods
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
+    
     // Food lists
     var frequentFoodIdList: [String] = []
     var recentFoods: [FoodEntity] = []
     var favFoods: [FavFoodEntity] = []
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         checkFoodType()
+        
         favoritesBottomConstraint.constant = 4.0
         recentsBottomConstraint.constant = 3.0
         favoritesBottomConstraint.constant = 3.0

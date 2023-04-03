@@ -107,10 +107,21 @@ class MainViewController: UITableViewController {
     var activityIndicatorContainer: UIView!
     var activityIndicator: UIActivityIndicatorView!
     
+    var check = false
     var view2: UIView!
     
+    func animate(){
+        let transition = CATransition()
+            transition.duration = 0.3
+        transition.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
+        transition.type = CATransitionType.reveal
+        transition.endProgress = 0.5
+        transition.fillMode = CAMediaTimingFillMode.backwards
+        navigationController?.view.layer.add(transition, forKey: nil)
+    }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        animate()
         setupActivityIndicator()
         showActivityIndicator(show: true)
         currentDayReal = Date().get(.minute, .day, .month, .year).day!
@@ -292,42 +303,8 @@ class MainViewController: UITableViewController {
                     }
                 } else {
                     print("Document does not exist.")
-                    self.delete()
                 }
             }
-        }
-    }
-    func delete() {
-            self.user!.delete { error in
-                if let error = error {
-                    let alert = UIAlertController(title: "Deletion unsuccessfull!", message: "Sorry for inconvenience situation. Deletion of an account is sensitive process. You should be re-signed into your account.", preferredStyle: UIAlertController.Style.alert)
-                    alert.addAction(UIAlertAction(title: "Okay", style: UIAlertAction.Style.default, handler: nil))
-                    self.present(alert, animated: true, completion: nil)
-                    print(error)
-                } else {
-                    // Account deleted.
-                    print("Account deleted.")
-                    self.deleteAllOnlineData()
-                    let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-                    let rootViewController: UIViewController = storyboard.instantiateViewController(withIdentifier: "nRoot")
-                    self.view.window?.rootViewController = rootViewController
-                    self.navigationController?.popToRootViewController(animated: true)
-                }
-        }
-    }
-  
-    func deleteAllOnlineData(){
-        if let currentUserEmail = Auth.auth().currentUser?.email {
-            let docRef = self.db.collection("UserInformations").document(currentUserEmail)
-            
-                docRef.delete(){ err in
-                    if let err = err {
-                        print("Errorqe removing document: \(err)")
-                    }
-                    else {
-                        print("Errorqenot successfully removed!")
-                    }
-                }
         }
     }
     

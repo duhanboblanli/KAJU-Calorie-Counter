@@ -13,6 +13,8 @@ import FirebaseAuth
 
 class RegisterViewController: UIViewController {
     
+    var check = false
+    
     @IBOutlet weak var emailTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var signUpButtonBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var signUpButton: UIButton!
@@ -26,6 +28,9 @@ class RegisterViewController: UIViewController {
             print("model:", UIDevice.hasNotch)
             signUpButtonBottomConstraint.constant = -25
             emailTopConstraint.constant = 200
+        }
+        if check {
+            self.performSegue(withIdentifier: "RegisterToCalculate", sender: self)
         }
     }
     override func viewDidLoad() {
@@ -47,7 +52,7 @@ class RegisterViewController: UIViewController {
         emailTextField.tag = 1
         passwordTextField.tag = 2
     }
-    
+
     @IBAction func signUpPressed(_ sender: UIButton) {
         
         if let email = emailTextField.text, let password = passwordTextField.text {

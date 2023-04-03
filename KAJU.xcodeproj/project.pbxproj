@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		13A1FD5129BF261800FF2485 /* PasswordEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A1FD5029BF261800FF2485 /* PasswordEditor.swift */; };
 		13F883F329B8B10500BBCF25 /* DatabaseSingleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13F883F229B8B10500BBCF25 /* DatabaseSingleton.swift */; };
+		2D3E289729DB180D002D3984 /* BaseNavController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D3E289629DB180D002D3984 /* BaseNavController.swift */; };
+		2D3E289929DB258E002D3984 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D3E289829DB258E002D3984 /* BaseViewController.swift */; };
 		2D7D7B4B29C32EE500027653 /* RecentFoodsOffline.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2D7D7B4929C32EE500027653 /* RecentFoodsOffline.xcdatamodeld */; };
 		2D850C3F299BFA6F00A525F0 /* FoodModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D850C3E299BFA6F00A525F0 /* FoodModel.swift */; };
 		2D850C41299BFA8E00A525F0 /* FoodApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D850C40299BFA8E00A525F0 /* FoodApiService.swift */; };
@@ -88,6 +90,8 @@
 		13A1FD5029BF261800FF2485 /* PasswordEditor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasswordEditor.swift; sourceTree = "<group>"; };
 		13F883F229B8B10500BBCF25 /* DatabaseSingleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseSingleton.swift; sourceTree = "<group>"; };
 		19C1B6341DC89EDF1E04D0D4 /* Pods-KAJU.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KAJU.release.xcconfig"; path = "Target Support Files/Pods-KAJU/Pods-KAJU.release.xcconfig"; sourceTree = "<group>"; };
+		2D3E289629DB180D002D3984 /* BaseNavController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseNavController.swift; sourceTree = "<group>"; };
+		2D3E289829DB258E002D3984 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		2D7D7B4A29C32EE500027653 /* RecentFoodsOffline.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = RecentFoodsOffline.xcdatamodel; sourceTree = "<group>"; };
 		2D850C3E299BFA6F00A525F0 /* FoodModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodModel.swift; sourceTree = "<group>"; };
 		2D850C40299BFA8E00A525F0 /* FoodApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodApiService.swift; sourceTree = "<group>"; };
@@ -354,6 +358,8 @@
 				FEC1A96729B787F100342AF6 /* SettingsViewController.swift */,
 				2DBCA23D29CB91A400B0653E /* BurnedCalTracker.swift */,
 				2DDDE99229D6FC2900960DB9 /* UIDevice.swift */,
+				2D3E289629DB180D002D3984 /* BaseNavController.swift */,
+				2D3E289829DB258E002D3984 /* BaseViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -508,6 +514,7 @@
 				2DDDE99329D6FC2900960DB9 /* UIDevice.swift in Sources */,
 				FEC1A96D29B787F500342AF6 /* Editor.swift in Sources */,
 				FE6FCCFF29A7B6B700FDE008 /* FavoritesCell.swift in Sources */,
+				2D3E289929DB258E002D3984 /* BaseViewController.swift in Sources */,
 				13F883F329B8B10500BBCF25 /* DatabaseSingleton.swift in Sources */,
 				FEC1A95F29B787C800342AF6 /* SettingsCell.swift in Sources */,
 				2DBCA23E29CB91A400B0653E /* BurnedCalTracker.swift in Sources */,
@@ -532,6 +539,7 @@
 				FE59984E298B0EDF002CB4DF /* CalculatorViewController.swift in Sources */,
 				FEBF1DCC2986BB4400FD4760 /* SceneDelegate.swift in Sources */,
 				FEC7BF5B29A3F147001B1EC9 /* SpoonacularClient.swift in Sources */,
+				2D3E289729DB180D002D3984 /* BaseNavController.swift in Sources */,
 				FE0BB00C29958C320062E096 /* GoalViewController.swift in Sources */,
 				2D850C43299BFAAD00A525F0 /* FoodViewModel.swift in Sources */,
 				FEC7BF6729A3F2AC001B1EC9 /* RecipesViewController.swift in Sources */,
