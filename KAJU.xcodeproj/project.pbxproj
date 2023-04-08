@@ -193,6 +193,33 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		FE9B659C29E18F910031654F /* App Delegates */ = {
+			isa = PBXGroup;
+			children = (
+				FEBF1DC92986BB4400FD4760 /* AppDelegate.swift */,
+				FEBF1DCB2986BB4400FD4760 /* SceneDelegate.swift */,
+			);
+			path = "App Delegates";
+			sourceTree = "<group>";
+		};
+		FEAD26EF29E18EB200A40A10 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				FEBF1DD22986BB4600FD4760 /* Assets.xcassets */,
+				FEAD26F029E18EC800A40A10 /* Sounds */,
+			);
+			path = Assets;
+			sourceTree = "<group>";
+		};
+		FEAD26F029E18EC800A40A10 /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				FEE2CDEA2989A4B0002DAA6F /* guitar_alarm_sound.wav */,
+				FEC0321F29B8F74D001C71A5 /* beep_message_alarm.mp3 */,
+			);
+			path = Sounds;
+			sourceTree = "<group>";
+		};
 		FEBF1DBD2986BB4400FD4760 = {
 			isa = PBXGroup;
 			children = (
@@ -214,16 +241,13 @@
 		FEBF1DC82986BB4400FD4760 /* KAJU */ = {
 			isa = PBXGroup;
 			children = (
-				FEBF1DC92986BB4400FD4760 /* AppDelegate.swift */,
-				FEBF1DCB2986BB4400FD4760 /* SceneDelegate.swift */,
 				FEBF1DD72986BB4600FD4760 /* Info.plist */,
 				FE0BB009299519690062E096 /* GoogleService-Info.plist */,
+				FE9B659C29E18F910031654F /* App Delegates */,
 				FEE2CDE129892A5B002DAA6F /* Model */,
 				FEE2CDE229892A6B002DAA6F /* View */,
 				FEE2CDE329892A73002DAA6F /* Controller */,
-				FEBF1DD22986BB4600FD4760 /* Assets.xcassets */,
-				FEE2CDEA2989A4B0002DAA6F /* guitar_alarm_sound.wav */,
-				FEC0321F29B8F74D001C71A5 /* beep_message_alarm.mp3 */,
+				FEAD26EF29E18EB200A40A10 /* Assets */,
 			);
 			path = KAJU;
 			sourceTree = "<group>";
