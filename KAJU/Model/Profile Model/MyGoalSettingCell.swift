@@ -10,11 +10,8 @@ import DropDown
 import FirebaseAuth
 import FirebaseFirestore
 
-
-
 class MyGoalSettingCell: UITableViewCell {
     
-
     let db = Firestore.firestore()
     static let identifier = "MyGoalSettingCell"
     var myViewController: UIViewController!

@@ -184,8 +184,6 @@ class FoodDetailVC: UITableViewController {
         }
     }
     
-    
-    
     func favoriteAction(){
         if !isRecipe{
             for (i,fav) in favFoods.enumerated() {
@@ -258,7 +256,6 @@ class FoodDetailVC: UITableViewController {
             saveActionAddToDiary()
         }
     }
-    
     
     @IBAction func stepperValueChanged(_ sender: ValueStepper) {
         

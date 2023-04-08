@@ -26,8 +26,6 @@
 		FE0BB00A299519690062E096 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FE0BB009299519690062E096 /* GoogleService-Info.plist */; };
 		FE0BB00C29958C320062E096 /* GoalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE0BB00B29958C320062E096 /* GoalViewController.swift */; };
 		FE1432662991E131000F762D /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1432652991E131000F762D /* LogInViewController.swift */; };
-		FE160F5329A2876D00876278 /* RecipeApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE160F5229A2876D00876278 /* RecipeApiService.swift */; };
-		FE160F5529A28A6400876278 /* RecipeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE160F5429A28A6400876278 /* RecipeViewModel.swift */; };
 		FE1F72C529969C0D005FFC4B /* ActivenessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1F72C429969C0D005FFC4B /* ActivenessViewController.swift */; };
 		FE32926D2991AF740075A5B8 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE32926C2991AF740075A5B8 /* WelcomeViewController.swift */; };
 		FE41A2012997ABA200892346 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE41A2002997ABA200892346 /* TabBarController.swift */; };
@@ -77,7 +75,6 @@
 		FEC7BF6329A3F269001B1EC9 /* Extension + UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC7BF6229A3F269001B1EC9 /* Extension + UITableView.swift */; };
 		FEC7BF6529A3F271001B1EC9 /* Extension + UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC7BF6429A3F270001B1EC9 /* Extension + UIViewController.swift */; };
 		FEC7BF6729A3F2AC001B1EC9 /* RecipesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC7BF6629A3F2AC001B1EC9 /* RecipesViewController.swift */; };
-		FEC7C20629A260CC009A99A8 /* RecipeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC7C20529A260CC009A99A8 /* RecipeModel.swift */; };
 		FED2FFB229A985E000EDBF19 /* RecipeSearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FED2FFB129A985DF00EDBF19 /* RecipeSearchCell.swift */; };
 		FEE2CDEB2989A4B0002DAA6F /* guitar_alarm_sound.wav in Resources */ = {isa = PBXBuildFile; fileRef = FEE2CDEA2989A4B0002DAA6F /* guitar_alarm_sound.wav */; };
 		FEE9E150299DAB87007FA5FB /* RecipeTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE9E14F299DAB87007FA5FB /* RecipeTableView.swift */; };
@@ -108,8 +105,6 @@
 		FE0BB009299519690062E096 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		FE0BB00B29958C320062E096 /* GoalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalViewController.swift; sourceTree = "<group>"; };
 		FE1432652991E131000F762D /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
-		FE160F5229A2876D00876278 /* RecipeApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeApiService.swift; sourceTree = "<group>"; };
-		FE160F5429A28A6400876278 /* RecipeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeViewModel.swift; sourceTree = "<group>"; };
 		FE1F72C429969C0D005FFC4B /* ActivenessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivenessViewController.swift; sourceTree = "<group>"; };
 		FE32926C2991AF740075A5B8 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		FE41A2002997ABA200892346 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
@@ -160,7 +155,6 @@
 		FEC7BF6229A3F269001B1EC9 /* Extension + UITableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Extension + UITableView.swift"; sourceTree = "<group>"; };
 		FEC7BF6429A3F270001B1EC9 /* Extension + UIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Extension + UIViewController.swift"; sourceTree = "<group>"; };
 		FEC7BF6629A3F2AC001B1EC9 /* RecipesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipesViewController.swift; sourceTree = "<group>"; };
-		FEC7C20529A260CC009A99A8 /* RecipeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeModel.swift; sourceTree = "<group>"; };
 		FED2FFB129A985DF00EDBF19 /* RecipeSearchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeSearchCell.swift; sourceTree = "<group>"; };
 		FEE2CDEA2989A4B0002DAA6F /* guitar_alarm_sound.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = guitar_alarm_sound.wav; sourceTree = "<group>"; };
 		FEE9E14F299DAB87007FA5FB /* RecipeTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeTableView.swift; sourceTree = "<group>"; };
@@ -266,16 +260,6 @@
 			path = "Food Edamam";
 			sourceTree = "<group>";
 		};
-		FEC7BF5029A3EED4001B1EC9 /* Recipe Edamam */ = {
-			isa = PBXGroup;
-			children = (
-				FE160F5429A28A6400876278 /* RecipeViewModel.swift */,
-				FE160F5229A2876D00876278 /* RecipeApiService.swift */,
-				FEC7C20529A260CC009A99A8 /* RecipeModel.swift */,
-			);
-			path = "Recipe Edamam";
-			sourceTree = "<group>";
-		};
 		FEC7BF5129A3EEFD001B1EC9 /* Recipe Spoonacular */ = {
 			isa = PBXGroup;
 			children = (
@@ -301,7 +285,6 @@
 			children = (
 				FEC30E5029B7642400D20327 /* Profile Model */,
 				FEC7BF5129A3EEFD001B1EC9 /* Recipe Spoonacular */,
-				FEC7BF5029A3EED4001B1EC9 /* Recipe Edamam */,
 				FEC7BF4F29A3EEB6001B1EC9 /* Food Edamam */,
 				FEC7BF5229A3F0B3001B1EC9 /* Calculator Model */,
 				13F883F229B8B10500BBCF25 /* DatabaseSingleton.swift */,
@@ -520,10 +503,8 @@
 				2DBCA23E29CB91A400B0653E /* BurnedCalTracker.swift in Sources */,
 				FE5E92AB298D1C5400947F7A /* BMI.swift in Sources */,
 				FE5DEF5D299BC5AC00F13802 /* FoodsViewController.swift in Sources */,
-				FE160F5529A28A6400876278 /* RecipeViewModel.swift in Sources */,
 				13A1FD5129BF261800FF2485 /* PasswordEditor.swift in Sources */,
 				FEC1A95429B7877700342AF6 /* ProfileCellModel.swift in Sources */,
-				FE160F5329A2876D00876278 /* RecipeApiService.swift in Sources */,
 				FEC7BF5E29A3F147001B1EC9 /* RecipeTableViewCell.swift in Sources */,
 				2D850C3F299BFA6F00A525F0 /* FoodModel.swift in Sources */,
 				2D91D95629C5BD100095C9AA /* FavoriteFoodsOffline.xcdatamodeld in Sources */,
@@ -531,7 +512,6 @@
 				FEC1A95629B7879700342AF6 /* ThemesOptions.swift in Sources */,
 				FEC1A96C29B787F500342AF6 /* AccountSettingsController.swift in Sources */,
 				FEC1A95129B7877700342AF6 /* SettingModel.swift in Sources */,
-				FEC7C20629A260CC009A99A8 /* RecipeModel.swift in Sources */,
 				FE1F72C529969C0D005FFC4B /* ActivenessViewController.swift in Sources */,
 				FEBF1DCA2986BB4400FD4760 /* AppDelegate.swift in Sources */,
 				FEC7BF6529A3F271001B1EC9 /* Extension + UIViewController.swift in Sources */,
