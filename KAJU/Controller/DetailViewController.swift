@@ -11,12 +11,6 @@ import Foundation
 
 class DetailViewController: UIViewController {
     
-    let ColorHardDarkGreen = UIColor( red: 26/255, green: 47/255, blue: 75/255, alpha: 1) //rgb(26, 47, 75)
-    let ColorDarkGreen = UIColor( red: 40/255, green: 71/255, blue: 92/255, alpha: 1) //rgb(40, 71, 92)
-    let ColorGreen = UIColor( red: 47/255, green: 136/255, blue: 134/255, alpha: 1) //rgb(47, 136, 134)
-    let ColorLightGreen = UIColor( red: 132/255, green: 198/255, blue: 155/255, alpha: 1) //rgb(132, 198, 155)
-    let ColorOrange = UIColor( red: 255/255, green: 56/255, blue: 51/255, alpha: 1)
-    
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     var recipe: Recipe!
     var ingredientsArray = [String]()
@@ -117,7 +111,7 @@ class DetailViewController: UIViewController {
     }
     
     private func setupView() {
-        view.backgroundColor = ColorHardDarkGreen
+        view.backgroundColor = ThemeColors.ColorHardDarkGreen.associatedColor
         setupAddToDiaryButton()
         setupInstructionButton()
         setupTableView()
@@ -136,9 +130,9 @@ class DetailViewController: UIViewController {
         tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         tableView.bottomAnchor.constraint(equalTo: instructionsButton.topAnchor, constant: 0).isActive = true
-        tableView.backgroundColor = ColorHardDarkGreen
+        tableView.backgroundColor = ThemeColors.ColorHardDarkGreen.associatedColor
         tableView.separatorStyle = UITableViewCell.SeparatorStyle.singleLine
-        tableView.separatorColor = ColorLightGreen
+        tableView.separatorColor = ThemeColors.ColorLightGreen.associatedColor
     }
     
     
@@ -156,7 +150,7 @@ class DetailViewController: UIViewController {
         instructionsButton.setTitle("Instructions", for: .normal)
         instructionsButton.setTitleColor(.white, for: .normal)
         instructionsButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18.5)
-        instructionsButton.backgroundColor = ColorGreen
+        instructionsButton.backgroundColor = ThemeColors.ColorGreen.associatedColor
         instructionsButton.addTarget(self, action: #selector(showInstructionsAction), for: .touchUpInside)
     }
     private func setupAddToDiaryButton() {
@@ -172,7 +166,7 @@ class DetailViewController: UIViewController {
         addToDiaryButton.setTitle("➕", for: .normal)
         addToDiaryButton.setTitleColor(.white, for: .normal)
         addToDiaryButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18.5)
-        addToDiaryButton.backgroundColor = ColorGreen
+        addToDiaryButton.backgroundColor = ThemeColors.ColorGreen.associatedColor
         addToDiaryButton.addTarget(self, action: #selector(addToDiaryAction), for: .touchUpInside)
     }
     
@@ -356,7 +350,7 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell")!
-        cell.contentView.backgroundColor = ColorHardDarkGreen
+        cell.contentView.backgroundColor = ThemeColors.ColorHardDarkGreen.associatedColor
         cell.textLabel?.numberOfLines = 0
         cell.textLabel?.font = UIFont(name: "Verdana", size: 16)
         cell.textLabel?.textColor = .lightGray

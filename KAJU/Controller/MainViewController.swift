@@ -11,7 +11,8 @@ import FirebaseFirestore
 
 class MainViewController: UITableViewController {
     
-    let strokeColorDarkGreen = UIColor( red: 47/255, green: 160/255, blue: 134/255, alpha: 1).cgColor
+    //rgb(47, 160, 134) special color for main view controller
+    let strokeColorDarkGreen = SpecialColors.strokeColorDarkGreen.CGColorType
     let db = Firestore.firestore()
     
     let user = Auth.auth().currentUser

@@ -27,6 +27,7 @@
 		FE0BB00C29958C320062E096 /* GoalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE0BB00B29958C320062E096 /* GoalViewController.swift */; };
 		FE1432662991E131000F762D /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1432652991E131000F762D /* LogInViewController.swift */; };
 		FE1F72C529969C0D005FFC4B /* ActivenessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1F72C429969C0D005FFC4B /* ActivenessViewController.swift */; };
+		FE21190C29E1941500408EE0 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE21190B29E1941500408EE0 /* Constants.swift */; };
 		FE32926D2991AF740075A5B8 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE32926C2991AF740075A5B8 /* WelcomeViewController.swift */; };
 		FE41A2012997ABA200892346 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE41A2002997ABA200892346 /* TabBarController.swift */; };
 		FE44DF0229B5DDC3005CD7C1 /* FoodDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE44DF0129B5DDC3005CD7C1 /* FoodDetailVC.swift */; };
@@ -106,6 +107,7 @@
 		FE0BB00B29958C320062E096 /* GoalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalViewController.swift; sourceTree = "<group>"; };
 		FE1432652991E131000F762D /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		FE1F72C429969C0D005FFC4B /* ActivenessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivenessViewController.swift; sourceTree = "<group>"; };
+		FE21190B29E1941500408EE0 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		FE32926C2991AF740075A5B8 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		FE41A2002997ABA200892346 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		FE44DF0129B5DDC3005CD7C1 /* FoodDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodDetailVC.swift; sourceTree = "<group>"; };
@@ -328,6 +330,7 @@
 				2D8A39C929CB9FF100897B18 /* Main.storyboard */,
 				FEBF1DD42986BB4600FD4760 /* LaunchScreen.storyboard */,
 				FEA6096829ACF985005E7820 /* CircleButton.swift */,
+				FE21190B29E1941500408EE0 /* Constants.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -504,6 +507,7 @@
 				FEC1A96B29B787F500342AF6 /* PhotoPicker.swift in Sources */,
 				FEC1A96E29B787F500342AF6 /* AboutUsController.swift in Sources */,
 				FEFFFD2329A63BFD0001999E /* DetailViewController.swift in Sources */,
+				FE21190C29E1941500408EE0 /* Constants.swift in Sources */,
 				FEC7BF6329A3F269001B1EC9 /* Extension + UITableView.swift in Sources */,
 				FE95C5502992F44900BCC4A6 /* RegisterViewController.swift in Sources */,
 				FEC1A94A29B7871600342AF6 /* AutoLayoutExtension.swift in Sources */,
