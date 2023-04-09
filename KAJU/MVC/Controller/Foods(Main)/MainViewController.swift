@@ -88,7 +88,22 @@ class MainViewController: UITableViewController {
     var view2: UIView!
     
     //MARK: - Outlet Variables
+    @IBOutlet weak var caloriesBurnedLabel: UILabel!
+    
+    @IBOutlet weak var dinnerLabel: UILabel!
+    
+    @IBOutlet weak var snacksLabel: UILabel!
+    @IBOutlet weak var breakfastLabel: UILabel!
+    @IBOutlet weak var lunchLabel: UILabel!
+    
+    @IBOutlet weak var eatenLabel: UILabel!
+    
+    @IBOutlet weak var carbsLabel: UILabel!
+    
+    @IBOutlet weak var fatLabel: UILabel!
+    @IBOutlet weak var proteinLabel: UILabel!
     @IBOutlet weak var burnedLabel: UILabel!
+ 
     @IBOutlet weak var breakfastCalLabel: UILabel!
     @IBOutlet weak var snacksCalLabel: UILabel!
     @IBOutlet weak var dinnerCalLabel: UILabel!
@@ -96,9 +111,9 @@ class MainViewController: UITableViewController {
     @IBOutlet weak var fatProgressBar: UIProgressView!
     @IBOutlet weak var proteinProgressBar: UIProgressView!
     @IBOutlet weak var carbsProgressBar: UIProgressView!
-    @IBOutlet weak var fatLabel: UILabel!
-    @IBOutlet weak var proteinLabel: UILabel!
-    @IBOutlet weak var carbsLabel: UILabel!
+    @IBOutlet weak var fat: UILabel!
+    @IBOutlet weak var protein: UILabel!
+    @IBOutlet weak var carbs: UILabel!
     @IBOutlet weak var calorieBurned: UILabel!
     @IBOutlet weak var remainingTitle: UILabel!
     @IBOutlet weak var calorieEaten: UILabel!
@@ -107,12 +122,15 @@ class MainViewController: UITableViewController {
     @IBOutlet weak var addDinnerButton: UIButton!
     @IBOutlet weak var addLunchButton: UIButton!
     @IBOutlet weak var addBreakfastButton: UIButton!
+
+    
     
     //MARK: - View Lifecycle Methods
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         animate()
         setupActivityIndicator()
+        defineLabels()
         showActivityIndicator(show: true)
         currentDayReal = Date().get(.minute, .day, .month, .year).day!
         // DB verilerini çeker, define(), loadprogressBars() çağırır
@@ -282,6 +300,20 @@ class MainViewController: UITableViewController {
             }
         }
     }
+    func defineLabels(){
+        navigationItem.title = navigationItem.title?.localized()
+        caloriesBurnedLabel.text = caloriesBurnedLabel.text?.localized()
+        remainingTitle.text = remainingTitle.text?.localized()
+        eatenLabel.text = eatenLabel.text?.localized()
+        burnedLabel.text = burnedLabel.text?.localized()
+        breakfastLabel.text = breakfastLabel.text?.localized()
+        lunchLabel.text = lunchLabel.text?.localized()
+        dinnerLabel.text = dinnerLabel.text?.localized()
+        snacksLabel.text = snacksLabel.text?.localized()
+        carbsLabel.text = carbsLabel.text?.localized()
+        proteinLabel.text = proteinLabel.text?.localized()
+        fatLabel.text = fatLabel.text?.localized()
+    }
     
     private func define(){
         
@@ -416,12 +448,12 @@ class MainViewController: UITableViewController {
         totalCalView.layer.addSublayer(totalCalTrackLayer)
         
        if currentCal >= (totalCal  + currentBurnedCal){
-            remainingTitle.text = "Over"
+           remainingTitle.text = "Over".localized()
             totalCalTrackLayer.strokeColor = UIColor.orange.cgColor
             currentCal = totalCal + currentBurnedCal
         }
         else{
-            remainingTitle.text = "Remaining"
+            remainingTitle.text = "Remaining".localized()
         }
         showActivityIndicator(show: false)
     } // ends of func define()
@@ -577,5 +609,16 @@ extension Date {
 
     func get(_ component: Calendar.Component, calendar: Calendar = Calendar.current) -> Int {
         return calendar.component(component, from: self)
+    }
+}
+extension String{
+    func localized() -> String{
+        return NSLocalizedString(
+            self,
+            tableName: "Localizable",
+            bundle: .main,
+            value: self,
+            comment: self
+        )
     }
 }

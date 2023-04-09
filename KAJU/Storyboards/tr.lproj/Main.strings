@@ -1,0 +1,336 @@
+
+/* Class = "UIButton"; normalTitle = "Sign Up"; ObjectID = "0ht-op-WRz"; */
+"0ht-op-WRz.normalTitle" = "Kayıt ol";
+
+/* Class = "UILabel"; text = "🥗"; ObjectID = "1DL-ca-Jze"; */
+"1DL-ca-Jze.text" = "🥗";
+
+/* Class = "UILabel"; text = "🍜"; ObjectID = "2Jq-lZ-I3X"; */
+"2Jq-lZ-I3X.text" = "🍜";
+
+/* Class = "UINavigationItem"; title = "Egg Timer"; ObjectID = "2YO-qd-eBh"; */
+"2YO-qd-eBh.title" = "Yumurta Zamanlayıcısı";
+
+/* Class = "UIButton"; normalTitle = "Next"; ObjectID = "2qK-wx-NcH"; */
+"2qK-wx-NcH.normalTitle" = "Sıradaki";
+
+/* Class = "UINavigationItem"; title = "Diary"; ObjectID = "3NA-xm-gpf"; */
+"3NA-xm-gpf.title" = "Günlük";
+
+/* Class = "UILabel"; text = "Remaining "; ObjectID = "3xi-gG-nl1"; */
+"3xi-gG-nl1.text" = "Kalan ";
+
+/* Class = "UIButton"; normalTitle = "Log In"; ObjectID = "4re-L7-k8R"; */
+"4re-L7-k8R.normalTitle" = "Giriş Yap";
+
+/* Class = "UILabel"; text = "kcal"; ObjectID = "5Br-Xg-W0U"; */
+"5Br-Xg-W0U.text" = "kcal";
+
+/* Class = "UILabel"; text = "1.80m"; ObjectID = "6gs-Qi-L12"; */
+"6gs-Qi-L12.text" = "1.80m";
+
+/* Class = "UILabel"; text = "🍏 Your BMI Result"; ObjectID = "8wL-v6-V2L"; */
+"8wL-v6-V2L.text" = "🍏 Senin BMI Sonucun";
+
+/* Class = "UITextField"; placeholder = "Search For A Recipe"; ObjectID = "9UD-U9-YmD"; */
+"9UD-U9-YmD.placeholder" = "Tarif ara";
+
+/* Class = "UILabel"; text = "2000 kcal"; ObjectID = "9UP-ca-LTD"; */
+"9UP-ca-LTD.text" = "2000 kcal";
+
+/* Class = "UITextField"; text = "100"; ObjectID = "9Xg-CZ-qej"; */
+"9Xg-CZ-qej.text" = "100";
+
+/* Class = "UILabel"; text = "Snacks"; ObjectID = "9uQ-TS-uZh"; */
+"9uQ-TS-uZh.text" = "Atıştırmalık";
+
+/* Class = "UIButton"; normalTitle = "Login"; ObjectID = "Ag8-Fz-2ku"; */
+"Ag8-Fz-2ku.normalTitle" = "Giriş Yap";
+
+/* Class = "UILabel"; text = "We need your sex, current age, height and weight to accurately calculate your BMI and calorie needs."; ObjectID = "B3c-eD-jbp"; */
+"B3c-eD-jbp.text" = "Senin BMI ve calori ihtiyacını hesaplayabilmemiz için cinsiyetin, yaşın, boyun ve ağırlığına ihtiyacımız var.";
+
+/* Class = "UILabel"; text = "KAJU"; ObjectID = "CWT-O1-Xi1"; */
+"CWT-O1-Xi1.text" = "KAJU";
+
+/* Class = "UILabel"; text = "Dinner"; ObjectID = "Cdb-KE-f3V"; */
+"Cdb-KE-f3V.text" = "Akşam Yemeği";
+
+/* Class = "UILabel"; text = "KAJU"; ObjectID = "D55-1L-Exi"; */
+"D55-1L-Exi.text" = "KAJU";
+
+/* Class = "UILabel"; text = "2000 kcal"; ObjectID = "DBi-8M-wfN"; */
+"DBi-8M-wfN.text" = "2000 kcal";
+
+/* Class = "UIButton"; configuration.subtitle = "Mostly sitting. e.g. office worker"; ObjectID = "Du4-98-ylc"; */
+"Du4-98-ylc.configuration.subtitle" = "Genellikle oturan. ö.o. ofis çalışanı";
+
+/* Class = "UIButton"; configuration.title = "🧑‍💻 Lightly active"; ObjectID = "Du4-98-ylc"; */
+"Du4-98-ylc.configuration.title" = "🧑‍💻 Çok az aktif";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "Du4-98-ylc"; */
+"Du4-98-ylc.normalTitle" = "Button";
+
+/* Class = "UIButton"; normalTitle = "Soft"; ObjectID = "EIK-7U-CJr"; */
+"EIK-7U-CJr.normalTitle" = "Soft";
+
+/* Class = "UILabel"; text = "128"; ObjectID = "GND-F5-c4x"; */
+"GND-F5-c4x.text" = "128";
+
+/* Class = "UILabel"; text = "How active are you?"; ObjectID = "HJY-bG-8vK"; */
+"HJY-bG-8vK.text" = "Ne kadar aktifsin?";
+
+/* Class = "UILabel"; text = "📏Height"; ObjectID = "Hfu-Aa-RsS"; */
+"Hfu-Aa-RsS.text" = "📏Boy";
+
+/* Class = "UILabel"; text = "Knowing your daily activity level helps us calculate your calorie needs more accurately."; ObjectID = "ITN-So-mgm"; */
+"ITN-So-mgm.text" = "Senin günlük aktivite seviyeni bilmek bize senin kalori ihtiyacını daha doğru hesaplamamız için yardımcı olacak.";
+
+/* Class = "UILabel"; text = "100Kg"; ObjectID = "JAv-0G-KeR"; */
+"JAv-0G-KeR.text" = "100Kg";
+
+/* Class = "UILabel"; text = "☕️"; ObjectID = "Jd3-RU-3pp"; */
+"Jd3-RU-3pp.text" = "☕️";
+
+/* Class = "UIButton"; configuration.title = "🍏 Lose Weight"; ObjectID = "KFE-M9-2VN"; */
+"KFE-M9-2VN.configuration.title" = "🍏 Kilo Ver";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "KFE-M9-2VN"; */
+"KFE-M9-2VN.normalTitle" = "Button";
+
+/* Class = "UIButton"; normalTitle = "Get Started"; ObjectID = "KTn-fc-L4X"; */
+"KTn-fc-L4X.normalTitle" = "Başlayalım";
+
+/* Class = "UILabel"; text = "120 min"; ObjectID = "LF9-0j-dfb"; */
+"LF9-0j-dfb.text" = "120 dk";
+
+/* Class = "UILabel"; text = "According to your choices, your goal is to maintain your weight."; ObjectID = "MFo-mA-Mz5"; */
+"MFo-mA-Mz5.text" = "According to your choices, your goal is to maintain your weight.";
+
+/* Class = "UILabel"; text = "Please sign up to continue."; ObjectID = "MOA-Lx-yAc"; */
+"MOA-Lx-yAc.text" = "Lütfen devam etmek için kayıt ol.";
+
+/* Class = "UILabel"; text = "25"; ObjectID = "Max-Vq-Jzn"; */
+"Max-Vq-Jzn.text" = "25";
+
+/* Class = "UILabel"; text = "Corned Beef Hash"; ObjectID = "MiB-gl-KzM"; */
+"MiB-gl-KzM.text" = "Corned Beef Hash";
+
+/* Class = "UILabel"; text = "Fat"; ObjectID = "Mw4-sU-yAY"; */
+"Mw4-sU-yAY.text" = "Yağ";
+
+/* Class = "UILabel"; text = "kdhfhfhjffghjfjfgjfgjhfgjhfgjfgfhjfgjhfgfjhfvghfv fsjsjsjdsjdjfjjffjfjfjfjdkskskskskssjsjjjsjsjsjsjsjsjsjsjsjsjksk"; ObjectID = "N22-eR-NBl"; */
+"N22-eR-NBl.text" = "kdhfhfhjffghjfjfgjfgjhfgjhfgjfgfhjfgjhfgfjhfvghfv fsjsjsjdsjdjfjjffjfjfjfjdkskskskskssjsjjjsjsjsjsjsjsjsjsjsjsjksk";
+
+/* Class = "UILabel"; text = "Protein"; ObjectID = "N5M-Zc-ha7"; */
+"N5M-Zc-ha7.text" = "Protein";
+
+/* Class = "UIButton"; normalTitle = "Hard"; ObjectID = "Ovm-yI-bmr"; */
+"Ovm-yI-bmr.normalTitle" = "Çok Pişmiş";
+
+/* Class = "UILabel"; text = "What's your goal?"; ObjectID = "Pup-1R-8Rd"; */
+"Pup-1R-8Rd.text" = "Hedefin nedir?";
+
+/* Class = "UIButton"; configuration.subtitle = "Mostly walking. e.g. salesperson"; ObjectID = "QOM-IS-6nr"; */
+"QOM-IS-6nr.configuration.subtitle" = "Genellikle yürüyen. ö.o. pazarlamacı";
+
+/* Class = "UIButton"; configuration.title = "🧑‍💼 Active"; ObjectID = "QOM-IS-6nr"; */
+"QOM-IS-6nr.configuration.title" = "🧑‍💼 Aktif";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "QOM-IS-6nr"; */
+"QOM-IS-6nr.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "⚖️Weight"; ObjectID = "QRR-EA-rdj"; */
+"QRR-EA-rdj.text" = "⚖️Ağırlık";
+
+/* Class = "UILabel"; text = "Calorie Counter & Recipes"; ObjectID = "Qxv-LW-2ei"; */
+"Qxv-LW-2ei.text" = "Kalori Sayacı & Tarifler;
+
+/* Class = "UILabel"; text = "What's your BMI?"; ObjectID = "R0W-h4-G9u"; */
+"R0W-h4-G9u.text" = "BMI sonucun ne?";
+
+/* Class = "UISearchBar"; placeholder = "Search For A Food"; ObjectID = "RYr-c9-v3a"; */
+"RYr-c9-v3a.placeholder" = "Yiyecek için ara";
+
+/* Class = "UILabel"; text = "Note: Make sure the water is boiling before starting the timer."; ObjectID = "S9D-bu-u3t"; */
+"S9D-bu-u3t.text" = "Note: Zamanlayıcıyı başlatmadan önce suyun kaynadığından emin ol.";
+
+/* Class = "UILabel"; text = "Calorie Counter & Recipes"; ObjectID = "SC3-Qa-EPz"; */
+"SC3-Qa-EPz.text" = "Kalori Sayacı & Tarifler";
+
+/* Class = "UILabel"; text = "Calories Burned"; ObjectID = "TSC-GR-lTM"; */
+"TSC-GR-lTM.text" = "Yakılan Kalori";
+
+/* Class = "UILabel"; text = "1882"; ObjectID = "TWC-Vj-qzP"; */
+"TWC-Vj-qzP.text" = "1882";
+
+/* Class = "UILabel"; text = "Frequents"; ObjectID = "TYs-jQ-YS7"; */
+"TYs-jQ-YS7.text" = "Sık Kullanılanlar";
+
+/* Class = "UILabel"; text = "⬅️ Swipe     "; ObjectID = "Tb8-QX-7bR"; */
+"Tb8-QX-7bR.text" = "⬅️ Kaydır     ";
+
+/* Class = "UINavigationItem"; title = "Profile"; ObjectID = "VGz-Ay-awq"; */
+"VGz-Ay-awq.title" = "Profil";
+
+/* Class = "UILabel"; text = "We'll personalize recommendations based on your goals."; ObjectID = "W5Q-Na-Sxn"; */
+"W5Q-Na-Sxn.text" = "Senin hedeflerine göre önerilerimizi özelleştireceğiz.";
+
+/* Class = "UIButton"; normalTitle = "Add to Calorie Counter"; ObjectID = "XCS-o3-QS4"; */
+"XCS-o3-QS4.normalTitle" = "Kalori Sayacına Ekle";
+
+/* Class = "UILabel"; text = "How do you like your eggs? "; ObjectID = "Zv0-8e-Z2J"; */
+"Zv0-8e-Z2J.text" = "Yumurtanı nasıl istersin? ";
+
+/* Class = "UIButton"; normalTitle = "Medium"; ObjectID = "abg-qa-r6o"; */
+"abg-qa-r6o.normalTitle" = "Orta";
+
+/* Class = "UILabel"; text = "Eaten"; ObjectID = "b8p-cv-7Bi"; */
+"b8p-cv-7Bi.text" = "Yenen";
+
+/* Class = "UITextField"; placeholder = "email@example.com"; ObjectID = "cPP-aR-pB8"; */
+"cPP-aR-pB8.placeholder" = "email@ornek.com";
+
+/* Class = "UILabel"; text = "120 min"; ObjectID = "e5U-OA-aC3"; */
+"e5U-OA-aC3.text" = "120 dk";
+
+/* Class = "UITabBarItem"; title = "Egg Timer"; ObjectID = "eDq-Vb-SYl"; */
+"eDq-Vb-SYl.title" = "Yumurta Zamanlayıcı";
+
+/* Class = "UILabel"; text = "Breakfast"; ObjectID = "eiw-HB-3Nm"; */
+"eiw-HB-3Nm.text" = "Kahvaltı";
+
+/* Class = "UILabel"; text = "19.5"; ObjectID = "fRe-n5-i5s"; */
+"fRe-n5-i5s.text" = "19.5";
+
+/* Class = "UILabel"; text = "Favorites"; ObjectID = "fbj-G8-OV4"; */
+"fbj-G8-OV4.text" = "Favoriler";
+
+/* Class = "UITabBarItem"; title = "Calculator"; ObjectID = "fc6-4c-Piq"; */
+"fc6-4c-Piq.title" = "Hesaplayıcı";
+
+/* Class = "UIButton"; normalTitle = "Start Your Plan"; ObjectID = "fi3-au-OQq"; */
+"fi3-au-OQq.normalTitle" = "Planını Başlat";
+
+/* Class = "UINavigationItem"; title = "Recipes"; ObjectID = "fm4-9W-12K"; */
+"fm4-9W-12K.title" = "Tarifler";
+
+/* Class = "UILabel"; text = "Please sign in to continue."; ObjectID = "gHX-uK-pnV"; */
+"gHX-uK-pnV.text" = "Lütfen devam etmek için giriş yap.";
+
+/* Class = "UILabel"; text = "🔥"; ObjectID = "gTY-nR-6Bn"; */
+"gTY-nR-6Bn.text" = "🔥";
+
+/* Class = "UILabel"; text = "🍎"; ObjectID = "gWB-O1-fhy"; */
+"gWB-O1-fhy.text" = "🍎";
+
+/* Class = "UILabel"; text = "Recents"; ObjectID = "gsy-dS-Y6g"; */
+"gsy-dS-Y6g.text" = "Son Eklenenler";
+
+/* Class = "UIButton"; configuration.title = "🧘 Maintain Weight"; ObjectID = "hS2-Wg-DOK"; */
+"hS2-Wg-DOK.configuration.title" = "🧘 Kilonu Koru";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "hS2-Wg-DOK"; */
+"hS2-Wg-DOK.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "💪 Lose weight, build muscle or simply get healthy."; ObjectID = "huJ-YT-nKk"; */
+"huJ-YT-nKk.text" = "💪 Kilo ver, kas yap ya da basitçe sağlını koru.";
+
+/* Class = "UILabel"; text = "Corned Beef Hash"; ObjectID = "i6l-X8-NvN"; */
+"i6l-X8-NvN.text" = "Corned Beef Hash";
+
+/* Class = "UILabel"; text = "📆 Age"; ObjectID = "iEN-3v-8z7"; */
+"iEN-3v-8z7.text" = "📆 Yaş";
+
+/* Class = "UIButton"; configuration.subtitle = "Mostly sitting. e.g. office worker"; ObjectID = "iiU-L2-M7O"; */
+"iiU-L2-M7O.configuration.subtitle" = "Genellikle oturan. ö.o. ofis çalışanı";
+
+/* Class = "UIButton"; configuration.title = "🧑‍🏫 Moderately active"; ObjectID = "iiU-L2-M7O"; */
+"iiU-L2-M7O.configuration.title" = "🧑‍🏫 Orta derece aktif";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "iiU-L2-M7O"; */
+"iiU-L2-M7O.normalTitle" = "Button";
+
+/* Class = "UITextField"; placeholder = "email@example.com"; ObjectID = "ijY-ef-vMo"; */
+"ijY-ef-vMo.placeholder" = "email@example.com";
+
+/* Class = "UILabel"; text = "Lunch"; ObjectID = "jOi-vs-dgK"; */
+"jOi-vs-dgK.text" = "Öğle Yemeği";
+
+/* Class = "UITabBarItem"; title = "Profile"; ObjectID = "kQ3-0N-sIO"; */
+"kQ3-0N-sIO.title" = "Profil";
+
+/* Class = "UILabel"; text = "Favorites"; ObjectID = "lEc-ni-ds6"; */
+"lEc-ni-ds6.text" = "Favoriler";
+
+/* Class = "UILabel"; text = "🔥2000kcal   🥖Carbs: 20g   🥩Protein: 30g   🧈Fat: 40g"; ObjectID = "mvM-jw-Bvq"; */
+"mvM-jw-Bvq.text" = "🔥2000kcal   🥖Karbonhidrat: 20g   🥩Protein: 30g   🧈Yağ: 40g";
+
+/* Class = "UILabel"; text = "Carbs"; ObjectID = "npt-wO-IBn"; */
+"npt-wO-IBn.text" = "Karbonhidrat";
+
+/* Class = "UIButton"; configuration.subtitle = "Physically demanding. e.g. builder"; ObjectID = "oxD-H5-mQP"; */
+"oxD-H5-mQP.configuration.subtitle" = "Fiziksel olarak yoğun ö.o. işçi";
+
+/* Class = "UIButton"; configuration.title = "👷 Very active"; ObjectID = "oxD-H5-mQP"; */
+"oxD-H5-mQP.configuration.title" = "👷 Çok Aktif";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "oxD-H5-mQP"; */
+"oxD-H5-mQP.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "You are overweight. If you are not careful, you may experience serious health problems."; ObjectID = "qUO-Ti-UCx"; */
+"qUO-Ti-UCx.text" = "Aşırı kilolusun. Dikkatli olmazsan, ciddi sağlık sorunları yaşayabilirsin.";
+
+/* Class = "UILabel"; text = "KAJU"; ObjectID = "rvT-87-cPa"; */
+"rvT-87-cPa.text" = "KAJU";
+
+/* Class = "UITabBarItem"; title = "Recipes"; ObjectID = "szJ-no-xXw"; */
+"szJ-no-xXw.title" = "Tarifler";
+
+/* Class = "UILabel"; text = "1 whole whole whole whole  whole whole   egg (43g)"; ObjectID = "t3l-Ov-XbA"; */
+"t3l-Ov-XbA.text" = "1 whole whole whole whole  whole whole   egg (43g)";
+
+/* Class = "UITextField"; placeholder = "password"; ObjectID = "tA3-51-UMe"; */
+"tA3-51-UMe.placeholder" = "password";
+
+/* Class = "UIButton"; normalTitle = "Add to Calorie Counter"; ObjectID = "tnV-j3-uc8"; */
+"tnV-j3-uc8.normalTitle" = "Kalori Sayacına Ekle";
+
+/* Class = "UIButton"; configuration.title = "💪 Gain Muscle"; ObjectID = "uDJ-1k-TGd"; */
+"uDJ-1k-TGd.configuration.title" = "💪 Kas Yapmak";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "uDJ-1k-TGd"; */
+"uDJ-1k-TGd.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "Discover"; ObjectID = "uur-4W-O5l"; */
+"uur-4W-O5l.text" = "Keşfet";
+
+/* Class = "UIButton"; normalTitle = "Next"; ObjectID = "v6p-mN-wEd"; */
+"v6p-mN-wEd.normalTitle" = "Sıradaki";
+
+/* Class = "UILabel"; text = "Enter Your Calories        Burned Today:"; ObjectID = "vB6-G2-8lm"; */
+"vB6-G2-8lm.text" = "Bugün Yaktığın Kalori        Miktarını Gir:";
+
+/* Class = "UITabBarItem"; title = "Diary"; ObjectID = "vQV-aE-ZAR"; */
+"vQV-aE-ZAR.title" = "Günlük";
+
+/* Class = "UITextField"; placeholder = "password"; ObjectID = "wPn-fx-6k0"; */
+"wPn-fx-6k0.placeholder" = "password";
+
+/* Class = "UILabel"; text = "🍏 Daily Calorie Goal"; ObjectID = "wrv-1o-oc5"; */
+"wrv-1o-oc5.text" = "🍏 Günlük Kalori Hedefi";
+
+/* Class = "UIButton"; normalTitle = "Next"; ObjectID = "xCF-wR-6Hz"; */
+"xCF-wR-6Hz.normalTitle" = "Sıradaki";
+
+/* Class = "UILabel"; text = "Calorie Counter & Recipes"; ObjectID = "yAb-op-XaW"; */
+"yAb-op-XaW.text" = "Kalori Sayacı & Tarifler";
+
+/* Class = "UILabel"; text = "Burned"; ObjectID = "yeC-fP-e9U"; */
+"yeC-fP-e9U.text" = "Yakılmış";
+
+/* Class = "UISegmentedControl"; yzE-eL-pR2.segmentTitles[0] = "Male"; ObjectID = "yzE-eL-pR2"; */
+"yzE-eL-pR2.segmentTitles[0]" = "Erkek";
+
+/* Class = "UISegmentedControl"; yzE-eL-pR2.segmentTitles[1] = "Female"; ObjectID = "yzE-eL-pR2"; */
+"yzE-eL-pR2.segmentTitles[1]" = "Kadın";
