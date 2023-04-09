@@ -11,10 +11,8 @@ import FirebaseFirestore
 
 class MainViewController: UITableViewController {
     
-    //rgb(47, 160, 134) special color for main view controller
-    let strokeColorDarkGreen = SpecialColors.strokeColorDarkGreen.CGColorType
+    //MARK: - General Variables
     let db = Firestore.firestore()
-    
     let user = Auth.auth().currentUser
     
     // Views for shapes autolayout constraints
@@ -84,7 +82,12 @@ class MainViewController: UITableViewController {
     var currentBurnedCal = 0
     
     var currentDayReal = 0
+    var activityIndicatorContainer: UIView!
+    var activityIndicator: UIActivityIndicatorView!
+    var check = false
+    var view2: UIView!
     
+    //MARK: - Outlet Variables
     @IBOutlet weak var burnedLabel: UILabel!
     @IBOutlet weak var breakfastCalLabel: UILabel!
     @IBOutlet weak var snacksCalLabel: UILabel!
@@ -105,12 +108,27 @@ class MainViewController: UITableViewController {
     @IBOutlet weak var addLunchButton: UIButton!
     @IBOutlet weak var addBreakfastButton: UIButton!
     
-    var activityIndicatorContainer: UIView!
-    var activityIndicator: UIActivityIndicatorView!
+    //MARK: - View Lifecycle Methods
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        animate()
+        setupActivityIndicator()
+        showActivityIndicator(show: true)
+        currentDayReal = Date().get(.minute, .day, .month, .year).day!
+        // DB verilerini çeker, define(), loadprogressBars() çağırır
+        loadData()
+    }
     
-    var check = false
-    var view2: UIView!
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.navigationItem.setHidesBackButton(true, animated: true)
+        carbsProgressBar.progressTintColor = SpecialColors.strokeColorDarkGreen.associatedColor
+        fatProgressBar.progressTintColor = SpecialColors.strokeColorDarkGreen.associatedColor
+        proteinProgressBar.progressTintColor = SpecialColors.strokeColorDarkGreen.associatedColor
+ 
+    }
     
+    //MARK: - Supporting Methods
     func animate(){
         let transition = CATransition()
             transition.duration = 0.3
@@ -120,17 +138,6 @@ class MainViewController: UITableViewController {
         transition.fillMode = CAMediaTimingFillMode.backwards
         navigationController?.view.layer.add(transition, forKey: nil)
     }
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        animate()
-        setupActivityIndicator()
-        showActivityIndicator(show: true)
-        currentDayReal = Date().get(.minute, .day, .month, .year).day!
-        // DB verilerini çeker, define(), loadprogressBars() çağırır
-        loadData()
-        
-    }
-    
     
     // Loading alert functionality
     private func showActivityIndicator(show: Bool) {
@@ -168,15 +175,6 @@ class MainViewController: UITableViewController {
         // Constraints
         activityIndicator.centerXAnchor.constraint(equalTo: activityIndicatorContainer.centerXAnchor).isActive = true
         activityIndicator.centerYAnchor.constraint(equalTo: activityIndicatorContainer.centerYAnchor).isActive = true
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.navigationItem.setHidesBackButton(true, animated: true)
-        carbsProgressBar.progressTintColor = UIColor( red: 47/255, green: 160/255, blue: 134/255, alpha: 1)
-        fatProgressBar.progressTintColor = UIColor( red: 47/255, green: 160/255, blue: 134/255, alpha: 1)
-        proteinProgressBar.progressTintColor = UIColor( red: 47/255, green: 160/255, blue: 134/255, alpha: 1)
- 
     }
     
     @objc
@@ -232,9 +230,6 @@ class MainViewController: UITableViewController {
         if let currentUserEmail = Auth.auth().currentUser?.email {
             let docRef = db.collection("UserInformations").document("\(currentUserEmail)")
             
-            // currentCal = currentBreakfastCal + currentLunchCal + currentDinnerCal + currentSnacksCal
-            // breakfast lunch dinner snacks değerleri burada db'den gelen calorie değerleri ile güncellenecek
-            // current carbs pro fat güncellenecek
             docRef.getDocument { (document, error) in
                 if let document = document, document.exists {
                     if let data = document.data() {
@@ -276,27 +271,6 @@ class MainViewController: UITableViewController {
                                         self.resetData()
                                     }
                                 }
-                                
-                                // db'den current değer eklendikten sonra değer sıfırlanmalı
-                                // yoksa her viewDidLoad'da değer tekrar eklenir
-                                /*if let currentUserEmail = Auth.auth().currentUser?.email {
-                                    self.db.collection("UserInformations").document("\(currentUserEmail)").updateData([
-                                        "currentBreakfastCal": 0,
-                                        "currentLunchCal": 0,
-                                        "currentDinnerCal": 0,
-                                        "currentSnacksCal": 0,
-                                        "currentCarbs": 0.0,
-                                        "currentPro": 0.0,
-                                        "currentFat": 0.0,
-                                        "currentBurnedCal": 0
-                                     ]) { err in
-                                            if let err = err {
-                                                print("Error adding document: \(err)")
-                                            } else {
-                                                print("Document successfully written!")
-                                            }
-                                        }
-                                }*/
                                 self.define()
                                 self.loadProgressBars()
                             }
@@ -317,16 +291,9 @@ class MainViewController: UITableViewController {
         let burnedTap2 = UITapGestureRecognizer(target: self, action: #selector(MainViewController.burnedTapFunction))
         burnedLabel.isUserInteractionEnabled = true
         burnedLabel.addGestureRecognizer(burnedTap2)
-        
-        //addBreakfastButton.addTarget(self, action: "addBreakfastButtonClicked:", for: .touchUpInside)
-        
-        // Test Values Before DB
-        //totalCal = totalBreakfastCal + totalLunchCal + totalDinnerCal + totalSnacksCal
         currentCal = currentBreakfastCal + currentLunchCal + currentDinnerCal + currentSnacksCal
         
-        // set values..
-        print("insideDefine:\(totalCal)")
-        print("insideDefine:\(currentCal)")
+        // Set values
         calculateTotalValues()
         calorieRemaining.text = abs((totalCal + currentBurnedCal - currentCal)).description
         calorieEaten.text = currentCal.description
@@ -343,11 +310,9 @@ class MainViewController: UITableViewController {
         snacksCalLabel.text = currentSnacksCal.description + " / " + totalSnacksCal.description + " kcal"
         
         // circular paths for circular progress bar shape layers
-        // viewin ortası CGPoint(x: totalCalView.bounds.midX, y: totalCalView.bounds.midY)
-        // x: 196.5, y: 90 ---> totalCalView.layer.addSublayer(breakfastShapeLayer)
         let circularPathTotalCal = UIBezierPath(arcCenter: CGPoint(x: totalCalView.bounds.midX, y: totalCalView.bounds.midY), radius: 50,
                                                 startAngle:  CGFloat.pi*3/4 , endAngle: CGFloat.pi/4, clockwise: true)
-        //x: 71, y: 282
+        
         let circularPathBreakfast = UIBezierPath(arcCenter: CGPoint(x: breakfastView.bounds.midX, y: breakfastView.bounds.midY), radius: 25,
                                                  startAngle:  CGFloat.pi*3/2 , endAngle: CGFloat.pi/2*7, clockwise: true)
         
@@ -360,7 +325,6 @@ class MainViewController: UITableViewController {
         let circularPathSnacks = UIBezierPath(arcCenter: CGPoint(x: snacksView.bounds.midX, y: snacksView.bounds.midY), radius: 25,
                                               startAngle:  CGFloat.pi*3/2 , endAngle: CGFloat.pi/2*7, clockwise: true)
         
-        
         // BREAKFAST
         // Breakfast Shape Layer..
         breakfastShapeLayer.path = circularPathBreakfast.cgPath
@@ -368,20 +332,16 @@ class MainViewController: UITableViewController {
         breakfastShapeLayer.lineWidth = 5
         breakfastShapeLayer.fillColor = UIColor.clear.cgColor
         breakfastShapeLayer.lineCap = CAShapeLayerLineCap.round
-        //view.layer.addSublayer(breakfastShapeLayer)
         breakfastView.layer.addSublayer(breakfastShapeLayer)
         
-      
         // Breakfast Track Layer..
         breakfastTrackLayer.path = circularPathBreakfast.cgPath
         breakfastTrackLayer.fillColor = UIColor.clear.cgColor
-        breakfastTrackLayer.strokeColor = strokeColorDarkGreen
+        breakfastTrackLayer.strokeColor = SpecialColors.strokeColorDarkGreen.CGColorType
         breakfastTrackLayer.lineWidth = 6
         breakfastTrackLayer.lineCap = CAShapeLayerLineCap.round
         breakfastTrackLayer.strokeEnd = 0
-        //view.layer.addSublayer(breakfastTrackLayer)
         breakfastView.layer.addSublayer(breakfastTrackLayer)
-        
         
         // LUNCH
         // Lunch Shape Layer
@@ -390,19 +350,16 @@ class MainViewController: UITableViewController {
         lunchShapeLayer.lineWidth = 5
         lunchShapeLayer.fillColor = UIColor.clear.cgColor
         lunchShapeLayer.lineCap = CAShapeLayerLineCap.round
-        //view.layer.addSublayer(lunchShapeLayer)
         lunchView.layer.addSublayer(lunchShapeLayer)
         
         // Lunch Track Layer
         lunchTrackLayer.path = circularPathLunch.cgPath
         lunchTrackLayer.fillColor = UIColor.clear.cgColor
-        lunchTrackLayer.strokeColor = strokeColorDarkGreen
+        lunchTrackLayer.strokeColor = SpecialColors.strokeColorDarkGreen.CGColorType
         lunchTrackLayer.lineWidth = 6
         lunchTrackLayer.lineCap = CAShapeLayerLineCap.round
         lunchTrackLayer.strokeEnd = 0
-        //view.layer.addSublayer(lunchTrackLayer)
         lunchView.layer.addSublayer(lunchTrackLayer)
-        
         
         // DINNER
         // Dinner Shape Layer
@@ -411,20 +368,17 @@ class MainViewController: UITableViewController {
         dinnerShapeLayer.lineWidth = 5
         dinnerShapeLayer.fillColor = UIColor.clear.cgColor
         dinnerShapeLayer.lineCap = CAShapeLayerLineCap.round
-        //view.layer.addSublayer(dinnerShapeLayer)
         dinnerView.layer.addSublayer(dinnerShapeLayer)
         
         // Dinner Track Layer
         dinnerTrackLayer.path = circularPathDinner.cgPath
         dinnerTrackLayer.fillColor = UIColor.clear.cgColor
-        dinnerTrackLayer.strokeColor = strokeColorDarkGreen
+        dinnerTrackLayer.strokeColor = SpecialColors.strokeColorDarkGreen.CGColorType
         dinnerTrackLayer.lineWidth = 6
         dinnerTrackLayer.lineCap = CAShapeLayerLineCap.round
         dinnerTrackLayer.strokeEnd = 0
-        //view.layer.addSublayer(dinnerTrackLayer)
         dinnerView.layer.addSublayer(dinnerTrackLayer)
 
-        
         // SNACKS
         // Snacks Shape Layer
         snacksShapeLayer.path = circularPathSnacks.cgPath
@@ -432,20 +386,17 @@ class MainViewController: UITableViewController {
         snacksShapeLayer.lineWidth = 5
         snacksShapeLayer.fillColor = UIColor.clear.cgColor
         snacksShapeLayer.lineCap = CAShapeLayerLineCap.round
-        //view.layer.addSublayer(snacksShapeLayer)
         snacksView.layer.addSublayer(snacksShapeLayer)
 
         // Snacks Track Layer
         snacksTrackLayer.path = circularPathSnacks.cgPath
         snacksTrackLayer.fillColor = UIColor.clear.cgColor
-        snacksTrackLayer.strokeColor = strokeColorDarkGreen
+        snacksTrackLayer.strokeColor = SpecialColors.strokeColorDarkGreen.CGColorType
         snacksTrackLayer.lineWidth = 6
         snacksTrackLayer.lineCap = CAShapeLayerLineCap.round
         snacksTrackLayer.strokeEnd = 0
-        //view.layer.addSublayer(snacksTrackLayer)
         snacksView.layer.addSublayer(snacksTrackLayer)
 
-        
         // TOTAL CALORIE
         // Total Calorie Shape Layer
         totalCalShapeLayer.path = circularPathTotalCal.cgPath
@@ -453,18 +404,17 @@ class MainViewController: UITableViewController {
         totalCalShapeLayer.lineWidth = 6
         totalCalShapeLayer.fillColor = UIColor.clear.cgColor
         totalCalShapeLayer.lineCap = CAShapeLayerLineCap.round
-        //view.layer.addSublayer(totalCalShapeLayer)
         totalCalView.layer.addSublayer(totalCalShapeLayer)
         
         // Total Calorie Track Layer
         totalCalTrackLayer.path = circularPathTotalCal.cgPath
         totalCalTrackLayer.fillColor = UIColor.clear.cgColor
-        totalCalTrackLayer.strokeColor = strokeColorDarkGreen
+        totalCalTrackLayer.strokeColor = SpecialColors.strokeColorDarkGreen.CGColorType
         totalCalTrackLayer.lineWidth = 7
         totalCalTrackLayer.lineCap = CAShapeLayerLineCap.round
         totalCalTrackLayer.strokeEnd = 0
-        //view.layer.addSublayer(totalCalTrackLayer)
         totalCalView.layer.addSublayer(totalCalTrackLayer)
+        
        if currentCal >= (totalCal  + currentBurnedCal){
             remainingTitle.text = "Over"
             totalCalTrackLayer.strokeColor = UIColor.orange.cgColor
@@ -477,7 +427,6 @@ class MainViewController: UITableViewController {
     } // ends of func define()
     
  
-    
     @IBAction func caloryBurnedButtonPressed(_ sender: UIButton) {
         let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
         let nextViewController = storyBoard.instantiateViewController(withIdentifier: "BurnedCalTracker") as! BurnedCalTracker
@@ -618,64 +567,9 @@ class MainViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 5
     }
-    
-    /*
-     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-     let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-     
-     // Configure the cell...
-     
-     return cell
-     }
-     */
-    
-    /*
-     // Override to support conditional editing of the table view.
-     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-     // Return false if you do not want the specified item to be editable.
-     return true
-     }
-     */
-    
-    /*
-     // Override to support editing the table view.
-     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-     if editingStyle == .delete {
-     // Delete the row from the data source
-     tableView.deleteRows(at: [indexPath], with: .fade)
-     } else if editingStyle == .insert {
-     // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-     }
-     }
-     */
-    
-    /*
-     // Override to support rearranging the table view.
-     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-     
-     }
-     */
-    
-    /*
-     // Override to support conditional rearranging of the table view.
-     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-     // Return false if you do not want the item to be re-orderable.
-     return true
-     }
-     */
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
-     }
-     */
-    
-}
+} // ends of MainViewController
 
+//MARK: - Extensions
 extension Date {
     func get(_ components: Calendar.Component..., calendar: Calendar = Calendar.current) -> DateComponents {
         return calendar.dateComponents(Set(components), from: self)

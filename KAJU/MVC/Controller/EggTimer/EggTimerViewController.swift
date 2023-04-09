@@ -11,16 +11,15 @@ import CountdownLabel
 
 class EggTimerViewController: UIViewController {
     
+    // Outlet Variables
     @IBOutlet weak var countDownLabelFall: CountdownLabel!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var secondTitleLabel: UILabel!
     @IBOutlet weak var progressBar: UIProgressView!
     
-    var player: AVAudioPlayer!
-    
-    //Rafadan,kayısı,katı yumurta haşlama süreleri: 150, 240, 360 saniye
+    // General variables
+    // Rafadan,kayısı,katı yumurta haşlama süreleri: 150, 240, 360 saniye
     let eggTimes = ["Soft": 150, "Medium": 240, "Hard": 360]
-    
     var secondsRemaining = 0
     var progressPercantage: Float = 0
     var totalTime = 0
@@ -28,18 +27,11 @@ class EggTimerViewController: UIViewController {
     var checkSecondTap: Bool = false
     var secondTapIndicator = 0
     var previousHardness: String = ""
-    
-    //Her farklı butona basıldığında yeni bir timer oluşturulması için kullanılır
+    var player: AVAudioPlayer!
+    // Her farklı butona basıldığında yeni bir timer oluşturulması için kullanılır
     var timer = Timer()
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        
-    }
-
     @IBAction func hardnessSelected(_ sender: UIButton) {
-        
         sender.shake(duration: 0.7, values: [-12.0, 12.0, -12.0, 12.0, -6.0, 6.0, -3.0, 3.0, 0.0])
         //Önceden çalışmaya devam eden timer varsa sonlandır
         timer.invalidate()

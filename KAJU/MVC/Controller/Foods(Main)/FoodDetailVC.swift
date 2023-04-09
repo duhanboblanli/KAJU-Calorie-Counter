@@ -14,16 +14,13 @@ import CoreData
 
 class FoodDetailVC: UITableViewController {
     
+    //MARK: - General Variables
     let RECENTS_LIMIT = 20
-    
     var query = "egg"
     var foodType = "currentBreakfastCal"
-    
     var previousValue = 1.0
     var valueCheck = true
-    
     var isRecipe = false
-    
     let db = Firestore.firestore()
     var food: FoodStruct!
     var image = UIImage()
@@ -35,26 +32,28 @@ class FoodDetailVC: UITableViewController {
     var favFood: FavFoodEntity!
     var favFoods: [FavFoodEntity]!
     var recentFoods: [FoodEntity]!
-    
     var floatActive = true
-    
     var isFav: Bool = false
     var isFav2: Bool = false
-    
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
+    //MARK: - IBActions
     @IBOutlet weak var foodImageView: UIImageView!
     @IBOutlet weak var foodNameTitle: UILabel!
     @IBOutlet weak var nutrientsLabel: UILabel!
     @IBOutlet weak var addButton: UIButton!
     @IBOutlet weak var stepper: ValueStepper!
     
+    //MARK: - View Lifecycle Methods
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setupFetchRequest()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.contentInsetAdjustmentBehavior = .never
         tableView.contentInset = UIEdgeInsets(top: self.tabBarController!.tabBar.frame.size.height,left: 0,bottom: 0,right: 0)
-       
         favoriteAction()
         stepper.minimumValue = 0.1
         stepper.stepValue = 0.1
@@ -72,7 +71,6 @@ class FoodDetailVC: UITableViewController {
             foodType = "currentSnacksCal"
         }
         
-       
         if let title = food.label, let wholeGram = food.wholeGram, let measureLabel = food.measureLabel {
             var lastPart = ""
             if !isRecipe{
@@ -104,21 +102,7 @@ class FoodDetailVC: UITableViewController {
             self.presentAlert(title: "Image not available", message: "")
         }
         foodImageView.image = image
-    }
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        setupFetchRequest()
-    }
-    // Fetch the local data
-    private func setupFetchRequest() {
-        //Recents
-        let fetchRequest: NSFetchRequest<FoodEntity> = FoodEntity.fetchRequest()
-        fetchRequest.returnsObjectsAsFaults = false
-        fetchRequest.sortDescriptors = []
-        if let result = try? appDelegate.persistentContainer2.viewContext.fetch(fetchRequest) {
-            recentFoods = result
-        }
-    }
+    } // ends of viewDidLoad
     
     override func viewWillDisappear(_ animated: Bool) {
         if !isRecipe{
@@ -131,7 +115,20 @@ class FoodDetailVC: UITableViewController {
             }
         }
     }
-    // save to diary
+   
+    //MARK: - Supporting Methods
+    // Fetch the local data
+    private func setupFetchRequest() {
+        //Recents
+        let fetchRequest: NSFetchRequest<FoodEntity> = FoodEntity.fetchRequest()
+        fetchRequest.returnsObjectsAsFaults = false
+        fetchRequest.sortDescriptors = []
+        if let result = try? appDelegate.persistentContainer2.viewContext.fetch(fetchRequest) {
+            recentFoods = result
+        }
+    }
+    
+    // Save to diary
     func saveActionAddToDiary() {
         var inRecent = false
         var lastIndex = 1

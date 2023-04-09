@@ -13,26 +13,32 @@ import FirebaseFirestore
 
 class FoodsViewController: UIViewController, UpdateDelegate {
     
+    //MARK: - General Variables
     let RECENTS_LIMIT = 20
     let db = Firestore.firestore()
-    
     var foodCount = 0
-    
     var query = "egg"
-    
     var foodType: String = "currentBreakfastCal"
-    
     var searchEnable = false
     var favEnable = false
     var recentsEnable = false
-    
     // 0: breakfast, 1: lunch, 2: dinner, 3: snacks
     var mealType = 0
+    var foodSearchSuggestions = [String]()
+    var currentSearchTask: URLSessionTask?
+    //For waiting alert
+    var activityIndicatorContainer: UIView!
+    var activityIndicator: UIActivityIndicatorView!
+    private var foodViewModel = FoodViewModel()
+    private var images: [UIImage]?
+    // For favorites local foods
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    // Food lists
+    var frequentFoodIdList: [String] = []
+    var recentFoods: [FoodEntity] = []
+    var favFoods: [FavFoodEntity] = []
     
-    let ColorHardDarkGreen = UIColor( red: 40/255, green: 71/255, blue: 92/255, alpha: 1)
-    let ColorDarkGreen = UIColor( red: 47/255, green: 136/255, blue: 134/255, alpha: 1)
-    let ColorLightGreen = UIColor( red: 132/255, green: 198/255, blue: 155/255, alpha: 1)
-    
+    //MARK: - Outlet Variables
     @IBOutlet weak var frequentsButtonView: UIView!
     @IBOutlet weak var recentsButtonView: UIView!
     @IBOutlet weak var favoritesButtonView: UIView!
@@ -49,29 +55,18 @@ class FoodsViewController: UIViewController, UpdateDelegate {
     @IBOutlet weak var tableView: UITableView!
     //For search and autoComplete
     @IBOutlet weak var searchBar: UISearchBar!
-    var foodSearchSuggestions = [String]()
-    var currentSearchTask: URLSessionTask?
     
-    //For waiting alert
-    var activityIndicatorContainer: UIView!
-    var activityIndicator: UIActivityIndicatorView!
-    
-    private var foodViewModel = FoodViewModel()
-    private var images: [UIImage]?
-    
-    // For favorites local foods
-    let appDelegate = UIApplication.shared.delegate as! AppDelegate
-    
-    
-    // Food lists
-    var frequentFoodIdList: [String] = []
-    var recentFoods: [FoodEntity] = []
-    var favFoods: [FavFoodEntity] = []
+    //MARK: - View Lifecycle Methods
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.tabBarController?.tabBar.isHidden = false
+        setupFetchRequest()
+        setupFetchRequest2()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         checkFoodType()
-        
         favoritesBottomConstraint.constant = 4.0
         recentsBottomConstraint.constant = 3.0
         favoritesBottomConstraint.constant = 3.0
@@ -86,6 +81,7 @@ class FoodsViewController: UIViewController, UpdateDelegate {
         tableView.reloadData()
     }
     
+    //MARK: - Supporting Methods
     func checkFoodType(){
         if query == "egg" {
             foodType = "currentBreakfastCal"
@@ -101,12 +97,6 @@ class FoodsViewController: UIViewController, UpdateDelegate {
         }
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        self.tabBarController?.tabBar.isHidden = false
-        setupFetchRequest()
-        setupFetchRequest2()
-    }
     // Fetch the local data
     private func setupFetchRequest() {
         //Recents
@@ -193,6 +183,8 @@ class FoodsViewController: UIViewController, UpdateDelegate {
         activityIndicator.centerXAnchor.constraint(equalTo: activityIndicatorContainer.centerXAnchor).isActive = true
         activityIndicator.centerYAnchor.constraint(equalTo: activityIndicatorContainer.centerYAnchor).isActive = true
     }
+    
+    //MARK: - IBActions
     @IBAction func firstTabPressed(_ sender: UIButton) {
         self.tableView.separatorStyle = .singleLine
         tableView.setContentOffset(.zero, animated: true)
@@ -201,10 +193,10 @@ class FoodsViewController: UIViewController, UpdateDelegate {
         frequentsBottomConstraint.constant = 4.0
         recentsBottomConstraint.constant = 3.0
         favoritesBottomConstraint.constant = 3.0
-        frequentsButtonView.backgroundColor = ColorDarkGreen
-        recentsButtonView.backgroundColor = ColorHardDarkGreen
-        favoritesButtonView.backgroundColor = ColorHardDarkGreen
-        frequentsLabel.textColor = ColorDarkGreen
+        frequentsButtonView.backgroundColor = ThemeColors.ColorGreen.associatedColor
+        recentsButtonView.backgroundColor = ThemeColors.ColorDarkGreen.associatedColor
+        favoritesButtonView.backgroundColor = ThemeColors.ColorDarkGreen.associatedColor
+        frequentsLabel.textColor = ThemeColors.ColorGreen.associatedColor
         recentsLabel.textColor = UIColor.lightGray
         favoritesLabel.textColor = UIColor.lightGray
         tableView.reloadData()
@@ -217,11 +209,11 @@ class FoodsViewController: UIViewController, UpdateDelegate {
         frequentsBottomConstraint.constant = 3.0
         recentsBottomConstraint.constant = 4.0
         favoritesBottomConstraint.constant = 3.0
-        frequentsButtonView.backgroundColor = ColorHardDarkGreen
-        recentsButtonView.backgroundColor = ColorDarkGreen
-        favoritesButtonView.backgroundColor = ColorHardDarkGreen
+        frequentsButtonView.backgroundColor = ThemeColors.ColorDarkGreen.associatedColor
+        recentsButtonView.backgroundColor = ThemeColors.ColorGreen.associatedColor
+        favoritesButtonView.backgroundColor = ThemeColors.ColorDarkGreen.associatedColor
         frequentsLabel.textColor = UIColor.lightGray
-        recentsLabel.textColor = ColorDarkGreen
+        recentsLabel.textColor = ThemeColors.ColorGreen.associatedColor
         favoritesLabel.textColor = UIColor.lightGray
         tableView.reloadData()
     }
@@ -234,12 +226,12 @@ class FoodsViewController: UIViewController, UpdateDelegate {
         recentsBottomConstraint.constant = 3.0
         frequentsBottomConstraint.constant = 3.0
         favoritesBottomConstraint.constant = 4.0
-        frequentsButtonView.backgroundColor = ColorHardDarkGreen
-        recentsButtonView.backgroundColor = ColorHardDarkGreen
-        favoritesButtonView.backgroundColor = ColorDarkGreen
+        frequentsButtonView.backgroundColor = ThemeColors.ColorDarkGreen.associatedColor
+        recentsButtonView.backgroundColor = ThemeColors.ColorDarkGreen.associatedColor
+        favoritesButtonView.backgroundColor = ThemeColors.ColorGreen.associatedColor
         frequentsLabel.textColor = UIColor.lightGray
         recentsLabel.textColor = UIColor.lightGray
-        favoritesLabel.textColor = ColorDarkGreen
+        favoritesLabel.textColor = ThemeColors.ColorGreen.associatedColor
         DispatchQueue.main.async { [self] in
             setupFetchRequest2()
         }
@@ -545,10 +537,6 @@ extension FoodsViewController: UISearchBarDelegate, ErrorDelegate {
             self.searchEnable = false
             self.tableView.reloadData()
         }
-        //searchEnable = false
-        //self.searchBar.placeholder = "Search For A Food"
-        //searchBarCancelButtonClicked(self.searchBar)
-        //tableView.reloadData()
     }
     
     
