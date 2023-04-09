@@ -19,9 +19,6 @@ Contributors:
 - Umut Ulaş Demir
 """
     
-    
-    
-    
     static let dunoMatchPass = "Password isn't matching with old one !"
     static let shortPass = "Password length must be at least 6 characters !"
     static let passChanged = "Password is changed succesfully"

@@ -8,6 +8,10 @@
 import Foundation
 import UIKit
 
+// Color Usage
+// For UIColor --> ThemeColors.ColorLightGreen.associatedColor
+// For CGColor --> ThemeColors.ColorLightGreen.CGColorTyoe
+
 enum ThemeColors {
     case ColorLightGreen
     case ColorGreen

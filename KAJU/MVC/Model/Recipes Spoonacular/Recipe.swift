@@ -7,9 +7,9 @@
 
 import Foundation
 
-// Referans Recipe struct modelidir
-// Değişken isimleri JSON formatından farklıdır
-// JSON'dan decode edilip datalar bu değişkenlere atanacak
+// Reference Recipe struct model.
+// Variable names are different from JSON format.
+// The data will be decoded from JSON and assigned to these variables.
 struct Recipe {
     var title : String?
     var imageURL : String?

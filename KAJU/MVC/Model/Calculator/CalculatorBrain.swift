@@ -13,7 +13,7 @@ struct CalculatorBrain {
     var calorie: Float?
     
     mutating func calculateBMI(_ height: Float,_ weight: Float) {
-       
+        
         let bmiValue = weight / pow(height,2)
         
         if bmiValue < 18.5 {
@@ -26,7 +26,6 @@ struct CalculatorBrain {
     }
     
     //10 * ağırlık (kg) + 6.25 * boy (cm) – 5 * yaş (y) + s (kcal / gün) --> burada s, erkekler için +5 ve kadınlar için -161’dir.
-    
     mutating func calculateCalorie(_ sex: String,_ weight: Float,_ height: Float,_ age: Float,_ bmh: Float, _ changeCalorieAmount: Int) {
         if sex == "Male" {
             calorie = (10*weight) + (6.25 * height) - (5*age) + 5
@@ -56,11 +55,6 @@ struct CalculatorBrain {
         let calorieTo1DecimalPlace = String(format: "%.0f", calorie ?? 0.0)
         return calorieTo1DecimalPlace
     }
-    
-    
-    
-    
-    
 }
 
 
