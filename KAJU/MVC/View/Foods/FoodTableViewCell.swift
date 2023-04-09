@@ -28,18 +28,7 @@ class FoodTableViewCell: UITableViewCell {
     @IBAction func directAddPressed(_ sender: Any) {
         delegate?.directAddTap(self)
     }
-    /*override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }*/
-    
-    
+  
     func setCellWithValuesOf(_ foodData:FoodStruct) {
         updateUI(label: foodData.label, calorie: foodData.calorie, image: foodData.image)
     }

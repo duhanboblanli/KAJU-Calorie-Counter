@@ -8,13 +8,9 @@
 import UIKit
 import FirebaseAuth
 
-
-
-
 class RegisterViewController: UIViewController {
     
-    var check = false
-    
+    // Outlet Variables
     @IBOutlet weak var emailTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var signUpButtonBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var signUpButton: UIButton!
@@ -22,10 +18,13 @@ class RegisterViewController: UIViewController {
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var errorTextField: UILabel!
     
+    // General Variables
+    var check = false
+    
+    //MARK: - View Lifecycle Functions
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         if !UIDevice.hasNotch{
-            print("model:", UIDevice.hasNotch)
             signUpButtonBottomConstraint.constant = -25
             emailTopConstraint.constant = 200
         }
@@ -53,6 +52,7 @@ class RegisterViewController: UIViewController {
         passwordTextField.tag = 2
     }
 
+    //MARK: - IBActions
     @IBAction func signUpPressed(_ sender: UIButton) {
         
         if let email = emailTextField.text, let password = passwordTextField.text {
@@ -68,6 +68,7 @@ class RegisterViewController: UIViewController {
         }
     }
     
+    //MARK: - Setup Functions
     //Kenarlardan 10,height 72 constraintsli buttonlar için ideal cornerRadius 0.096
     func setupButtonStyle(button : UIButton,cornerRadius: Float){
         button.layer.cornerRadius = CGFloat(cornerRadius) * button.bounds.size.width

@@ -11,34 +11,32 @@ import FirebaseFirestore
 
 class CalculatorViewController: UIViewController {
     
+    // Outlet Variables
     @IBOutlet weak var topConstraint: NSLayoutConstraint!
     @IBOutlet weak var nextButtonConstraint: NSLayoutConstraint!
-    let db = Firestore.firestore()
+    @IBOutlet weak var calculateButton: UIButton!
+    @IBOutlet weak var ageLabel: UILabel!
+    @IBOutlet weak var heightLabel: UILabel!
+    @IBOutlet weak var weightLabel: UILabel!
+    @IBOutlet weak var ageSlider: UISlider!
+    @IBOutlet weak var heightSlider: UISlider!
+    @IBOutlet weak var weightSlider: UISlider!
+    @IBOutlet weak var sexSegment: UISegmentedControl!
     
+    // General Variables
+    let db = Firestore.firestore()
     var calorieSublabel = ""
     var bmh:Float = 1.2
     var changeCalorieAmount = 0
     var goalType = ""
     var calculatorBrain = CalculatorBrain()
     var sex = "Male"
-    var ColorDarkGreen = UIColor( red: 47/255, green: 136/255, blue: 134/255, alpha: 1)
+    var ColorDarkGreen = ThemeColors.ColorGreen.associatedColor
     
-    @IBOutlet weak var calculateButton: UIButton!
-    
-    @IBOutlet weak var ageLabel: UILabel!
-    @IBOutlet weak var heightLabel: UILabel!
-    @IBOutlet weak var weightLabel: UILabel!
-    
-    @IBOutlet weak var ageSlider: UISlider!
-    @IBOutlet weak var heightSlider: UISlider!
-    @IBOutlet weak var weightSlider: UISlider!
-    
-    @IBOutlet weak var sexSegment: UISegmentedControl!
-    
+    //MARK: - View Lifecycle Functions
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         if !UIDevice.hasNotch{
-            print("model:", UIDevice.hasNotch)
             nextButtonConstraint.constant = 25
             topConstraint.constant = 15
         }
@@ -62,9 +60,8 @@ class CalculatorViewController: UIViewController {
         }
     }
     
+    //MARK: - IBActions
     @IBAction func sexSegmentPressed(_ sender: UISegmentedControl) {
-        
-        
         if sender.isSelected {
             sex = sender.titleForSegment(at:0)!
             sender.isSelected = false
@@ -72,13 +69,10 @@ class CalculatorViewController: UIViewController {
             sex = sender.titleForSegment(at: 1)!
             sender.isSelected = true
         }
-        
-        print(sex)
         calculateButton.backgroundColor = ColorDarkGreen
         calculateButton.isEnabled = true
         calculateButton.isHighlighted = false
     }
-    
     
     // Text Label updates
     @IBAction func ageSliderChanged(_ sender: UISlider) {
@@ -118,7 +112,7 @@ class CalculatorViewController: UIViewController {
         let calorieFloat = Float(calorie) ?? 0.0
         let calorieInt = Int(calorieFloat)
         if let currentUserEmail = Auth.auth().currentUser?.email {
-             db.collection("UserInformations").document("\(currentUserEmail)").setData([
+            db.collection("UserInformations").document("\(currentUserEmail)").setData([
                 "UserEmail": currentUserEmail,
                 "calorie": calorieInt,
                 "sex": sex,
@@ -140,17 +134,18 @@ class CalculatorViewController: UIViewController {
                 "calorieGoal": 0,
                 "adviced": true,
                 "goalWeight": 0.0
-             ]) { err in
-                    if let err = err {
-                        print("Error adding document: \(err)")
-                    } else {
-                        print("Document successfully written!")
-                    }
+            ]) { err in
+                if let err = err {
+                    print("Error adding document: \(err)")
+                } else {
+                    print("Document successfully written!")
                 }
+            }
         }
         
     }
     
+    //MARK: - Supporting Functions
     override func prepare(for segue: UIStoryboardSegue, sender: Any?){
         
         if segue.identifier == "goToResult" {
@@ -170,5 +165,5 @@ class CalculatorViewController: UIViewController {
         button.layer.cornerRadius = CGFloat(cornerRadius) * button.bounds.size.width
         button.clipsToBounds = true
     }
- 
+    
 }

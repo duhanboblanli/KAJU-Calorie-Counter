@@ -8,7 +8,7 @@
 import UIKit
 
 class RecipeTableViewCell: UITableViewCell {
-        
+    
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var recipeImage: UIImageView!
     @IBOutlet weak var calorie: UILabel!
@@ -17,15 +17,14 @@ class RecipeTableViewCell: UITableViewCell {
     // Update the Cell UI Views
     func updateUI(recipe: Recipe, recipeCell: RecipeTableViewCell) {
         
-        
         if let title = recipe.title {
             recipeCell.name.text = title
         }
         if let time = recipe.timeRequired {
             recipeCell.time.text = String("\(time) minutes")
-         
+            
         }
-        recipeCell.recipeImage.image = UIImage(named: "imagePlaceholder")
+        recipeCell.recipeImage.image = Images.Placeholder.associatedImage
         if let imageURL = recipe.imageURL {
             SpoonacularClient.downloadRecipeImage(imageURL: imageURL) { (image, success) in
                 recipeCell.recipeImage.image = image
@@ -40,15 +39,13 @@ class RecipeTableViewCell: UITableViewCell {
     
     func updateFoodUI(recipe: FoodRecipe, recipeCell: RecipeTableViewCell) {
         
-            let title = recipe.title
-            recipeCell.name.text = title
+        let title = recipe.title
+        recipeCell.name.text = title
         
-            let time = recipe.timeRequired
-            recipeCell.time.text = String("\(time) minutes")
-         
+        let time = recipe.timeRequired
+        recipeCell.time.text = String("\(time) minutes")
         
         recipeCell.recipeImage.image = UIImage(data: recipe.image!)
-       
         
         let calorie = recipe.calories
         recipeCell.calorie.text = "\(calorie) kcal"

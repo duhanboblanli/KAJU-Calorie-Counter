@@ -7,18 +7,13 @@
 
 import UIKit
 
-// InstructionView header için kullanılan cell
+// Cell used for Instruction View header
 class InstructionsHeaderCell: UIView {
-    
-    static let ColorHardDarkGreen = UIColor( red: 26/255, green: 47/255, blue: 75/255, alpha: 1) //rgb(26, 47, 75)
-    static let ColorDarkGreen = UIColor( red: 40/255, green: 71/255, blue: 92/255, alpha: 1) //rgb(40, 71, 92)
-    static let ColorGreen = UIColor( red: 47/255, green: 136/255, blue: 134/255, alpha: 1) //rgb(47, 136, 134)
-    static let ColorLightGreen = UIColor( red: 132/255, green: 198/255, blue: 155/255, alpha: 1) //rgb(132, 198, 155)
     
     //MARK: - Setup UI Items
     let ingredientsLabel: UILabel = {
         let label = UILabel()
-        label.backgroundColor = ColorHardDarkGreen
+        label.backgroundColor = ThemeColors.ColorHardDarkGreen.associatedColor
         label.textColor = .white
         label.font = UIFont.boldSystemFont(ofSize: 27)
         label.textAlignment = .left
@@ -27,7 +22,7 @@ class InstructionsHeaderCell: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = UIColor( red: 26/255, green: 47/255, blue: 75/255, alpha: 1)
+        backgroundColor = ThemeColors.ColorHardDarkGreen.associatedColor
         addSubview(ingredientsLabel)
         setupView()
     }

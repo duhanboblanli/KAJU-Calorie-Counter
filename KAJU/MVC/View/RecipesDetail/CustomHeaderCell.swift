@@ -7,13 +7,8 @@
 
 import UIKit
 
-// DetailView üst kısmı için kullanılan cell
+// The cell used for the top of the DetailView
 class CustomHeaderCell: UIView {
-    
-    static let ColorHardDarkGreen = UIColor( red: 26/255, green: 47/255, blue: 75/255, alpha: 1) //rgb(26, 47, 75)
-    static let ColorDarkGreen = UIColor( red: 40/255, green: 71/255, blue: 92/255, alpha: 1) //rgb(40, 71, 92)
-    static let ColorGreen = UIColor( red: 47/255, green: 136/255, blue: 134/255, alpha: 1) //rgb(47, 136, 134)
-    static let ColorLightGreen = UIColor( red: 132/255, green: 198/255, blue: 155/255, alpha: 1) //rgb(132, 198, 155)
     
     //MARK: - Setup UI Items
     let imageView: UIImageView = {
@@ -26,7 +21,7 @@ class CustomHeaderCell: UIView {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 27.0)
         label.textAlignment = .center
-        label.backgroundColor = ColorHardDarkGreen.withAlphaComponent(0.4)
+        label.backgroundColor = ThemeColors.ColorHardDarkGreen.associatedColor.withAlphaComponent(0.4)
         label.textColor = .white
         label.numberOfLines = 0
         label.minimumScaleFactor = 0.5
@@ -35,7 +30,7 @@ class CustomHeaderCell: UIView {
     
     let timingLabel: UILabel = {
         let label = UILabel()
-        label.backgroundColor = ColorHardDarkGreen
+        label.backgroundColor = ThemeColors.ColorHardDarkGreen.associatedColor
         label.textColor = .white
         label.font = UIFont.boldSystemFont(ofSize: 18)
         label.adjustsFontSizeToFitWidth = true
@@ -45,7 +40,7 @@ class CustomHeaderCell: UIView {
     
     let ingredientsLabel: UILabel = {
         let label = UILabel()
-        label.backgroundColor = ColorHardDarkGreen
+        label.backgroundColor = ThemeColors.ColorHardDarkGreen.associatedColor
         label.textColor = .white
         label.font = UIFont.boldSystemFont(ofSize: 18)
         label.textAlignment = .left

@@ -9,6 +9,7 @@ import UIKit
 
 class WelcomeViewController: UIViewController {
 
+    //Outlet variables
     @IBOutlet weak var logInBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var infoLabel: UILabel!
@@ -17,12 +18,12 @@ class WelcomeViewController: UIViewController {
     @IBOutlet weak var firstInfoLabel: UILabel!
     @IBOutlet weak var thirdInfoLabel: UILabel!
     
+    //General variables
     var percentage = 0
     var counter = 0
     var timer: Timer?
     
-
-    
+    //MARK: - View Lifecycle Functions
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         let backButton = UIBarButtonItem(title: "", style: .plain, target: navigationController, action: nil)
@@ -31,7 +32,6 @@ class WelcomeViewController: UIViewController {
             print("model:", UIDevice.hasNotch)
             logInBottomConstraint.constant = -20
         }
-        //check()
     }
     
     override func viewDidLoad() {
@@ -53,10 +53,10 @@ class WelcomeViewController: UIViewController {
             }
             charIndex += 1
         }
-        
         incrementLabel(amount: 12)
     }
     
+    //MARK: - Supporting Functions
     //Kenarlardan 10,height 72 constraintsli buttonlar için ideal cornerRadius 0.096
     //Kenarlardan 10,height 65 constraintsli buttonlar için ideal cornerRadius 0.09
     func setupButtonStyle(button : UIButton,cornerRadius: Float){

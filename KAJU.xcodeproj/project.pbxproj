@@ -27,7 +27,7 @@
 		FE0BB00C29958C320062E096 /* GoalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE0BB00B29958C320062E096 /* GoalViewController.swift */; };
 		FE1432662991E131000F762D /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1432652991E131000F762D /* LogInViewController.swift */; };
 		FE1F72C529969C0D005FFC4B /* ActivenessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1F72C429969C0D005FFC4B /* ActivenessViewController.swift */; };
-		FE21190C29E1941500408EE0 /* ThemeColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE21190B29E1941500408EE0 /* ThemeColors.swift */; };
+		FE21190C29E1941500408EE0 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE21190B29E1941500408EE0 /* Colors.swift */; };
 		FE32926D2991AF740075A5B8 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE32926C2991AF740075A5B8 /* WelcomeViewController.swift */; };
 		FE41A2012997ABA200892346 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE41A2002997ABA200892346 /* TabBarController.swift */; };
 		FE44DF0229B5DDC3005CD7C1 /* FoodDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE44DF0129B5DDC3005CD7C1 /* FoodDetailVC.swift */; };
@@ -76,6 +76,7 @@
 		FEC7BF6529A3F271001B1EC9 /* Extension + UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC7BF6429A3F270001B1EC9 /* Extension + UIViewController.swift */; };
 		FEC7BF6729A3F2AC001B1EC9 /* RecipesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC7BF6629A3F2AC001B1EC9 /* RecipesViewController.swift */; };
 		FED2FFB229A985E000EDBF19 /* RecipeSearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FED2FFB129A985DF00EDBF19 /* RecipeSearchCell.swift */; };
+		FED9E41C29E2435100E05390 /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = FED9E41B29E2435100E05390 /* Images.swift */; };
 		FEE2CDEB2989A4B0002DAA6F /* guitar_alarm_sound.wav in Resources */ = {isa = PBXBuildFile; fileRef = FEE2CDEA2989A4B0002DAA6F /* guitar_alarm_sound.wav */; };
 		FEE9E150299DAB87007FA5FB /* RecipeTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE9E14F299DAB87007FA5FB /* RecipeTableView.swift */; };
 		FEFFFD2329A63BFD0001999E /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEFFFD2229A63BFD0001999E /* DetailViewController.swift */; };
@@ -106,7 +107,7 @@
 		FE0BB00B29958C320062E096 /* GoalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalViewController.swift; sourceTree = "<group>"; };
 		FE1432652991E131000F762D /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		FE1F72C429969C0D005FFC4B /* ActivenessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivenessViewController.swift; sourceTree = "<group>"; };
-		FE21190B29E1941500408EE0 /* ThemeColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeColors.swift; sourceTree = "<group>"; };
+		FE21190B29E1941500408EE0 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		FE32926C2991AF740075A5B8 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		FE41A2002997ABA200892346 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		FE44DF0129B5DDC3005CD7C1 /* FoodDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodDetailVC.swift; sourceTree = "<group>"; };
@@ -156,6 +157,7 @@
 		FEC7BF6429A3F270001B1EC9 /* Extension + UIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Extension + UIViewController.swift"; sourceTree = "<group>"; };
 		FEC7BF6629A3F2AC001B1EC9 /* RecipesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipesViewController.swift; sourceTree = "<group>"; };
 		FED2FFB129A985DF00EDBF19 /* RecipeSearchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeSearchCell.swift; sourceTree = "<group>"; };
+		FED9E41B29E2435100E05390 /* Images.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
 		FEE2CDEA2989A4B0002DAA6F /* guitar_alarm_sound.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = guitar_alarm_sound.wav; sourceTree = "<group>"; };
 		FEE9E14F299DAB87007FA5FB /* RecipeTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeTableView.swift; sourceTree = "<group>"; };
 		FEFFFD2229A63BFD0001999E /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
@@ -214,7 +216,8 @@
 		FE21190F29E2336F00408EE0 /* Constant */ = {
 			isa = PBXGroup;
 			children = (
-				FE21190B29E1941500408EE0 /* ThemeColors.swift */,
+				FE21190B29E1941500408EE0 /* Colors.swift */,
+				FED9E41B29E2435100E05390 /* Images.swift */,
 				FEC1A94F29B7877600342AF6 /* ProfileTexts.swift */,
 				FEC1A95529B7879700342AF6 /* ProfileThemesOption.swift */,
 			);
@@ -696,10 +699,11 @@
 				FEC1A96B29B787F500342AF6 /* PhotoPicker.swift in Sources */,
 				FEC1A96E29B787F500342AF6 /* AboutUsController.swift in Sources */,
 				FEFFFD2329A63BFD0001999E /* DetailViewController.swift in Sources */,
-				FE21190C29E1941500408EE0 /* ThemeColors.swift in Sources */,
+				FE21190C29E1941500408EE0 /* Colors.swift in Sources */,
 				FEC7BF6329A3F269001B1EC9 /* Extension + UITableView.swift in Sources */,
 				FE95C5502992F44900BCC4A6 /* RegisterViewController.swift in Sources */,
 				FEC1A94A29B7871600342AF6 /* AutoLayoutExtension.swift in Sources */,
+				FED9E41C29E2435100E05390 /* Images.swift in Sources */,
 				2D850C41299BFA8E00A525F0 /* FoodApiService.swift in Sources */,
 				FE08EA90298F06EC008BDC6A /* CalculatorBrain.swift in Sources */,
 				FEBF1DCE2986BB4400FD4760 /* EggTimerViewController.swift in Sources */,

@@ -8,52 +8,36 @@
 import UIKit
 import FirebaseAuth
 
-
-
-
 class GoalViewController: UIViewController{
     
-    
-    var check = false
-    var user = Auth.auth().currentUser
-    
+    // Outlet Variables
     @IBOutlet weak var downMiddleConstraint: NSLayoutConstraint!
     @IBOutlet weak var middleConstraint: NSLayoutConstraint!
     @IBOutlet weak var topConstraint: NSLayoutConstraint!
     @IBOutlet weak var nextButtonConstraint: NSLayoutConstraint!
-    var changeCalorieAmount = 0
-    var calorieSublabel = "According to your choices, your goal is to maintain your weight."
-    var ColorDarkGreen = UIColor( red: 47/255, green: 136/255, blue: 134/255, alpha: 1)
-    var ColorSelected = UIColor( red: 132/255, green: 198/255, blue: 155/255, alpha: 0.3)
-    var ColorDarkBlue = UIColor( red: 40/255, green: 71/255, blue: 92/255, alpha: 1)
-    
     @IBOutlet weak var goalNextButton: UIButton!
     @IBOutlet weak var loseWeightButton: UIButton!
     @IBOutlet weak var protectWeightButton: UIButton!
     @IBOutlet weak var gainMuscleButton: UIButton!
     
+    // General Variables
+    var changeCalorieAmount = 0
+    var calorieSublabel = "According to your choices, your goal is to maintain your weight."
+    var check = false
+    var user = Auth.auth().currentUser
+    var ColorSelected = ThemeColors.ColorLightGreen.associatedColor.withAlphaComponent(0.3)
     
-    func animate(){
-        let transition = CATransition()
-            transition.duration = 0.3
-        transition.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
-        transition.type = CATransitionType.reveal
-        transition.endProgress = 0.5
-        transition.fillMode = CAMediaTimingFillMode.backwards
-        navigationController?.view.layer.add(transition, forKey: nil)
-    }
     
+    //MARK: - View Lifecycle Functions
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         if !UIDevice.hasNotch{
-            print("model:", UIDevice.hasNotch)
             nextButtonConstraint.constant = -25
             topConstraint.constant = 15
             middleConstraint.constant = 60
             downMiddleConstraint.constant = 60
         }
     }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         if check{
@@ -61,8 +45,6 @@ class GoalViewController: UIViewController{
             alert.addAction(UIAlertAction(title: "Okay", style: UIAlertAction.Style.default, handler: nil))
             self.present(alert, animated: true, completion: nil)
         }
-        
-        
         self.navigationItem.setHidesBackButton(false, animated: false)
         setupButtonStyle(button: goalNextButton, cornerRadius: 0.096)
         goalNextButton.isEnabled = false
@@ -77,36 +59,48 @@ class GoalViewController: UIViewController{
         navigationItem.hidesBackButton = true
     }
     
+    //MARK: - IBActions
     @IBAction func loseWeightPressed(_ sender: UIButton) {
         changeCalorieAmount = -400
         calorieSublabel = "According to your choices, your goal is to lose your weight."
-        protectWeightButton.backgroundColor = ColorDarkBlue
-        gainMuscleButton.backgroundColor = ColorDarkBlue
+        protectWeightButton.backgroundColor = ThemeColors.ColorDarkGreen.associatedColor
+        gainMuscleButton.backgroundColor = ThemeColors.ColorDarkGreen.associatedColor
         loseWeightButton.backgroundColor = ColorSelected
         goalNextButton.isEnabled = true
         goalNextButton.isHighlighted = false
-        goalNextButton.backgroundColor = ColorDarkGreen
+        goalNextButton.backgroundColor = ThemeColors.ColorGreen.associatedColor
     }
     @IBAction func protectWeightPressed(_ sender: UIButton) {
         
         changeCalorieAmount = 0
         calorieSublabel = "According to your choices, your goal is to maintain your weight."
         protectWeightButton.backgroundColor = ColorSelected
-        gainMuscleButton.backgroundColor = ColorDarkBlue
-        loseWeightButton.backgroundColor = ColorDarkBlue
+        gainMuscleButton.backgroundColor = ThemeColors.ColorDarkGreen.associatedColor
+        loseWeightButton.backgroundColor = ThemeColors.ColorDarkGreen.associatedColor
         goalNextButton.isEnabled = true
         goalNextButton.isHighlighted = false
-        goalNextButton.backgroundColor = ColorDarkGreen
+        goalNextButton.backgroundColor = ThemeColors.ColorGreen.associatedColor
     }
     @IBAction func gainMusclePressed(_ sender: UIButton) {
         changeCalorieAmount = 400
         calorieSublabel = "According to your choices, your goal is to gain muscle."
-        protectWeightButton.backgroundColor = ColorDarkBlue
+        protectWeightButton.backgroundColor = ThemeColors.ColorDarkGreen.associatedColor
         gainMuscleButton.backgroundColor = ColorSelected
-        loseWeightButton.backgroundColor = ColorDarkBlue
+        loseWeightButton.backgroundColor = ThemeColors.ColorDarkGreen.associatedColor
         goalNextButton.isEnabled = true
         goalNextButton.isHighlighted = false
-        goalNextButton.backgroundColor = ColorDarkGreen
+        goalNextButton.backgroundColor = ThemeColors.ColorGreen.associatedColor
+    }
+    
+    //MARK: - Supporting Functions
+    func animate(){
+        let transition = CATransition()
+        transition.duration = 0.3
+        transition.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
+        transition.type = CATransitionType.reveal
+        transition.endProgress = 0.5
+        transition.fillMode = CAMediaTimingFillMode.backwards
+        navigationController?.view.layer.add(transition, forKey: nil)
     }
     
     //Kenarlardan 10,height 72 constraintsli buttonlar için ideal cornerRadius 0.096
@@ -124,8 +118,6 @@ class GoalViewController: UIViewController{
             
         }
     }
-    
-    
 }
 
 
