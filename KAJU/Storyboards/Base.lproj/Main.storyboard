@@ -977,7 +977,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="aAM-tH-Wcf">
-                                <rect key="frame" x="67" y="423" width="280.5" height="105"/>
+                                <rect key="frame" x="67" y="450" width="280.5" height="51"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="🍏 Daily Calorie Goal" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="wrv-1o-oc5">
                                         <rect key="frame" x="0.0" y="0.0" width="280.5" height="43"/>
@@ -989,7 +989,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="249" horizontalCompressionResistancePriority="1000" text="1882" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TWC-Vj-qzP" customClass="CLTypingLabel" customModule="CLTypingLabel">
-                                        <rect key="frame" x="87" y="51" width="106" height="54"/>
+                                        <rect key="frame" x="140" y="51" width="0.0" height="0.0"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="45"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -997,7 +997,7 @@
                                 </subviews>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="According to your choices, your goal is to maintain your weight." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="MFo-mA-Mz5">
-                                <rect key="frame" x="24" y="544" width="366" height="43"/>
+                                <rect key="frame" x="24" y="517" width="366" height="43"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="43" id="UOP-jI-hch"/>
                                 </constraints>
@@ -2018,7 +2018,7 @@
                                                     </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Breakfast" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eiw-HB-3Nm">
-                                                    <rect key="frame" x="101.5" y="20" width="122.5" height="20"/>
+                                                    <rect key="frame" x="101.5" y="20" width="150.5" height="20"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
@@ -2065,7 +2065,7 @@
                                             <constraints>
                                                 <constraint firstItem="q6M-L9-ajD" firstAttribute="leading" secondItem="ZXK-bR-Cza" secondAttribute="leading" constant="100" id="3da-cO-Czl"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="5F0-Gw-RcZ" secondAttribute="bottom" constant="19" id="8WT-xu-LZt"/>
-                                                <constraint firstAttribute="trailing" secondItem="eiw-HB-3Nm" secondAttribute="trailing" constant="150" id="DF1-ao-t66"/>
+                                                <constraint firstAttribute="trailing" secondItem="eiw-HB-3Nm" secondAttribute="trailing" constant="122" id="DF1-ao-t66"/>
                                                 <constraint firstItem="dqO-10-1uI" firstAttribute="top" secondItem="ZXK-bR-Cza" secondAttribute="top" constant="25" id="Diy-FV-BC9"/>
                                                 <constraint firstItem="5F0-Gw-RcZ" firstAttribute="top" secondItem="ZXK-bR-Cza" secondAttribute="topMargin" constant="9" id="IyM-N9-LKB"/>
                                                 <constraint firstItem="eiw-HB-3Nm" firstAttribute="leading" secondItem="ZXK-bR-Cza" secondAttribute="leading" constant="101.33333333333331" id="TbI-Mh-Z2W"/>
@@ -2103,7 +2103,7 @@
                                                     </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lunch" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jOi-vs-dgK">
-                                                    <rect key="frame" x="101.5" y="20" width="122.5" height="20"/>
+                                                    <rect key="frame" x="101.5" y="20" width="150.5" height="20"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
@@ -2149,7 +2149,7 @@
                                             <color key="backgroundColor" red="0.15686274510000001" green="0.2784313725" blue="0.36078431370000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                             <constraints>
                                                 <constraint firstItem="8Jg-kW-wqc" firstAttribute="leading" secondItem="fFJ-ij-bLj" secondAttribute="leading" constant="100" id="1EN-fP-weh"/>
-                                                <constraint firstAttribute="trailing" secondItem="jOi-vs-dgK" secondAttribute="trailing" constant="150" id="1Sq-ag-rxs"/>
+                                                <constraint firstAttribute="trailing" secondItem="jOi-vs-dgK" secondAttribute="trailing" constant="122" id="1Sq-ag-rxs"/>
                                                 <constraint firstItem="fZn-Ub-f9d" firstAttribute="leading" secondItem="fFJ-ij-bLj" secondAttribute="leadingMargin" constant="14" id="5Mn-2j-xcp"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="2Jq-lZ-I3X" secondAttribute="bottom" constant="19" id="AXr-aI-srj"/>
                                                 <constraint firstItem="jOi-vs-dgK" firstAttribute="leading" secondItem="fFJ-ij-bLj" secondAttribute="leading" constant="101.33333333333331" id="F7I-H9-AO6"/>
@@ -2188,7 +2188,7 @@
                                                     </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dinner" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cdb-KE-f3V">
-                                                    <rect key="frame" x="101.5" y="20" width="122.5" height="20"/>
+                                                    <rect key="frame" x="101.5" y="20" width="150.5" height="20"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
@@ -2245,7 +2245,7 @@
                                                 <constraint firstAttribute="trailingMargin" secondItem="LgV-HN-dtg" secondAttribute="trailing" constant="264" id="TC4-DG-xZe"/>
                                                 <constraint firstItem="84Y-4r-Iuk" firstAttribute="top" secondItem="ino-o8-Wn8" secondAttribute="top" constant="45" id="biQ-oN-YlY"/>
                                                 <constraint firstAttribute="bottom" secondItem="84Y-4r-Iuk" secondAttribute="bottom" constant="25" id="fwW-vs-gt8"/>
-                                                <constraint firstAttribute="trailing" secondItem="Cdb-KE-f3V" secondAttribute="trailing" constant="150" id="fyi-vg-fEW"/>
+                                                <constraint firstAttribute="trailing" secondItem="Cdb-KE-f3V" secondAttribute="trailing" constant="122" id="fyi-vg-fEW"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="LgV-HN-dtg" secondAttribute="bottom" constant="19" id="fzu-9I-xcs"/>
                                                 <constraint firstItem="Cdb-KE-f3V" firstAttribute="top" secondItem="ino-o8-Wn8" secondAttribute="top" constant="20" symbolic="YES" id="pTE-l1-2qu"/>
                                                 <constraint firstAttribute="trailing" secondItem="84Y-4r-Iuk" secondAttribute="trailing" constant="133" id="r78-23-t3h"/>
@@ -2273,7 +2273,7 @@
                                                     </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Snacks" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9uQ-TS-uZh">
-                                                    <rect key="frame" x="101.5" y="20" width="122.5" height="20"/>
+                                                    <rect key="frame" x="101.5" y="20" width="150.5" height="20"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
@@ -2322,7 +2322,7 @@
                                                 <constraint firstAttribute="bottom" secondItem="DTF-sI-MCZ" secondAttribute="bottom" constant="25" id="DVq-8W-RQx"/>
                                                 <constraint firstAttribute="bottom" secondItem="9uQ-TS-uZh" secondAttribute="bottom" constant="45" id="Eer-kZ-DtX"/>
                                                 <constraint firstItem="gWB-O1-fhy" firstAttribute="top" secondItem="zS1-IO-krZ" secondAttribute="topMargin" constant="9" id="K3Z-id-nmD"/>
-                                                <constraint firstAttribute="trailing" secondItem="9uQ-TS-uZh" secondAttribute="trailing" constant="150" id="KCD-pC-c8D"/>
+                                                <constraint firstAttribute="trailing" secondItem="9uQ-TS-uZh" secondAttribute="trailing" constant="122" id="KCD-pC-c8D"/>
                                                 <constraint firstItem="kW5-4o-clV" firstAttribute="leading" secondItem="zS1-IO-krZ" secondAttribute="leading" constant="283" id="LKA-G8-Dnh"/>
                                                 <constraint firstItem="DTF-sI-MCZ" firstAttribute="leading" secondItem="zS1-IO-krZ" secondAttribute="leading" constant="100" id="NXS-4H-b5x"/>
                                                 <constraint firstItem="gWB-O1-fhy" firstAttribute="leading" secondItem="zS1-IO-krZ" secondAttribute="leadingMargin" constant="14" id="Pbf-pC-6gr"/>
@@ -2428,23 +2428,32 @@
                     <navigationItem key="navigationItem" title="Diary" id="3NA-xm-gpf"/>
                     <connections>
                         <outlet property="breakfastCalLabel" destination="q6M-L9-ajD" id="Lak-Na-s5B"/>
+                        <outlet property="breakfastLabel" destination="eiw-HB-3Nm" id="Q4L-dF-3s3"/>
                         <outlet property="breakfastView" destination="5F0-Gw-RcZ" id="Tcr-98-XZl"/>
                         <outlet property="burnedLabel" destination="yeC-fP-e9U" id="wny-cV-2Ym"/>
                         <outlet property="calorieBurned" destination="X8B-ug-B1E" id="ekV-dE-8vD"/>
                         <outlet property="calorieEaten" destination="5KQ-Gs-tLA" id="6Tc-dp-YOf"/>
                         <outlet property="calorieRemaining" destination="4MR-41-71z" id="kxs-tK-ccD"/>
+                        <outlet property="caloriesBurnedLabel" destination="yeC-fP-e9U" id="MC5-YY-B4y"/>
+                        <outlet property="carbs" destination="ck5-ow-wTg" id="q0w-3B-6t2"/>
                         <outlet property="carbsLabel" destination="ck5-ow-wTg" id="UzN-yX-1ef"/>
                         <outlet property="carbsProgressBar" destination="8t5-Yb-E54" id="e3b-Dn-BYw"/>
                         <outlet property="dinnerCalLabel" destination="84Y-4r-Iuk" id="0Uv-hU-fBE"/>
+                        <outlet property="dinnerLabel" destination="Cdb-KE-f3V" id="InD-dW-e5E"/>
                         <outlet property="dinnerView" destination="LgV-HN-dtg" id="hhF-oD-Q7U"/>
+                        <outlet property="eatenLabel" destination="b8p-cv-7Bi" id="mRX-Kc-TKI"/>
+                        <outlet property="fat" destination="zXn-86-RTB" id="74E-Bc-LrN"/>
                         <outlet property="fatLabel" destination="zXn-86-RTB" id="yRS-wN-qMd"/>
                         <outlet property="fatProgressBar" destination="N5e-u5-n63" id="9El-6o-QF6"/>
                         <outlet property="lunchCalLabel" destination="8Jg-kW-wqc" id="Pqh-qG-7h4"/>
+                        <outlet property="lunchLabel" destination="jOi-vs-dgK" id="M1d-bl-dIc"/>
                         <outlet property="lunchView" destination="fZn-Ub-f9d" id="3GL-Yx-Nea"/>
+                        <outlet property="protein" destination="rL4-WL-lxK" id="gaQ-VD-CGY"/>
                         <outlet property="proteinLabel" destination="rL4-WL-lxK" id="fYa-Qv-42P"/>
                         <outlet property="proteinProgressBar" destination="r3X-1i-whV" id="B2n-tC-o2o"/>
                         <outlet property="remainingTitle" destination="3xi-gG-nl1" id="swR-DU-OQP"/>
                         <outlet property="snacksCalLabel" destination="DTF-sI-MCZ" id="kQJ-mX-W1t"/>
+                        <outlet property="snacksLabel" destination="9uQ-TS-uZh" id="8Sn-Ci-CAx"/>
                         <outlet property="snacksView" destination="gcn-Hl-sth" id="HSg-v4-ArQ"/>
                         <outlet property="totalCalView" destination="UiD-1J-0er" id="13q-Ol-Csn"/>
                     </connections>
@@ -3104,9 +3113,10 @@
         </scene>
     </scenes>
     <designables>
-        <designable name="TWC-Vj-qzP">
-            <size key="intrinsicContentSize" width="106" height="54"/>
+        <designable name="JDg-bZ-DgD">
+            <size key="intrinsicContentSize" width="141" height="29"/>
         </designable>
+        <designable name="TWC-Vj-qzP"/>
         <designable name="xiS-Vn-AJh"/>
     </designables>
     <inferredMetricsTieBreakers>
