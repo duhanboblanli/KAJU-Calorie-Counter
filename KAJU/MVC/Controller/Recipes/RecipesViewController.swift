@@ -10,10 +10,6 @@ import CoreData
 
 class RecipesViewController: UIViewController, UISearchBarDelegate {
     
-    // Bunlar diğer sayfalardakinden farklı, değiştirme!
-    let ColorHardDarkGreen = UIColor( red: 40/255, green: 71/255, blue: 92/255, alpha: 1)
-    let ColorDarkGreen = UIColor( red: 47/255, green: 136/255, blue: 134/255, alpha: 1)
-    let ColorLightGreen = UIColor( red: 132/255, green: 198/255, blue: 155/255, alpha: 1)
     // For Discover/Favorites Pagination
     @IBOutlet weak var firstButtonView: UIView!
     @IBOutlet weak var secondButtonView: UIView!
@@ -67,6 +63,7 @@ class RecipesViewController: UIViewController, UISearchBarDelegate {
         }
     }
     
+    //MARK: - View Lifecycle Functions
     override func viewDidLoad() {
         super.viewDidLoad()
         firstBottomConstraint.constant = 4.0
@@ -94,7 +91,7 @@ class RecipesViewController: UIViewController, UISearchBarDelegate {
         if let searchText = sender.text {
             if searchText.count >= 0 {
                 discoverTableView.separatorStyle = UITableViewCell.SeparatorStyle.singleLine
-                discoverTableView.separatorColor = ColorLightGreen
+                discoverTableView.separatorColor = ThemeColors.ColorLightGreen.associatedColor
                 scrollTopButton.isHidden = true
                 currentSearchTask?.cancel()
                 currentSearchTask = SpoonacularClient.autoCompleteRecipeSearch(query: searchText) { (recipeSearchSuggestions, error) in
@@ -178,9 +175,9 @@ class RecipesViewController: UIViewController, UISearchBarDelegate {
         secondView.isHidden = true
         firstBottomConstraint.constant = 4.0
         secondBottomConstraint.constant = 3.0
-        firstButtonView.backgroundColor = ColorDarkGreen
-        secondButtonView.backgroundColor = ColorHardDarkGreen
-        discoverLabel.textColor = ColorDarkGreen
+        firstButtonView.backgroundColor = ThemeColors.ColorGreen.associatedColor
+        secondButtonView.backgroundColor = ThemeColors.ColorDarkGreen.associatedColor
+        discoverLabel.textColor = ThemeColors.ColorGreen.associatedColor
         favoritesLabel.textColor = UIColor.lightGray
     }
     
@@ -189,10 +186,10 @@ class RecipesViewController: UIViewController, UISearchBarDelegate {
         secondView.isHidden = false
         firstBottomConstraint.constant = 3.0
         secondBottomConstraint.constant = 4.0
-        firstButtonView.backgroundColor = ColorHardDarkGreen
-        secondButtonView.backgroundColor = ColorDarkGreen
+        firstButtonView.backgroundColor = ThemeColors.ColorDarkGreen.associatedColor
+        secondButtonView.backgroundColor = ThemeColors.ColorGreen.associatedColor
         discoverLabel.textColor = UIColor.lightGray
-        favoritesLabel.textColor = ColorDarkGreen
+        favoritesLabel.textColor = ThemeColors.ColorGreen.associatedColor
         DispatchQueue.main.async { [self] in
             setupFetchRequest()
         }

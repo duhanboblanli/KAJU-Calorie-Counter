@@ -10,11 +10,7 @@ import CoreData
 
 class InstructionsViewController: UIViewController {
     
-    let ColorHardDarkGreen = UIColor( red: 26/255, green: 47/255, blue: 75/255, alpha: 1) //rgb(26, 47, 75)
-    let ColorDarkGreen = UIColor( red: 40/255, green: 71/255, blue: 92/255, alpha: 1) //rgb(40, 71, 92)
-    let ColorGreen = UIColor( red: 47/255, green: 136/255, blue: 134/255, alpha: 1) //rgb(47, 136, 134)
-    let ColorLightGreen = UIColor( red: 132/255, green: 198/255, blue: 155/255, alpha: 1) //rgb(132, 198, 155)
-    
+    // General variables
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     let tableView = UITableView()
     var recipe: Recipe!
@@ -24,6 +20,7 @@ class InstructionsViewController: UIViewController {
     var instructionsArray = [String]()
     let instructionsButton = UIButton()
     
+    // Setup variables
     let recipeTitleLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 27.0)
@@ -68,7 +65,7 @@ class InstructionsViewController: UIViewController {
     }
     
     private func setupView() {
-        view.backgroundColor = ColorHardDarkGreen
+        view.backgroundColor = ThemeColors.ColorHardDarkGreen.associatedColor
         setupInstructionButton()
         setupTableView()
     }
@@ -86,9 +83,9 @@ class InstructionsViewController: UIViewController {
         tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         tableView.bottomAnchor.constraint(equalTo: instructionsButton.topAnchor, constant: 0).isActive = true
-        tableView.backgroundColor = ColorHardDarkGreen
+        tableView.backgroundColor = ThemeColors.ColorHardDarkGreen.associatedColor
         tableView.separatorStyle = UITableViewCell.SeparatorStyle.singleLine
-        tableView.separatorColor = ColorLightGreen
+        tableView.separatorColor = ThemeColors.ColorLightGreen.associatedColor
     }
     
     private func setupInstructionButton() {
@@ -103,7 +100,7 @@ class InstructionsViewController: UIViewController {
         instructionsButton.setTitle("Visit Website for More", for: .normal)
         instructionsButton.setTitleColor(.white, for: .normal)
         instructionsButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18.5)
-        instructionsButton.backgroundColor = ColorGreen
+        instructionsButton.backgroundColor = ThemeColors.ColorGreen.associatedColor
         instructionsButton.addTarget(self, action: #selector(showInstructionsAction), for: .touchUpInside)
     }
     
@@ -156,7 +153,7 @@ extension InstructionsViewController: UITableViewDataSource, UITableViewDelegate
             cell.textLabel?.font = UIFont(name: "Verdana", size: 16)
             cell.textLabel?.text = "\(indexPath.row + 1). \(instructions[indexPath.row].instruction!)"
         }
-        cell.backgroundColor = ColorHardDarkGreen
+        cell.backgroundColor = ThemeColors.ColorHardDarkGreen.associatedColor
         cell.textLabel?.textColor = .lightGray
         cell.selectionStyle = .none
         return cell

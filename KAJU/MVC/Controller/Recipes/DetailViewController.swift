@@ -14,10 +14,12 @@ class DetailViewController: UIViewController {
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     var recipe: Recipe!
     var ingredientsArray = [String]()
-    var ingredients = [Ingredient]() // Type, local databasede tanımlı; detail viewde tıklanan recipe
+    // Type, local databasede tanımlı; detail viewde tıklanan recipe
+    var ingredients = [Ingredient]()
     var image = UIImage()
     var isSavedRecipe = false
-    var foodRecipe: FoodRecipe! // Type, local databasede tanımlı; detail viewde tıklanan recipe
+    // Type, local databasede tanımlı; detail viewde tıklanan recipe
+    var foodRecipe: FoodRecipe!
     let instructionsButton = UIButton()
     let addToDiaryButton = UIButton()
     let tableView = UITableView.init(frame: CGRect.zero, style: .grouped)
@@ -25,6 +27,7 @@ class DetailViewController: UIViewController {
     var isFav = false
     var favoriteRecipes: [FoodRecipe] = []
     
+    //MARK: - View Lifecycle Functions
     override func viewDidLoad() {
         super.viewDidLoad()
         // Recipe local databasede kayıtlı mı ?
@@ -366,22 +369,4 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
-
-/*
-//Create SwiftUI Preview for this UIKit ViewController
-struct ViewControllerRepresentable: UIViewControllerRepresentable {
-    typealias UIViewControllerType = DetailViewController
-    
-    func makeUIViewController(context: Context) -> DetailViewController {
-        DetailViewController()
-    }
-    func updateUIViewController(_ uiViewController: DetailViewController, context: Context) {
-    }
-}
-
-struct ViewController_Previews: PreviewProvider {
-    static var previews: some View {
-        ViewControllerRepresentable()
-    }
-} */
 
