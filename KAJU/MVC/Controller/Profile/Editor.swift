@@ -48,7 +48,7 @@ class Editor: UIViewController {
         let width = CGFloat(76)
         let height = CGFloat(40)
         button.anchor(width: width, height: height)
-        button.setTitle("Done", for: .normal)
+        button.setTitle("Done".localized(), for: .normal)
         button.titleLabel?.font = .boldSystemFont(ofSize: 18)
 
         button.backgroundColor = ThemesOptions.buttonBackGColor
@@ -60,7 +60,7 @@ class Editor: UIViewController {
         let width = CGFloat(88)
         let height = CGFloat(40)
         button.anchor(width: width, height: height)
-        button.setTitle("Cancel", for: .normal)
+        button.setTitle("Cancel".localized(), for: .normal)
         button.titleLabel?.font = .boldSystemFont(ofSize: 16)
         button.backgroundColor = ThemesOptions.buttonBackGColor
         button.layer.cornerRadius = 20
@@ -121,22 +121,22 @@ class Editor: UIViewController {
     
    @objc func done(){
        switch textLabel.text {
-       case "Name":
+       case "Name".localized():
            setAttrValue(key: "name", value: textField.text ?? "")
            self.dismiss(animated: true)
-       case "Height":
+       case "Height".localized():
            setAttrValue(key: "height", value: Int(textField.text ?? "") ?? 0)
            self.dismiss(animated: true)
-       case "Starting Weight":
+       case "Starting Weight".localized():
            setAttrValue(key: "weight", value: Double(textField.text ?? "") ?? 0)
            self.dismiss(animated: true)
-       case "Goal Weight":
+       case "Goal Weight".localized():
            setAttrValue(key: "goalWeight", value: Double(textField.text ?? "") ?? 0)
            self.dismiss(animated: true)
-       case "Weekly Goal":
+       case "Weekly Goal".localized():
            setAttrValue(key: "weeklyGoal", value: Double(textField.text ?? "") ?? 0)
            self.dismiss(animated: true)
-       case "Calorie Goal":
+       case "Calorie Goal".localized():
            setAttrValue(key: "calorieGoal", value: Int(textField.text ?? "") ?? 0)
            updateDBValue(key: "adviced", value: false)
            self.dismiss(animated: true)
@@ -152,7 +152,7 @@ class Editor: UIViewController {
     }
     func setAttrValue(key: String, value: Any){
         if key != "calorieGoal"{
-            textValue.text = textField.text
+            textValue.text = textField.text?.localized()
         }else{
             textValue.text = "Manuel"
         }

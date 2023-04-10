@@ -24,6 +24,7 @@ class RegisterViewController: UIViewController {
     //MARK: - View Lifecycle Functions
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+        defineLabels()
         if !UIDevice.hasNotch{
             signUpButtonBottomConstraint.constant = -25
             emailTopConstraint.constant = 200
@@ -32,6 +33,12 @@ class RegisterViewController: UIViewController {
             self.performSegue(withIdentifier: "RegisterToCalculate", sender: self)
         }
     }
+    
+    func defineLabels(){
+        errorTextField.text = errorTextField.text?.localized()
+        signUpButton.setTitle(signUpButton.currentTitle?.localized(), for: .normal)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -40,11 +47,11 @@ class RegisterViewController: UIViewController {
         passwordTextField.delegate = self
         emailTextField.backgroundColor = UIColor.white
         emailTextField.attributedPlaceholder = NSAttributedString(
-            string: "email@example.com",
+            string: "email@example.com".localized(),
             attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray]
         )
         passwordTextField.attributedPlaceholder = NSAttributedString(
-            string: "password",
+            string: "password".localized(),
             attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray]
         )
         passwordTextField.backgroundColor = UIColor.white

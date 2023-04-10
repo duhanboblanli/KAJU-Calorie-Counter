@@ -17,17 +17,17 @@ struct CalculatorBrain {
         let bmiValue = weight / pow(height,2)
         
         if bmiValue < 18.5 {
-            bmi = BMI (value: bmiValue, advice:"You are underweight. Your body mass index is below normal limits.", color: UIColor.init(red: 0.1137, green: 0.6745, blue: 0.898, alpha: 1))
+            bmi = BMI (value: bmiValue, advice:"You are underweight. Your body mass index is below normal limits.".localized(), color: UIColor.init(red: 0.1137, green: 0.6745, blue: 0.898, alpha: 1))
         } else if bmiValue <= 24.9 {
-            bmi = BMI (value: bmiValue, advice: "You are healthy. Track your daily calorie needs.", color: UIColor.init(red: 0.3882, green: 0.9, blue: 0.1176, alpha: 1))
+            bmi = BMI (value: bmiValue, advice: "You are healthy. Track your daily calorie needs.".localized(), color: UIColor.init(red: 0.3882, green: 0.9, blue: 0.1176, alpha: 1))
         } else {
-            bmi = BMI (value: bmiValue, advice: "You are overweight. You need to keep an eye on your health.", color: UIColor.systemPink)
+            bmi = BMI (value: bmiValue, advice: "You are overweight. You need to keep an eye on your health.".localized(), color: UIColor.systemPink)
         }
     }
     
     //10 * ağırlık (kg) + 6.25 * boy (cm) – 5 * yaş (y) + s (kcal / gün) --> burada s, erkekler için +5 ve kadınlar için -161’dir.
     mutating func calculateCalorie(_ sex: String,_ weight: Float,_ height: Float,_ age: Float,_ bmh: Float, _ changeCalorieAmount: Int) {
-        if sex == "Male" {
+        if sex == "Male".localized() {
             calorie = (10*weight) + (6.25 * height) - (5*age) + 5
             calorie! *= bmh
             calorie! += Float(changeCalorieAmount)

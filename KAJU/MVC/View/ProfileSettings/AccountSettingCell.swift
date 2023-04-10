@@ -65,14 +65,14 @@ class AccountSettingCell: UITableViewCell {
     
     func setAccountSettings(model: SettingModel){
         editButton.accessibilityIdentifier = model.textLabel
-        pSettingLabel.text = "\(model.textLabel)"
+        pSettingLabel.text = "\(model.textLabel.localized())"
         
-        if(model.textLabel == "Password"){
+        if(model.textLabel == "Password".localized()){
             pValueLabel.accessibilityIdentifier = model.textValue
             pValueLabel.text = String(repeating: "* ", count: model.textValue.count)
         }else{
             editButton.isHidden = true
-            pValueLabel.text = model.textValue
+            pValueLabel.text = model.textValue.localized()
         }
     }
     
@@ -86,7 +86,7 @@ class AccountSettingCell: UITableViewCell {
     
     @objc func edit(){
         switch editButton.accessibilityIdentifier {
-        case "Password":
+        case "Password".localized():
             myViewController.present(PasswordEditor(textLabel: pSettingLabel, textValue: pValueLabel), animated: true)
         default:
             return

@@ -11,7 +11,10 @@ import CountdownLabel
 
 class EggTimerViewController: UIViewController {
     
+    @IBOutlet weak var hardLabelView: UIButton!
+    @IBOutlet weak var mediumLabelView: UIButton!
     // Outlet Variables
+    @IBOutlet weak var softLabelView: UIButton!
     @IBOutlet weak var countDownLabelFall: CountdownLabel!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var secondTitleLabel: UILabel!
@@ -19,7 +22,7 @@ class EggTimerViewController: UIViewController {
     
     // General variables
     // Rafadan,kayısı,katı yumurta haşlama süreleri: 150, 240, 360 saniye
-    let eggTimes = ["Soft": 150, "Medium": 240, "Hard": 360]
+    let eggTimes = ["Soft".localized(): 150, "Medium".localized(): 240, "Hard".localized(): 360]
     var secondsRemaining = 0
     var progressPercantage: Float = 0
     var totalTime = 0
@@ -30,6 +33,19 @@ class EggTimerViewController: UIViewController {
     var player: AVAudioPlayer!
     // Her farklı butona basıldığında yeni bir timer oluşturulması için kullanılır
     var timer = Timer()
+    
+    func defineLabels(){
+        navigationItem.title = navigationItem.title?.localized()
+        titleLabel.text = titleLabel.text?.localized()
+        softLabelView.setTitle(softLabelView.currentTitle?.localized(), for: .normal)
+        mediumLabelView.setTitle(mediumLabelView.currentTitle?.localized(), for: .normal)
+        hardLabelView.setTitle(hardLabelView.currentTitle?.localized(), for: .normal)
+        secondTitleLabel.text = "Note: Make sure the water is boiling before starting the timer.".localized()
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        defineLabels()
+    }
     
     @IBAction func hardnessSelected(_ sender: UIButton) {
         sender.shake(duration: 0.7, values: [-12.0, 12.0, -12.0, 12.0, -6.0, 6.0, -3.0, 3.0, 0.0])
@@ -64,7 +80,7 @@ class EggTimerViewController: UIViewController {
                 countDownLabelFall.animationType = .Fall
                 countDownLabelFall.timeFormat = "mm:ss"
                 countDownLabelFall.start()
-                titleLabel.text = "Time Left:"
+                titleLabel.text = "Time Left:".localized()
                 progressPercantage = 1 - (Float(secondsRemaining) / Float(totalTime))
                 progressBar.progress = progressPercantage
                 secondsRemaining -= 1
@@ -79,8 +95,8 @@ class EggTimerViewController: UIViewController {
             else {
                 
                 timer.invalidate()
-                titleLabel.text = "DONE!"
-                secondTitleLabel.text = "Your \(hardnessType) egg is ready. Bon appetit!"
+                titleLabel.text = "DONE!".localized()
+                secondTitleLabel.text = "Your \(hardnessType) egg is ready. Bon appetit!".localized()
                 progressBar.progress = 1.0
                 
                 let url = Bundle.main.url(forResource: "guitar_alarm_sound", withExtension: "wav")
@@ -89,8 +105,8 @@ class EggTimerViewController: UIViewController {
             }
         }
         else{
-            secondTitleLabel.text = "Note: Make sure the water is boiling before starting the timer."
-            titleLabel.text = "How do you like your eggs?"
+            secondTitleLabel.text = "Note: Make sure the water is boiling before starting the timer.".localized()
+            titleLabel.text = "How do you like your eggs?".localized()
             progressBar.progress = 0.0
             countDownLabelFall.pause()
             countDownLabelFall.text = ""

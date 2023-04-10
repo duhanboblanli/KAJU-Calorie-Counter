@@ -15,8 +15,8 @@ class ProfileSettingsCell: UITableViewCell {
     static let identifier = "ProfileSettingsCell"
     var myViewController: UIViewController!
     var dropDown = ThemesOptions.dropDown
-    let genders = ["Male", "Female"]
-    let diateries = ["Vegetarian", "Vegan", "Classic"]
+    let genders = ["Male".localized(), "Female".localized()]
+    let diateries = ["Vegetarian".localized(), "Vegan", "Classic".localized()]
     let cellBackgColor = ThemesOptions.cellBackgColor
     
     let pSettingLabel = {
@@ -72,8 +72,8 @@ class ProfileSettingsCell: UITableViewCell {
     
     func setProfileSetting(model: SettingModel){
         editButton.accessibilityIdentifier = model.textLabel        
-        pSettingLabel.text = "\(model.textLabel)"
-        pValueLabel.text = "\(model.textValue)"
+        pSettingLabel.text = "\(model.textLabel.localized())"
+        pValueLabel.text = "\(model.textValue.localized())"
     }
     
     @objc func edit(){

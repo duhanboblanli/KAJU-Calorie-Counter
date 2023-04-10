@@ -48,7 +48,7 @@ class PasswordEditor: UIViewController {
         let height = CGFloat(44)
         textField.anchor(height: height)
         textField.attributedPlaceholder = NSAttributedString(
-            string: "New Password",
+            string: "New Password".localized(),
             attributes: [NSAttributedString.Key.foregroundColor: UIColor.white]
         )
         textField.borderStyle = .roundedRect
@@ -62,7 +62,7 @@ class PasswordEditor: UIViewController {
         let width = CGFloat(76)
         let height = CGFloat(40)
         button.anchor(width: width, height: height)
-        button.setTitle("Done", for: .normal)
+        button.setTitle("Done".localized(), for: .normal)
         button.titleLabel?.font = .boldSystemFont(ofSize: 18)
         button.backgroundColor = ThemesOptions.buttonBackGColor
         button.layer.cornerRadius = 20
@@ -73,7 +73,7 @@ class PasswordEditor: UIViewController {
         let width = CGFloat(88)
         let height = CGFloat(40)
         button.anchor(width: width, height: height)
-        button.setTitle("Cancel", for: .normal)
+        button.setTitle("Cancel".localized(), for: .normal)
         button.titleLabel?.font = .boldSystemFont(ofSize: 16)
         button.backgroundColor = ThemesOptions.buttonBackGColor
         button.layer.cornerRadius = 20
@@ -176,13 +176,13 @@ class PasswordEditor: UIViewController {
     }
     
     func showSimpleAlert() {
-        let alert = UIAlertController(title: "Are you sure you want to Change ?",
+        let alert = UIAlertController(title: "Are you sure you want to Change ?".localized(),
                                       message: nil,
                                       preferredStyle: UIAlertController.Style.alert)
-        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.default,
+        alert.addAction(UIAlertAction(title: "Cancel".localized(), style: UIAlertAction.Style.default,
                                       handler: { _ in }))
         
-        alert.addAction(UIAlertAction(title: "Change",
+        alert.addAction(UIAlertAction(title: "Change".localized(),
                                       style: UIAlertAction.Style.default,
                                       handler: {(_: UIAlertAction!) in
             if let email = Auth.auth().currentUser?.email,

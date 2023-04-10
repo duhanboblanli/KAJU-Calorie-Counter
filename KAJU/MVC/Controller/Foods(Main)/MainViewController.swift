@@ -90,6 +90,7 @@ class MainViewController: UITableViewController {
     //MARK: - Outlet Variables
     @IBOutlet weak var caloriesBurnedLabel: UILabel!
     
+    @IBOutlet weak var caloriesBurnedAddLabel: UILabel!
     @IBOutlet weak var dinnerLabel: UILabel!
     
     @IBOutlet weak var snacksLabel: UILabel!
@@ -128,7 +129,7 @@ class MainViewController: UITableViewController {
     //MARK: - View Lifecycle Methods
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        animate()
+        //animate()
         setupActivityIndicator()
         defineLabels()
         showActivityIndicator(show: true)
@@ -302,7 +303,7 @@ class MainViewController: UITableViewController {
     }
     func defineLabels(){
         navigationItem.title = navigationItem.title?.localized()
-        caloriesBurnedLabel.text = caloriesBurnedLabel.text?.localized()
+        caloriesBurnedAddLabel.text = caloriesBurnedAddLabel.text?.localized()
         remainingTitle.text = remainingTitle.text?.localized()
         eatenLabel.text = eatenLabel.text?.localized()
         burnedLabel.text = burnedLabel.text?.localized()
@@ -331,11 +332,11 @@ class MainViewController: UITableViewController {
         calorieEaten.text = currentCal.description
         calorieBurned.text = currentBurnedCal.description
         let currentCarbsGStr = String(format: "%.1f", currentCarbsG)
-        carbsLabel.text = currentCarbsGStr + " / " + totalCarbsG.description + " g"
+        carbs.text = currentCarbsGStr + " / " + totalCarbsG.description + " g"
         let currentProGStr = String(format: "%.1f", currentProteinG)
-        proteinLabel.text = currentProGStr + " / " + totalProteinG.description + " g"
+        protein.text = currentProGStr + " / " + totalProteinG.description + " g"
         let currentPFatGStr = String(format: "%.1f", currentFatG)
-        fatLabel.text = currentPFatGStr + " / " + totalFatG.description + " g"
+        fat.text = currentPFatGStr + " / " + totalFatG.description + " g"
         breakfastCalLabel.text = currentBreakfastCal.description + " / " + totalBreakfastCal.description + " kcal"
         lunchCalLabel.text = currentLunchCal.description + " / " + totalLunchCal.description + " kcal"
         dinnerCalLabel.text = currentDinnerCal.description + " / " + totalDinnerCal.description + " kcal"

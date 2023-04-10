@@ -16,9 +16,9 @@ class MyGoalSettingCell: UITableViewCell {
     static let identifier = "MyGoalSettingCell"
     var myViewController: UIViewController!
     var dropDown = ThemesOptions.dropDown
-    let activityLevel = ["Low", "Moderate", "High", "Very High"]
-    var calorie = ["Adviced", "Manuel"]
-    let goal = ["Lose Weight", "Build Muscle", "Maintain Weight"]
+    let activityLevel = ["Low".localized(), "Moderate".localized(), "High".localized(), "Very High".localized()]
+    var calorie = ["Adviced".localized(), "Manuel"]
+    let goal = ["Lose Weight".localized(), "Build Muscle".localized(), "Maintain Weight".localized()]
     let cellBackgColor = ThemesOptions.cellBackgColor
     
     let pSettingLabel = {
@@ -78,44 +78,44 @@ class MyGoalSettingCell: UITableViewCell {
     
     @objc func edit(){
         switch editButton.accessibilityIdentifier{
-        case "Goal":
+        case "Goal".localized():
             dropDown = setDropDown(dataSource: goal, anchorView: pSettingLabel, bottomOffset: CGPoint(x: 0, y:(pSettingLabel.plainView.bounds.height ) + 36))
             dropDown.show()
             dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
                 pValueLabel.text = item
                 var changeCaloryAmount:Int = 0
                 switch item{
-                case "Lose Weight":
+                case "Lose Weight".localized():
                     changeCaloryAmount = -400
-                case "Build Muscle":
+                case "Build Muscle".localized():
                     changeCaloryAmount = 400
-                case "Maintain Weight":
+                case "Maintain Weight".localized():
                     changeCaloryAmount = 0
                 default: print("error happened while choosing goal type")
                 }
                 updateDBValue(key: "changeCalorieAmount", value: changeCaloryAmount)
                 updateDBValue(key: "goalType", value: item)
             }
-        case "Starting Weight":
+        case "Starting Weight".localized():
             myViewController.present(Editor(textLabel: pSettingLabel, textValue: pValueLabel), animated: true)
             
-        case "Goal Weight":
+        case "Goal Weight".localized():
             myViewController.present(Editor(textLabel: pSettingLabel, textValue: pValueLabel), animated: true)
             
-        case "Activity Level":
+        case "Activity Level".localized():
             dropDown = setDropDown(dataSource: activityLevel, anchorView: pSettingLabel, bottomOffset: CGPoint(x: 0, y:(pSettingLabel.plainView.bounds.height ) + 36))
             dropDown.show()
             dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
                 pValueLabel.text = item
                 var bmh:Float = 0.0
                 switch item{
-                case "Low":
+                case "Low".localized():
                     bmh = 1.2
-                case "Moderate":
+                case "Moderate".localized():
                     bmh = 1.3
-                case "High":
+                case "High".localized():
                     bmh = 1.4
-                case "Very High":
+                case "Very High".localized():
                     bmh = 1.5
                 default: print("error happened")
                 }
@@ -123,16 +123,16 @@ class MyGoalSettingCell: UITableViewCell {
                 updateDBValue(key: "activeness", value: item)
             }
             
-        case "Weekly Goal":
+        case "Weekly Goal".localized():
             myViewController.present(Editor(textLabel: pSettingLabel, textValue: pValueLabel), animated: true)
 
-        case "Calorie Goal":
+        case "Calorie Goal".localized():
             dropDown = setDropDown(dataSource: calorie, anchorView: pSettingLabel, bottomOffset: CGPoint(x: 0, y:(pSettingLabel.plainView.bounds.height ) + 36))
             dropDown.show()
             dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
                 self.pValueLabel.text = "Adviced"
                 switch item{
-                case "Adviced":
+                case "Adviced".localized():
                     updateDBValue(key: "adviced", value: true)
                 case "Manuel":
                     

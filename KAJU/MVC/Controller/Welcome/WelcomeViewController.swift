@@ -26,12 +26,19 @@ class WelcomeViewController: UIViewController {
     //MARK: - View Lifecycle Functions
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+        defineLabels()
         let backButton = UIBarButtonItem(title: "", style: .plain, target: navigationController, action: nil)
         navigationItem.leftBarButtonItem = backButton
         if !UIDevice.hasNotch{
             print("model:", UIDevice.hasNotch)
             logInBottomConstraint.constant = -20
         }
+    }
+    
+    func defineLabels(){
+        firstInfoLabel.text = firstInfoLabel.text?.localized()
+        getStartedButton.setTitle(getStartedButton.currentTitle?.localized(), for: .normal)
+        logInButton.setTitle(logInButton.currentTitle?.localized(), for: .normal)
     }
     
     override func viewDidLoad() {
@@ -43,7 +50,7 @@ class WelcomeViewController: UIViewController {
         //Title Label Animation With For Loop
         firstInfoLabel.text = ""
         var charIndex = 0.0
-        let titleText = "💪 Lose weight, build muscle or simply get healthy."
+        let titleText = "💪 Lose weight, build muscle or simply get healthy.".localized()
         for letter in titleText {
             //charIndex ile çarpmaz isek hepsi 0.1'inci saniyede oluşturulur
             //Yani for döngüsü içinde sıra sıra hepsi aynı anda oluşturulmuş olur
@@ -77,7 +84,7 @@ class WelcomeViewController: UIViewController {
                 //Title Label Animation With For Loop
                 infoLabel.text = ""
                 var charIndex = 0.0
-                let titleText = "🧑‍🍳 Discover healthy recipes and use food tracker."
+                let titleText = "🧑‍🍳 Discover healthy recipes and use food tracker.".localized()
                 for letter in titleText {
                     Timer.scheduledTimer(withTimeInterval: 0.06*charIndex, repeats: false) { (timer) in
                         self.infoLabel.text?.append(letter)
@@ -89,7 +96,7 @@ class WelcomeViewController: UIViewController {
                 //Title Label Animation With For Loop
                 thirdInfoLabel.text = ""
                 var charIndex = 0.0
-                let titleText = "🙏 We'll help you every step of the way."
+                let titleText = "🙏 We'll help you every step of the way.".localized()
                 for letter in titleText {
                     Timer.scheduledTimer(withTimeInterval: 0.06*charIndex, repeats: false) { (timer) in
                         self.thirdInfoLabel.text?.append(letter)

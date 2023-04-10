@@ -10,7 +10,9 @@ import FirebaseAuth
 
 class GoalViewController: UIViewController{
     
+    @IBOutlet weak var topTitle: UILabel!
     // Outlet Variables
+    @IBOutlet weak var topExplanation: UILabel!
     @IBOutlet weak var downMiddleConstraint: NSLayoutConstraint!
     @IBOutlet weak var middleConstraint: NSLayoutConstraint!
     @IBOutlet weak var topConstraint: NSLayoutConstraint!
@@ -22,7 +24,7 @@ class GoalViewController: UIViewController{
     
     // General Variables
     var changeCalorieAmount = 0
-    var calorieSublabel = "According to your choices, your goal is to maintain your weight."
+    var calorieSublabel = "According to your choices, your goal is to maintain your weight.".localized()
     var check = false
     var user = Auth.auth().currentUser
     var ColorSelected = ThemeColors.ColorLightGreen.associatedColor.withAlphaComponent(0.3)
@@ -31,6 +33,7 @@ class GoalViewController: UIViewController{
     //MARK: - View Lifecycle Functions
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+        defineLabels()
         if !UIDevice.hasNotch{
             nextButtonConstraint.constant = -25
             topConstraint.constant = 15
@@ -38,11 +41,17 @@ class GoalViewController: UIViewController{
             downMiddleConstraint.constant = 60
         }
     }
+    
+    func defineLabels(){
+        topTitle.text = topTitle.text?.localized()
+        topExplanation.text = topExplanation.text?.localized()
+        goalNextButton.setTitle(goalNextButton.currentTitle?.localized(), for: .normal)
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         if check{
-            let alert = UIAlertController(title: "Your registration has been suspended!", message: "", preferredStyle: UIAlertController.Style.alert)
-            alert.addAction(UIAlertAction(title: "Okay", style: UIAlertAction.Style.default, handler: nil))
+            let alert = UIAlertController(title: "Your registration has been suspended!".localized(), message: "", preferredStyle: UIAlertController.Style.alert)
+            alert.addAction(UIAlertAction(title: "Okay".localized(), style: UIAlertAction.Style.default, handler: nil))
             self.present(alert, animated: true, completion: nil)
         }
         self.navigationItem.setHidesBackButton(false, animated: false)
@@ -53,16 +62,16 @@ class GoalViewController: UIViewController{
         setupButtonStyle(button: loseWeightButton, cornerRadius: 0.04)
         setupButtonStyle(button: protectWeightButton, cornerRadius: 0.04)
         setupButtonStyle(button: gainMuscleButton, cornerRadius: 0.04)
-        loseWeightButton.setTitle("🍏 Lose Weight", for: UIControl.State())
-        protectWeightButton.setTitle("🧘 Maintain Weight", for: UIControl.State())
-        gainMuscleButton.setTitle("💪 Gain Muscle", for: UIControl.State())
+        loseWeightButton.setTitle("🍏 Lose Weight".localized(), for: UIControl.State())
+        protectWeightButton.setTitle("🧘 Maintain Weight".localized(), for: UIControl.State())
+        gainMuscleButton.setTitle("💪 Gain Muscle".localized(), for: UIControl.State())
         navigationItem.hidesBackButton = true
     }
     
     //MARK: - IBActions
     @IBAction func loseWeightPressed(_ sender: UIButton) {
         changeCalorieAmount = -400
-        calorieSublabel = "According to your choices, your goal is to lose your weight."
+        calorieSublabel = "According to your choices, your goal is to lose your weight.".localized()
         protectWeightButton.backgroundColor = ThemeColors.ColorDarkGreen.associatedColor
         gainMuscleButton.backgroundColor = ThemeColors.ColorDarkGreen.associatedColor
         loseWeightButton.backgroundColor = ColorSelected
@@ -73,7 +82,7 @@ class GoalViewController: UIViewController{
     @IBAction func protectWeightPressed(_ sender: UIButton) {
         
         changeCalorieAmount = 0
-        calorieSublabel = "According to your choices, your goal is to maintain your weight."
+        calorieSublabel = "According to your choices, your goal is to maintain your weight.".localized()
         protectWeightButton.backgroundColor = ColorSelected
         gainMuscleButton.backgroundColor = ThemeColors.ColorDarkGreen.associatedColor
         loseWeightButton.backgroundColor = ThemeColors.ColorDarkGreen.associatedColor
@@ -83,7 +92,7 @@ class GoalViewController: UIViewController{
     }
     @IBAction func gainMusclePressed(_ sender: UIButton) {
         changeCalorieAmount = 400
-        calorieSublabel = "According to your choices, your goal is to gain muscle."
+        calorieSublabel = "According to your choices, your goal is to gain muscle.".localized()
         protectWeightButton.backgroundColor = ThemeColors.ColorDarkGreen.associatedColor
         gainMuscleButton.backgroundColor = ColorSelected
         loseWeightButton.backgroundColor = ThemeColors.ColorDarkGreen.associatedColor
