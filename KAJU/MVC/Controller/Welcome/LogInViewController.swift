@@ -21,10 +21,16 @@ class LogInViewController: UIViewController {
     //MARK: - View Lifecycle Functions
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+        defineLabels()
         if !UIDevice.hasNotch{
             logInButtonBottomConstraint.constant = -25
             emailTopConstraint.constant = 200
         }
+    }
+    
+    func defineLabels(){
+        errorTextField.text = errorTextField.text?.localized()
+        logInButton.setTitle(logInButton.currentTitle?.localized(), for: .normal)
     }
     
     override func viewDidLoad() {
@@ -35,11 +41,11 @@ class LogInViewController: UIViewController {
         emailTextField.backgroundColor = UIColor.white
         passwordTextField.backgroundColor = UIColor.white
         emailTextField.attributedPlaceholder = NSAttributedString(
-            string: "email@example.com",
+            string: "email@example.com".localized(),
             attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray]
         )
         passwordTextField.attributedPlaceholder = NSAttributedString(
-            string: "password",
+            string: "password".localized(),
             attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray]
         )
         emailTextField.tag = 1

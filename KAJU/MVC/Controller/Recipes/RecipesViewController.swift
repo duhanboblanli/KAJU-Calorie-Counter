@@ -49,6 +49,7 @@ class RecipesViewController: UIViewController, UISearchBarDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.tabBarController?.tabBar.isHidden = false
+        defineLabels()
         setupFetchRequest()
     }
     
@@ -63,6 +64,13 @@ class RecipesViewController: UIViewController, UISearchBarDelegate {
         }
     }
     
+    func defineLabels(){
+        navigationItem.title = navigationItem.title?.localized()
+        discoverLabel.text = discoverLabel.text?.localized()
+        favoritesLabel.text = favoritesLabel.text?.localized()
+        searchBar.placeholder = searchBar.placeholder?.localized()
+    }
+    
     //MARK: - View Lifecycle Functions
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -75,7 +83,7 @@ class RecipesViewController: UIViewController, UISearchBarDelegate {
         searchBar.delegate = self
         searchBar.layer.cornerRadius = searchBar.frame.size.height / 5
         discoverTableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
-        recipesNavigationıtem.title = "Recipes"
+        recipesNavigationıtem.title = "Recipes".localized()
     }
     
     override func loadView() {
@@ -118,7 +126,7 @@ class RecipesViewController: UIViewController, UISearchBarDelegate {
         SpoonacularClient.getRandomRecipe(pagination:true,completion: handleRecipes)
         //SpoonacularClient.newSearch(query: "chicken", completion: handleSearchRecipes)
         DispatchQueue.main.async {
-            self.searchBar.placeholder = "Discover from Random Recipes!"
+            self.searchBar.placeholder = "Discover from Random Recipes!".localized()
         }
         discoverTableView.reloadData()
     }
@@ -244,10 +252,10 @@ extension RecipesViewController: UITableViewDelegate {
                             if UIApplication.shared.canOpenURL(url) {
                                 UIApplication.shared.open(url, options: [:], completionHandler: nil)
                             } else {
-                                self.presentAlert(title: "Recipe Unavailable", message: "")
+                                self.presentAlert(title: "Recipe Unavailable".localized(), message: "")
                             }
                         } else {
-                            self.presentAlert(title: "Recipe Unavailable", message: "")
+                            self.presentAlert(title: "Recipe Unavailable".localized(), message: "")
                         }
                     } else {
                         let detailVC = DetailViewController()
@@ -262,10 +270,10 @@ extension RecipesViewController: UITableViewDelegate {
                             if UIApplication.shared.canOpenURL(url) {
                                 UIApplication.shared.open(url, options: [:], completionHandler: nil)
                             } else {
-                                self.presentAlert(title: "Recipe Unavailable", message: "")
+                                self.presentAlert(title: "Recipe Unavailable".localized(), message: "")
                             }
                         } else {
-                            self.presentAlert(title: "Recipe Unavailable", message: "")
+                            self.presentAlert(title: "Recipe Unavailable".localized(), message: "")
                         }
                     } else {
                         let detailVC = DetailViewController()
@@ -280,10 +288,10 @@ extension RecipesViewController: UITableViewDelegate {
                         if UIApplication.shared.canOpenURL(url) {
                             UIApplication.shared.open(url, options: [:], completionHandler: nil)
                         } else {
-                            self.presentAlert(title: "Recipe Unavailable", message: "")
+                            self.presentAlert(title: "Recipe Unavailable".localized(), message: "")
                         }
                     } else {
-                        self.presentAlert(title: "Recipe Unavailable", message: "")
+                        self.presentAlert(title: "Recipe Unavailable".localized(), message: "")
                     }
                 } else {
                     let detailVC = DetailViewController()
@@ -308,7 +316,7 @@ extension RecipesViewController: UITableViewDelegate {
         
         var action = UISwipeActionsConfiguration()
         if tableView == favTableView {
-            let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { (action, view, completionHandler) in
+            let deleteAction = UIContextualAction(style: .destructive, title: "Delete".localized()) { (action, view, completionHandler) in
                 let recipeToDelete = self.foodRecipes[indexPath.row]
                 self.appDelegate.persistentContainer.viewContext.delete(recipeToDelete)
                 try? self.appDelegate.persistentContainer.viewContext.save()
@@ -353,15 +361,15 @@ extension RecipesViewController: UITableViewDataSource {
             case favTableView:
                 numberOfRow = foodRecipes.count
                 if numberOfRow != 0 {
-                    favoritesLabel.text = "Favorites(\(numberOfRow))"
+                    favoritesLabel.text = "Favorites".localized()  + "(\(numberOfRow))"
                     favTableView.restore()
                 }
                 else {
                     favoritesLabel.text = "Favorites"
-                    favTableView.setEmptyView(title: "You don't have any saved favorite recipes.", message: "Your saved recipes will be in here.")
+                    favTableView.setEmptyView(title: "You don't have any saved favorite recipes yet.".localized(), message: "Your saved recipes will be in here.".localized())
                 }
             default:
-                print("Some things Wrong RecipesTableViewDataSource!!")
+                print("Some things Wrong RecipesTableViewDataSource!!".localized())
             }
         }
         else {
@@ -420,11 +428,11 @@ extension RecipesViewController: UITextFieldDelegate {
             if searchQuery != "" {
                 setupActivityIndicator()
                 showActivityIndicator(show: true)
-                self.searchBar.placeholder = "Search Results for '\(searchQuery)' "
+                self.searchBar.placeholder = "Search Results for".localized() + " '\(searchQuery)' "
                 SpoonacularClient.newSearch(query: searchQuery, completion: handleSearchRecipes)
             } else {
                 DispatchQueue.main.async {
-                    self.searchBar.placeholder = "Type Something!"
+                    self.searchBar.placeholder = "Type Something!".localized()
                 }
             }
             searchBar.text = ""
@@ -437,11 +445,11 @@ extension RecipesViewController: UITextFieldDelegate {
             if searchQuery != "" {
                 setupActivityIndicator()
                 showActivityIndicator(show: true)
-                self.searchBar.placeholder = "Search Results for '\(searchQuery)' "
+                self.searchBar.placeholder = "Search Results for".localized() + " '\(searchQuery)' "
                 SpoonacularClient.newSearch(query: searchQuery, completion: handleSearchRecipes)
             } else {
                 DispatchQueue.main.async {
-                    self.searchBar.placeholder = "Type Something!"
+                    self.searchBar.placeholder = "Type Something!".localized()
                 }
             }
             searchBar.text = ""
@@ -469,7 +477,7 @@ extension RecipesViewController: UITextFieldDelegate {
         self.navigationController?.isNavigationBarHidden = false
     }
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        textField.placeholder = "Search For A Recipe"
+        textField.placeholder = "Search For A Recipe".localized()
     }
 
 } // ends of extension:UITextFieldDelegate

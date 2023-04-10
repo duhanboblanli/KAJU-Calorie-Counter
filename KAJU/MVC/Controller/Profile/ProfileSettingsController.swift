@@ -18,7 +18,7 @@ class ProfileSettingsController: UIViewController, UITableViewDelegate, UITableV
     
     let tableTitle = {
         let label = UILabel()
-        label.text = "Profile Settings"
+        label.text = "Profile Settings".localized()
         label.font = UIFont(name: "Copperplate Bold", size: 33)
         label.textColor = .white
         return label

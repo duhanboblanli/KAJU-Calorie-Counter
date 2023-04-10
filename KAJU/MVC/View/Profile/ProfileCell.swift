@@ -83,21 +83,21 @@ class ProfileCell: UITableViewCell {
     let nameLabel = {
         let label = UILabel()
         label.textColor = .black
-        label.text = "Name"
+        label.text = "Name".localized()
         label.makeLargeText(fontSize: 18)
         return label
     }()
     let genderLabel = {
         let label = UILabel()
         label.textColor = .black
-        label.text = "Gender"
+        label.text = "Gender".localized()
         label.makeLargeText(fontSize: 18)
         return label
     }()
     let diateryLabel = {
         let label = UILabel()
         label.textColor = .black
-        label.text = "Diatery"
+        label.text = "Diatery".localized()
         label.makeLargeText(fontSize: 18)
         return label
     }()
@@ -223,12 +223,12 @@ class ProfileCell: UITableViewCell {
         ProfileCell.myProfileSettings = ProfileSettingsController(nameValue: model.name, genderValue: model.sex, diaterValue: model.diateryType, heightValue: model.height)
         
         switch genderLValue.text{
-        case "Male":
+        case "Male".localized():
             nameIcon.image = UIImage(named: "MaleImage")
             genderIcon.image = UIImage(named: "MaleGender")
             nameContainer.backgroundColor = .systemBlue.withAlphaComponent(0.8)
             genderContainer.backgroundColor = .systemRed.withAlphaComponent(0.8)
-        case "Female":
+        case "Female".localized():
             nameIcon.image = UIImage(named: "FemaleImage")
             genderIcon.image = UIImage(named: "FemaleGender")
             nameContainer.backgroundColor = .systemPink.withAlphaComponent(0.8)
@@ -238,9 +238,9 @@ class ProfileCell: UITableViewCell {
         }
         
         switch diateryValue.text{
-        case "Classic":
+        case "Classic".localized():
             diateryIcon.image = UIImage(named: "classicDiate")
-        case "Vegetarian":
+        case "Vegetarian".localized():
             diateryIcon.image = UIImage(named: "vegetarianDiate")
         case "Vegan":
             diateryIcon.image = UIImage(named: "veganDiate")

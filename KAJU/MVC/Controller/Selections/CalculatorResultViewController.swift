@@ -11,6 +11,7 @@ import CLTypingLabel
 class CalculatorResultViewController: UIViewController {
     
     // Outlet Variables
+    @IBOutlet weak var dailyLabel: UILabel!
     @IBOutlet weak var nextButtonConstraint: NSLayoutConstraint!
     @IBOutlet weak var bmiLabel: UILabel!
     @IBOutlet weak var adviceLabel: UILabel!
@@ -31,10 +32,19 @@ class CalculatorResultViewController: UIViewController {
     //MARK: - View Lifecycle Functions
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+        defineLabels()
         if !UIDevice.hasNotch{
             print("model:", UIDevice.hasNotch)
             nextButtonConstraint.constant = -25
         }
+    }
+    
+    func defineLabels(){
+        resultLabel.text = resultLabel.text?.localized()
+        adviceLabel.text = adviceLabel.text?.localized()
+        calorieSublabel.text = calorieSublabel.text?.localized()
+        dailyLabel.text = dailyLabel.text?.localized()
+        resultNextButton.setTitle(resultNextButton.currentTitle?.localized(), for: .normal)
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,13 +62,13 @@ class CalculatorResultViewController: UIViewController {
             }
         }
         if let advice {
-            adviceLabel.text = advice
+            adviceLabel.text = advice.localized()
         }
         if let color {
             bmiLabel.textColor = color
         }
         if let CalorieSublabelField {
-            calorieSublabel.text = CalorieSublabelField
+            calorieSublabel.text = CalorieSublabelField.localized()
         }
         if let calorie {
             calorieLabel.text = "\(calorie) kcal"

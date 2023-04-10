@@ -15,6 +15,8 @@ class ActivenessViewController: UIViewController {
     //Yüksek düzeyde aktifseniz ve düzenli spor yapıyorsanız, BMH’ınızı 1.5 ile çarpın.
     
     // Outlet Variables
+    @IBOutlet weak var topExplanation: UILabel!
+    @IBOutlet weak var topTitle: UILabel!
     @IBOutlet weak var downMiddleConstraint: NSLayoutConstraint!
     @IBOutlet weak var middleConstraint: NSLayoutConstraint!
     @IBOutlet weak var topConstraint: NSLayoutConstraint!
@@ -34,6 +36,7 @@ class ActivenessViewController: UIViewController {
     //MARK: - View Lifecycle Functions
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+        defineLabels()
         if !UIDevice.hasNotch{
             nextButtonConstraint.constant = -25
             topConstraint.constant = 15
@@ -41,7 +44,11 @@ class ActivenessViewController: UIViewController {
             downMiddleConstraint.constant = 35
         }
     }
-    
+    func defineLabels(){
+        topTitle.text = topTitle.text?.localized()
+        topExplanation.text = topExplanation.text?.localized()
+        activenessNextButton.setTitle(activenessNextButton.currentTitle?.localized(), for: .normal)
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         setupButtonStyle(button: activenessNextButton, cornerRadius: 0.096)
@@ -52,10 +59,34 @@ class ActivenessViewController: UIViewController {
         setupButtonStyle(button: moderatelyActiveButton, cornerRadius: 0.04)
         setupButtonStyle(button: activeButton, cornerRadius: 0.04)
         setupButtonStyle(button: veryActiveButton, cornerRadius: 0.04)
-        lightlyActiveButton.setTitle("🧑‍💻 Lightly active", for: UIControl.State())
-        moderatelyActiveButton.setTitle("🧑‍🏫 Moderately active", for: UIControl.State())
-        activeButton.setTitle("🧑‍💼 Active", for: UIControl.State())
-        veryActiveButton.setTitle("👷 Very active", for: UIControl.State())
+        lightlyActiveButton.setTitle("🧑‍💻 Lightly active".localized(), for: UIControl.State())
+        if #available(iOS 15.0, *) {
+            lightlyActiveButton.configuration?.subtitle =
+            lightlyActiveButton.configuration?.subtitle?.localized()
+        } else {
+            // Fallback on earlier versions
+        }
+        moderatelyActiveButton.setTitle("🧑‍🏫 Moderately active".localized(), for: UIControl.State())
+        if #available(iOS 15.0, *) {
+            moderatelyActiveButton.configuration?.subtitle =
+            moderatelyActiveButton.configuration?.subtitle?.localized()
+        } else {
+            // Fallback on earlier versions
+        }
+        activeButton.setTitle("🧑‍💼 Active".localized(), for: UIControl.State())
+        if #available(iOS 15.0, *) {
+            activeButton.configuration?.subtitle =
+            activeButton.configuration?.subtitle?.localized()
+        } else {
+            // Fallback on earlier versions
+        }
+        veryActiveButton.setTitle("👷 Very active".localized(), for: UIControl.State())
+        if #available(iOS 15.0, *) {
+            veryActiveButton.configuration?.subtitle =
+            veryActiveButton.configuration?.subtitle?.localized()
+        } else {
+            // Fallback on earlier versions
+        }
     }
     
     //MARK: - IBActions

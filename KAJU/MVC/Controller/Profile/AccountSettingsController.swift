@@ -26,14 +26,14 @@ class AccountSettingsController: UIViewController, UITableViewDelegate, UITableV
     
     let tableTitle = {
         let label = UILabel()
-        label.text = "Account Settings"
+        label.text = "Account Settings".localized()
         label.textColor = .white
         label.font = UIFont(name: "Copperplate Bold", size: 33)
         return label
     }()
     let deleteButton = {
         let button = UIButton()
-        button.setTitle("Delete", for: .normal)
+        button.setTitle("Delete".localized(), for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 22)
         button.backgroundColor = ThemesOptions.buttonBackGColor
         button.layer.cornerRadius = 20
@@ -41,7 +41,7 @@ class AccountSettingsController: UIViewController, UITableViewDelegate, UITableV
     }()
     let logOutButton = {
         let button = UIButton()
-        button.setTitle("Log Out", for: .normal)
+        button.setTitle("Log Out".localized(), for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 22)
         button.backgroundColor = ThemesOptions.buttonBackGColor
         button.layer.cornerRadius = 20
@@ -79,15 +79,15 @@ class AccountSettingsController: UIViewController, UITableViewDelegate, UITableV
     }
     
     @objc func deleteAccount(){
-        showSimpleAlert(title: "Are you sure you want to Delete ? ", firstResponse: "Cancel", secondResponse: "Delete")
+        showSimpleAlert(title: "Are you sure you want to Delete ?".localized(), firstResponse: "Cancel".localized(), secondResponse: "Delete".localized())
     }
     
     @objc func logOutAccount(){
-        showSimpleAlert(title: "Are you sure you want to Log Out ?", firstResponse: "Cancel", secondResponse: "Log Out")
+        showSimpleAlert(title: "Are you sure you want to Log Out ?".localized(), firstResponse: "Cancel".localized(), secondResponse: "Log Out".localized())
     }
     
     func showSimpleAlert(title: String, firstResponse: String, secondResponse: String){
-        let alert = UIAlertController(title: title, message: "Your offline data that consisting of favorite foods, recent foods and favorite recipes will be gone!",
+        let alert = UIAlertController(title: title, message: "Your offline data that consisting of favorite foods, recent foods and favorite recipes will be gone!".localized(),
                                       preferredStyle: UIAlertController.Style.alert)
         alert.addAction(UIAlertAction(title: firstResponse, style: UIAlertAction.Style.default, handler: { _ in
             //Cancel Action
@@ -96,9 +96,9 @@ class AccountSettingsController: UIViewController, UITableViewDelegate, UITableV
                                           style: UIAlertAction.Style.destructive,
                                           handler: {(_: UIAlertAction!) in
                 switch secondResponse {
-                case "Log Out":
+                case "Log Out".localized():
                     self.logOut()
-                case "Delete":
+                case "Delete".localized():
                     self.delete()
                 default:
                     return
@@ -109,13 +109,13 @@ class AccountSettingsController: UIViewController, UITableViewDelegate, UITableV
     func delete() {
             self.user!.delete { error in
                 if let error = error {
-                    let alert = UIAlertController(title: "Deletion unsuccessfull!", message: "Sorry for inconvenience situation. Deletion of an account is sensitive process. You should be re-signed into your account.", preferredStyle: UIAlertController.Style.alert)
-                    alert.addAction(UIAlertAction(title: "Okay", style: UIAlertAction.Style.default, handler: nil))
+                    let alert = UIAlertController(title: "Deletion unsuccessfull!".localized(), message: "Sorry for inconvenience situation. Deletion of an account is sensitive process. You should be re-signed into your account to perform this process.".localized(), preferredStyle: UIAlertController.Style.alert)
+                    alert.addAction(UIAlertAction(title: "Okay".localized(), style: UIAlertAction.Style.default, handler: nil))
                     self.present(alert, animated: true, completion: nil)
                     print(error)
                 } else {
                     // Account deleted.
-                    print("Account deleted.")
+                    print("Account deleted.".localized())
                     self.deleteAllOnlineData()
                     self.deleteAllOfflineData()
                     let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
@@ -147,10 +147,10 @@ class AccountSettingsController: UIViewController, UITableViewDelegate, UITableV
             
                 docRef.delete(){ err in
                     if let err = err {
-                        print("Errorqe removing document: \(err)")
+                        print("Error while removing document: \(err)")
                     }
                     else {
-                        print("Errorqenot successfully removed!")
+                        print("Error successfully removed!")
                     }
                 }
         }

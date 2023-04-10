@@ -60,8 +60,18 @@ class FoodsViewController: UIViewController, UpdateDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.tabBarController?.tabBar.isHidden = false
+        defineLabels()
         setupFetchRequest()
         setupFetchRequest2()
+        
+    }
+    
+    func defineLabels(){
+        frequentsLabel.text = frequentsLabel.text?.localized()
+        recentsLabel.text = recentsLabel.text?.localized()
+        favoritesLabel.text = favoritesLabel.text?.localized()
+        searchBar.placeholder = searchBar.placeholder?.localized()
+        
     }
     
     override func viewDidLoad() {
@@ -76,7 +86,7 @@ class FoodsViewController: UIViewController, UpdateDelegate {
         foodViewModel.updateDelegate = self
         foodViewModel.errorDelegate = self
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "autoCompleteCell")
-        searchBar.searchTextField.attributedPlaceholder = NSAttributedString(string: "Search For A Food", attributes: [NSAttributedString.Key.foregroundColor: UIColor( red: 170/255, green: 170/255, blue: 170/255, alpha: 1)])
+        searchBar.searchTextField.attributedPlaceholder = NSAttributedString(string: "Search For A Food".localized(), attributes: [NSAttributedString.Key.foregroundColor: UIColor( red: 170/255, green: 170/255, blue: 170/255, alpha: 1)])
         LoadFoodsData(with: query)
         tableView.reloadData()
     }
@@ -333,9 +343,9 @@ extension FoodsViewController: UITableViewDataSource, UITableViewDelegate, CellD
         foodEntity.index = Int64(lastIndex-1)
         do {
             try appDelegate.persistentContainer2.viewContext.save()
-            presentAlert(title: "Food added to diary 🤩", message: "")
+            presentAlert(title: "Food added to diary 🤩".localized(), message: "")
         } catch {
-            presentAlert(title: "Unable to add food", message: "")
+            presentAlert(title: "Unable to add food".localized(), message: "")
         }
     }
     func directAddTap(_ cell: FoodTableViewCell) {
@@ -406,7 +416,7 @@ extension FoodsViewController: UITableViewDataSource, UITableViewDelegate, CellD
                 tableView.restore()
             }
             else {
-                tableView.setEmptyView(title: "You don't have any saved favorite foods.", message: "Your saved favorite foods will be in here.")
+                tableView.setEmptyView(title: "You don't have any saved favorite foods yet.".localized(), message: "Your saved favorite foods will be in here.".localized())
             }
             print("favEnabled: ", numberOfRow.description)
         }
@@ -416,7 +426,7 @@ extension FoodsViewController: UITableViewDataSource, UITableViewDelegate, CellD
                 tableView.restore()
             }
             else {
-                tableView.setEmptyView(title: "You don't have any foods you added to diary.", message: "Your recent foods that added to diary will be in here.")
+                tableView.setEmptyView(title: "You don't have any foods you added to diary yet.".localized(), message: "Your recent foods that added to diary will be in here.".localized())
             }
         }
         else if !searchEnable && foodSearchSuggestions.count == 0{
@@ -543,27 +553,27 @@ extension FoodsViewController: UISearchBarDelegate, ErrorDelegate {
     // Arama için query oluşturan fonksiyon
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         if favEnable{
-            favoritesLabel.text = "Search"
+            favoritesLabel.text = "Search".localized()
         }
         else if recentsEnable{
-            recentsLabel.text = "Search"
+            recentsLabel.text = "Search".localized()
         }
         else{
-            frequentsLabel.text = "Search"
+            frequentsLabel.text = "Search".localized()
         }
         searchEnable = true
         searchBar.setShowsCancelButton(true, animated: true)
         if let searchQuery = searchBar.text {
             if searchQuery != "" {
                 foodSearchSuggestions = []
-                self.searchBar.placeholder = "Search Results for '\(searchQuery)' "
+                self.searchBar.placeholder = "Search Results for".localized() + " '\(searchQuery)' "
                 foodViewModel.clearData()
                 var configuretedQuery = searchQuery.replacingOccurrences(of: ",", with: "%2C", options: .literal, range: nil)
                 configuretedQuery = searchQuery.replacingOccurrences(of: " ", with: "%2C", options: .literal, range: nil)
                 LoadFoodsData(with: configuretedQuery)
             } else {
                 DispatchQueue.main.async {
-                    self.searchBar.placeholder = "Search For A Food!"
+                    self.searchBar.placeholder = "Search For A Food".localized()
                 }
             }
             searchBar.text = ""
@@ -602,19 +612,19 @@ extension FoodsViewController: UISearchBarDelegate, ErrorDelegate {
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         searchBar.setShowsCancelButton(true, animated: true)
-        searchBar.placeholder = "Search For A Food"
+        searchBar.placeholder = "Search For A Food".localized()
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchBar.text = ""
         if favEnable{
-            favoritesLabel.text = "Favorites"
+            favoritesLabel.text = "Favorites".localized()
         }
         else if recentsEnable{
-            recentsLabel.text = "Recents"
+            recentsLabel.text = "Recents".localized()
         }
         else{
-            frequentsLabel.text = "Frequents"
+            frequentsLabel.text = "Frequents".localized()
         }
         searchBar.resignFirstResponder()
         searchEnable = false

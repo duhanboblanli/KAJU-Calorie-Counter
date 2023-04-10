@@ -18,7 +18,7 @@ class MyGoalSettingsController: UIViewController, UITableViewDelegate, UITableVi
     var goalCalorieValue: String!
     let viewTitle = {
         let label = UILabel()
-        label.text = "My Goal Settings"
+        label.text = "My Goal Settings".localized()
         label.font = UIFont(name: "Copperplate Bold", size: 33)
         label.textColor = .white
         return label
@@ -94,12 +94,12 @@ class MyGoalSettingsController: UIViewController, UITableViewDelegate, UITableVi
 
 extension MyGoalSettingsController {
     func fetcData() -> [SettingModel]{
-        let goalSetting1 = SettingModel(textLabel: "Goal", textValue: goalValue)
-        let goalSetting2 = SettingModel(textLabel: "Starting Weight", textValue: weightValue)
-        let goalSetting3 = SettingModel(textLabel: "Goal Weight", textValue: goalWeightValue)
-        let goalSetting4 = SettingModel(textLabel: "Activity Level", textValue: activenessValue)
-        let goalSetting5 = SettingModel(textLabel: "Weekly Goal", textValue: weeklyGoalValue)
-        let goalSetting6 = SettingModel(textLabel: "Calorie Goal", textValue: goalCalorieValue)
+        let goalSetting1 = SettingModel(textLabel: "Goal".localized(), textValue: goalValue.localized())
+        let goalSetting2 = SettingModel(textLabel: "Starting Weight".localized(), textValue: weightValue.localized())
+        let goalSetting3 = SettingModel(textLabel: "Goal Weight".localized(), textValue: goalWeightValue.localized())
+        let goalSetting4 = SettingModel(textLabel: "Activity Level".localized(), textValue: activenessValue.localized())
+        let goalSetting5 = SettingModel(textLabel: "Weekly Goal".localized(), textValue: weeklyGoalValue.localized())
+        let goalSetting6 = SettingModel(textLabel: "Calorie Goal".localized(), textValue: goalCalorieValue.localized())
         
         return [goalSetting1, goalSetting2, goalSetting3, goalSetting4, goalSetting5, goalSetting6]
     }

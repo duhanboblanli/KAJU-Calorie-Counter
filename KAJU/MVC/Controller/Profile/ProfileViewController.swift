@@ -35,8 +35,11 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        defineLabels()
     }
-    
+    func defineLabels(){
+        navigationItem.title = navigationItem.title?.localized()
+    }
     func addRealTimeUpdate(){
         if let currentUserEmail = Auth.auth().currentUser?.email {
             db.collection("UserInformations").document("\(currentUserEmail)")
@@ -197,7 +200,7 @@ extension ProfileViewController {
                             default: print("Error happened while choosing activeness")
                             }
                             self.goal = GoalCellModel(goalType: "\(goalType)", weight: String(format: "%.2f", weightWrapped), activeness: "\(activeness)", goalWeight: "\(goalWeight)" , weeklyGoal: "\(weeklyGoal)",manuelCalorieGoal: "\(caloryGoal)", advicedCalorieGoal: "\(calorie)", isAdviced: isAdviced as! Bool)
-                            self.profile = ProfileCellModel(profileImage: UIImage(named: "defaultProfilePhoto") ?? UIImage(), name: data["name"] as? String ?? "Enter a name", sex: "\(sex)", diateryType: data["diateryType"] as? String ?? "Classic", height: "\(height)")
+                            self.profile = ProfileCellModel(profileImage: UIImage(named: "defaultProfilePhoto") ?? UIImage(), name: data["name"] as? String ?? "Enter a name".localized(), sex: "\(sex)", diateryType: data["diateryType"] as? String ?? "Classic".localized(), height: "\(height)")
                             self.table.reloadData()
                         }
                     }

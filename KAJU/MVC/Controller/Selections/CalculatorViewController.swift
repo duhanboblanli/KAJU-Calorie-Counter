@@ -11,7 +11,13 @@ import FirebaseFirestore
 
 class CalculatorViewController: UIViewController {
     
+    @IBOutlet weak var genderPicker: UISegmentedControl!
     // Outlet Variables
+    @IBOutlet weak var weightLabell: UILabel!
+    @IBOutlet weak var heightLabell: UILabel!
+    @IBOutlet weak var ageLabell: UILabel!
+    @IBOutlet weak var topExplanation: UILabel!
+    @IBOutlet weak var topTitle: UILabel!
     @IBOutlet weak var topConstraint: NSLayoutConstraint!
     @IBOutlet weak var nextButtonConstraint: NSLayoutConstraint!
     @IBOutlet weak var calculateButton: UIButton!
@@ -30,12 +36,13 @@ class CalculatorViewController: UIViewController {
     var changeCalorieAmount = 0
     var goalType = ""
     var calculatorBrain = CalculatorBrain()
-    var sex = "Male"
+    var sex = "Male".localized()
     var ColorDarkGreen = ThemeColors.ColorGreen.associatedColor
     
     //MARK: - View Lifecycle Functions
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+        defineLabels()
         if !UIDevice.hasNotch{
             nextButtonConstraint.constant = 25
             topConstraint.constant = 15
@@ -45,18 +52,29 @@ class CalculatorViewController: UIViewController {
         weightSlider.value = 75
     }
     
+    func defineLabels(){
+        topTitle.text = topTitle.text?.localized()
+        topExplanation.text = topExplanation.text?.localized()
+        calculateButton.setTitle(calculateButton.currentTitle?.localized(), for: .normal)
+        ageLabell.text = ageLabell.text?.localized()
+        heightLabel.text = heightLabel.text?.localized()
+        weightLabell.text = weightLabell.text?.localized()
+        sexSegment.setTitle(sexSegment.titleForSegment(at: 0)?.localized(), forSegmentAt: 0)
+        sexSegment.setTitle(sexSegment.titleForSegment(at: 1)?.localized(), forSegmentAt: 1)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupButtonStyle(button: calculateButton, cornerRadius: 0.096)
         calculateButton.isEnabled = false
         calculateButton.isHighlighted = true
         if changeCalorieAmount == 400 {
-            goalType = "Build Muscle"
+            goalType = "Build Muscle".localized()
         } else if changeCalorieAmount == -400 {
-            goalType = "Lose Weight"
+            goalType = "Lose Weight".localized()
         }
         else {
-            goalType = "Maintain Weight"
+            goalType = "Maintain Weight".localized()
         }
     }
     
@@ -152,7 +170,7 @@ class CalculatorViewController: UIViewController {
             // CalculatorResultVC field ve fonksiyonlara erişmek için downcasting
             let destinationVC = segue.destination as! CalculatorResultViewController
             destinationVC.bmiValue = calculatorBrain.getBMIValue()
-            destinationVC.advice = calculatorBrain.getAdvice()
+            destinationVC.advice = calculatorBrain.getAdvice().localized()
             destinationVC.color = calculatorBrain.getColor()
             destinationVC.CalorieSublabelField = calorieSublabel
             destinationVC.calorie = calculatorBrain.getCalorie()

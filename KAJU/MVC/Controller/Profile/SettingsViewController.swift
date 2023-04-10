@@ -14,7 +14,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     let tableView = UITableView()
     let tableTitle = {
         let label = UILabel()
-        label.text = "Settings"
+        label.text = "Settings".localized()
         label.font = UIFont(name: "Copperplate Bold", size: 33)
         label.textColor = .white
         return label
@@ -94,10 +94,10 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
 
 extension SettingsViewController {
     func fetchData() -> [ProfileOption]{
-        let option1 = ProfileOption(image: UIImage(systemName: "lock.fill") ?? UIImage(), title: "Account")
-        let option2 = ProfileOption(image: UIImage(systemName: "person.circle.fill") ?? UIImage(), title: "Profile")
-        let option3 = ProfileOption(image: UIImage(systemName: "flag.fill") ?? UIImage(), title: "My Goals")
-        let option4 = ProfileOption(image: UIImage(systemName: "questionmark.app.fill") ?? UIImage(), title: "About Us")
+        let option1 = ProfileOption(image: UIImage(systemName: "lock.fill") ?? UIImage(), title: "Account".localized())
+        let option2 = ProfileOption(image: UIImage(systemName: "person.circle.fill") ?? UIImage(), title: "Profile".localized())
+        let option3 = ProfileOption(image: UIImage(systemName: "flag.fill") ?? UIImage(), title: "My Goals".localized())
+        let option4 = ProfileOption(image: UIImage(systemName: "questionmark.app.fill") ?? UIImage(), title: "About Us".localized())
 
         return[option1, option2, option3, option4]
     }

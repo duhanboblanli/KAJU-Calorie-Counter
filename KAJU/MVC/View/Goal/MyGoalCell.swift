@@ -16,14 +16,14 @@ class MyGoalCell: UITableViewCell {
     
     let title = {
         let label = UILabel()
-        label.text = "My Goals"
+        label.text = "My Goals".localized()
         label.font = UIFont.boldSystemFont(ofSize: 22)
         label.textColor = .white
         return label
     }()
     let goal = {
         let label = UILabel()
-        label.text = "Goal:"
+        label.text = "Goal:".localized()
         label.makeLargeText(fontSize: 18)
         label.textColor = .white
         return label
@@ -36,7 +36,7 @@ class MyGoalCell: UITableViewCell {
     }()
     let weight = {
         let label = UILabel()
-        label.text = "Weight:"
+        label.text = "Weight:".localized()
         label.makeLargeText(fontSize: 18)
         label.textColor = .white
         return label
@@ -49,7 +49,7 @@ class MyGoalCell: UITableViewCell {
     }()
     let calories = {
         let label = UILabel()
-        label.text = "Calories:"
+        label.text = "Calories:".localized()
         label.makeLargeText(fontSize: 18)
         label.textColor = .white
         return label
@@ -101,7 +101,7 @@ class MyGoalCell: UITableViewCell {
         var calorieGoal: String = ""
         if model.isAdviced{
             caloriesValue.text = model.advicedCalorieGoal
-            calorieGoal = "Adviced"
+            calorieGoal = "Adviced".localized()
         }else{
             caloriesValue.text = model.manuelCalorieGoal
             calorieGoal = "Manuel"
@@ -121,10 +121,10 @@ class MyGoalCell: UITableViewCell {
         editButton.anchor(top: title.topAnchor, bottom: title.bottomAnchor, right: contentView.rightAnchor, paddingRight: 16)
         editButton.widthAnchor.constraint(equalToConstant: 64).isActive = true
         
-        goal.anchor(top: title.bottomAnchor, left: title.leftAnchor, paddingTop: 16, paddingLeft: 0, width: 45)
+        goal.anchor(top: title.bottomAnchor, left: title.leftAnchor, paddingTop: 16, paddingLeft: 0, width: 75)
         goalValue.anchor(top: goal.topAnchor, left: goal.rightAnchor, right: contentView.rightAnchor, paddingLeft: 4, paddingRight: 8)
         
-        weight.anchor(top: goal.bottomAnchor, left: title.leftAnchor, paddingTop: 8, paddingLeft: 0, width: 65)
+        weight.anchor(top: goal.bottomAnchor, left: title.leftAnchor, paddingTop: 8, paddingLeft: 0, width: 75)
         weightValue.anchor(top: weight.topAnchor, left: weight.rightAnchor, right: goalValue.rightAnchor, paddingLeft: 4, paddingRight: 8)
         calories.anchor(top: weight.bottomAnchor, left: title.leftAnchor, bottom: contentView.bottomAnchor, paddingTop: 8, paddingBottom: 16, width: 75)
         caloriesValue.anchor(top: calories.topAnchor, left: calories.rightAnchor, bottom: calories.bottomAnchor, right: goalValue.rightAnchor, paddingLeft: 4)
