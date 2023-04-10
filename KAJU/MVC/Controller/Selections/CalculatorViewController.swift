@@ -151,7 +151,8 @@ class CalculatorViewController: UIViewController {
                 "weeklyGoal": 0,
                 "calorieGoal": 0,
                 "adviced": true,
-                "goalWeight": 0.0
+                "goalWeight": 0.0,
+                "dietaryType": "Classic"
             ]) { err in
                 if let err = err {
                     print("Error adding document: \(err)")

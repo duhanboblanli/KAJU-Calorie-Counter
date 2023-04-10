@@ -1,3 +1,13 @@
+// For db
+"Vejeteryan" = "Vegetarian";
+"Klasik" = "Classic";
+"Erkek" = "Male";
+"Kadın" = "Female";
+"Kilo Ver" = "Lose Weight";
+"Kilo Ver" = "Kilo Ver";
+"Kas Yap" = "Build Muscle";
+"Kilonu Koru" = "Maintain Weight";
+// localized
 "Sign Up" = "Kayıt ol";
 "Egg Timer" = "Yumurta";
 "Next" = "Sıradaki";
@@ -30,7 +40,7 @@
 "Search For A Food" = "Yiyecek ara";
 "Note: Make sure the water is boiling before starting the timer." = "Not: Zamanlayıcıyı başlatmadan önce suyun kaynadığından emin ol.";
 "Calories Burned" = "Yakılan Kalori";
-"Frequents" = "KLASİKLER";
+"FREQUENTS" = "KLASİKLER";
 "⬅️ Swipe     " = "⬅️ Kaydır     ";
 "We'll personalize recommendations based on your goals." = "Senin hedeflerine göre önerilerimizi özelleştireceğiz.";
 "Add to Calorie Counter" = "Kalori Sayacına Ekle";
@@ -38,7 +48,7 @@
 "Medium" = "Kayısı";
 "Eaten" = "Yenen";
 "Breakfast" = "Kahvaltı";
-"Favorites" = "FAVORİLER";
+"FAVORITES" = "FAVORİLER";
 "Calculator" = "Hesaplayıcı";
 "Start Your Plan" = "Planını Başlat";
 "Recipes" = "Tarifler";
@@ -56,7 +66,7 @@
 "Recipes" = "Tarifler";
 "Add to Calorie Counter" = "Kalori Sayacına Ekle";
 "💪 Gain Muscle" = "💪 Kas Yap";
-"Discover" = "KEŞFET";
+"DISCOVER" = "KEŞFET";
 "Enter Your Calories        Burned Today:" = "Bugün Yaktığın Kalori        Miktarını Gir:";
 "Diary" = "Günlük";
 "🍏 Daily Calorie Goal" = "🍏 Günlük Kalori Hedefi";
@@ -71,9 +81,10 @@
 "Your recent foods that added to diary will be in here." = "Günlüğüne son ekledğin yiyecekler burada olacak.";
 "Food added to diary 🤩" = "Yiyecek günlüğüne eklendi 🤩";
 "Unable to add food" = "Yiyecek eklenemiyor";
-"Recents" = "GEÇMİŞ";
+"RECENTS" = "GEÇMİŞ";
 "Search Results for" = "Arama Sonuçların";
 "Search" = "Arama";
+"SEARCH" = "ARAMA";
 "Discover from Random Recipes!" = "Rastegele Tarif Ara!";
 "Delete" = "Sil";
 "You don't have any saved favorite recipes yet." = "Henüz kaydedilmiş favori tarifin yok.";
@@ -122,11 +133,12 @@
 "Profile" = "Profil";
 "Name" = "İsim";
 "Gender" = "Cinsiyet";
-"Diatery" = "Diyet";
+"Dietary" = "Diyet";
 "Classic" = "Klasik";
 "Vegetarian" = "Vejeteryan";
 "Adviced" = "Önerilen";
 "Lose Weight" = "Kilo Ver";
+"Kilo Ver" = "Lose Weight";
 "Build Muscle"  = "Kas Yap";
 "Maintain Weight" = "Kilonu Koru";
 "Low" = "Düşük";
@@ -134,7 +146,7 @@
 "High" = "Yüksek";
 "Very High" = "Oldukça Yüksek";
 "Enter a name" = "İsim gir";
-"Height" = "Height";
+"Height" = "Boy";
 "Goal:" = "Hedef:";
 "Weight:" = "Kilo:";
 "Calories:" = "Kalori:";
@@ -146,3 +158,15 @@
 "You are underweight. Your body mass index is below normal limits." = "Zayıfsın. Vücüt kilo indeksin normalin altında.";
 "You are healthy. Track your daily calorie needs." = "Sağlıklısın. Günlük kalori ihtiyaçlarını takip et.";
 "You are overweight. You need to keep an eye on your health." = "Kilolusun. Sağlığına dikkat etmen lazım.";
+"App Version" = "Uygulama Versiyonu";
+"About KAJU" = "KAJU Hakkında";
+"Terms of Use & Privacy Policy" = "Kullanım Koşulları ve Gizlilik Politikası";
+"Our motive for developing this app was to help people who are pretty confused while cooking and also want to keep track of how many of their calories come from it. We hope it will be useful to people who fight against unhealthy diets and waste a lot of time finding healthy recipes.\nContributors:\n\n- Kadir Çopur\n- Duhan Boblanlı\n- Umut Ulaş Demir" = "
+Bu uygulamayı geliştirmekteki motivasyonumuz yemek yaparken bununla beraber kalorisini de takip etmek isteyen insanlara yardım etmekti. Umuyoruz ki sağlıksız diyetlerle savaşan ve sağlıklı tarifler ararken bolca zaman kaybeden insanlara yardımcı olabiliriz.
+
+Geliştiriciler:
+
+- Kadir Çopur
+- Duhan Boblanlı
+- Umut Ulaş Demir
+";

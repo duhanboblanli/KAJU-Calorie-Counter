@@ -11,6 +11,6 @@ struct ProfileCellModel{
     var profileImage: UIImage
     var name: String
     var sex: String
-    var diateryType: String
+    var dietaryType: String
     var height: String
 }
