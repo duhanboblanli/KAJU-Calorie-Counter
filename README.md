@@ -1,4 +1,8 @@
+
 # KAJU: Calorie Counter & Recipes
+<img width="1372" alt="Ekran Resmi 2023-03-31 03 22 47" src="https://user-images.githubusercontent.com/77344408/230979479-67e577c2-9dea-4540-a184-b5834edde4de.png">
+
+
 
 KAJU is an app used to calculate BMI and daily calorie needs, tracks user calories, and offers over 600.000 foods and recipes.
 
