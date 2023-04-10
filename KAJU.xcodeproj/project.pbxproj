@@ -182,14 +182,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		2D119EE129E2F73000EB6EDD /* Utility */ = {
-			isa = PBXGroup;
-			children = (
-				2D119EE729E2F88500EB6EDD /* Localizable.strings */,
-			);
-			path = Utility;
-			sourceTree = "<group>";
-		};
 		3C87B8F78CDDE88A2FC92486 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -207,13 +199,17 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
-		FE21190D29E22D4D00408EE0 /* Supporting Files */ = {
+		FE21190D29E22D4D00408EE0 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				FE21191729E2389700408EE0 /* Base */,
+				FE21191629E2370E00408EE0 /* Extensions */,
+				FE9B659C29E18F910031654F /* AppDelegate */,
+				2D119EE729E2F88500EB6EDD /* Localizable.strings */,
 				FEBF1DD72986BB4600FD4760 /* Info.plist */,
 				FE0BB009299519690062E096 /* GoogleService-Info.plist */,
 			);
-			path = "Supporting Files";
+			path = Utility;
 			sourceTree = "<group>";
 		};
 		FE21190E29E22E0300408EE0 /* Storyboards */ = {
@@ -410,7 +406,7 @@
 				FE21190F29E2336F00408EE0 /* Constant */,
 				FE21190E29E22E0300408EE0 /* Storyboards */,
 				FEAD26EF29E18EB200A40A10 /* Resources */,
-				FE21190D29E22D4D00408EE0 /* Supporting Files */,
+				FE21190D29E22D4D00408EE0 /* Utility */,
 			);
 			path = KAJU;
 			sourceTree = "<group>";
@@ -530,7 +526,6 @@
 		FED9E41A29E23F3C00E05390 /* MVC */ = {
 			isa = PBXGroup;
 			children = (
-				2D119EE129E2F73000EB6EDD /* Utility */,
 				FEE2CDE129892A5B002DAA6F /* Model */,
 				FEE2CDE229892A6B002DAA6F /* View */,
 				FEE2CDE329892A73002DAA6F /* Controller */,
@@ -572,9 +567,6 @@
 				FE21191129E2342800408EE0 /* Recipes */,
 				FE21191229E2345F00408EE0 /* EggTimer */,
 				FE21191529E235D500408EE0 /* Profile */,
-				FE21191629E2370E00408EE0 /* Extensions */,
-				FE9B659C29E18F910031654F /* AppDelegate */,
-				FE21191729E2389700408EE0 /* Base */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -933,7 +925,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "KAJU/Supporting Files/Info.plist";
+				INFOPLIST_FILE = KAJU/Utility/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -963,7 +955,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "KAJU/Supporting Files/Info.plist";
+				INFOPLIST_FILE = KAJU/Utility/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;

@@ -21,7 +21,7 @@
 "Dinner" = "Akşam Yemeği";
 "Mostly sitting. e.g. office worker" = "Genellikle oturan. ö.o. ofis çalışanı";
 "🧑‍💻 Lightly active" = "🧑‍💻 Çok az aktif";
-"Soft" = "Cıvık";
+"Soft" = "Rafadan";
 "How active are you?" = "Ne kadar aktifsin?";
 "📏Height" = "📏Boy";
 "Knowing your daily activity level helps us calculate your calorie needs more accurately." = "Senin günlük aktivite seviyeni bilmek bize senin kalori ihtiyacını daha doğru hesaplamamız için yardımcı olacak.";
@@ -161,11 +161,10 @@
 "App Version" = "Uygulama Versiyonu";
 "About KAJU" = "KAJU Hakkında";
 "Terms of Use & Privacy Policy" = "Kullanım Koşulları ve Gizlilik Politikası";
-"Our motive for developing this app was to help people who are pretty confused while cooking and also want to keep track of how many of their calories come from it. We hope it will be useful to people who fight against unhealthy diets and waste a lot of time finding healthy recipes.\nContributors:\n\n- Kadir Çopur\n- Duhan Boblanlı\n- Umut Ulaş Demir" = "
+"Our motive for developing this app was to help people who are pretty confused while cooking and also want to keep track of how many of their calories come from it. We hope it will be useful to people who fight against unhealthy diets and waste a lot of time finding healthy recipes.\n\nContributors:\n- Kadir Çopur\n- Duhan Boblanlı\n- Umut Ulaş Demir" = "
 Bu uygulamayı geliştirmekteki motivasyonumuz yemek yaparken bununla beraber kalorisini de takip etmek isteyen insanlara yardım etmekti. Umuyoruz ki sağlıksız diyetlerle savaşan ve sağlıklı tarifler ararken bolca zaman kaybeden insanlara yardımcı olabiliriz.
 
 Geliştiriciler:
-
 - Kadir Çopur
 - Duhan Boblanlı
 - Umut Ulaş Demir
