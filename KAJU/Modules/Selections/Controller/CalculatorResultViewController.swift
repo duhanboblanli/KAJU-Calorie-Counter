@@ -27,8 +27,6 @@ class CalculatorResultViewController: UIViewController {
     var CalorieSublabelField: String?
     var bmiValue: String?
     
-    
-    
     //MARK: - View Lifecycle Functions
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)

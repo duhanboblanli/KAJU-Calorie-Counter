@@ -11,8 +11,8 @@ import FirebaseFirestore
 
 class CalculatorViewController: UIViewController {
     
-    @IBOutlet weak var genderPicker: UISegmentedControl!
     // Outlet Variables
+    @IBOutlet weak var genderPicker: UISegmentedControl!
     @IBOutlet weak var weightLabell: UILabel!
     @IBOutlet weak var heightLabell: UILabel!
     @IBOutlet weak var ageLabell: UILabel!
