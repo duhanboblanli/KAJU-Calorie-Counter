@@ -553,13 +553,13 @@ extension FoodsViewController: UISearchBarDelegate, ErrorDelegate {
     // Arama için query oluşturan fonksiyon
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         if favEnable{
-            favoritesLabel.text = "Search".localized()
+            favoritesLabel.text = "SEARCH".localized()
         }
         else if recentsEnable{
-            recentsLabel.text = "Search".localized()
+            recentsLabel.text = "SEARCH".localized()
         }
         else{
-            frequentsLabel.text = "Search".localized()
+            frequentsLabel.text = "SEARCH".localized()
         }
         searchEnable = true
         searchBar.setShowsCancelButton(true, animated: true)
@@ -618,13 +618,13 @@ extension FoodsViewController: UISearchBarDelegate, ErrorDelegate {
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchBar.text = ""
         if favEnable{
-            favoritesLabel.text = "Favorites".localized()
+            favoritesLabel.text = "FAVORITES".localized()
         }
         else if recentsEnable{
-            recentsLabel.text = "Recents".localized()
+            recentsLabel.text = "RECENTS".localized()
         }
         else{
-            frequentsLabel.text = "Frequents".localized()
+            frequentsLabel.text = "FREQUENTS".localized()
         }
         searchBar.resignFirstResponder()
         searchEnable = false

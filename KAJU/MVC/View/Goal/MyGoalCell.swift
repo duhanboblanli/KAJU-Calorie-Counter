@@ -96,7 +96,7 @@ class MyGoalCell: UITableViewCell {
     }
     
     func setGoalCell(model: GoalCellModel){
-        goalValue.text = model.goalType
+        goalValue.text = model.goalType.localized()
         weightValue.text = model.weight
         var calorieGoal: String = ""
         if model.isAdviced{

@@ -361,11 +361,11 @@ extension RecipesViewController: UITableViewDataSource {
             case favTableView:
                 numberOfRow = foodRecipes.count
                 if numberOfRow != 0 {
-                    favoritesLabel.text = "Favorites".localized()  + "(\(numberOfRow))"
+                    favoritesLabel.text = "FAVORITES".localized()  + "(\(numberOfRow))"
                     favTableView.restore()
                 }
                 else {
-                    favoritesLabel.text = "Favorites"
+                    favoritesLabel.text = "FAVORITES".localized()
                     favTableView.setEmptyView(title: "You don't have any saved favorite recipes yet.".localized(), message: "Your saved recipes will be in here.".localized())
                 }
             default:

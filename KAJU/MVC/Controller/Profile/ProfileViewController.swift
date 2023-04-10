@@ -64,7 +64,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     func checkProfileSettingsUpdate (data: Dictionary<String, Any>){
         if let name = data["name"]{self.profile?.name = name as? String ?? ""}
         if let height = data["height"]{self.profile?.height = "\(height)"}
-        if let diateryType = data["diateryType"]{self.profile?.diateryType = diateryType as? String ?? ""}
+        if let diateryType = data["diateryType"]{self.profile?.dietaryType = diateryType as? String ?? ""}
         if let sex = data["sex"]{self.profile?.sex = sex as? String ?? ""}
     }
     
@@ -148,7 +148,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
             profileCell.myViewController = self
             profileCell.selectionStyle = UITableViewCell.SelectionStyle.none
             profileCell.tintColor = backGroundColor
-            profileCell.setProfile(model: self.profile ?? ProfileCellModel(profileImage: UIImage(named: "defaultProfilePhoto") ?? UIImage(), name: "", sex: "", diateryType: "", height: ""))
+            profileCell.setProfile(model: self.profile ?? ProfileCellModel(profileImage: UIImage(named: "defaultProfilePhoto") ?? UIImage(), name: "", sex: "", dietaryType: "", height: ""))
             return profileCell
         case 1:
             goalCell.backgroundColor = cellBackgColor
@@ -200,7 +200,7 @@ extension ProfileViewController {
                             default: print("Error happened while choosing activeness")
                             }
                             self.goal = GoalCellModel(goalType: "\(goalType)", weight: String(format: "%.2f", weightWrapped), activeness: "\(activeness)", goalWeight: "\(goalWeight)" , weeklyGoal: "\(weeklyGoal)",manuelCalorieGoal: "\(caloryGoal)", advicedCalorieGoal: "\(calorie)", isAdviced: isAdviced as! Bool)
-                            self.profile = ProfileCellModel(profileImage: UIImage(named: "defaultProfilePhoto") ?? UIImage(), name: data["name"] as? String ?? "Enter a name".localized(), sex: "\(sex)", diateryType: data["diateryType"] as? String ?? "Classic".localized(), height: "\(height)")
+                            self.profile = ProfileCellModel(profileImage: UIImage(named: "defaultProfilePhoto") ?? UIImage(), name: data["name"] as? String ?? "Enter a name".localized(), sex: "\(sex)", dietaryType: data["dietaryType"] as? String ?? "Classic".localized(), height: "\(height)")
                             self.table.reloadData()
                         }
                     }

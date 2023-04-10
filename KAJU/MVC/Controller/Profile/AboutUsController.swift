@@ -89,7 +89,7 @@ class AboutUsController: UIViewController{
     }()
     let appVersionLabel = {
         let label = UILabel()
-        label.text = "App Version"
+        label.text = "App Version".localized()
         label.font = UIFont.systemFont(ofSize: 20)
         label.textColor = .white
         return label
@@ -104,7 +104,7 @@ class AboutUsController: UIViewController{
         let label = UILabel()
         let height = CGFloat(50)
         label.anchor(height: height)
-        label.text = "About KAJU"
+        label.text = "About KAJU".localized()
         label.font = UIFont.systemFont(ofSize: 30)
         label.textColor = .white
         
@@ -122,7 +122,7 @@ class AboutUsController: UIViewController{
         let height = CGFloat(80)
         button.addSubview(policyBText)
         button.anchor(height: height)
-        policyBText.text = "Terms of Use & Privacy Policy"
+        policyBText.text = "Terms of Use & Privacy Policy".localized()
         policyBText.anchor(left: button.leftAnchor, paddingLeft: 24)
         policyBText.centerYAnchor.constraint(equalTo: button.centerYAnchor).isActive = true
         policyBText.font = UIFont.systemFont(ofSize: 20)

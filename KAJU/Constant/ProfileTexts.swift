@@ -9,15 +9,7 @@ import UIKit
 
 struct Texts {
     static let aboutString =
-    """
-Our motive for developing this app was to help people who are pretty confused while cooking and also want to keep track of how many of their calories come from it. We hope it will be useful to people who fight against unhealthy diets and waste a lot of time finding healthy recipes.
-
-Contributors:
-
-- Kadir Çopur
-- Duhan Boblanlı
-- Umut Ulaş Demir
-""".localized()
+    "Our motive for developing this app was to help people who are pretty confused while cooking and also want to keep track of how many of their calories come from it. We hope it will be useful to people who fight against unhealthy diets and waste a lot of time finding healthy recipes.\nContributors:\n\n- Kadir Çopur\n- Duhan Boblanlı\n- Umut Ulaş Demir".localized()
     
     static let dunoMatchPass = "Password isn't matching with old one !".localized()
     static let shortPass = "Password length must be at least 6 characters !".localized()

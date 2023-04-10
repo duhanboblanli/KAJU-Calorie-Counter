@@ -94,7 +94,7 @@ class MyGoalSettingCell: UITableViewCell {
                 default: print("error happened while choosing goal type")
                 }
                 updateDBValue(key: "changeCalorieAmount", value: changeCaloryAmount)
-                updateDBValue(key: "goalType", value: item)
+                updateDBValue(key: "goalType", value: item.localized())
             }
         case "Starting Weight".localized():
             myViewController.present(Editor(textLabel: pSettingLabel, textValue: pValueLabel), animated: true)

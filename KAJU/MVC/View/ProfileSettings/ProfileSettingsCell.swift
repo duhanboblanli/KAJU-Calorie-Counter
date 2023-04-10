@@ -79,23 +79,23 @@ class ProfileSettingsCell: UITableViewCell {
     @objc func edit(){
 
         switch editButton.accessibilityIdentifier{
-        case "Name":
+        case "Name".localized():
             myViewController.present(Editor(textLabel: pSettingLabel, textValue: pValueLabel), animated: true)
-        case "Gender":
+        case "Gender".localized():
             dropDown = setDropDown(dataSource: genders, anchorView: pSettingLabel, bottomOffset: CGPoint(x: 0, y:(pSettingLabel.plainView.bounds.height ) + 36))
             dropDown.show()
             dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
                 pValueLabel.text = item
-                updateDBValue(key: "sex", value: item)
+                updateDBValue(key: "sex", value: item.localized())
             }
-        case "Dieatary":
+        case "Dietary".localized():
             dropDown = setDropDown(dataSource: diateries, anchorView: pSettingLabel, bottomOffset: CGPoint(x: 0, y:(pSettingLabel.plainView.bounds.height ) + 36))
             dropDown.show()
             dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
                 pValueLabel.text = item
-                updateDBValue(key: "diateryType", value: item)
+                updateDBValue(key: "dietaryType", value: item.localized())
             }
-        case "Height":
+        case "Height".localized():
             myViewController.present(Editor(textLabel: pSettingLabel, textValue: pValueLabel), animated: true)
         default:
             return

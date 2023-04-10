@@ -87,10 +87,10 @@ class ProfileSettingsController: UIViewController, UITableViewDelegate, UITableV
 
 extension ProfileSettingsController {
     func fetcData() -> [SettingModel]{
-        let profileSetting1 = SettingModel(textLabel: "Name", textValue: nameValue)
-        let profileSetting2 = SettingModel(textLabel: "Gender", textValue: genderValue)
-        let profileSetting3 = SettingModel(textLabel: "Dieatary", textValue: diaterValue)
-        let profileSetting4 = SettingModel(textLabel: "Height", textValue: heightValue)
+        let profileSetting1 = SettingModel(textLabel: "Name".localized(), textValue: nameValue)
+        let profileSetting2 = SettingModel(textLabel: "Gender".localized(), textValue: genderValue)
+        let profileSetting3 = SettingModel(textLabel: "Dietary".localized(), textValue: diaterValue)
+        let profileSetting4 = SettingModel(textLabel: "Height".localized(), textValue: heightValue)
         
         return [profileSetting1, profileSetting2, profileSetting3, profileSetting4]
     }

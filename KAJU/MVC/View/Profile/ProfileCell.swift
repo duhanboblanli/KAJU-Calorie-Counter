@@ -94,10 +94,10 @@ class ProfileCell: UITableViewCell {
         label.makeLargeText(fontSize: 18)
         return label
     }()
-    let diateryLabel = {
+    let dietaryLabel = {
         let label = UILabel()
         label.textColor = .black
-        label.text = "Diatery".localized()
+        label.text = "Dietary".localized()
         label.makeLargeText(fontSize: 18)
         return label
     }()
@@ -151,7 +151,7 @@ class ProfileCell: UITableViewCell {
         label.makeLargeText(fontSize: 16)
         return label
     }()
-    let diateryValue = {
+    let dietaryValue = {
         let label = UILabel()
         label.textColor = .white
         label.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMaxXMaxYCorner]
@@ -189,8 +189,8 @@ class ProfileCell: UITableViewCell {
         genderContainer.addSubview(genderLabel)
         genderContainer.addSubview(genderLValue)
         diateryContainer.addSubview(diateryIcon)
-        diateryContainer.addSubview(diateryLabel)
-        diateryContainer.addSubview(diateryValue)
+        diateryContainer.addSubview(dietaryLabel)
+        diateryContainer.addSubview(dietaryValue)
         editPhotoButton.addSubview(photoImage)
     }
     
@@ -218,9 +218,9 @@ class ProfileCell: UITableViewCell {
     
     func setProfile(model: ProfileCellModel){
         nameValue.text = model.name
-        genderLValue.text = model.sex
-        diateryValue.text = model.diateryType
-        ProfileCell.myProfileSettings = ProfileSettingsController(nameValue: model.name, genderValue: model.sex, diaterValue: model.diateryType, heightValue: model.height)
+        genderLValue.text = model.sex.localized()
+        dietaryValue.text = model.dietaryType.localized()
+        ProfileCell.myProfileSettings = ProfileSettingsController(nameValue: model.name, genderValue: model.sex, diaterValue: model.dietaryType, heightValue: model.height)
         
         switch genderLValue.text{
         case "Male".localized():
@@ -237,7 +237,7 @@ class ProfileCell: UITableViewCell {
             return
         }
         
-        switch diateryValue.text{
+        switch dietaryValue.text{
         case "Classic".localized():
             diateryIcon.image = UIImage(named: "classicDiate")
         case "Vegetarian".localized():
@@ -322,10 +322,10 @@ class ProfileCell: UITableViewCell {
                            paddingTop: 2,
                            paddingLeft: 2)
         
-        diateryLabel.anchor(left: diateryIcon.rightAnchor,
+        dietaryLabel.anchor(left: diateryIcon.rightAnchor,
                             paddingLeft: 4)
         
-        diateryValue.anchor(top: diateryContainer.topAnchor,
+        dietaryValue.anchor(top: diateryContainer.topAnchor,
                             left: diateryContainer.rightAnchor,
                             bottom: diateryContainer.bottomAnchor,
                             right: contentView.rightAnchor,
@@ -339,8 +339,8 @@ class ProfileCell: UITableViewCell {
         genderLabel.centerYAnchor.constraint(equalTo: genderContainer.centerYAnchor).isActive = true
         genderLValue.centerYAnchor.constraint(equalTo: genderContainer.centerYAnchor).isActive = true
         diateryIcon.centerYAnchor.constraint(equalTo: diateryContainer.centerYAnchor).isActive = true
-        diateryLabel.centerYAnchor.constraint(equalTo: diateryContainer.centerYAnchor).isActive = true
-        diateryValue.centerYAnchor.constraint(equalTo: diateryContainer.centerYAnchor).isActive = true
+        dietaryLabel.centerYAnchor.constraint(equalTo: diateryContainer.centerYAnchor).isActive = true
+        dietaryValue.centerYAnchor.constraint(equalTo: diateryContainer.centerYAnchor).isActive = true
     }
 }
 
