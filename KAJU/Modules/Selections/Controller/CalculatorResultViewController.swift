@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import CLTypingLabel
 
 class CalculatorResultViewController: UIViewController {
     
@@ -16,7 +15,7 @@ class CalculatorResultViewController: UIViewController {
     @IBOutlet weak var bmiLabel: UILabel!
     @IBOutlet weak var adviceLabel: UILabel!
     @IBOutlet weak var resultLabel: UILabel!
-    @IBOutlet weak var calorieLabel: CLTypingLabel!
+    @IBOutlet weak var calorieLabel: UILabel!
     @IBOutlet weak var calorieSublabel: UILabel!
     @IBOutlet weak var resultNextButton: UIButton!
     
@@ -32,7 +31,6 @@ class CalculatorResultViewController: UIViewController {
         super.viewWillAppear(true)
         defineLabels()
         if !UIDevice.hasNotch{
-            print("model:", UIDevice.hasNotch)
             nextButtonConstraint.constant = -25
         }
     }
@@ -53,7 +51,7 @@ class CalculatorResultViewController: UIViewController {
             var charIndex = 0.0
             let titleText = bmiValue
             for letter in titleText {
-                Timer.scheduledTimer(withTimeInterval: 0.25*charIndex, repeats: false) { (timer) in
+                Timer.scheduledTimer(withTimeInterval: 0.23*charIndex, repeats: false) { (timer) in
                     self.bmiLabel.text?.append(letter)
                 }
                 charIndex += 1
@@ -69,10 +67,20 @@ class CalculatorResultViewController: UIViewController {
             calorieSublabel.text = CalorieSublabelField.localized()
         }
         if let calorie {
-            calorieLabel.text = "\(calorie) kcal"
+            //Title Label Animation With For Loop
+            calorieLabel.text = ""
+            var charIndex = 0.0
+            let titleText = calorie + " kcal"
+            for letter in titleText {
+                Timer.scheduledTimer(withTimeInterval: 0.13*charIndex, repeats: false) { (timer) in
+                    self.calorieLabel.text?.append(letter)
+                }
+                charIndex += 1
+            }
         }
-        
     }
+    
+    
     
     //MARK: - IBActions
     @IBAction func resultNextButtonPressed(_ sender: UIButton) {
@@ -85,4 +93,5 @@ class CalculatorResultViewController: UIViewController {
         button.clipsToBounds = true
     }
 }
+
 

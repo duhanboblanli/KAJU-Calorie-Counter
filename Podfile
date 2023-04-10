@@ -4,8 +4,6 @@ target 'KAJU' do
   use_frameworks!
 
   # Pods for KAJU
-  
-  pod 'CLTypingLabel', '~> 0.4.0'
   pod 'FirebaseAuth'
   pod 'FirebaseFirestore'
   pod 'Firebase/Core'
