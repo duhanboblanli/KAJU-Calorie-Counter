@@ -54,7 +54,6 @@ We hope it will be useful to people who fight against unhealthy diets and waste 
 * Toast-Swift
 * FirebaseCore
 * ValueStepper
-* CLTypingLabel
 * FirebaseStorage
 * CountdownLabel
 * FirebaseFirestore
