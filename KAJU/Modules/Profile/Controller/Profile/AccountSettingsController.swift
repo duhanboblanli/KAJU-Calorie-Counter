@@ -11,27 +11,29 @@ import FirebaseAuth
 import FirebaseFirestore
 import CoreData
 
-class AccountSettingsController: UIViewController, UITableViewDelegate, UITableViewDataSource{
-    let user = Auth.auth().currentUser
-    var docCopy: [String : Any]?
-    let db = DatabaseSingleton.db
+final class AccountSettingsController: UIViewController, UITableViewDelegate, UITableViewDataSource{
+    
+    private let user = Auth.auth().currentUser
+    private var docCopy: [String : Any]?
+    private let db = DatabaseSingleton.db
     private var userPassword = UserDefaults.standard.string(forKey: Auth.auth().currentUser?.email ?? "")
     private var userEmail = Auth.auth().currentUser?.email
-    var accountSettingModels: [SettingModel] = []
-    let backGroundColor = ThemesOptions.backGroundColor
-    let cellBackgColor = ThemesOptions.cellBackgColor
-    let tableView: UITableView = UITableView()
+    private var accountSettingModels: [SettingModel] = []
+    private let backGroundColor = ThemesOptions.backGroundColor
+    private let cellBackgColor = ThemesOptions.cellBackgColor
+    private let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
-    let appDelegate = UIApplication.shared.delegate as! AppDelegate
-    
-    let tableTitle = {
+    // MARK: -UI ELEMENTS
+    private lazy var tableView: UITableView = UITableView()
+
+    private lazy var tableTitle = {
         let label = UILabel()
         label.text = "Account Settings".localized()
         label.textColor = .white
         label.font = UIFont(name: "Copperplate Bold", size: 33)
         return label
     }()
-    let deleteButton = {
+    private lazy var deleteButton = {
         let button = UIButton()
         button.setTitle("Delete".localized(), for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 22)
@@ -39,7 +41,7 @@ class AccountSettingsController: UIViewController, UITableViewDelegate, UITableV
         button.layer.cornerRadius = 20
         return button
     }()
-    let logOutButton = {
+    private lazy var logOutButton = {
         let button = UIButton()
         button.setTitle("Log Out".localized(), for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 22)
@@ -47,7 +49,8 @@ class AccountSettingsController: UIViewController, UITableViewDelegate, UITableV
         button.layer.cornerRadius = 20
         return button
     }()
-
+    
+    // MARK: -VIEW LIFECYCLE
     override func viewDidLoad() {
         super.viewDidLoad()
         accountSettingModels = fetcData()
@@ -57,6 +60,7 @@ class AccountSettingsController: UIViewController, UITableViewDelegate, UITableV
         configureLayout()
     }
     
+    // MARK: -VIEWS CONNECTION
     func linkViews(){
         view.addSubview(tableView)
         view.addSubview(tableTitle)
@@ -64,6 +68,7 @@ class AccountSettingsController: UIViewController, UITableViewDelegate, UITableV
         view.addSubview(logOutButton)
     }
     
+    // MARK: -CONFIGURATION
     func configureView(){
         view.backgroundColor = backGroundColor
         navigationItem.largeTitleDisplayMode = .never
@@ -78,6 +83,7 @@ class AccountSettingsController: UIViewController, UITableViewDelegate, UITableV
         tableView.backgroundColor = backGroundColor
     }
     
+    // MARK: -FUNCTIONS
     @objc func deleteAccount(){
         showSimpleAlert(title: "Are you sure you want to Delete ?".localized(), firstResponse: "Cancel".localized(), secondResponse: "Delete".localized())
     }
@@ -86,8 +92,8 @@ class AccountSettingsController: UIViewController, UITableViewDelegate, UITableV
         showSimpleAlert(title: "Are you sure you want to Log Out ?".localized(), firstResponse: "Cancel".localized(), secondResponse: "Log Out".localized())
     }
     
-    func showSimpleAlert(title: String, firstResponse: String, secondResponse: String){
-        let alert = UIAlertController(title: title, message: "Your offline data that consisting of favorite foods, recent foods and favorite recipes will be gone!".localized(),
+    func showSimpleAlert(title: String, firstResponse: String, secondResponse: String) {
+        let alert = UIAlertController(title: title, message: nil,
                                       preferredStyle: UIAlertController.Style.alert)
         alert.addAction(UIAlertAction(title: firstResponse, style: UIAlertAction.Style.default, handler: { _ in
             //Cancel Action
@@ -96,9 +102,9 @@ class AccountSettingsController: UIViewController, UITableViewDelegate, UITableV
                                           style: UIAlertAction.Style.destructive,
                                           handler: {(_: UIAlertAction!) in
                 switch secondResponse {
-                case "Log Out".localized():
+                case "Log Out":
                     self.logOut()
-                case "Delete".localized():
+                case "Delete":
                     self.delete()
                 default:
                     return
@@ -106,23 +112,21 @@ class AccountSettingsController: UIViewController, UITableViewDelegate, UITableV
             }))
         self.present(alert, animated: true, completion: nil)
     }
-    func delete() {
-            self.user!.delete { error in
-                if let error = error {
-                    let alert = UIAlertController(title: "Deletion unsuccessfull!".localized(), message: "Sorry for inconvenience situation. Deletion of an account is sensitive process. You should be re-signed into your account to perform this process.".localized(), preferredStyle: UIAlertController.Style.alert)
-                    alert.addAction(UIAlertAction(title: "Okay".localized(), style: UIAlertAction.Style.default, handler: nil))
-                    self.present(alert, animated: true, completion: nil)
-                    print(error)
-                } else {
-                    // Account deleted.
-                    print("Account deleted.".localized())
-                    self.deleteAllOnlineData()
-                    self.deleteAllOfflineData()
-                    let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-                    let rootViewController: UIViewController = storyboard.instantiateViewController(withIdentifier: "nRoot")
-                    self.view.window?.rootViewController = rootViewController
-                    self.navigationController?.popToRootViewController(animated: true)
-                }
+    
+    func delete(){
+        let user = Auth.auth().currentUser
+        
+        user?.delete { error in
+          if let error = error {
+            // An error happened.
+              print(error)
+          } else {
+            // Account deleted.
+              let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+              let rootViewController: UIViewController = storyboard.instantiateViewController(withIdentifier: "nRoot")
+              self.view.window?.rootViewController = rootViewController
+              self.navigationController?.popToRootViewController(animated: true)
+          }
         }
     }
     
@@ -141,18 +145,17 @@ class AccountSettingsController: UIViewController, UITableViewDelegate, UITableV
     }
     
     func deleteAllOnlineData(){
-        
         if let currentUserEmail = userEmail {
             let docRef = self.db.collection("UserInformations").document(currentUserEmail)
             
-                docRef.delete(){ err in
-                    if let err = err {
-                        print("Error while removing document: \(err)")
-                    }
-                    else {
-                        print("Error successfully removed!")
-                    }
+            docRef.delete(){ err in
+                if let err = err {
+                    debugPrint("Errorqe removing document: \(err)")
                 }
+                else {
+                    debugPrint("Errorqenot successfully removed!")
+                }
+            }
         }
     }
     
@@ -164,6 +167,7 @@ class AccountSettingsController: UIViewController, UITableViewDelegate, UITableV
         deleteOfflineData("FoodEntity", context2)
         deleteOfflineData("FavFoodEntity", context3)
     }
+    
     func deleteOfflineData(_ entity:String,_ container: NSPersistentContainer) {
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entity)
         fetchRequest.returnsObjectsAsFaults = false
@@ -175,19 +179,48 @@ class AccountSettingsController: UIViewController, UITableViewDelegate, UITableV
             }
             try? container.viewContext.save()
         } catch let error {
-            print("Detele all data in \(entity) error :", error)
+            debugPrint("Detele all data in \(entity) error :", error)
         }
     }
         
+    // MARK: -LAYOUT
     func configureLayout(){
-        tableTitle.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, bottom: tableView.topAnchor, right: view.rightAnchor, paddingTop: 32, paddingLeft: 16, paddingBottom: 16, paddingRight: 16)
-        tableView.anchor(top: tableTitle.bottomAnchor, left: tableTitle.leftAnchor, bottom: deleteButton.topAnchor, right: tableTitle.rightAnchor)
-        deleteButton.anchor(width: 256, height: 48)
-        deleteButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        logOutButton.anchor(top: deleteButton.bottomAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, paddingTop: 32, paddingBottom: 32, width: 256, height: 48)
-        logOutButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        tableTitle
+            .anchor(top: view.safeAreaLayoutGuide.topAnchor,
+                    left: view.leftAnchor,
+                    bottom: tableView.topAnchor,
+                    right: view.rightAnchor,
+                    paddingTop: 32,
+                    paddingLeft: 16,
+                    paddingBottom: 16,
+                    paddingRight: 16)
+        
+        tableView
+            .anchor(top: tableTitle.bottomAnchor,
+                    left: tableTitle.leftAnchor,
+                    bottom: deleteButton.topAnchor,
+                    right: tableTitle.rightAnchor)
+        
+        deleteButton
+            .anchor(width: 256,
+                    height: 48)
+        
+        deleteButton
+            .centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        
+        logOutButton
+            .anchor(top: deleteButton.bottomAnchor,
+                    bottom: view.safeAreaLayoutGuide.bottomAnchor,
+                    paddingTop: 32,
+                    paddingBottom: 32,
+                    width: 256,
+                    height: 48)
+        
+        logOutButton
+            .centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
     }
     
+    // MARK: -TABLEVIEW FUNCTIONS
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         accountSettingModels.count
     }
@@ -202,12 +235,13 @@ class AccountSettingsController: UIViewController, UITableViewDelegate, UITableV
     }
 
 }
-
+// MARK: -DATA FETCH
 extension AccountSettingsController {
     func fetcData() -> [SettingModel]{
-        let accountSetting1 = SettingModel(textLabel: "Email Adress", textValue: userEmail ?? "")
-        let accountSetting2 = SettingModel(textLabel: "Password", textValue: userPassword ?? "")
+        let accountSetting1 = SettingModel(textLabel: "Email Adress".localized(), textValue: userEmail ?? "")
+        let accountSetting2 = SettingModel(textLabel: "Password".localized(), textValue: userPassword ?? "")
         return [accountSetting1, accountSetting2]
     }
 }
+
 

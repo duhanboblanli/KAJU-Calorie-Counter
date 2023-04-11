@@ -7,44 +7,45 @@
 
 import UIKit
 import FirebaseAuth
-import FirebaseStorageUI
 
-class PhotoPicker: UIViewController{
+final class PhotoPicker: UIViewController{
     
-    let profileRef = DatabaseSingleton.storage
-    let db = DatabaseSingleton.db
+    private let profileRef = DatabaseSingleton.storage
+    private let db = DatabaseSingleton.db
     private var userEmail = Auth.auth().currentUser?.email
-    let cellBackgColor = ThemesOptions.cellBackgColor
-    let backGroundColor = ThemesOptions.backGroundColor
-    var imageView: UIImageView!
+    private let cellBackgColor = ThemesOptions.cellBackgColor
+    private let backGroundColor = ThemesOptions.backGroundColor
     
-    let backGroundView = {
+    // MARK: -UI ELEMENTS
+    private var imageView: UIImageView!
+    
+    private lazy var backGroundView = {
         let button = UIButton()
         button.backgroundColor = .black
         return button
         
     }()
-    let containerView = {
+    private lazy var containerView = {
         let view = UIView()
         view.backgroundColor = ThemesOptions.backGroundColor
         view.layer.cornerRadius = 10
         return view
     }()
-    let galleryButton = {
+    private lazy var galleryButton = {
         let button = UIButton()
         button.backgroundColor = ThemesOptions.cellBackgColor
         button.layer.cornerRadius = 10
         button.accessibilityIdentifier = "Gallery"
         return button
     }()
-    let cameraButton = {
+    private lazy var cameraButton = {
         let button = UIButton()
         button.backgroundColor = ThemesOptions.cellBackgColor
         button.layer.cornerRadius = 10
         button.accessibilityIdentifier = "Camera"
         return button
     }()
-    let galleryIcon = {
+    private lazy var galleryIcon = {
         let imageView = UIImageView()
         let width = CGFloat(28)
         let height = CGFloat(24)
@@ -54,7 +55,7 @@ class PhotoPicker: UIViewController{
         imageView.image = UIImage(systemName: "photo.on.rectangle.angled")
         return imageView
     }()
-    let cameraIcon = {
+    private lazy var cameraIcon = {
         let imageView = UIImageView()
         let width = CGFloat(28)
         let height = CGFloat(24)
@@ -64,38 +65,49 @@ class PhotoPicker: UIViewController{
         imageView.image = UIImage(systemName: "camera")
         return imageView
     }()
-    let defaultPersonImage = {
+    private lazy var defaultPersonImage = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "defaultProfilePhoto")
         imageView.tintColor = .systemGray
         return imageView
     }()
-    let galleryLabel = {
+    private lazy var galleryLabel = {
         let label = UILabel()
         label.textColor = .white
-        label.text = "Gallery"
+        label.text = "Gallery".localized()
         return label
     }()
-    let cameraLabel = {
+    private lazy var cameraLabel = {
         let label = UILabel()
         label.textColor = .white
-        label.text = "Camera"
+        label.text = "Camera".localized()
         return label
     }()
-    let deletePPButton = {
+    private lazy var deletePPButton = {
         let button = UIButton()
         button.setImage(UIImage(systemName: "trash"), for: .normal)
         button.tintColor = ThemesOptions.buttonBackGColor
         button.accessibilityIdentifier = "Delete"
         return button
     }()
-    let imagePickerController = {
+    private lazy var imagePickerController = {
         let imagePickerController = UIImagePickerController()
         imagePickerController.allowsEditing = true
         return imagePickerController
     }()
     
+    // MARK: -INIT-CONTROLLER
+    init(imageView: UIImageView) {
+        super.init(nibName: nil, bundle: nil)
+        modalPresentationStyle = .overFullScreen
+        self.imageView = imageView
+    }
     
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: -VIEW LIFECYCLE
     override func viewDidLoad() {
         super.viewDidLoad()
         linkViews()
@@ -107,16 +119,7 @@ class PhotoPicker: UIViewController{
         showOptions()
     }
     
-    init(imageView: UIImageView) {
-        super.init(nibName: nil, bundle: nil)
-        modalPresentationStyle = .overFullScreen
-        self.imageView = imageView
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
+    // MARK: -VIEWS CONNECTION
     func linkViews(){
         containerView.addSubview(galleryButton)
         containerView.addSubview(cameraButton)
@@ -127,6 +130,7 @@ class PhotoPicker: UIViewController{
         cameraButton.addSubview(cameraIcon)
     }
     
+    // MARK: -CONFIGURATION
     func configureView(){
         view.backgroundColor = .clear
         imagePickerController.delegate = self
@@ -136,6 +140,7 @@ class PhotoPicker: UIViewController{
         deletePPButton.addTarget(self, action: #selector(pickPhoto(sender: )), for: .touchUpInside)
     }
     
+    // MARK: -FUNCTIONS
     func showOptions(){
         guard let targetView = view else{return}
         targetView.addSubview(backGroundView)
@@ -177,12 +182,12 @@ class PhotoPicker: UIViewController{
     }
     
     func showSimpleAlert() {
-        let alert = UIAlertController(title: "Are you sure you want to Delete ?", message: nil,
+        let alert = UIAlertController(title: "Are you sure you want to Delete ?".localized(), message: nil,
                                       preferredStyle: UIAlertController.Style.alert)
-        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.default, handler: { _ in
+        alert.addAction(UIAlertAction(title: "Cancel".localized(), style: UIAlertAction.Style.default, handler: { _ in
             //Cancel Action
             }))
-            alert.addAction(UIAlertAction(title: "Delete",
+        alert.addAction(UIAlertAction(title: "Delete".localized(),
                                           style: UIAlertAction.Style.default,
                                           handler: {(_: UIAlertAction!) in
                 //Sign out action
@@ -194,55 +199,64 @@ class PhotoPicker: UIViewController{
             self.present(alert, animated: true, completion: nil)
         }
     
+    // MARK: -LAYOUT
     func configureLayout(){
+        galleryButton
+            .anchor(top: containerView.topAnchor,
+                    bottom: galleryLabel.topAnchor,
+                    right: containerView.centerXAnchor,
+                    paddingTop: 16,
+                    paddingBottom: 4,
+                    paddingRight: 32)
         
-        galleryButton.anchor(top: containerView.topAnchor,
-                             bottom: galleryLabel.topAnchor,
-                             right: containerView.centerXAnchor,
-                             paddingTop: 16,
-                             paddingBottom: 4,
-                             paddingRight: 32)
+        galleryIcon
+            .anchor(top: galleryButton.topAnchor,
+                    left: galleryButton.leftAnchor,
+                    bottom: galleryButton.bottomAnchor,
+                    right: galleryButton.rightAnchor,
+                    paddingTop: 8,
+                    paddingLeft: 8,
+                    paddingBottom: 8,
+                    paddingRight: 8)
         
-        galleryIcon.anchor(top: galleryButton.topAnchor,
-                           left: galleryButton.leftAnchor,
-                           bottom: galleryButton.bottomAnchor,
-                           right: galleryButton.rightAnchor,
-                           paddingTop: 8,
-                           paddingLeft: 8,
-                           paddingBottom: 8,
-                           paddingRight: 8)
+        galleryLabel
+            .anchor(top: galleryButton.bottomAnchor,
+                    bottom: containerView.bottomAnchor,
+                    paddingBottom: 8)
         
-        galleryLabel.anchor(top: galleryButton.bottomAnchor,
-                            bottom: containerView.bottomAnchor,
-                            paddingBottom: 8)
-        cameraButton.anchor(top: galleryButton.topAnchor,
-                            left: containerView.centerXAnchor,
-                            bottom: cameraLabel.topAnchor,
-                            paddingLeft: 32,
-                            paddingBottom: 4)
+        cameraButton
+            .anchor(top: galleryButton.topAnchor,
+                    left: containerView.centerXAnchor,
+                    bottom: cameraLabel.topAnchor,
+                    paddingLeft: 32,
+                    paddingBottom: 4)
         
-        cameraIcon.anchor(top: cameraButton.topAnchor,
-                          left: cameraButton.leftAnchor,
-                          bottom: cameraButton.bottomAnchor,
-                          right: cameraButton.rightAnchor,
-                          paddingTop: 8,
-                          paddingLeft: 8,
-                          paddingBottom: 8,
-                          paddingRight: 8)
+        cameraIcon
+            .anchor(top: cameraButton.topAnchor,
+                    left: cameraButton.leftAnchor,
+                    bottom: cameraButton.bottomAnchor,
+                    right: cameraButton.rightAnchor,
+                    paddingTop: 8,
+                    paddingLeft: 8,
+                    paddingBottom: 8,
+                    paddingRight: 8)
         
-        cameraLabel.anchor(top: cameraButton.bottomAnchor,
-                           bottom: galleryLabel.bottomAnchor)
+        cameraLabel
+            .anchor(top: cameraButton.bottomAnchor,
+                    bottom: galleryLabel.bottomAnchor)
         
-        deletePPButton.anchor(top: containerView.topAnchor,
-                              right: containerView.rightAnchor,
-                              paddingTop: 12,
-                              paddingRight: 12)
+        deletePPButton
+            .anchor(top: containerView.topAnchor,
+                    right: containerView.rightAnchor,
+                    paddingTop: 12,
+                    paddingRight: 12)
         
         galleryLabel.centerXAnchor.constraint(equalTo: galleryButton.centerXAnchor).isActive = true
         cameraLabel.centerXAnchor.constraint(equalTo: cameraButton.centerXAnchor).isActive = true
     }
 }
 
+// MARK: -PHOTO PICKING AND UPLOADING
 extension PhotoPicker: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
@@ -269,7 +283,7 @@ extension PhotoPicker: UIImagePickerControllerDelegate, UINavigationControllerDe
             let path = "images/\(email).\(imageName)"
             let docRef = db.collection("UserInformations").document("\(email)")
             docRef.updateData(["profileImgURL": path])
-            let uploadTask = profileRef.reference(withPath: path).putData(jpegData, metadata: nil) { (metadata, error) in
+            _ = profileRef.reference(withPath: path).putData(jpegData, metadata: nil) { (metadata, error) in
               guard let metadata = metadata else {
                 // Uh-oh, an error occurred!
                 return
@@ -285,4 +299,5 @@ extension PhotoPicker: UIImagePickerControllerDelegate, UINavigationControllerDe
         return paths[0]
     }
 }
+
 

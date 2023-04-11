@@ -7,60 +7,58 @@
 
 import UIKit
 
-class MyGoalCell: UITableViewCell {
+final class MyGoalCell: UITableViewCell {
     
     static var identifier = "MyGoalCell"
     static var myGoalSettings: MyGoalSettingsController!
     var myViewController: UIViewController!
-    let backGroundColor = ThemesOptions.backGroundColor
+    private let backGroundColor = ThemesOptions.backGroundColor
     
-    let title = {
+    // MARK: -UI ELEMENTS
+    private lazy var title = {
         let label = UILabel()
         label.text = "My Goals".localized()
         label.font = UIFont.boldSystemFont(ofSize: 22)
         label.textColor = .white
         return label
     }()
-    let goal = {
+    private lazy var goal = {
         let label = UILabel()
         label.text = "Goal:".localized()
         label.makeLargeText(fontSize: 18)
         label.textColor = .white
         return label
     }()
-    let goalValue = {
+    private lazy var goalValue = {
         let label = UILabel()
         label.textColor = .systemGray
         return label
-        
     }()
-    let weight = {
+    private lazy var weight = {
         let label = UILabel()
         label.text = "Weight:".localized()
         label.makeLargeText(fontSize: 18)
         label.textColor = .white
         return label
     }()
-    let weightValue = {
+    private lazy var weightValue = {
         let label = UILabel()
         label.textColor = .systemGray
         return label
-        
     }()
-    let calories = {
+    private lazy var calories = {
         let label = UILabel()
         label.text = "Calories:".localized()
         label.makeLargeText(fontSize: 18)
         label.textColor = .white
         return label
     }()
-    let caloriesValue = {
+    private lazy var caloriesValue = {
         let label = UILabel()
         label.textColor = .systemGray
         return label
-        
     }()
-    let editButton = {
+    private lazy var editButton = {
         let button = UIButton()
         button.setTitle("EDIT", for: .normal)
         button.titleLabel?.font = .boldSystemFont(ofSize: 16)
@@ -68,7 +66,8 @@ class MyGoalCell: UITableViewCell {
         button.backgroundColor = ThemesOptions.buttonBackGColor
         return button
     }()
-
+    
+    // MARK: -INIT-CELL
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         linkViews()
@@ -80,6 +79,7 @@ class MyGoalCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: -VIEWS CONNECTION
     func linkViews(){
         contentView.addSubview(title)
         contentView.addSubview(editButton)
@@ -91,12 +91,14 @@ class MyGoalCell: UITableViewCell {
         contentView.addSubview(caloriesValue)
     }
     
+    // MARK: -CONFIGURATION
     func configureView(){
-        editButton.addTarget(self, action: #selector(tapped), for: .touchUpInside)
+        editButton.addTarget(self, action: #selector(editButtonTapped), for: .touchUpInside)
     }
     
+    // MARK: -FUNCTIONS
     func setGoalCell(model: GoalCellModel){
-        goalValue.text = model.goalType.localized()
+        goalValue.text = model.goalType
         weightValue.text = model.weight
         var calorieGoal: String = ""
         if model.isAdviced{
@@ -104,30 +106,78 @@ class MyGoalCell: UITableViewCell {
             calorieGoal = "Adviced".localized()
         }else{
             caloriesValue.text = model.manuelCalorieGoal
-            calorieGoal = "Manuel"
+            calorieGoal = "Manuel".localized()
         }
         
         MyGoalCell.myGoalSettings = MyGoalSettingsController(goalValue: model.goalType , weightValue: model.weight, goalCaloryValue: calorieGoal, activenessValue: model.activeness, goalWeightValue: model.goalWeight, weeklyGoalValue: model.weeklyGoal
         )
     }
     
-    @objc func tapped() {
+    @objc func editButtonTapped() {
         myViewController.navigationController?.pushViewController(MyGoalCell.myGoalSettings, animated: true)
     }
     
+    // MARK: -LAYOUT
     override func layoutSubviews() {
         super.layoutSubviews()
-        title.anchor(top: contentView.topAnchor, left: contentView.leftAnchor, paddingTop: 16 ,paddingLeft: 24)
-        editButton.anchor(top: title.topAnchor, bottom: title.bottomAnchor, right: contentView.rightAnchor, paddingRight: 16)
-        editButton.widthAnchor.constraint(equalToConstant: 64).isActive = true
+        title
+            .anchor(top: contentView.topAnchor,
+                    left: contentView.leftAnchor,
+                    paddingTop: 16,
+                    paddingLeft: 24)
         
-        goal.anchor(top: title.bottomAnchor, left: title.leftAnchor, paddingTop: 16, paddingLeft: 0, width: 75)
-        goalValue.anchor(top: goal.topAnchor, left: goal.rightAnchor, right: contentView.rightAnchor, paddingLeft: 4, paddingRight: 8)
+        editButton
+            .anchor(top: title.topAnchor,
+                    bottom: title.bottomAnchor,
+                    right: contentView.rightAnchor,
+                    paddingRight: 16)
         
-        weight.anchor(top: goal.bottomAnchor, left: title.leftAnchor, paddingTop: 8, paddingLeft: 0, width: 75)
-        weightValue.anchor(top: weight.topAnchor, left: weight.rightAnchor, right: goalValue.rightAnchor, paddingLeft: 4, paddingRight: 8)
-        calories.anchor(top: weight.bottomAnchor, left: title.leftAnchor, bottom: contentView.bottomAnchor, paddingTop: 8, paddingBottom: 16, width: 75)
-        caloriesValue.anchor(top: calories.topAnchor, left: calories.rightAnchor, bottom: calories.bottomAnchor, right: goalValue.rightAnchor, paddingLeft: 4)
+        editButton
+            .widthAnchor.constraint(equalToConstant: 64).isActive = true
+        
+        goal
+            .anchor(top: title.bottomAnchor,
+                    left: title.leftAnchor,
+                    paddingTop: 16,
+                    paddingLeft: 0,
+                    width: 65)
+        
+        goalValue
+            .anchor(top: goal.topAnchor,
+                    left: goal.rightAnchor,
+                    right: contentView.rightAnchor,
+                    paddingLeft: 0,
+                    paddingRight: 8)
+        
+        weight
+            .anchor(top: goal.bottomAnchor,
+                    left: title.leftAnchor,
+                    paddingTop: 8,
+                    paddingLeft: 0,
+                    width: 65)
+        
+        weightValue
+            .anchor(top: weight.topAnchor,
+                    left: weight.rightAnchor,
+                    right: goalValue.rightAnchor,
+                    paddingLeft: 0,
+                    paddingRight: 8)
+        
+        calories
+            .anchor(top: weight.bottomAnchor,
+                    left: title.leftAnchor,
+                    bottom: contentView.bottomAnchor,
+                    paddingTop: 8,
+                    paddingBottom: 16,
+                    width: 65)
+        
+        caloriesValue
+            .anchor(top: calories.topAnchor,
+                    left: calories.rightAnchor,
+                    bottom: calories.bottomAnchor,
+                    right: goalValue.rightAnchor,
+                    paddingLeft: 0)
     }
 }
+
 

@@ -8,15 +8,20 @@
 import UIKit
 import DropDown
 
-class ProfileSettingsController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+final class ProfileSettingsController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    let tableView: UITableView = UITableView()
-    var nameValue: String!
-    var genderValue: String!
-    var diaterValue: String!
-    var heightValue: String!
+    private var nameValue: String!
+    private var genderValue: String!
+    private var diaterValue: String!
+    private var heightValue: String!
+    private let backGroundColor = ThemesOptions.backGroundColor
+    private let cellBackgColor = ThemesOptions.cellBackgColor
+    private var profileSettingModels: [SettingModel] = []
+
+    // MARK: -UI ELEMENTS
+    private lazy var tableView: UITableView = UITableView()
     
-    let tableTitle = {
+    private lazy var tableTitle = {
         let label = UILabel()
         label.text = "Profile Settings".localized()
         label.font = UIFont(name: "Copperplate Bold", size: 33)
@@ -24,19 +29,7 @@ class ProfileSettingsController: UIViewController, UITableViewDelegate, UITableV
         return label
     }()
     
-    let backGroundColor = ThemesOptions.backGroundColor
-    let cellBackgColor = ThemesOptions.cellBackgColor
-    var profileSettingModels: [SettingModel] = []
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        profileSettingModels = fetcData()
-        linkViews()
-        configureView()
-        layoutViews()
-        delegateTableView()
-    }
-    
+    // MARK: -INIT-CONTROLLER
     init(nameValue: String!, genderValue: String!, diaterValue: String!, heightValue: String!) {
         super.init(nibName: nil, bundle: nil)
         self.nameValue = nameValue
@@ -49,15 +42,27 @@ class ProfileSettingsController: UIViewController, UITableViewDelegate, UITableV
         fatalError("init(coder:) has not been implemented")
     }
     
-    func delegateTableView(){
-        tableView.delegate = self
-        tableView.dataSource = self
+    // MARK: -VIEW LIFECYCLE
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        profileSettingModels = fetcData()
+        linkViews()
+        configureView()
+        layoutViews()
+        delegateTableView()
     }
     
+    // MARK: -VIEWS CONNECTION
     func linkViews(){
         view.backgroundColor = backGroundColor
         view.addSubview(tableView)
         view.addSubview(tableTitle)
+    }
+    
+    // MARK: -CONFIGURATION
+    func delegateTableView(){
+        tableView.delegate = self
+        tableView.dataSource = self
     }
     
     func configureView(){
@@ -66,11 +71,26 @@ class ProfileSettingsController: UIViewController, UITableViewDelegate, UITableV
         navigationItem.largeTitleDisplayMode = .never
     }
     
+    // MARK: -LAYOUT
     func layoutViews(){
-        tableTitle.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, bottom: tableView.topAnchor, right: view.rightAnchor, paddingTop: 32, paddingLeft: 16, paddingBottom: 16, paddingRight: 16)
-        tableView.anchor(top: tableTitle.bottomAnchor, left: tableTitle.leftAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, right: tableTitle.rightAnchor)
+        tableTitle
+            .anchor(top: view.safeAreaLayoutGuide.topAnchor,
+                    left: view.leftAnchor,
+                    bottom: tableView.topAnchor,
+                    right: view.rightAnchor,
+                    paddingTop: 32,
+                    paddingLeft: 16,
+                    paddingBottom: 16,
+                    paddingRight: 16)
+        
+        tableView
+            .anchor(top: tableTitle.bottomAnchor,
+                    left: tableTitle.leftAnchor,
+                    bottom: view.safeAreaLayoutGuide.bottomAnchor,
+                    right: tableTitle.rightAnchor)
     }
     
+    // MARK: -TABLEVIEW FUNCTIONS
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return profileSettingModels.count
     }
@@ -84,7 +104,7 @@ class ProfileSettingsController: UIViewController, UITableViewDelegate, UITableV
         return cell
     }
 }
-
+// MARK: -DATA FETCH
 extension ProfileSettingsController {
     func fetcData() -> [SettingModel]{
         let profileSetting1 = SettingModel(textLabel: "Name".localized(), textValue: nameValue)
@@ -95,4 +115,5 @@ extension ProfileSettingsController {
         return [profileSetting1, profileSetting2, profileSetting3, profileSetting4]
     }
 }
+
 

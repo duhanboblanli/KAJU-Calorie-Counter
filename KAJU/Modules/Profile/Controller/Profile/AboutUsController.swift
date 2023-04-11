@@ -7,11 +7,12 @@
 
 import UIKit
 
-class AboutUsController: UIViewController{
+final class AboutUsController: UIViewController{
     
-    let backGroundColor = ThemesOptions.backGroundColor
+    private let backGroundColor = ThemesOptions.backGroundColor
     
-    let scrollView = {
+    // MARK: -UI ELEMENTS
+    private lazy var scrollView = {
         let scrollView = UIScrollView()
         scrollView.alwaysBounceVertical = true
         scrollView.translatesAutoresizingMaskIntoConstraints = false
@@ -19,10 +20,10 @@ class AboutUsController: UIViewController{
         scrollView.backgroundColor = ThemesOptions.backGroundColor
         return scrollView
     }()
-    let containerView = {
+    private lazy var containerView = {
         return UIView()
     }()
-    let aboutUsImageView = {
+    private lazy var aboutUsImageView = {
         let imageView = UIImageView()
         let height = CGFloat(300)
         imageView.anchor(height: height)
@@ -31,7 +32,7 @@ class AboutUsController: UIViewController{
         imageView.contentMode = .scaleAspectFit
         return imageView
     }()
-    let aboutUsDesc = {
+    private lazy var aboutUsDesc = {
         let textView = UITextView()
         let height = CGFloat(120)
         textView.anchor(height: height)
@@ -43,13 +44,13 @@ class AboutUsController: UIViewController{
         textView.text = Texts.aboutString
         return textView
     }()
-    let socialMediaContainer = {
+    private lazy var socialMediaContainer = {
         let view = UIView()
         let height = CGFloat(80)
         view.anchor(height: height)
         return view
     }()
-    let facebookButton = {
+    private lazy var facebookButton = {
         let button = UIButton()
         let size = CGFloat(36)
         button.anchor(width: size, height: size)
@@ -57,7 +58,7 @@ class AboutUsController: UIViewController{
         button.accessibilityIdentifier = "facebook"
         return button
     }()
-    let instagramButton = {
+    private lazy var instagramButton = {
         let button = UIButton()
         let size = CGFloat(36)
         button.anchor(width: size, height: size)
@@ -65,7 +66,7 @@ class AboutUsController: UIViewController{
         button.accessibilityIdentifier = "instagram"
         return button
     }()
-    let twitterButton = {
+    private lazy var twitterButton = {
         let button = UIButton()
         let size = CGFloat(36)
         button.anchor(width: size, height: size)
@@ -73,7 +74,7 @@ class AboutUsController: UIViewController{
         button.accessibilityIdentifier = "twitter"
         return button
     }()
-    let discordButton = {
+    private lazy var discordButton = {
         let button = UIButton()
         let size = CGFloat(36)
         button.anchor(width: size, height: size)
@@ -81,42 +82,41 @@ class AboutUsController: UIViewController{
         button.accessibilityIdentifier = "discord"
         return button
     }()
-    let appVersionContainer = {
+    private lazy var appVersionContainer = {
         let view = UIView()
         let height = CGFloat(50)
         view.anchor(height: height)
         return view
     }()
-    let appVersionLabel = {
+    private lazy var appVersionLabel = {
         let label = UILabel()
         label.text = "App Version".localized()
         label.font = UIFont.systemFont(ofSize: 20)
         label.textColor = .white
         return label
     }()
-    let appVersionValue = {
+    private lazy var appVersionValue = {
         let label = UILabel()
         label.text = "0.0.1"
         label.textColor = .white
         return label
     }()
-    let descTitle = {
+    private lazy var descTitle = {
         let label = UILabel()
         let height = CGFloat(50)
         label.anchor(height: height)
         label.text = "About KAJU".localized()
         label.font = UIFont.systemFont(ofSize: 30)
         label.textColor = .white
-        
         return label
     }()
-    let spacer = {
+    private lazy var spacer = {
         let view = UIView()
         let height = CGFloat(80)
         view.anchor(height: height)
         return view
     }()
-    let policyButton: UIButton = {
+    private lazy var policyButton: UIButton = {
         let policyBText = UILabel()
         let button = UIButton()
         let height = CGFloat(80)
@@ -130,6 +130,7 @@ class AboutUsController: UIViewController{
         return button
     }()
     
+    // MARK: -VIEW LIFECYCLE
     override func viewDidLoad() {
         super.viewDidLoad()
         linkViews()
@@ -137,6 +138,7 @@ class AboutUsController: UIViewController{
         configureView()
     }
     
+    // MARK: -VIEWS CONNECTION
     func linkViews(){
         view.addSubview(scrollView)
         scrollView.addSubview(containerView)
@@ -155,6 +157,7 @@ class AboutUsController: UIViewController{
         socialMediaContainer.addSubview(discordButton)
     }
     
+    // MARK: -CONFUGURATION
     func configureView(){
         navigationItem.largeTitleDisplayMode = .never
         policyButton.accessibilityIdentifier = "policy"
@@ -167,6 +170,7 @@ class AboutUsController: UIViewController{
         addTopBorder(to: spacer)
     }
     
+    // MARK: -FUNCTIONS
     @objc func goToTheLink(sender: UIButton){
         switch sender.accessibilityIdentifier {
         case "facebook":
@@ -185,80 +189,95 @@ class AboutUsController: UIViewController{
         }
     }
     
+    // MARK: -LAYOUT
     override func viewDidLayoutSubviews() {
+        scrollView
+            .anchor(top: view.topAnchor,
+                    left: view.leftAnchor,
+                    bottom: view.bottomAnchor,
+                    right: view.rightAnchor)
         
-        scrollView.anchor(top: view.topAnchor,
-                          left: view.leftAnchor,
-                          bottom: view.bottomAnchor,
-                          right: view.rightAnchor)
+        containerView
+            .anchor(top: scrollView.contentLayoutGuide.topAnchor,
+                    left: scrollView.contentLayoutGuide.leftAnchor,
+                    bottom: scrollView.contentLayoutGuide.bottomAnchor,
+                    right: scrollView.contentLayoutGuide.rightAnchor,
+                    width: view.frame.width)
         
-        containerView.anchor(top: scrollView.contentLayoutGuide.topAnchor,
-                             left: scrollView.contentLayoutGuide.leftAnchor,
-                             bottom: scrollView.contentLayoutGuide.bottomAnchor,
-                             right: scrollView.contentLayoutGuide.rightAnchor,
-                             width: view.frame.width)
+        aboutUsImageView
+            .anchor(top: containerView.topAnchor,
+                    left: containerView.leftAnchor,
+                    right: containerView.rightAnchor)
         
-        aboutUsImageView.anchor(top: containerView.topAnchor,
-                                left: containerView.leftAnchor,
-                                right: containerView.rightAnchor)
+        descTitle
+            .anchor(top: aboutUsImageView.bottomAnchor,
+                    left: aboutUsImageView.leftAnchor,
+                    bottom: aboutUsDesc.topAnchor,
+                    right: aboutUsDesc.rightAnchor,
+                    paddingTop: 16,
+                    paddingLeft: 19)
         
-        descTitle.anchor(top: aboutUsImageView.bottomAnchor,
-                         left: aboutUsImageView.leftAnchor,
-                         bottom: aboutUsDesc.topAnchor,
-                         right: aboutUsDesc.rightAnchor,
-                         paddingTop: 16,
-                         paddingLeft: 19)
+        aboutUsDesc
+            .anchor(top: descTitle.bottomAnchor,
+                    left: containerView.leftAnchor,
+                    right: containerView.rightAnchor,
+                    paddingLeft: 16, paddingRight: 16)
         
-        aboutUsDesc.anchor(top: descTitle.bottomAnchor,
-                           left: containerView.leftAnchor,
-                           right: containerView.rightAnchor,
-                           paddingLeft: 16, paddingRight: 16)
+        socialMediaContainer
+            .anchor(top: aboutUsDesc.bottomAnchor,
+                    paddingTop: 32)
         
-        socialMediaContainer.anchor(top: aboutUsDesc.bottomAnchor,
-                                    paddingTop: 32)
+        facebookButton
+            .anchor(left: socialMediaContainer.leftAnchor,
+                    paddingLeft: 16)
         
-        facebookButton.anchor(left: socialMediaContainer.leftAnchor,
-                              paddingLeft: 16)
+        instagramButton
+            .anchor(left: facebookButton.rightAnchor,
+                    paddingLeft: 32)
         
-        instagramButton.anchor(left: facebookButton.rightAnchor,
-                               paddingLeft: 32)
+        twitterButton
+            .anchor(left: instagramButton.rightAnchor,
+                    paddingLeft: 32)
         
-        twitterButton.anchor(left: instagramButton.rightAnchor,
-                             paddingLeft: 32)
+        discordButton
+            .anchor(left: twitterButton.rightAnchor,
+                    right: socialMediaContainer.rightAnchor,
+                    paddingLeft: 32,
+                    paddingRight: 16)
         
-        discordButton.anchor(left: twitterButton.rightAnchor,
-                             right: socialMediaContainer.rightAnchor,
-                             paddingLeft: 32,
-                             paddingRight: 16)
+        appVersionContainer
+            .anchor(top: socialMediaContainer.bottomAnchor,
+                    left: containerView.leftAnchor,
+                    right: containerView.rightAnchor,
+                    paddingTop: 32)
+        
+        appVersionLabel
+            .anchor(top: appVersionContainer.topAnchor,
+                    left: appVersionContainer.leftAnchor,
+                    paddingLeft: 24)
+        
+        appVersionValue
+            .anchor(top: appVersionLabel.bottomAnchor,
+                    left: appVersionLabel.leftAnchor,
+                    bottom: appVersionContainer.bottomAnchor)
+
+        policyButton
+            .anchor(top: appVersionContainer.bottomAnchor,
+                    left: containerView.leftAnchor,
+                    right: containerView.rightAnchor,
+                    paddingTop: 16)
+        
+        spacer
+            .anchor(top: policyButton.bottomAnchor,
+                    left: containerView.leftAnchor,
+                    bottom: containerView.bottomAnchor,
+                    right: containerView.rightAnchor)
         
         socialMediaContainer.centerXAnchor.constraint(equalTo: containerView.centerXAnchor).isActive = true
         facebookButton.centerYAnchor.constraint(equalTo: socialMediaContainer.centerYAnchor).isActive = true
         instagramButton.centerYAnchor.constraint(equalTo: socialMediaContainer.centerYAnchor).isActive = true
         twitterButton.centerYAnchor.constraint(equalTo: socialMediaContainer.centerYAnchor).isActive = true
         discordButton.centerYAnchor.constraint(equalTo: socialMediaContainer.centerYAnchor).isActive = true
-        
-        appVersionContainer.anchor(top: socialMediaContainer.bottomAnchor,
-                                   left: containerView.leftAnchor,
-                                   right: containerView.rightAnchor,
-                                   paddingTop: 32)
-        
-        appVersionLabel.anchor(top: appVersionContainer.topAnchor,
-                               left: appVersionContainer.leftAnchor,
-                               paddingLeft: 24)
-        
-        appVersionValue.anchor(top: appVersionLabel.bottomAnchor,
-                               left: appVersionLabel.leftAnchor,
-                               bottom: appVersionContainer.bottomAnchor)
-        
-        policyButton.anchor(top: appVersionContainer.bottomAnchor,
-                            left: containerView.leftAnchor,
-                            right: containerView.rightAnchor,
-                            paddingTop: 16)
-        
-        spacer.anchor(top: policyButton.bottomAnchor,
-                      left: containerView.leftAnchor,
-                      bottom: containerView.bottomAnchor,
-                      right: containerView.rightAnchor)
     }
 }
 
@@ -282,3 +301,4 @@ extension UIView {
     }
 }
     
+

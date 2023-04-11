@@ -9,17 +9,18 @@ import UIKit
 import FirebaseAuth
 import FirebaseFirestore
 
-class Editor: UIViewController {
+final class Editor: UIViewController {
     
-    var startFromZero = false
-    let db = DatabaseSingleton.db
-    let backGroundColor = ThemesOptions.backGroundColor
-    let cellBackgColor = ThemesOptions.cellBackgColor
-    var eyeButton: UIButton?
-    var textLabel: UILabel!
-    var textValue: UILabel!
+    private var startFromZero = false
+    private let db = DatabaseSingleton.db
+    private let backGroundColor = ThemesOptions.backGroundColor
+    private let cellBackgColor = ThemesOptions.cellBackgColor
     
-    let contentView = {
+    // MARK: -UI ELEMENTS
+    private var textLabel: UILabel!
+    private var textValue: UILabel!
+    
+    private lazy var contentView = {
         let view = UIView()
         let width = CGFloat(275)
         let height = CGFloat(200)
@@ -28,13 +29,13 @@ class Editor: UIViewController {
         view.layer.cornerRadius = 10
         return view
     }()
-    let titleLabel = {
+    private lazy var titleLabel = {
         let label = UILabel()
         label.textColor = .white
-        label.font = UIFont.systemFont(ofSize: 28)
+        label.font = UIFont.systemFont(ofSize: 22)
         return label
     }()
-    let textField = {
+    private lazy var textField = {
         let textField = UITextField()
         let height = CGFloat(44)
         textField.anchor(height: height)
@@ -43,19 +44,18 @@ class Editor: UIViewController {
         textField.backgroundColor = ThemesOptions.cellBackgColor
         return textField
     }()
-    let doneButton = {
+    private lazy var doneButton = {
         let button = UIButton()
         let width = CGFloat(76)
         let height = CGFloat(40)
         button.anchor(width: width, height: height)
         button.setTitle("Done".localized(), for: .normal)
         button.titleLabel?.font = .boldSystemFont(ofSize: 18)
-
         button.backgroundColor = ThemesOptions.buttonBackGColor
         button.layer.cornerRadius = 20
         return button
     }()
-    let cancelButton = {
+    private lazy var cancelButton = {
         let button = UIButton()
         let width = CGFloat(88)
         let height = CGFloat(40)
@@ -67,6 +67,27 @@ class Editor: UIViewController {
         return button
     }()
     
+    // MARK: -INIT-CONTROLLER
+    init(textLabel: UILabel, textValue: UILabel) {
+        super.init(nibName: nil, bundle: nil)
+        modalPresentationStyle = .overFullScreen
+        self.textLabel = textLabel
+        self.textValue = textValue
+    }
+    
+    init(textLabel: UILabel, textValue: UILabel, zero: Bool) {
+        super.init(nibName: nil, bundle: nil)
+        modalPresentationStyle = .overFullScreen
+        self.textLabel = textLabel
+        self.textValue = textValue
+        self.startFromZero = zero
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: -VIEW LIFE CYCLE
     override func viewDidLoad() {
         super.viewDidLoad()
         linkViews()
@@ -86,24 +107,7 @@ class Editor: UIViewController {
         configureLayout()
     }
     
-    init(textLabel: UILabel, textValue: UILabel) {
-        super.init(nibName: nil, bundle: nil)
-        modalPresentationStyle = .overFullScreen
-        self.textLabel = textLabel
-        self.textValue = textValue
-    }
-    init(textLabel: UILabel, textValue: UILabel, zero: Bool) {
-        super.init(nibName: nil, bundle: nil)
-        modalPresentationStyle = .overFullScreen
-        self.textLabel = textLabel
-        self.textValue = textValue
-        self.startFromZero = zero
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
+    // MARK: -VIEWS CONNNECTION
     func linkViews(){
         view.backgroundColor = .black.withAlphaComponent(0.8)
         view.addSubview(contentView)
@@ -113,12 +117,14 @@ class Editor: UIViewController {
         contentView.addSubview(cancelButton)
     }
     
+    // MARK: -CONFIGURATION
     func configureView(){
         titleLabel.text = textLabel.text
         doneButton.addTarget(self, action: #selector(done), for: .touchUpInside)
         cancelButton.addTarget(self, action: #selector(cancel), for: .touchUpInside)
     }
     
+    // MARK: -FUNCTIONS
    @objc func done(){
        switch textLabel.text {
        case "Name".localized():
@@ -144,6 +150,7 @@ class Editor: UIViewController {
            return
        }
     }
+    
     func updateDBValue(key: String, value: Any){
         if let currentUserEmail = Auth.auth().currentUser?.email {
             let docRef = DatabaseSingleton.db.collection("UserInformations").document("\(currentUserEmail)")
@@ -152,7 +159,7 @@ class Editor: UIViewController {
     }
     func setAttrValue(key: String, value: Any){
         if key != "calorieGoal"{
-            textValue.text = textField.text?.localized()
+            textValue.text = textField.text
         }else{
             textValue.text = "Manuel"
         }
@@ -167,36 +174,42 @@ class Editor: UIViewController {
         self.dismiss(animated: true)
     }
     
+    // MARK: -LAYOUT
     func configureLayout(){
-        
         contentView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         contentView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         
-        titleLabel.anchor(top: contentView.topAnchor,
-                          left: contentView.leftAnchor,
-                          right: contentView.rightAnchor,
-                          paddingTop: 24,
-                          paddingLeft: 24,
-                          paddingRight: 16)
+        titleLabel
+            .anchor(top: contentView.topAnchor,
+                    left: contentView.leftAnchor,
+                    right: contentView.rightAnchor,
+                    paddingTop: 24,
+                    paddingLeft: 24,
+                    paddingRight: 16)
         
-        textField.anchor(top: titleLabel.bottomAnchor,
-                         left: titleLabel.leftAnchor,
-                         right: eyeButton?.leftAnchor ?? contentView.rightAnchor,
-                         paddingTop: 16,
-                         paddingRight: 24)
+        textField
+            .anchor(top: titleLabel.bottomAnchor,
+                    left: titleLabel.leftAnchor,
+                    right: contentView.rightAnchor,
+                    paddingTop: 16,
+                    paddingRight: 24)
         
-        cancelButton.anchor(top: textField.bottomAnchor,
-                            left: contentView.leftAnchor,
-                            bottom: contentView.bottomAnchor,
-                            paddingTop: 24,
-                            paddingLeft: 32,
-                            paddingBottom: 16)
-        doneButton.anchor(top: cancelButton.topAnchor,
-                          bottom: cancelButton.bottomAnchor,
-                          right: contentView.rightAnchor,
-                          paddingLeft: 32,
-                          paddingRight: 32)
+        cancelButton
+            .anchor(top: textField.bottomAnchor,
+                    left: contentView.leftAnchor,
+                    bottom: contentView.bottomAnchor,
+                    paddingTop: 24,
+                    paddingLeft: 32,
+                    paddingBottom: 16)
+        
+        doneButton
+            .anchor(top: cancelButton.topAnchor,
+                    bottom: cancelButton.bottomAnchor,
+                    right: contentView.rightAnchor,
+                    paddingLeft: 32,
+                    paddingRight: 32)
     }
 }
+
 
 

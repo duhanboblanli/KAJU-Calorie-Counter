@@ -7,12 +7,15 @@
 
 import UIKit
 
-class SettingsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+final class SettingsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    let backGroundColor = ThemesOptions.backGroundColor
-    var optionList: [ProfileOption] = []
-    let tableView = UITableView()
-    let tableTitle = {
+    private let backGroundColor = ThemesOptions.backGroundColor
+    private var optionList: [ProfileOption] = []
+    
+    // MARK: -UI ELEMENTS
+    private lazy var tableView = UITableView()
+    
+    private lazy var tableTitle = {
         let label = UILabel()
         label.text = "Settings".localized()
         label.font = UIFont(name: "Copperplate Bold", size: 33)
@@ -20,6 +23,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         return label
     }()
     
+    // MARK: -VIEW LIFECYCLE
     override func viewDidLoad() {
         super.viewDidLoad()
         optionList = fetchData()
@@ -29,19 +33,16 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         configureLayout()
     }
     
+    // MARK: -VIEWS CONNECTION
     func linkViews(){
         view.addSubview(tableTitle)
         view.addSubview(tableView)
     }
     
+    // MARK: -CONFIGURATION
     func configureView(){
         view.backgroundColor = backGroundColor
         navigationItem.largeTitleDisplayMode = .never
-    }
-    
-    func configureLayout(){
-        tableTitle.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, bottom: tableView.topAnchor, right: view.rightAnchor, paddingTop: 32, paddingLeft: 16, paddingBottom: 16, paddingRight: 16)
-        tableView.anchor(top: tableTitle.bottomAnchor, left: tableTitle.leftAnchor, bottom: view.bottomAnchor, right: tableTitle.rightAnchor)
     }
     
     func configureTableView(){
@@ -56,6 +57,26 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         tableView.dataSource = self
     }
     
+    // MARK: -LAYOUT
+    func configureLayout(){
+        tableTitle
+            .anchor(top: view.safeAreaLayoutGuide.topAnchor,
+                    left: view.leftAnchor,
+                    bottom: tableView.topAnchor,
+                    right: view.rightAnchor,
+                    paddingTop: 32,
+                    paddingLeft: 16,
+                    paddingBottom: 16,
+                    paddingRight: 16)
+        
+        tableView
+            .anchor(top: tableTitle.bottomAnchor,
+                    left: tableTitle.leftAnchor,
+                    bottom: view.bottomAnchor,
+                    right: tableTitle.rightAnchor)
+    }
+    
+    // MARK: -TABLEVIEW FUNCTIONS
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return optionList.count
     }
@@ -92,6 +113,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     }
 }
 
+// MARK: -FETCH DATA
 extension SettingsViewController {
     func fetchData() -> [ProfileOption]{
         let option1 = ProfileOption(image: UIImage(systemName: "lock.fill") ?? UIImage(), title: "Account".localized())
@@ -102,4 +124,5 @@ extension SettingsViewController {
         return[option1, option2, option3, option4]
     }
 }
+
 
