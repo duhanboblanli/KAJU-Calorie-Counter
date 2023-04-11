@@ -249,13 +249,18 @@
 			path = Utility;
 			sourceTree = "<group>";
 		};
-		FE21190D29E22D4D00408EE0 /* Supporting Files */ = {
+		FE21190D29E22D4D00408EE0 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				FE21191829E239AE00408EE0 /* DataManagers */,
+				FE21191729E2389700408EE0 /* Base */,
+				FE21191629E2370E00408EE0 /* Extensions */,
+				FE9B659C29E18F910031654F /* AppDelegate */,
+				2D119EE729E2F88500EB6EDD /* Localizable.strings */,
 				FEBF1DD72986BB4600FD4760 /* Info.plist */,
 				FE0BB009299519690062E096 /* GoogleService-Info.plist */,
 			);
-			path = "Supporting Files";
+			path = Utility;
 			sourceTree = "<group>";
 		};
 		FE21190E29E22E0300408EE0 /* Storyboards */ = {
@@ -278,35 +283,6 @@
 			path = Constant;
 			sourceTree = "<group>";
 		};
-		FE21191029E233D200408EE0 /* Foods(Main) */ = {
-			isa = PBXGroup;
-			children = (
-				FE08EA91298F0798008BDC6A /* MainViewController.swift */,
-				FE44DF0129B5DDC3005CD7C1 /* FoodDetailVC.swift */,
-				FE5DEF5C299BC5AC00F13802 /* FoodsViewController.swift */,
-				2DBCA23D29CB91A400B0653E /* BurnedCalTracker.swift */,
-			);
-			path = "Foods(Main)";
-			sourceTree = "<group>";
-		};
-		FE21191129E2342800408EE0 /* Recipes */ = {
-			isa = PBXGroup;
-			children = (
-				FEC7BF6629A3F2AC001B1EC9 /* RecipesViewController.swift */,
-				FEFFFD2229A63BFD0001999E /* DetailViewController.swift */,
-				FEFFFD2429A63C230001999E /* InstructionsViewController.swift */,
-			);
-			path = Recipes;
-			sourceTree = "<group>";
-		};
-		FE21191229E2345F00408EE0 /* EggTimer */ = {
-			isa = PBXGroup;
-			children = (
-				FEBF1DCD2986BB4400FD4760 /* EggTimerViewController.swift */,
-			);
-			path = EggTimer;
-			sourceTree = "<group>";
-		};
 		FE21191329E2355700408EE0 /* Welcome */ = {
 			isa = PBXGroup;
 			children = (
@@ -320,10 +296,8 @@
 		FE21191429E2359B00408EE0 /* Selections */ = {
 			isa = PBXGroup;
 			children = (
-				FE0BB00B29958C320062E096 /* GoalViewController.swift */,
-				FE1F72C429969C0D005FFC4B /* ActivenessViewController.swift */,
-				FE59984D298B0EDF002CB4DF /* CalculatorViewController.swift */,
-				FE59984F298B1C55002CB4DF /* CalculatorResultViewController.swift */,
+				FE32CCFB29E4CFF6000D0991 /* Model */,
+				FE32CCFA29E4CFDD000D0991 /* Controller */,
 			);
 			path = Selections;
 			sourceTree = "<group>";
@@ -400,6 +374,146 @@
 			path = Settings;
 			sourceTree = "<group>";
 		};
+		FE32CCEE29E4CCB7000D0991 /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				FE21191329E2355700408EE0 /* Welcome */,
+				FE21191429E2359B00408EE0 /* Selections */,
+				FE32CCF029E4CD60000D0991 /* Diary */,
+				FE32CCF129E4CE03000D0991 /* Foods */,
+				FE32CCF529E4CECE000D0991 /* Recipes */,
+				FE32CCF929E4CF91000D0991 /* EggTimer */,
+				FE32CCFC29E4D061000D0991 /* Profile */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		FE32CCF029E4CD60000D0991 /* Diary */ = {
+			isa = PBXGroup;
+			children = (
+				FE08EA91298F0798008BDC6A /* MainViewController.swift */,
+				2DBCA23D29CB91A400B0653E /* BurnedCalTracker.swift */,
+			);
+			path = Diary;
+			sourceTree = "<group>";
+		};
+		FE32CCF129E4CE03000D0991 /* Foods */ = {
+			isa = PBXGroup;
+			children = (
+				FE32CCF229E4CE2B000D0991 /* Model */,
+				FE32CCF329E4CE3F000D0991 /* View */,
+				FE32CCF429E4CE47000D0991 /* Controller */,
+			);
+			path = Foods;
+			sourceTree = "<group>";
+		};
+		FE32CCF229E4CE2B000D0991 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				2D850C3E299BFA6F00A525F0 /* FoodModel.swift */,
+				2D850C40299BFA8E00A525F0 /* FoodApiService.swift */,
+				2D850C42299BFAAD00A525F0 /* FoodViewModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		FE32CCF329E4CE3F000D0991 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				2DF9F2F7299D1B530023AB7C /* FoodTableViewCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		FE32CCF429E4CE47000D0991 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				FE44DF0129B5DDC3005CD7C1 /* FoodDetailVC.swift */,
+				FE5DEF5C299BC5AC00F13802 /* FoodsViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		FE32CCF529E4CECE000D0991 /* Recipes */ = {
+			isa = PBXGroup;
+			children = (
+				FE32CCF829E4CEF7000D0991 /* Model */,
+				FE32CCF729E4CEF1000D0991 /* View */,
+				FE32CCF629E4CEEA000D0991 /* Controller */,
+			);
+			path = Recipes;
+			sourceTree = "<group>";
+		};
+		FE32CCF629E4CEEA000D0991 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				FEC7BF6629A3F2AC001B1EC9 /* RecipesViewController.swift */,
+				FEFFFD2229A63BFD0001999E /* DetailViewController.swift */,
+				FEFFFD2429A63C230001999E /* InstructionsViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		FE32CCF729E4CEF1000D0991 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				FEC7BF5629A3F144001B1EC9 /* RecipeTableViewCell.swift */,
+				FED2FFB129A985DF00EDBF19 /* RecipeSearchCell.swift */,
+				FEE9E14F299DAB87007FA5FB /* RecipeTableView.swift */,
+				FE6FCCFE29A7B6B700FDE008 /* FavoritesCell.swift */,
+				FED9E41329E23B5400E05390 /* RecipesDetail */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		FE32CCF829E4CEF7000D0991 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				FEC7BF5829A3F146001B1EC9 /* AutoCompleteSearchResponse.swift */,
+				FEC7BF5429A3F143001B1EC9 /* Recipe.swift */,
+				FEC7BF5329A3F142001B1EC9 /* SpoonacularClient.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		FE32CCF929E4CF91000D0991 /* EggTimer */ = {
+			isa = PBXGroup;
+			children = (
+				FEBF1DCD2986BB4400FD4760 /* EggTimerViewController.swift */,
+			);
+			path = EggTimer;
+			sourceTree = "<group>";
+		};
+		FE32CCFA29E4CFDD000D0991 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				FE0BB00B29958C320062E096 /* GoalViewController.swift */,
+				FE1F72C429969C0D005FFC4B /* ActivenessViewController.swift */,
+				FE59984D298B0EDF002CB4DF /* CalculatorViewController.swift */,
+				FE59984F298B1C55002CB4DF /* CalculatorResultViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		FE32CCFB29E4CFF6000D0991 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				FE5E92AA298D1C5400947F7A /* BMI.swift */,
+				FE08EA8F298F06EC008BDC6A /* CalculatorBrain.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		FE32CCFC29E4D061000D0991 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				FEE2CDE129892A5B002DAA6F /* Model */,
+				FEE2CDE229892A6B002DAA6F /* View */,
+				FEE2CDE329892A73002DAA6F /* Controller */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
 		FE9B659C29E18F910031654F /* AppDelegate */ = {
 			isa = PBXGroup;
 			children = (
@@ -446,11 +560,11 @@
 		FEBF1DC82986BB4400FD4760 /* KAJU */ = {
 			isa = PBXGroup;
 			children = (
-				FED9E41A29E23F3C00E05390 /* MVC */,
+				FE32CCEE29E4CCB7000D0991 /* Modules */,
 				FE21190F29E2336F00408EE0 /* Constant */,
 				FE21190E29E22E0300408EE0 /* Storyboards */,
 				FEAD26EF29E18EB200A40A10 /* Resources */,
-				FE21190D29E22D4D00408EE0 /* Supporting Files */,
+				FE21190D29E22D4D00408EE0 /* Utility */,
 			);
 			path = KAJU;
 			sourceTree = "<group>";
@@ -465,46 +579,6 @@
 			path = Profile;
 			sourceTree = "<group>";
 		};
-		FEC7BF4F29A3EEB6001B1EC9 /* Food Edamam */ = {
-			isa = PBXGroup;
-			children = (
-				2D850C3E299BFA6F00A525F0 /* FoodModel.swift */,
-				2D850C40299BFA8E00A525F0 /* FoodApiService.swift */,
-				2D850C42299BFAAD00A525F0 /* FoodViewModel.swift */,
-			);
-			path = "Food Edamam";
-			sourceTree = "<group>";
-		};
-		FEC7BF5129A3EEFD001B1EC9 /* Recipes Spoonacular */ = {
-			isa = PBXGroup;
-			children = (
-				FEC7BF5829A3F146001B1EC9 /* AutoCompleteSearchResponse.swift */,
-				FEC7BF5429A3F143001B1EC9 /* Recipe.swift */,
-				FEC7BF5329A3F142001B1EC9 /* SpoonacularClient.swift */,
-			);
-			path = "Recipes Spoonacular";
-			sourceTree = "<group>";
-		};
-		FEC7BF5229A3F0B3001B1EC9 /* Calculator */ = {
-			isa = PBXGroup;
-			children = (
-				FE5E92AA298D1C5400947F7A /* BMI.swift */,
-				FE08EA8F298F06EC008BDC6A /* CalculatorBrain.swift */,
-			);
-			path = Calculator;
-			sourceTree = "<group>";
-		};
-		FED9E41229E23AEE00E05390 /* Recipes */ = {
-			isa = PBXGroup;
-			children = (
-				FEC7BF5629A3F144001B1EC9 /* RecipeTableViewCell.swift */,
-				FED2FFB129A985DF00EDBF19 /* RecipeSearchCell.swift */,
-				FEE9E14F299DAB87007FA5FB /* RecipeTableView.swift */,
-				FE6FCCFE29A7B6B700FDE008 /* FavoritesCell.swift */,
-			);
-			path = Recipes;
-			sourceTree = "<group>";
-		};
 		FED9E41329E23B5400E05390 /* RecipesDetail */ = {
 			isa = PBXGroup;
 			children = (
@@ -512,14 +586,6 @@
 				FE9BCD7629A6C2A400D88351 /* InstructionsHeaderCell.swift */,
 			);
 			path = RecipesDetail;
-			sourceTree = "<group>";
-		};
-		FED9E41429E23C2000E05390 /* Foods */ = {
-			isa = PBXGroup;
-			children = (
-				2DF9F2F7299D1B530023AB7C /* FoodTableViewCell.swift */,
-			);
-			path = Foods;
 			sourceTree = "<group>";
 		};
 		FED9E41529E23C4100E05390 /* Profile */ = {
@@ -567,25 +633,10 @@
 			path = Local;
 			sourceTree = "<group>";
 		};
-		FED9E41A29E23F3C00E05390 /* MVC */ = {
-			isa = PBXGroup;
-			children = (
-				2D119EE129E2F73000EB6EDD /* Utility */,
-				FEE2CDE129892A5B002DAA6F /* Model */,
-				FEE2CDE229892A6B002DAA6F /* View */,
-				FEE2CDE329892A73002DAA6F /* Controller */,
-			);
-			path = MVC;
-			sourceTree = "<group>";
-		};
 		FEE2CDE129892A5B002DAA6F /* Model */ = {
 			isa = PBXGroup;
 			children = (
 				FEC30E5029B7642400D20327 /* Profile */,
-				FEC7BF5129A3EEFD001B1EC9 /* Recipes Spoonacular */,
-				FEC7BF4F29A3EEB6001B1EC9 /* Food Edamam */,
-				FEC7BF5229A3F0B3001B1EC9 /* Calculator */,
-				FE21191829E239AE00408EE0 /* DataManagers */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -593,9 +644,6 @@
 		FEE2CDE229892A6B002DAA6F /* View */ = {
 			isa = PBXGroup;
 			children = (
-				FED9E41229E23AEE00E05390 /* Recipes */,
-				FED9E41329E23B5400E05390 /* RecipesDetail */,
-				FED9E41429E23C2000E05390 /* Foods */,
 				FED9E41529E23C4100E05390 /* Profile */,
 				FED9E41629E23C7300E05390 /* ProfileSettings */,
 				FED9E41729E23CBF00E05390 /* Goal */,
@@ -606,15 +654,7 @@
 		FEE2CDE329892A73002DAA6F /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				FE21191329E2355700408EE0 /* Welcome */,
-				FE21191429E2359B00408EE0 /* Selections */,
-				FE21191029E233D200408EE0 /* Foods(Main) */,
-				FE21191129E2342800408EE0 /* Recipes */,
-				FE21191229E2345F00408EE0 /* EggTimer */,
 				FE21191529E235D500408EE0 /* Profile */,
-				FE21191629E2370E00408EE0 /* Extensions */,
-				FE9B659C29E18F910031654F /* AppDelegate */,
-				FE21191729E2389700408EE0 /* Base */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -966,7 +1006,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "KAJU/Supporting Files/Info.plist";
+				INFOPLIST_FILE = KAJU/Utility/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -995,7 +1035,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "KAJU/Supporting Files/Info.plist";
+				INFOPLIST_FILE = KAJU/Utility/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;

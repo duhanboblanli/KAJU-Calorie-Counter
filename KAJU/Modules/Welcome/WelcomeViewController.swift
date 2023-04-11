@@ -30,7 +30,6 @@ class WelcomeViewController: UIViewController {
         let backButton = UIBarButtonItem(title: "", style: .plain, target: navigationController, action: nil)
         navigationItem.leftBarButtonItem = backButton
         if !UIDevice.hasNotch{
-            print("model:", UIDevice.hasNotch)
             logInBottomConstraint.constant = -20
         }
     }
