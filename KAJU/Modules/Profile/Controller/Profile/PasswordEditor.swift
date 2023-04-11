@@ -27,7 +27,7 @@ final class PasswordEditor: UIViewController {
     private lazy var titleLabel = {
         let label = UILabel()
         label.textColor = .white
-        label.font = UIFont.systemFont(ofSize: 28)
+        label.font = UIFont.systemFont(ofSize: 22)
         return label
     }()
     private lazy var oldPassword = {
