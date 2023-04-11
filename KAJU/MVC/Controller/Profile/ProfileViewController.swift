@@ -10,19 +10,18 @@ import FirebaseAuth
 import FirebaseFirestore
 import FirebaseCore
 
+final class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
-
-class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-
-
-
-    let db = DatabaseSingleton.db
-    var profile: ProfileCellModel?
-    var goal: GoalCellModel?
-    let table: UITableView = UITableView()
-    let backGroundColor = ThemesOptions.backGroundColor
-    let cellBackgColor = ThemesOptions.cellBackgColor
+    private let db = DatabaseSingleton.db
+    private let backGroundColor = ThemesOptions.backGroundColor
+    private let cellBackgColor = ThemesOptions.cellBackgColor
     
+    // MARK: -UI ELEMENTS
+    private lazy var table: UITableView = UITableView()
+    private var profile: ProfileCellModel?
+    private var goal: GoalCellModel?
+    
+    // MARK: VIEW LIFECYCLE
     override func viewDidLoad() {
         super.viewDidLoad()
         addRealTimeUpdate()
@@ -35,11 +34,31 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        defineLabels()
     }
-    func defineLabels(){
-        navigationItem.title = navigationItem.title?.localized()
+    
+    // MARK: -VIEWS CONNECTION
+    func linkViews(){
+        view.backgroundColor = backGroundColor
+        view.addSubview(table)
     }
+    
+    // MARK: -CONFIGURATION
+    func configureView(){
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "gearshape.fill"), style: .plain, target: self, action: #selector(settingsButtonTapped))
+        navigationItem.rightBarButtonItem?.tintColor = .white
+        navigationItem.largeTitleDisplayMode = .never
+    }
+    
+    func configureTableView(){
+        table.delegate = self
+        table.dataSource = self
+        table.register(ProfileCell.self, forCellReuseIdentifier: ProfileCell.identifier)
+        table.register(MyGoalCell.self, forCellReuseIdentifier: MyGoalCell.identifier)
+        table.backgroundColor = backGroundColor
+        table.tableHeaderView?.isHidden = true
+    }
+    
+    // MARK: -FUNCTIONS
     func addRealTimeUpdate(){
         if let currentUserEmail = Auth.auth().currentUser?.email {
             db.collection("UserInformations").document("\(currentUserEmail)")
@@ -60,7 +79,6 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         }
     }
     
-    
     func checkProfileSettingsUpdate (data: Dictionary<String, Any>){
         if let name = data["name"]{self.profile?.name = name as? String ?? ""}
         if let height = data["height"]{self.profile?.height = "\(height)"}
@@ -73,55 +91,45 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         if let goalType = data["goalType"]{self.goal?.goalType = goalType as? String ?? ""}
         if let manuelCalorie = data["calorieGoal"]{self.goal?.manuelCalorieGoal = "\(manuelCalorie)"}
         if let advicedCalorie = data["calorie"]{self.goal?.advicedCalorieGoal = "\(advicedCalorie)"}
-        if let isAdviced = data["adviced"]{self.goal?.isAdviced = isAdviced as! Bool}
-        
-        
+        if let isAdviced = data["adviced"]{self.goal?.isAdviced = isAdviced as? Bool ?? true}
+        if let activeness = data["activeness"]{self.goal?.activeness = activeness as? String ?? "Moderate"}
         if let weight = data["weight"]{
             let weightWrapped = weight as? Double ?? 0
             self.goal?.weight = String(format: "%.2f", weightWrapped)
         }
     }
+    
     func updateDBValue(key: String, value: Any){
         if let currentUserEmail = Auth.auth().currentUser?.email {
             let docRef = DatabaseSingleton.db.collection("UserInformations").document("\(currentUserEmail)")
             docRef.updateData([key: value])
         }
     }
+    
     func updateCalorie(data: Dictionary<String, Any>){
-        
         var calculator = CalculatorBrain()
-        calculator.calculateCalorie(data["sex"] as! String,data["weight"] as! Float,data["height"] as! Float,data["age"] as! Float,data["bmh"] as! Float,data["changeCalorieAmount"] as! Int)
-        updateDBValue(key: "calorie", value: Int(calculator.getCalorie()))
-    }
-    
-    func linkViews(){
-        view.backgroundColor = backGroundColor
-        view.addSubview(table)
-    }
-    
-    func configureView(){
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "gearshape.fill"), style: .plain, target: self, action: #selector(settingsButtonTapped))
-        navigationItem.rightBarButtonItem?.tintColor = .white
-        navigationItem.largeTitleDisplayMode = .never
+        calculator.calculateCalorie(data["sex"] as? String ?? "", data["weight"] as? Float ?? 0, data["height"] as? Float ?? 0, data["age"] as? Float ?? 0,data["bmh"] as? Float ?? 0,data["changeCalorieAmount"] as? Int ?? 0)
+        updateDBValue(key: "calorie", value: Int(calculator.getCalorie()) ?? 0)
     }
     
     @objc func settingsButtonTapped() {
         navigationController?.pushViewController(SettingsViewController(), animated: true)
     }
     
+    // MARK: LAYOUT
     func configureLayout(){
-        table.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, right: view.rightAnchor,paddingTop: 32,paddingLeft: 16 ,paddingBottom: 8, paddingRight: 16)
+        table
+            .anchor(top: view.safeAreaLayoutGuide.topAnchor,
+                    left: view.leftAnchor,
+                    bottom: view.safeAreaLayoutGuide.bottomAnchor,
+                    right: view.rightAnchor,
+                    paddingTop: 32,
+                    paddingLeft: 16,
+                    paddingBottom: 8,
+                    paddingRight: 16)
     }
     
-    func configureTableView(){
-        table.delegate = self
-        table.dataSource = self
-        table.register(ProfileCell.self, forCellReuseIdentifier: ProfileCell.identifier)
-        table.register(MyGoalCell.self, forCellReuseIdentifier: MyGoalCell.identifier)
-        table.backgroundColor = backGroundColor
-        table.tableHeaderView?.isHidden = true
-    }
-    
+    // MARK: TABLEVIEW FUNCTIONS
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
@@ -172,6 +180,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
 }
 
+// MARK: -DATA FETCH
 extension ProfileViewController {
     func fetchProfileData() {
         if let currentUserEmail = Auth.auth().currentUser?.email {
@@ -179,7 +188,7 @@ extension ProfileViewController {
             docRef.getDocument { (document, error) in
                 if let document = document, document.exists {
                     if let data = document.data() {
-                        print("Document data: \(data)")
+                        debugPrint("Document data: \(data)")
                         if let goalType = data["goalType"],
                            let weight = data["weight"],
                            let calorie = data["calorie"],
@@ -191,24 +200,25 @@ extension ProfileViewController {
                            let caloryGoal = data["calorieGoal"],
                            let height = data["height"]{
                             let weightWrapped = weight as? Double ?? 0
-                            var activeness: String = "Moderate"
+                            var activeness: String = "Moderate".localized()
                             switch bmh as? Float{
-                            case 1.2: activeness = "Low"
-                            case 1.3: activeness = "Moderate"
-                            case 1.4: activeness = "High"
-                            case 1.5: activeness = "Very High"
-                            default: print("Error happened while choosing activeness")
+                            case 1.2: activeness = "Low".localized()
+                            case 1.3: activeness = "Moderate".localized()
+                            case 1.4: activeness = "High".localized()
+                            case 1.5: activeness = "Very High".localized()
+                            default: debugPrint("Error happened while choosing activeness")
                             }
-                            self.goal = GoalCellModel(goalType: "\(goalType)", weight: String(format: "%.2f", weightWrapped), activeness: "\(activeness)", goalWeight: "\(goalWeight)" , weeklyGoal: "\(weeklyGoal)",manuelCalorieGoal: "\(caloryGoal)", advicedCalorieGoal: "\(calorie)", isAdviced: isAdviced as! Bool)
-                            self.profile = ProfileCellModel(profileImage: UIImage(named: "defaultProfilePhoto") ?? UIImage(), name: data["name"] as? String ?? "Enter a name".localized(), sex: "\(sex)", dietaryType: data["dietaryType"] as? String ?? "Classic".localized(), height: "\(height)")
+                            self.goal = GoalCellModel(goalType: "\(goalType)", weight: String(format: "%.2f", weightWrapped), activeness: "\(activeness)", goalWeight: "\(goalWeight)" , weeklyGoal: "\(weeklyGoal)", manuelCalorieGoal: "\(caloryGoal)", advicedCalorieGoal: "\(calorie)", isAdviced: isAdviced as! Bool)
+                            self.profile = ProfileCellModel(profileImage: UIImage(named: "defaultProfilePhoto") ?? UIImage(), name: data["name"] as? String ?? "Enter a name", sex: "\(sex)", dietaryType: data["diateryType"] as? String ?? "Classic", height: "\(height)")
                             self.table.reloadData()
                         }
                     }
-                } else { print("Document does not exist.")}
+                } else { debugPrint("Document does not exist.") }
             }
         }
     }
 }
+
 
 
 

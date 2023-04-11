@@ -7,12 +7,15 @@
 
 import UIKit
 
-class SettingsCell: UITableViewCell {
-    
-    var settingIcon = UIImageView()
-    var settingLabel = UILabel()
+final class SettingsCell: UITableViewCell {
+
     static var identifier = "SettingsCell"
     
+    // MARK: -UI ELEMENTS
+    private lazy var settingIcon = UIImageView()
+    private lazy var settingLabel = UILabel()
+    
+    // MARK: INIT CELL
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         accessoryType = .disclosureIndicator
@@ -27,11 +30,13 @@ class SettingsCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: -VIEWS CONNECTION
     func linkViews(){
         contentView.addSubview(settingIcon)
         contentView.addSubview(settingLabel)
     }
     
+    // MARK: -FUNCTIONS
     func setSetting(setting: ProfileOption){
         settingIcon.image = setting.image
         settingIcon.tintColor = ThemesOptions.buttonBackGColor
@@ -40,6 +45,7 @@ class SettingsCell: UITableViewCell {
         settingLabel.textColor = .white
     }
     
+    // MARK: -CONFIGURATION
     func configureSettingIcon() {
         settingIcon.layer.cornerRadius = 10
         settingIcon.clipsToBounds = true
@@ -50,6 +56,7 @@ class SettingsCell: UITableViewCell {
         settingLabel.adjustsFontSizeToFitWidth = true
     }
     
+    // MARK: -LAYOUT
     func setIconConstraints(){
         settingIcon.translatesAutoresizingMaskIntoConstraints = false
         settingIcon.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
@@ -66,3 +73,4 @@ class SettingsCell: UITableViewCell {
         settingLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -12).isActive = true
     }
 }
+

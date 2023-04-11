@@ -7,14 +7,15 @@
 
 import UIKit
 import FirebaseAuth
-import Toast_Swift
+import Toast
 
-class PasswordEditor: UIViewController {
+final class PasswordEditor: UIViewController {
     
-    var textLabel: UILabel!
-    var textValue: UILabel!
+    // MARK: -UI ELEMENTS
+    private var textLabel: UILabel!
+    private var textValue: UILabel!
     
-    let contentView = {
+    private lazy var contentView = {
         let view = UIView()
         let width = CGFloat(275)
         let height = CGFloat(240)
@@ -23,18 +24,18 @@ class PasswordEditor: UIViewController {
         view.layer.cornerRadius = 10
         return view
     }()
-    let titleLabel = {
+    private lazy var titleLabel = {
         let label = UILabel()
         label.textColor = .white
         label.font = UIFont.systemFont(ofSize: 28)
         return label
     }()
-    let oldPassword = {
+    private lazy var oldPassword = {
         let textField = UITextField()
         let height = CGFloat(44)
         textField.anchor(height: height)
         textField.attributedPlaceholder = NSAttributedString(
-            string: "Old Password",
+            string: "Old Password".localized(),
             attributes: [NSAttributedString.Key.foregroundColor: UIColor.white]
         )
         textField.borderStyle = .roundedRect
@@ -43,7 +44,7 @@ class PasswordEditor: UIViewController {
         textField.backgroundColor = ThemesOptions.cellBackgColor
         return textField
     }()
-    let newPassword = {
+    private lazy var newPassword = {
         let textField = UITextField()
         let height = CGFloat(44)
         textField.anchor(height: height)
@@ -57,7 +58,7 @@ class PasswordEditor: UIViewController {
         textField.isSecureTextEntry = true
         return textField
     }()
-    let doneButton = {
+    private lazy var doneButton = {
         let button = UIButton()
         let width = CGFloat(76)
         let height = CGFloat(40)
@@ -79,7 +80,7 @@ class PasswordEditor: UIViewController {
         button.layer.cornerRadius = 20
         return button
     }()
-    let eyeButtonN = {
+    private lazy var eyeButtonN = {
         let button = UIButton()
         let size = CGFloat(36)
         button.anchor(width: size, height: 36)
@@ -92,7 +93,7 @@ class PasswordEditor: UIViewController {
         //
         return button
     }()
-    let eyeButtonO = {
+    private lazy var eyeButtonO = {
         let button = UIButton()
         let size = CGFloat(36)
         button.anchor(width: size, height: 36)
@@ -104,14 +105,8 @@ class PasswordEditor: UIViewController {
         button.backgroundColor = ThemesOptions.figureColor
         return button
     }()
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        linkViews()
-        configureView()
-        configureLayout()
-    }
     
+    // MARK: -INIT-CONTROLLER
     init(textLabel: UILabel, textValue: UILabel) {
         super.init(nibName: nil, bundle: nil)
         modalPresentationStyle = .overFullScreen
@@ -123,6 +118,15 @@ class PasswordEditor: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: -VIEW LIFECYCLE
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        linkViews()
+        configureView()
+        configureLayout()
+    }
+    
+    // MARK: -VIEWS CONNECTION
     func linkViews(){
         view.addSubview(contentView)
         contentView.addSubview(titleLabel)
@@ -134,6 +138,7 @@ class PasswordEditor: UIViewController {
         contentView.addSubview(eyeButtonO)
     }
     
+    // MARK: -CONFIGURATION
     func configureView(){
         view.backgroundColor = .black.withAlphaComponent(0.8)
         titleLabel.text = textLabel.text
@@ -143,6 +148,7 @@ class PasswordEditor: UIViewController {
         eyeButtonO.addTarget(self, action: #selector(changeEyeAppearance(sender: )), for: .touchUpInside)
     }
     
+    // MARK: -FUNCTIONS
     @objc func done(){
         showSimpleAlert()
     }
@@ -152,7 +158,6 @@ class PasswordEditor: UIViewController {
     }
     
     @objc func changeEyeAppearance(sender: UIButton){
-        
         switch sender.accessibilityIdentifier{
         case "new":
             if(newPassword.isSecureTextEntry){
@@ -211,55 +216,64 @@ class PasswordEditor: UIViewController {
         let alert = UIAlertController(title: title,
                                       message: nil,
                                       preferredStyle: UIAlertController.Style.alert)
-        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.destructive,
+        alert.addAction(UIAlertAction(title: "OK".localized(), style: UIAlertAction.Style.destructive,
                                       handler: { _ in }))
         self.present(alert, animated: true, completion: nil)
     }
     
+    // MARK: -LAYOUT
     func configureLayout(){
         contentView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         contentView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         
-        titleLabel.anchor(top: contentView.topAnchor,
-                          left: contentView.leftAnchor,
-                          right: contentView.rightAnchor,
-                          paddingTop: 16,
-                          paddingLeft: 24,
-                          paddingRight: 24)
+        titleLabel
+            .anchor(top: contentView.topAnchor,
+                    left: contentView.leftAnchor,
+                    right: contentView.rightAnchor,
+                    paddingTop: 16,
+                    paddingLeft: 24,
+                    paddingRight: 24)
         
-        oldPassword.anchor(top: titleLabel.bottomAnchor,
-                         left: titleLabel.leftAnchor,
-                         right: eyeButtonO.leftAnchor,
-                         paddingTop: 16,
-                         paddingRight: 0)
+        oldPassword
+            .anchor(top: titleLabel.bottomAnchor,
+                    left: titleLabel.leftAnchor,
+                    right: eyeButtonO.leftAnchor,
+                    paddingTop: 16,
+                    paddingRight: 0)
         
-        eyeButtonO.anchor(top: oldPassword.topAnchor,
-                          bottom: oldPassword.bottomAnchor,
-                          right: contentView.rightAnchor,
-                          paddingRight: 24)
+        eyeButtonO
+            .anchor(top: oldPassword.topAnchor,
+                    bottom: oldPassword.bottomAnchor,
+                    right: contentView.rightAnchor,
+                    paddingRight: 24)
         
-        eyeButtonN.anchor(top: newPassword.topAnchor,
-                          bottom: newPassword.bottomAnchor,
-                          right: contentView.rightAnchor,
-                          paddingRight: 24)
+        eyeButtonN
+            .anchor(top: newPassword.topAnchor,
+                    bottom: newPassword.bottomAnchor,
+                    right: contentView.rightAnchor,
+                    paddingRight: 24)
         
-        newPassword.anchor(top: oldPassword.bottomAnchor,
-                         left: titleLabel.leftAnchor,
-                         right: eyeButtonN.leftAnchor,
-                         paddingTop: 8,
-                         paddingRight: 0)
+        newPassword
+            .anchor(top: oldPassword.bottomAnchor,
+                    left: titleLabel.leftAnchor,
+                    right: eyeButtonN.leftAnchor,
+                    paddingTop: 8,
+                    paddingRight: 0)
         
-        cancelButton.anchor(top: newPassword.bottomAnchor,
-                            left: contentView.leftAnchor,
-                            bottom: contentView.bottomAnchor,
-                            paddingTop: 24,
-                            paddingLeft: 32,
-                            paddingBottom: 16)
+        cancelButton
+            .anchor(top: newPassword.bottomAnchor,
+                    left: contentView.leftAnchor,
+                    bottom: contentView.bottomAnchor,
+                    paddingTop: 24,
+                    paddingLeft: 32,
+                    paddingBottom: 16)
         
-        doneButton.anchor(top: cancelButton.topAnchor,
-                          bottom: cancelButton.bottomAnchor,
-                          right: contentView.rightAnchor,
-                          paddingLeft: 32,
-                          paddingRight: 32)
+        doneButton
+            .anchor(top: cancelButton.topAnchor,
+                    bottom: cancelButton.bottomAnchor,
+                    right: contentView.rightAnchor,
+                    paddingLeft: 32,
+                    paddingRight: 32)
     }
 }
+

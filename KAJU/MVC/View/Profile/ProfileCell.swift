@@ -7,19 +7,19 @@
 
 import UIKit
 import FirebaseAuth
-import FirebaseStorageUI
 
-class ProfileCell: UITableViewCell {
+final class ProfileCell: UITableViewCell {
     
-    let profileRef = DatabaseSingleton.storage
-    let db = DatabaseSingleton.db
+    private let profileRef = DatabaseSingleton.storage
+    private let db = DatabaseSingleton.db
     private var userEmail = Auth.auth().currentUser?.email
-    var myViewController: UIViewController!
-    static var myProfileSettings: UIViewController!
-    var alertPhotoPicker: PhotoPicker!
+    private var alertPhotoPicker: PhotoPicker!
     static var identifier = "ProfileCell"
+    static var myProfileSettings: UIViewController!
+    var myViewController: UIViewController!
     
-    let profileImage: UIImageView = {
+    // MARK: -UI ELEMENTS
+    private lazy var profileImage: UIImageView = {
         let imageView = UIImageView()
         let size = CGFloat(150)
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -30,15 +30,13 @@ class ProfileCell: UITableViewCell {
         imageView.contentMode = .scaleAspectFill
         return imageView
     }()
-    
-    let backGroundView = {
+    private lazy var backGroundView = {
         let view = UIView()
         view.layer.cornerRadius = 20
         view.backgroundColor = ThemesOptions.cellBackgColor
         return view
     }()
-    
-    let nameIcon = {
+    private lazy var nameIcon = {
         let icon = UIImageView()
         let size = CGFloat(38)
         icon.anchor(width: size, height: size)
@@ -47,7 +45,7 @@ class ProfileCell: UITableViewCell {
         icon.layer.cornerRadius = 10
         return icon
     }()
-    let genderIcon = {
+    private lazy var genderIcon = {
         let icon = UIImageView()
         let size = CGFloat(38)
         icon.anchor(width: size, height: size)
@@ -56,7 +54,7 @@ class ProfileCell: UITableViewCell {
         icon.layer.cornerRadius = 10
         return icon
     }()
-    let diateryIcon = {
+    private lazy var diateryIcon = {
         let icon = UIImageView()
         let size = CGFloat(38)
         icon.anchor(width: size, height: size)
@@ -65,7 +63,7 @@ class ProfileCell: UITableViewCell {
         icon.layer.cornerRadius = 10
         return icon
     }()
-    let editPhotoButton = {
+    private lazy var editPhotoButton = {
         let button = UIButton()
         let size = CGFloat(42)
         button.anchor(width: size, height: size)
@@ -73,35 +71,35 @@ class ProfileCell: UITableViewCell {
         button.layer.cornerRadius = CGFloat(size / 2)
         return button
     }()
-    let photoImage = {
+    private lazy var photoImage = {
         let image = UIImageView()
         image.image = UIImage(systemName: "photo.circle.fill")
         image.clipsToBounds = true
         image.tintColor = .white
         return image
     }()
-    let nameLabel = {
+    private lazy var nameLabel = {
         let label = UILabel()
         label.textColor = .black
         label.text = "Name".localized()
         label.makeLargeText(fontSize: 18)
         return label
     }()
-    let genderLabel = {
+    private lazy var genderLabel = {
         let label = UILabel()
         label.textColor = .black
         label.text = "Gender".localized()
         label.makeLargeText(fontSize: 18)
         return label
     }()
-    let dietaryLabel = {
+    private lazy var diateryLabel = {
         let label = UILabel()
         label.textColor = .black
         label.text = "Dietary".localized()
         label.makeLargeText(fontSize: 18)
         return label
     }()
-    let nameContainer = {
+    private lazy var nameContainer = {
         let container = UIView()
         let width = CGFloat(120)
         container.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMinXMinYCorner]
@@ -109,9 +107,8 @@ class ProfileCell: UITableViewCell {
         container.anchor(width: width)
         container.layer.cornerRadius = 10
         return container
-        
     }()
-    let genderContainer = {
+    private lazy var genderContainer = {
         let container = UIView()
         let width = CGFloat(120)
         container.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMinXMinYCorner]
@@ -119,9 +116,8 @@ class ProfileCell: UITableViewCell {
         container.layer.cornerRadius = 10
         container.anchor(width: width)
         return container
-        
     }()
-    let diateryContainer = {
+    private lazy var diateryContainer = {
         let container = UIView()
         let width = CGFloat(120)
         container.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMinXMinYCorner]
@@ -131,7 +127,7 @@ class ProfileCell: UITableViewCell {
         container.backgroundColor = .systemOrange.withAlphaComponent(0.8)
         return container
     }()
-    let nameValue = {
+    private lazy var nameValue = {
         let label = UILabel()
         label.textColor = .white
         label.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMaxXMaxYCorner]
@@ -141,7 +137,7 @@ class ProfileCell: UITableViewCell {
         label.makeLargeText(fontSize: 16)
         return label
     }()
-    let genderLValue = {
+    private lazy var genderLValue = {
         let label = UILabel()
         label.textColor = .white
         label.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMaxXMaxYCorner]
@@ -151,7 +147,7 @@ class ProfileCell: UITableViewCell {
         label.makeLargeText(fontSize: 16)
         return label
     }()
-    let dietaryValue = {
+    private lazy var diateryValue = {
         let label = UILabel()
         label.textColor = .white
         label.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMaxXMaxYCorner]
@@ -162,7 +158,7 @@ class ProfileCell: UITableViewCell {
         return label
     }()
     
-
+    // MARK: -INIT-CELL
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         alertPhotoPicker = PhotoPicker(imageView: profileImage)
@@ -175,6 +171,7 @@ class ProfileCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: -VIEWS CONNECTION
     func linkViews(){
         contentView.addSubview(backGroundView)
         contentView.addSubview(profileImage)
@@ -189,11 +186,12 @@ class ProfileCell: UITableViewCell {
         genderContainer.addSubview(genderLabel)
         genderContainer.addSubview(genderLValue)
         diateryContainer.addSubview(diateryIcon)
-        diateryContainer.addSubview(dietaryLabel)
-        diateryContainer.addSubview(dietaryValue)
+        diateryContainer.addSubview(diateryLabel)
+        diateryContainer.addSubview(diateryValue)
         editPhotoButton.addSubview(photoImage)
     }
     
+    // MARK: -CONFIGURATION
     func configureView(){
         editPhotoButton.addTarget(self, action: #selector(showOpt), for: .touchUpInside)
         if let email = userEmail {
@@ -202,24 +200,34 @@ class ProfileCell: UITableViewCell {
                 if let document = document, document.exists {
                     if let data = document.data() {
                         if let url = data["profileImgURL"]{
-                            self.profileImage.sd_setImage(with: self.profileRef.reference(withPath: url as! String), placeholderImage: UIImage(named: "defaultProfilePhoto"))
-                         }else{
-                             self.profileImage.image = UIImage(named: "defaultProfilePhoto")
-                         }
+                            self.profileRef.reference(withPath: url as! String).getData(maxSize: 1 * 1024 * 1024){data, error in
+                                if error != nil {
+                                    // Uh-oh, an error occurred!
+                                    self.photoImage.image = UIImage(named: "defaultProfilePhoto")
+                                } else {
+                                     let image = UIImage(data: data!)
+                                    DispatchQueue.main.async {
+                                        self.profileImage.image = image;
+                                        
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }
         }
     }
     
+    // MARK: -FUNCTIONS
     @objc func showOpt(){
         myViewController.present(alertPhotoPicker, animated: false)
     }
     
     func setProfile(model: ProfileCellModel){
         nameValue.text = model.name
-        genderLValue.text = model.sex.localized()
-        dietaryValue.text = model.dietaryType.localized()
+        genderLValue.text = model.sex
+        diateryValue.text = model.dietaryType
         ProfileCell.myProfileSettings = ProfileSettingsController(nameValue: model.name, genderValue: model.sex, diaterValue: model.dietaryType, heightValue: model.height)
         
         switch genderLValue.text{
@@ -237,12 +245,12 @@ class ProfileCell: UITableViewCell {
             return
         }
         
-        switch dietaryValue.text{
+        switch diateryValue.text{
         case "Classic".localized():
             diateryIcon.image = UIImage(named: "classicDiate")
         case "Vegetarian".localized():
             diateryIcon.image = UIImage(named: "vegetarianDiate")
-        case "Vegan":
+        case "Vegan".localized():
             diateryIcon.image = UIImage(named: "veganDiate")
         default:
             return
@@ -250,86 +258,104 @@ class ProfileCell: UITableViewCell {
     
     }
     
+    // MARK: -LAYOUT
     override func layoutSubviews() {
-        backGroundView.anchor(top: profileImage.centerYAnchor,
-                              left: contentView.leftAnchor,
-                              bottom: contentView.bottomAnchor,
-                              right: contentView.rightAnchor)
+        backGroundView
+            .anchor(top: profileImage.centerYAnchor,
+                    left: contentView.leftAnchor,
+                    bottom: contentView.bottomAnchor,
+                    right: contentView.rightAnchor)
         
-        profileImage.anchor(top: contentView.topAnchor)
+        profileImage
+            .anchor(top: contentView.topAnchor)
         
-        editPhotoButton.anchor(bottom: profileImage.bottomAnchor,
-                               right: profileImage.rightAnchor,
-                               paddingRight: 8)
+        editPhotoButton
+            .anchor(bottom: profileImage.bottomAnchor,
+                    right: profileImage.rightAnchor,
+                    paddingRight: 8)
         
-        photoImage.anchor(top: editPhotoButton.topAnchor,
-                          left: editPhotoButton.leftAnchor,
-                          bottom: editPhotoButton.bottomAnchor,
-                          right: editPhotoButton.rightAnchor,
-                          paddingTop: 8,
-                          paddingLeft: 8,
-                          paddingBottom: 8,
-                          paddingRight: 8,
-                          width: 28,
-                          height: 28)
+        photoImage
+            .anchor(top: editPhotoButton.topAnchor,
+                    left: editPhotoButton.leftAnchor,
+                    bottom: editPhotoButton.bottomAnchor,
+                    right: editPhotoButton.rightAnchor,
+                    paddingTop: 8,
+                    paddingLeft: 8,
+                    paddingBottom: 8,
+                    paddingRight: 8,
+                    width: 28,
+                    height: 28)
         
-        nameContainer.anchor(top: profileImage.bottomAnchor,
-                             left: contentView.leftAnchor,
-                             paddingTop: 16,
-                             paddingLeft: 32)
+        nameContainer
+            .anchor(top: profileImage.bottomAnchor,
+                    left: contentView.leftAnchor,
+                    paddingTop: 16,
+                    paddingLeft: 32)
         
-        nameIcon.anchor(top: nameContainer.topAnchor,
-                        left: nameContainer.leftAnchor,
-                        paddingTop: 2,
-                        paddingLeft: 2)
+        nameIcon
+            .anchor(top: nameContainer.topAnchor,
+                    left: nameContainer.leftAnchor,
+                    paddingTop: 2,
+                    paddingLeft: 2)
         
-        nameLabel.anchor(top: nameContainer.topAnchor,
-                         left: nameIcon.rightAnchor,
-                         paddingLeft: 4)
+        nameLabel
+            .anchor(top: nameContainer.topAnchor,
+                    left: nameIcon.rightAnchor,
+                    paddingLeft: 4)
         
-        nameValue.anchor(top: nameContainer.topAnchor,
-                         left: nameContainer.rightAnchor,
-                         bottom: nameContainer.bottomAnchor,
-                         right: contentView.rightAnchor,
-                         paddingLeft: 0,
-                         paddingRight: 32)
+        nameValue
+            .anchor(top: nameContainer.topAnchor,
+                    left: nameContainer.rightAnchor,
+                    bottom: nameContainer.bottomAnchor,
+                    right: contentView.rightAnchor,
+                    paddingLeft: 0,
+                    paddingRight: 32)
         
-        genderContainer.anchor(top: nameContainer.bottomAnchor,
-                               left: nameContainer.leftAnchor,
-                               paddingTop: 8)
-        genderIcon.anchor(top: genderContainer.topAnchor,
-                          left: genderContainer.leftAnchor,
-                          paddingTop: 2,
-                          paddingLeft: 2)
+        genderContainer
+            .anchor(top: nameContainer.bottomAnchor,
+                    left: nameContainer.leftAnchor,
+                    paddingTop: 8)
         
-        genderLabel.anchor(left: genderIcon.rightAnchor,
-                           paddingLeft: 4)
+        genderIcon
+            .anchor(top: genderContainer.topAnchor,
+                    left: genderContainer.leftAnchor,
+                    paddingTop: 2,
+                    paddingLeft: 2)
         
-        genderLValue.anchor(top: genderContainer.topAnchor,
-                            left: genderContainer.rightAnchor,
-                            bottom: genderContainer.bottomAnchor,
-                            right: contentView.rightAnchor,
-                            paddingRight: 32)
+        genderLabel
+            .anchor(left: genderIcon.rightAnchor,
+                    paddingLeft: 4)
         
-        diateryContainer.anchor(top: genderContainer.bottomAnchor,
-                                left: nameContainer.leftAnchor,
-                                bottom: contentView.bottomAnchor,
-                                paddingTop: 8,
-                                paddingBottom: 16)
+        genderLValue
+            .anchor(top: genderContainer.topAnchor,
+                    left: genderContainer.rightAnchor,
+                    bottom: genderContainer.bottomAnchor,
+                    right: contentView.rightAnchor,
+                    paddingRight: 32)
         
-        diateryIcon.anchor(top: diateryContainer.topAnchor,
-                           left: diateryContainer.leftAnchor,
-                           paddingTop: 2,
-                           paddingLeft: 2)
+        diateryContainer
+            .anchor(top: genderContainer.bottomAnchor,
+                    left: nameContainer.leftAnchor,
+                    bottom: contentView.bottomAnchor,
+                    paddingTop: 8,
+                    paddingBottom: 16)
         
-        dietaryLabel.anchor(left: diateryIcon.rightAnchor,
-                            paddingLeft: 4)
+        diateryIcon
+            .anchor(top: diateryContainer.topAnchor,
+                    left: diateryContainer.leftAnchor,
+                    paddingTop: 2,
+                    paddingLeft: 2)
         
-        dietaryValue.anchor(top: diateryContainer.topAnchor,
-                            left: diateryContainer.rightAnchor,
-                            bottom: diateryContainer.bottomAnchor,
-                            right: contentView.rightAnchor,
-                            paddingRight: 32)
+        diateryLabel
+            .anchor(left: diateryIcon.rightAnchor,
+                    paddingLeft: 4)
+        
+        diateryValue
+            .anchor(top: diateryContainer.topAnchor,
+                    left: diateryContainer.rightAnchor,
+                    bottom: diateryContainer.bottomAnchor,
+                    right: contentView.rightAnchor,
+                    paddingRight: 32)
         
         profileImage.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
         nameIcon.centerYAnchor.constraint(equalTo: nameContainer.centerYAnchor).isActive = true
@@ -339,8 +365,8 @@ class ProfileCell: UITableViewCell {
         genderLabel.centerYAnchor.constraint(equalTo: genderContainer.centerYAnchor).isActive = true
         genderLValue.centerYAnchor.constraint(equalTo: genderContainer.centerYAnchor).isActive = true
         diateryIcon.centerYAnchor.constraint(equalTo: diateryContainer.centerYAnchor).isActive = true
-        dietaryLabel.centerYAnchor.constraint(equalTo: diateryContainer.centerYAnchor).isActive = true
-        dietaryValue.centerYAnchor.constraint(equalTo: diateryContainer.centerYAnchor).isActive = true
+        diateryLabel.centerYAnchor.constraint(equalTo: diateryContainer.centerYAnchor).isActive = true
+        diateryValue.centerYAnchor.constraint(equalTo: diateryContainer.centerYAnchor).isActive = true
     }
 }
 
@@ -349,4 +375,5 @@ extension UILabel {
         self.font = UIFont.systemFont(ofSize: CGFloat(fontSize))
     }
 }
+
 
