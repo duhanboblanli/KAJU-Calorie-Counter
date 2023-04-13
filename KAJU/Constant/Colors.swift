@@ -13,25 +13,25 @@ import UIKit
 // For CGColor --> ThemeColors.ColorLightGreen.CGColorTyoe
 
 enum ThemeColors {
-    case ColorLightGreen
-    case ColorGreen
-    case ColorDarkGreen
-    case ColorHardDarkGreen
+    case colorLightGreen
+    case colorGreen
+    case colorDarkGreen
+    case colorHardDarkGreen
     
     //If using color with type UIcolor.
     var associatedColor: UIColor {
         switch self {
             //rgb(132, 198, 155)
-        case .ColorLightGreen:
+        case .colorLightGreen:
             return UIColor(named: "ColorLightGreen") ?? .white
             //rgb(47, 136, 134)
-        case .ColorGreen:
+        case .colorGreen:
             return UIColor(named: "ColorGreen") ?? .white
             //rgb(40, 71, 92)
-        case .ColorDarkGreen:
+        case .colorDarkGreen:
             return UIColor(named: "ColorDarkGreen") ?? .white
             //rgb(26, 47, 75)
-        case .ColorHardDarkGreen:
+        case .colorHardDarkGreen:
             return UIColor(named: "ColorHardDarkGreen") ?? .white
         }
     }
@@ -40,16 +40,16 @@ enum ThemeColors {
     var CGColorType: CGColor {
         switch self {
             //rgb(132, 198, 155)
-        case .ColorLightGreen:
+        case .colorLightGreen:
             return UIColor(named: "ColorLightGreen")?.cgColor ?? CGColor(red: 1, green: 1, blue: 1, alpha: 1)
             //rgb(47, 136, 134)
-        case .ColorGreen:
+        case .colorGreen:
             return UIColor(named: "ColorGreen")?.cgColor ?? CGColor(red: 1, green: 1, blue: 1, alpha: 1)
             //rgb(40, 71, 92)
-        case .ColorDarkGreen:
+        case .colorDarkGreen:
             return UIColor(named: "ColorDarkGreen")?.cgColor ?? CGColor(red: 1, green: 1, blue: 1, alpha: 1)
             //rgb(26, 47, 75)
-        case .ColorHardDarkGreen:
+        case .colorHardDarkGreen:
             return UIColor(named: "ColorHardDarkGreen")?.cgColor ?? CGColor(red: 1, green: 1, blue: 1, alpha: 1)
         }
     }

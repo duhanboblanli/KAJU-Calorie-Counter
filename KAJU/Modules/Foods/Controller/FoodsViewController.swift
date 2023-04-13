@@ -11,7 +11,7 @@ import FirebaseAuth
 import FirebaseFirestore
 
 
-class FoodsViewController: UIViewController, UpdateDelegate {
+final class FoodsViewController: UIViewController, UpdateDelegate {
     
     //MARK: - General Variables
     let RECENTS_LIMIT = 20
@@ -87,7 +87,7 @@ class FoodsViewController: UIViewController, UpdateDelegate {
         foodViewModel.errorDelegate = self
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "autoCompleteCell")
         searchBar.searchTextField.attributedPlaceholder = NSAttributedString(string: "Search For A Food".localized(), attributes: [NSAttributedString.Key.foregroundColor: UIColor( red: 170/255, green: 170/255, blue: 170/255, alpha: 1)])
-        LoadFoodsData(with: query)
+        loadFoodsData(with: query)
         tableView.reloadData()
     }
     
@@ -136,7 +136,7 @@ class FoodsViewController: UIViewController, UpdateDelegate {
         self.tableView.reloadData()
     }
     
-    private func LoadFoodsData(with searchQuery: String) {
+    private func loadFoodsData(with searchQuery: String) {
         setupActivityIndicator()
         foodViewModel.fetchDefaultFoodData(mealType: mealType){ [weak self] in
             self?.tableView.dataSource = self
@@ -203,10 +203,10 @@ class FoodsViewController: UIViewController, UpdateDelegate {
         frequentsBottomConstraint.constant = 4.0
         recentsBottomConstraint.constant = 3.0
         favoritesBottomConstraint.constant = 3.0
-        frequentsButtonView.backgroundColor = ThemeColors.ColorGreen.associatedColor
-        recentsButtonView.backgroundColor = ThemeColors.ColorDarkGreen.associatedColor
-        favoritesButtonView.backgroundColor = ThemeColors.ColorDarkGreen.associatedColor
-        frequentsLabel.textColor = ThemeColors.ColorGreen.associatedColor
+        frequentsButtonView.backgroundColor = ThemeColors.colorGreen.associatedColor
+        recentsButtonView.backgroundColor = ThemeColors.colorDarkGreen.associatedColor
+        favoritesButtonView.backgroundColor = ThemeColors.colorDarkGreen.associatedColor
+        frequentsLabel.textColor = ThemeColors.colorGreen.associatedColor
         recentsLabel.textColor = UIColor.lightGray
         favoritesLabel.textColor = UIColor.lightGray
         tableView.reloadData()
@@ -219,11 +219,11 @@ class FoodsViewController: UIViewController, UpdateDelegate {
         frequentsBottomConstraint.constant = 3.0
         recentsBottomConstraint.constant = 4.0
         favoritesBottomConstraint.constant = 3.0
-        frequentsButtonView.backgroundColor = ThemeColors.ColorDarkGreen.associatedColor
-        recentsButtonView.backgroundColor = ThemeColors.ColorGreen.associatedColor
-        favoritesButtonView.backgroundColor = ThemeColors.ColorDarkGreen.associatedColor
+        frequentsButtonView.backgroundColor = ThemeColors.colorDarkGreen.associatedColor
+        recentsButtonView.backgroundColor = ThemeColors.colorGreen.associatedColor
+        favoritesButtonView.backgroundColor = ThemeColors.colorDarkGreen.associatedColor
         frequentsLabel.textColor = UIColor.lightGray
-        recentsLabel.textColor = ThemeColors.ColorGreen.associatedColor
+        recentsLabel.textColor = ThemeColors.colorGreen.associatedColor
         favoritesLabel.textColor = UIColor.lightGray
         tableView.reloadData()
     }
@@ -236,12 +236,12 @@ class FoodsViewController: UIViewController, UpdateDelegate {
         recentsBottomConstraint.constant = 3.0
         frequentsBottomConstraint.constant = 3.0
         favoritesBottomConstraint.constant = 4.0
-        frequentsButtonView.backgroundColor = ThemeColors.ColorDarkGreen.associatedColor
-        recentsButtonView.backgroundColor = ThemeColors.ColorDarkGreen.associatedColor
-        favoritesButtonView.backgroundColor = ThemeColors.ColorGreen.associatedColor
+        frequentsButtonView.backgroundColor = ThemeColors.colorDarkGreen.associatedColor
+        recentsButtonView.backgroundColor = ThemeColors.colorDarkGreen.associatedColor
+        favoritesButtonView.backgroundColor = ThemeColors.colorGreen.associatedColor
         frequentsLabel.textColor = UIColor.lightGray
         recentsLabel.textColor = UIColor.lightGray
-        favoritesLabel.textColor = ThemeColors.ColorGreen.associatedColor
+        favoritesLabel.textColor = ThemeColors.colorGreen.associatedColor
         DispatchQueue.main.async { [self] in
             setupFetchRequest2()
         }
@@ -441,8 +441,6 @@ extension FoodsViewController: UITableViewDataSource, UITableViewDelegate, CellD
         return numberOfRow
     }
     
-    
-    // Belirlenen tablo cell indexinde gönderilen celli döndürür
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if favEnable && !searchEnable && foodSearchSuggestions.count == 0{
             var foodCell : FoodTableViewCell // Declare the cell
@@ -517,7 +515,7 @@ extension FoodsViewController: UITableViewDataSource, UITableViewDelegate, CellD
         }
     }
     
-    // Sola kaydırarak silme işlevi
+    // swipe to left
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
         var action = UISwipeActionsConfiguration()
@@ -549,17 +547,15 @@ extension FoodsViewController: UISearchBarDelegate, ErrorDelegate {
         }
     }
     
-    
-    // Arama için query oluşturan fonksiyon
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         if favEnable{
-            favoritesLabel.text = "SEARCH".localized()
+            favoritesLabel.text = "Search".localized()
         }
         else if recentsEnable{
-            recentsLabel.text = "SEARCH".localized()
+            recentsLabel.text = "Search".localized()
         }
         else{
-            frequentsLabel.text = "SEARCH".localized()
+            frequentsLabel.text = "Search".localized()
         }
         searchEnable = true
         searchBar.setShowsCancelButton(true, animated: true)
@@ -570,7 +566,7 @@ extension FoodsViewController: UISearchBarDelegate, ErrorDelegate {
                 foodViewModel.clearData()
                 var configuretedQuery = searchQuery.replacingOccurrences(of: ",", with: "%2C", options: .literal, range: nil)
                 configuretedQuery = searchQuery.replacingOccurrences(of: " ", with: "%2C", options: .literal, range: nil)
-                LoadFoodsData(with: configuretedQuery)
+                loadFoodsData(with: configuretedQuery)
             } else {
                 DispatchQueue.main.async {
                     self.searchBar.placeholder = "Search For A Food".localized()
@@ -582,9 +578,8 @@ extension FoodsViewController: UISearchBarDelegate, ErrorDelegate {
         searchBar.text = ""
         searchBar.endEditing(true)
     }
-    
-    
-    // Autocomplete için kullanılacak
+
+    // autocomplete
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
        
             if searchText.count > 0 {
@@ -618,13 +613,13 @@ extension FoodsViewController: UISearchBarDelegate, ErrorDelegate {
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchBar.text = ""
         if favEnable{
-            favoritesLabel.text = "FAVORITES".localized()
+            favoritesLabel.text = "Favorites".localized()
         }
         else if recentsEnable{
-            recentsLabel.text = "RECENTS".localized()
+            recentsLabel.text = "Recents".localized()
         }
         else{
-            frequentsLabel.text = "FREQUENTS".localized()
+            frequentsLabel.text = "Frequents".localized()
         }
         searchBar.resignFirstResponder()
         searchEnable = false

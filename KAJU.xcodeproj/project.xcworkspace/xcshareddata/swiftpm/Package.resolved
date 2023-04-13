@@ -19,15 +19,6 @@
       }
     },
     {
-      "identity" : "cltypinglabel",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/kadircopur/CLTypingLabel.git",
-      "state" : {
-        "branch" : "master",
-        "revision" : "9f95f28db2bd419439bcc4a09d154aef4050cfd0"
-      }
-    },
-    {
       "identity" : "countdownlabel",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/kadircopur/CountdownLabel.git",

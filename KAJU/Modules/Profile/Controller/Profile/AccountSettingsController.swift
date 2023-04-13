@@ -102,9 +102,9 @@ final class AccountSettingsController: UIViewController, UITableViewDelegate, UI
                                           style: UIAlertAction.Style.destructive,
                                           handler: {(_: UIAlertAction!) in
                 switch secondResponse {
-                case "Log Out":
+                case "Log Out".localized():
                     self.logOut()
-                case "Delete":
+                case "Delete".localized():
                     self.delete()
                 default:
                     return

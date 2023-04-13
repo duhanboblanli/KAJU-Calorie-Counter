@@ -37,7 +37,7 @@ class CalculatorViewController: UIViewController {
     var goalType = ""
     var calculatorBrain = CalculatorBrain()
     var sex = "Male".localized()
-    var ColorDarkGreen = ThemeColors.ColorGreen.associatedColor
+    var ColorDarkGreen = ThemeColors.colorGreen.associatedColor
     
     //MARK: - View Lifecycle Functions
     override func viewWillAppear(_ animated: Bool) {
@@ -123,7 +123,7 @@ class CalculatorViewController: UIViewController {
         let weight = weightSlider.value //78.791916 kg
         
         calculatorBrain.calculateBMI(BMIheight,weight)
-        calculatorBrain.calculateCalorie(sex,weight,height,age,bmh,changeCalorieAmount)
+        calculatorBrain.calculateCalorie(sex.localized(),weight,height,age,bmh,changeCalorieAmount)
         
         //Verilerin database'e kaydedilmesi
         let calorie = calculatorBrain.getCalorie()
@@ -133,13 +133,13 @@ class CalculatorViewController: UIViewController {
             db.collection("UserInformations").document("\(currentUserEmail)").setData([
                 "UserEmail": currentUserEmail,
                 "calorie": calorieInt,
-                "sex": sex,
+                "sex": sex.localized(),
                 "weight": weight,
                 "height": height,
                 "age": age,
                 "bmh": bmh,
                 "changeCalorieAmount": changeCalorieAmount,
-                "goalType": goalType,
+                "goalType": goalType.localized(),
                 "currentDay": Date().get(.minute, .day, .month, .year).day!,
                 "currentCarbs": 0.0,
                 "currentPro": 0.0,
@@ -148,6 +148,7 @@ class CalculatorViewController: UIViewController {
                 "currentLunchCal": 0,
                 "currentDinnerCal": 0,
                 "currentSnacksCal": 0,
+                "currentBurnedCal": 0,
                 "weeklyGoal": 0,
                 "calorieGoal": 0,
                 "adviced": true,

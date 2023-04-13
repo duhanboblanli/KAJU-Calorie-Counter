@@ -65,7 +65,7 @@ class InstructionsViewController: UIViewController {
     }
     
     private func setupView() {
-        view.backgroundColor = ThemeColors.ColorHardDarkGreen.associatedColor
+        view.backgroundColor = ThemeColors.colorHardDarkGreen.associatedColor
         setupInstructionButton()
         setupTableView()
     }
@@ -83,9 +83,9 @@ class InstructionsViewController: UIViewController {
         tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         tableView.bottomAnchor.constraint(equalTo: instructionsButton.topAnchor, constant: 0).isActive = true
-        tableView.backgroundColor = ThemeColors.ColorHardDarkGreen.associatedColor
+        tableView.backgroundColor = ThemeColors.colorHardDarkGreen.associatedColor
         tableView.separatorStyle = UITableViewCell.SeparatorStyle.singleLine
-        tableView.separatorColor = ThemeColors.ColorLightGreen.associatedColor
+        tableView.separatorColor = ThemeColors.colorLightGreen.associatedColor
     }
     
     private func setupInstructionButton() {
@@ -100,7 +100,7 @@ class InstructionsViewController: UIViewController {
         instructionsButton.setTitle("Visit Website for More", for: .normal)
         instructionsButton.setTitleColor(.white, for: .normal)
         instructionsButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18.5)
-        instructionsButton.backgroundColor = ThemeColors.ColorGreen.associatedColor
+        instructionsButton.backgroundColor = ThemeColors.colorGreen.associatedColor
         instructionsButton.addTarget(self, action: #selector(showInstructionsAction), for: .touchUpInside)
     }
     
@@ -153,7 +153,7 @@ extension InstructionsViewController: UITableViewDataSource, UITableViewDelegate
             cell.textLabel?.font = UIFont(name: "Verdana", size: 16)
             cell.textLabel?.text = "\(indexPath.row + 1). \(instructions[indexPath.row].instruction!)"
         }
-        cell.backgroundColor = ThemeColors.ColorHardDarkGreen.associatedColor
+        cell.backgroundColor = ThemeColors.colorHardDarkGreen.associatedColor
         cell.textLabel?.textColor = .lightGray
         cell.selectionStyle = .none
         return cell
