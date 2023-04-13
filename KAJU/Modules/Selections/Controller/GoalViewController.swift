@@ -27,7 +27,7 @@ class GoalViewController: UIViewController{
     var calorieSublabel = "According to your choices, your goal is to maintain your weight.".localized()
     var check = false
     var user = Auth.auth().currentUser
-    var ColorSelected = ThemeColors.ColorLightGreen.associatedColor.withAlphaComponent(0.3)
+    var ColorSelected = ThemeColors.colorLightGreen.associatedColor.withAlphaComponent(0.3)
     
     
     //MARK: - View Lifecycle Functions
@@ -72,33 +72,33 @@ class GoalViewController: UIViewController{
     @IBAction func loseWeightPressed(_ sender: UIButton) {
         changeCalorieAmount = -400
         calorieSublabel = "According to your choices, your goal is to lose your weight.".localized()
-        protectWeightButton.backgroundColor = ThemeColors.ColorDarkGreen.associatedColor
-        gainMuscleButton.backgroundColor = ThemeColors.ColorDarkGreen.associatedColor
+        protectWeightButton.backgroundColor = ThemeColors.colorDarkGreen.associatedColor
+        gainMuscleButton.backgroundColor = ThemeColors.colorDarkGreen.associatedColor
         loseWeightButton.backgroundColor = ColorSelected
         goalNextButton.isEnabled = true
         goalNextButton.isHighlighted = false
-        goalNextButton.backgroundColor = ThemeColors.ColorGreen.associatedColor
+        goalNextButton.backgroundColor = ThemeColors.colorGreen.associatedColor
     }
     @IBAction func protectWeightPressed(_ sender: UIButton) {
         
         changeCalorieAmount = 0
         calorieSublabel = "According to your choices, your goal is to maintain your weight.".localized()
         protectWeightButton.backgroundColor = ColorSelected
-        gainMuscleButton.backgroundColor = ThemeColors.ColorDarkGreen.associatedColor
-        loseWeightButton.backgroundColor = ThemeColors.ColorDarkGreen.associatedColor
+        gainMuscleButton.backgroundColor = ThemeColors.colorDarkGreen.associatedColor
+        loseWeightButton.backgroundColor = ThemeColors.colorDarkGreen.associatedColor
         goalNextButton.isEnabled = true
         goalNextButton.isHighlighted = false
-        goalNextButton.backgroundColor = ThemeColors.ColorGreen.associatedColor
+        goalNextButton.backgroundColor = ThemeColors.colorGreen.associatedColor
     }
     @IBAction func gainMusclePressed(_ sender: UIButton) {
         changeCalorieAmount = 400
         calorieSublabel = "According to your choices, your goal is to gain muscle.".localized()
-        protectWeightButton.backgroundColor = ThemeColors.ColorDarkGreen.associatedColor
+        protectWeightButton.backgroundColor = ThemeColors.colorDarkGreen.associatedColor
         gainMuscleButton.backgroundColor = ColorSelected
-        loseWeightButton.backgroundColor = ThemeColors.ColorDarkGreen.associatedColor
+        loseWeightButton.backgroundColor = ThemeColors.colorDarkGreen.associatedColor
         goalNextButton.isEnabled = true
         goalNextButton.isHighlighted = false
-        goalNextButton.backgroundColor = ThemeColors.ColorGreen.associatedColor
+        goalNextButton.backgroundColor = ThemeColors.colorGreen.associatedColor
     }
     
     //MARK: - Supporting Functions

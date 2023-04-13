@@ -39,7 +39,6 @@
 		13A1FD5129BF261800FF2485 /* PasswordEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A1FD5029BF261800FF2485 /* PasswordEditor.swift */; };
 		13EAE48629E4A498001D2592 /* DropDown in Frameworks */ = {isa = PBXBuildFile; productRef = 13EAE48529E4A498001D2592 /* DropDown */; };
 		13EAE48C29E4A644001D2592 /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = 13EAE48B29E4A644001D2592 /* Toast */; };
-		13EAE49229E4BB15001D2592 /* CLTypingLabel in Frameworks */ = {isa = PBXBuildFile; productRef = 13EAE49129E4BB15001D2592 /* CLTypingLabel */; };
 		13F883F329B8B10500BBCF25 /* DatabaseSingleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13F883F229B8B10500BBCF25 /* DatabaseSingleton.swift */; };
 		2D119EE529E2F88500EB6EDD /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2D119EE729E2F88500EB6EDD /* Localizable.strings */; };
 		2D3E289729DB180D002D3984 /* BaseNavController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D3E289629DB180D002D3984 /* BaseNavController.swift */; };
@@ -53,6 +52,7 @@
 		2DBCA23E29CB91A400B0653E /* BurnedCalTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DBCA23D29CB91A400B0653E /* BurnedCalTracker.swift */; };
 		2DDDE99329D6FC2900960DB9 /* UIDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DDDE99229D6FC2900960DB9 /* UIDevice.swift */; };
 		2DF9F2F8299D1B530023AB7C /* FoodTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DF9F2F7299D1B530023AB7C /* FoodTableViewCell.swift */; };
+		2DFC052B29E860D300480A8A /* General.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DFC052A29E860D300480A8A /* General.swift */; };
 		FE08EA90298F06EC008BDC6A /* CalculatorBrain.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE08EA8F298F06EC008BDC6A /* CalculatorBrain.swift */; };
 		FE08EA92298F0798008BDC6A /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE08EA91298F0798008BDC6A /* MainViewController.swift */; };
 		FE0BB00A299519690062E096 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FE0BB009299519690062E096 /* GoogleService-Info.plist */; };
@@ -133,6 +133,7 @@
 		2DBCA23D29CB91A400B0653E /* BurnedCalTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurnedCalTracker.swift; sourceTree = "<group>"; };
 		2DDDE99229D6FC2900960DB9 /* UIDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDevice.swift; sourceTree = "<group>"; };
 		2DF9F2F7299D1B530023AB7C /* FoodTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodTableViewCell.swift; sourceTree = "<group>"; };
+		2DFC052A29E860D300480A8A /* General.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = General.swift; sourceTree = "<group>"; };
 		FE08EA8F298F06EC008BDC6A /* CalculatorBrain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorBrain.swift; sourceTree = "<group>"; };
 		FE08EA91298F0798008BDC6A /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		FE0BB009299519690062E096 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -213,7 +214,6 @@
 				13EAE48629E4A498001D2592 /* DropDown in Frameworks */,
 				135435F029E497DA00A2F528 /* FirebaseMessaging in Frameworks */,
 				135435D229E497DA00A2F528 /* FirebaseAuth in Frameworks */,
-				13EAE49229E4BB15001D2592 /* CLTypingLabel in Frameworks */,
 				135435F429E497DA00A2F528 /* FirebaseRemoteConfig in Frameworks */,
 				135435CA29E497DA00A2F528 /* FirebaseAnalyticsSwift in Frameworks */,
 				135435F829E497DA00A2F528 /* FirebaseStorage in Frameworks */,
@@ -241,14 +241,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		2D119EE129E2F73000EB6EDD /* Utility */ = {
-			isa = PBXGroup;
-			children = (
-				2D119EE729E2F88500EB6EDD /* Localizable.strings */,
-			);
-			path = Utility;
-			sourceTree = "<group>";
-		};
 		FE21190D29E22D4D00408EE0 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
@@ -259,6 +251,7 @@
 				2D119EE729E2F88500EB6EDD /* Localizable.strings */,
 				FEBF1DD72986BB4600FD4760 /* Info.plist */,
 				FE0BB009299519690062E096 /* GoogleService-Info.plist */,
+				2DFC052A29E860D300480A8A /* General.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -708,7 +701,6 @@
 				135435FC29E49D8B00A2F528 /* ValueStepper */,
 				13EAE48529E4A498001D2592 /* DropDown */,
 				13EAE48B29E4A644001D2592 /* Toast */,
-				13EAE49129E4BB15001D2592 /* CLTypingLabel */,
 			);
 			productName = KAJU;
 			productReference = FEBF1DC62986BB4400FD4760 /* KAJU.app */;
@@ -746,7 +738,6 @@
 				135435FB29E49D8B00A2F528 /* XCRemoteSwiftPackageReference "ValueStepper" */,
 				13EAE48429E4A498001D2592 /* XCRemoteSwiftPackageReference "DropDown" */,
 				13EAE48A29E4A644001D2592 /* XCRemoteSwiftPackageReference "Toast-Swift" */,
-				13EAE49029E4BB15001D2592 /* XCRemoteSwiftPackageReference "CLTypingLabel" */,
 			);
 			productRefGroup = FEBF1DC72986BB4400FD4760 /* Products */;
 			projectDirPath = "";
@@ -829,6 +820,7 @@
 				FE59984E298B0EDF002CB4DF /* CalculatorViewController.swift in Sources */,
 				FEBF1DCC2986BB4400FD4760 /* SceneDelegate.swift in Sources */,
 				FEC7BF5B29A3F147001B1EC9 /* SpoonacularClient.swift in Sources */,
+				2DFC052B29E860D300480A8A /* General.swift in Sources */,
 				2D3E289729DB180D002D3984 /* BaseNavController.swift in Sources */,
 				FE0BB00C29958C320062E096 /* GoalViewController.swift in Sources */,
 				2D850C43299BFAAD00A525F0 /* FoodViewModel.swift in Sources */,
@@ -1119,14 +1111,6 @@
 				minimumVersion = 5.0.0;
 			};
 		};
-		13EAE49029E4BB15001D2592 /* XCRemoteSwiftPackageReference "CLTypingLabel" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/kadircopur/CLTypingLabel.git";
-			requirement = {
-				branch = master;
-				kind = branch;
-			};
-		};
 		FE95C260299EDF2200122BC1 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/hackiftekhar/IQKeyboardManager";
@@ -1292,11 +1276,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 13EAE48A29E4A644001D2592 /* XCRemoteSwiftPackageReference "Toast-Swift" */;
 			productName = Toast;
-		};
-		13EAE49129E4BB15001D2592 /* CLTypingLabel */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 13EAE49029E4BB15001D2592 /* XCRemoteSwiftPackageReference "CLTypingLabel" */;
-			productName = CLTypingLabel;
 		};
 		FE95C261299EDF2200122BC1 /* IQKeyboardManagerSwift */ = {
 			isa = XCSwiftPackageProductDependency;

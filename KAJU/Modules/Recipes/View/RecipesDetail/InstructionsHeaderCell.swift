@@ -13,7 +13,7 @@ class InstructionsHeaderCell: UIView {
     //MARK: - Setup UI Items
     let ingredientsLabel: UILabel = {
         let label = UILabel()
-        label.backgroundColor = ThemeColors.ColorHardDarkGreen.associatedColor
+        label.backgroundColor = ThemeColors.colorHardDarkGreen.associatedColor
         label.textColor = .white
         label.font = UIFont.boldSystemFont(ofSize: 27)
         label.textAlignment = .left
@@ -22,7 +22,7 @@ class InstructionsHeaderCell: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = ThemeColors.ColorHardDarkGreen.associatedColor
+        backgroundColor = ThemeColors.colorHardDarkGreen.associatedColor
         addSubview(ingredientsLabel)
         setupView()
     }

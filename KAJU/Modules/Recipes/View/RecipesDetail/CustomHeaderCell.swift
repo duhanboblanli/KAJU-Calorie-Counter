@@ -21,7 +21,7 @@ class CustomHeaderCell: UIView {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 27.0)
         label.textAlignment = .center
-        label.backgroundColor = ThemeColors.ColorHardDarkGreen.associatedColor.withAlphaComponent(0.4)
+        label.backgroundColor = ThemeColors.colorHardDarkGreen.associatedColor.withAlphaComponent(0.4)
         label.textColor = .white
         label.numberOfLines = 0
         label.minimumScaleFactor = 0.5
@@ -30,7 +30,7 @@ class CustomHeaderCell: UIView {
     
     let timingLabel: UILabel = {
         let label = UILabel()
-        label.backgroundColor = ThemeColors.ColorHardDarkGreen.associatedColor
+        label.backgroundColor = ThemeColors.colorHardDarkGreen.associatedColor
         label.textColor = .white
         label.font = UIFont.boldSystemFont(ofSize: 18)
         label.adjustsFontSizeToFitWidth = true
@@ -40,7 +40,7 @@ class CustomHeaderCell: UIView {
     
     let ingredientsLabel: UILabel = {
         let label = UILabel()
-        label.backgroundColor = ThemeColors.ColorHardDarkGreen.associatedColor
+        label.backgroundColor = ThemeColors.colorHardDarkGreen.associatedColor
         label.textColor = .white
         label.font = UIFont.boldSystemFont(ofSize: 18)
         label.textAlignment = .left

@@ -31,7 +31,7 @@ class ActivenessViewController: UIViewController {
     var changeCalorieAmount = 0
     var calorieSublabel = ""
     var bmh:Float = 0.0
-    var ColorSelected = ThemeColors.ColorLightGreen.associatedColor.withAlphaComponent(0.3)
+    var ColorSelected = ThemeColors.colorLightGreen.associatedColor.withAlphaComponent(0.3)
 
     //MARK: - View Lifecycle Functions
     override func viewWillAppear(_ animated: Bool) {
@@ -93,45 +93,45 @@ class ActivenessViewController: UIViewController {
     @IBAction func lightlyActivePressed(_ sender: UIButton) {
         bmh = 1.2
         lightlyActiveButton.backgroundColor = ColorSelected
-        moderatelyActiveButton.backgroundColor = ThemeColors.ColorDarkGreen.associatedColor
-        activeButton.backgroundColor = ThemeColors.ColorDarkGreen.associatedColor
-        veryActiveButton.backgroundColor = ThemeColors.ColorDarkGreen.associatedColor
+        moderatelyActiveButton.backgroundColor = ThemeColors.colorDarkGreen.associatedColor
+        activeButton.backgroundColor = ThemeColors.colorDarkGreen.associatedColor
+        veryActiveButton.backgroundColor = ThemeColors.colorDarkGreen.associatedColor
         activenessNextButton.isEnabled = true
         activenessNextButton.isHighlighted = false
-        activenessNextButton.backgroundColor = ThemeColors.ColorGreen.associatedColor
+        activenessNextButton.backgroundColor = ThemeColors.colorGreen.associatedColor
     }
     
     @IBAction func moderatelyActivePressed(_ sender: UIButton) {
         bmh = 1.3
-        lightlyActiveButton.backgroundColor = ThemeColors.ColorDarkGreen.associatedColor
+        lightlyActiveButton.backgroundColor = ThemeColors.colorDarkGreen.associatedColor
         moderatelyActiveButton.backgroundColor = ColorSelected
-        activeButton.backgroundColor = ThemeColors.ColorDarkGreen.associatedColor
-        veryActiveButton.backgroundColor = ThemeColors.ColorDarkGreen.associatedColor
+        activeButton.backgroundColor = ThemeColors.colorDarkGreen.associatedColor
+        veryActiveButton.backgroundColor = ThemeColors.colorDarkGreen.associatedColor
         activenessNextButton.isEnabled = true
         activenessNextButton.isHighlighted = false
-        activenessNextButton.backgroundColor = ThemeColors.ColorGreen.associatedColor
+        activenessNextButton.backgroundColor = ThemeColors.colorGreen.associatedColor
     }
     
     @IBAction func activePressed(_ sender: UIButton) {
         bmh = 1.4
-        lightlyActiveButton.backgroundColor = ThemeColors.ColorDarkGreen.associatedColor
-        moderatelyActiveButton.backgroundColor = ThemeColors.ColorDarkGreen.associatedColor
+        lightlyActiveButton.backgroundColor = ThemeColors.colorDarkGreen.associatedColor
+        moderatelyActiveButton.backgroundColor = ThemeColors.colorDarkGreen.associatedColor
         activeButton.backgroundColor = ColorSelected
-        veryActiveButton.backgroundColor = ThemeColors.ColorDarkGreen.associatedColor
+        veryActiveButton.backgroundColor = ThemeColors.colorDarkGreen.associatedColor
         activenessNextButton.isEnabled = true
         activenessNextButton.isHighlighted = false
-        activenessNextButton.backgroundColor = ThemeColors.ColorGreen.associatedColor
+        activenessNextButton.backgroundColor = ThemeColors.colorGreen.associatedColor
     }
     
     @IBAction func veryActivePressed(_ sender: Any) {
         bmh = 1.5
-        lightlyActiveButton.backgroundColor = ThemeColors.ColorDarkGreen.associatedColor
-        moderatelyActiveButton.backgroundColor = ThemeColors.ColorDarkGreen.associatedColor
-        activeButton.backgroundColor = ThemeColors.ColorDarkGreen.associatedColor
+        lightlyActiveButton.backgroundColor = ThemeColors.colorDarkGreen.associatedColor
+        moderatelyActiveButton.backgroundColor = ThemeColors.colorDarkGreen.associatedColor
+        activeButton.backgroundColor = ThemeColors.colorDarkGreen.associatedColor
         veryActiveButton.backgroundColor = ColorSelected
         activenessNextButton.isEnabled = true
         activenessNextButton.isHighlighted = false
-        activenessNextButton.backgroundColor = ThemeColors.ColorGreen.associatedColor
+        activenessNextButton.backgroundColor = ThemeColors.colorGreen.associatedColor
     }
 
     //MARK: - Supporting Functions

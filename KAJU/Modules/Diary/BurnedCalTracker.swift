@@ -25,7 +25,7 @@ class BurnedCalTracker: UITableViewController {
         calEditText.inputView = pickerView
         calEditText.textAlignment = .center
         pickerView.selectRow(90, inComponent: 0, animated: true)
-        let burnedTap = UITapGestureRecognizer(target: self, action: #selector(MainViewController.burnedTapFunction))
+        let burnedTap = UITapGestureRecognizer(target: self, action: #selector(MainViewController.addBurnedButtonClicked))
         addToDiaryButton.isUserInteractionEnabled = true
         addToDiaryButton.addGestureRecognizer(burnedTap)
     }

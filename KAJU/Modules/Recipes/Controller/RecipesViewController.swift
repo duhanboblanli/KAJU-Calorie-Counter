@@ -99,7 +99,7 @@ class RecipesViewController: UIViewController, UISearchBarDelegate {
         if let searchText = sender.text {
             if searchText.count >= 0 {
                 discoverTableView.separatorStyle = UITableViewCell.SeparatorStyle.singleLine
-                discoverTableView.separatorColor = ThemeColors.ColorLightGreen.associatedColor
+                discoverTableView.separatorColor = ThemeColors.colorLightGreen.associatedColor
                 scrollTopButton.isHidden = true
                 currentSearchTask?.cancel()
                 currentSearchTask = SpoonacularClient.autoCompleteRecipeSearch(query: searchText) { (recipeSearchSuggestions, error) in
@@ -183,9 +183,9 @@ class RecipesViewController: UIViewController, UISearchBarDelegate {
         secondView.isHidden = true
         firstBottomConstraint.constant = 4.0
         secondBottomConstraint.constant = 3.0
-        firstButtonView.backgroundColor = ThemeColors.ColorGreen.associatedColor
-        secondButtonView.backgroundColor = ThemeColors.ColorDarkGreen.associatedColor
-        discoverLabel.textColor = ThemeColors.ColorGreen.associatedColor
+        firstButtonView.backgroundColor = ThemeColors.colorGreen.associatedColor
+        secondButtonView.backgroundColor = ThemeColors.colorDarkGreen.associatedColor
+        discoverLabel.textColor = ThemeColors.colorGreen.associatedColor
         favoritesLabel.textColor = UIColor.lightGray
     }
     
@@ -194,10 +194,10 @@ class RecipesViewController: UIViewController, UISearchBarDelegate {
         secondView.isHidden = false
         firstBottomConstraint.constant = 3.0
         secondBottomConstraint.constant = 4.0
-        firstButtonView.backgroundColor = ThemeColors.ColorDarkGreen.associatedColor
-        secondButtonView.backgroundColor = ThemeColors.ColorGreen.associatedColor
+        firstButtonView.backgroundColor = ThemeColors.colorDarkGreen.associatedColor
+        secondButtonView.backgroundColor = ThemeColors.colorGreen.associatedColor
         discoverLabel.textColor = UIColor.lightGray
-        favoritesLabel.textColor = ThemeColors.ColorGreen.associatedColor
+        favoritesLabel.textColor = ThemeColors.colorGreen.associatedColor
         DispatchQueue.main.async { [self] in
             setupFetchRequest()
         }
