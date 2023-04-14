@@ -2867,6 +2867,9 @@
                                                         </userDefinedRuntimeAttribute>
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="clipsToBounds" value="YES"/>
                                                     </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <action selector="addToDiaryButtonClicked:" destination="M9j-Gz-vAD" eventType="touchUpInside" id="0bd-Ev-sNc"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <color key="backgroundColor" red="0.1019607843" green="0.1843137255" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -2889,7 +2892,6 @@
                     </tableView>
                     <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="KbK-xn-L6K"/>
                     <connections>
-                        <outlet property="addToDiaryButton" destination="tnV-j3-uc8" id="urv-14-JI1"/>
                         <outlet property="calEditText" destination="9Xg-CZ-qej" id="wI4-ee-0JX"/>
                     </connections>
                 </tableViewController>
@@ -3126,9 +3128,6 @@
         </scene>
     </scenes>
     <designables>
-        <designable name="TWC-Vj-qzP">
-            <size key="intrinsicContentSize" width="106" height="54"/>
-        </designable>
         <designable name="xiS-Vn-AJh"/>
     </designables>
     <inferredMetricsTieBreakers>

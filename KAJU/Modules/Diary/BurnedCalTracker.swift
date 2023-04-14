@@ -15,7 +15,6 @@ class BurnedCalTracker: UITableViewController {
     let db = Firestore.firestore()
     
     @IBOutlet weak var calEditText: UITextField!
-    @IBOutlet weak var addToDiaryButton: UIButton!
     @IBOutlet weak var calPicker: UIPickerView!
     let calOptions = Array(10...1000)
     var pickerView = UIPickerView()
@@ -25,13 +24,9 @@ class BurnedCalTracker: UITableViewController {
         calEditText.inputView = pickerView
         calEditText.textAlignment = .center
         pickerView.selectRow(90, inComponent: 0, animated: true)
-        let burnedTap = UITapGestureRecognizer(target: self, action: #selector(MainViewController.addBurnedButtonClicked))
-        addToDiaryButton.isUserInteractionEnabled = true
-        addToDiaryButton.addGestureRecognizer(burnedTap)
     }
-    @objc
-    func burnedTapFunction(sender:UITapGestureRecognizer) {
-        //Verilerin updatelenmesi(increment işlemi)
+    @IBAction func addToDiaryButtonClicked(_ sender: Any) {
+        // update burned cal
         let cal = Int(calEditText.text!)
         if let currentUserEmail = Auth.auth().currentUser?.email {
              db.collection("UserInformations").document("\(currentUserEmail)").updateData([
@@ -55,6 +50,7 @@ class BurnedCalTracker: UITableViewController {
         view.window!.layer.add(transition, forKey: kCATransition)
         self.navigationController?.pushViewController(nextViewController, animated: false)
     }
+    
     // MARK: - Table view data source
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
