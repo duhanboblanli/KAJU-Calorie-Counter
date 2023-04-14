@@ -7,6 +7,7 @@
 
 import UIKit
 import FirebaseAuth
+import ShimmerSwift
 
 final class ProfileCell: UITableViewCell {
     
@@ -25,7 +26,6 @@ final class ProfileCell: UITableViewCell {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.layer.cornerRadius = CGFloat(size / 2)
         imageView.layer.borderWidth = 3
-        imageView.anchor(width: size, height: size)
         imageView.clipsToBounds = true
         imageView.contentMode = .scaleAspectFill
         return imageView
@@ -157,7 +157,15 @@ final class ProfileCell: UITableViewCell {
         label.makeLargeText(fontSize: 16)
         return label
     }()
-    
+    private lazy var shimmerView = {
+        let shimmer = ShimmeringView()
+        let size = CGFloat(150)
+        shimmer.anchor(width: size, height: size)
+        shimmer.layer.cornerRadius = CGFloat(size / 2)
+        shimmer.backgroundColor = .systemGray.withAlphaComponent(0.2)
+        return shimmer
+    }()
+
     // MARK: -INIT-CELL
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -175,6 +183,7 @@ final class ProfileCell: UITableViewCell {
     func linkViews(){
         contentView.addSubview(backGroundView)
         contentView.addSubview(profileImage)
+        contentView.addSubview(shimmerView)
         contentView.addSubview(editPhotoButton)
         contentView.addSubview(nameContainer)
         contentView.addSubview(genderContainer)
@@ -193,6 +202,17 @@ final class ProfileCell: UITableViewCell {
     
     // MARK: -CONFIGURATION
     func configureView(){
+        
+        // Setup the view you want shimmered
+        profileImage.bounds = shimmerView.bounds
+
+        // Add the view you want shimmered to the `shimmerView`
+        shimmerView.contentView = profileImage
+        shimmerView.shimmerAnimationOpacity = 0.1
+        
+        // Start shimmering
+        self.shimmerView.isShimmering = true
+        
         editPhotoButton.addTarget(self, action: #selector(showOpt), for: .touchUpInside)
         if let email = userEmail {
             let docRef = db.collection("UserInformations").document("\(email)")
@@ -200,18 +220,26 @@ final class ProfileCell: UITableViewCell {
                 if let document = document, document.exists {
                     if let data = document.data() {
                         if let url = data["profileImgURL"]{
+                            
                             self.profileRef.reference(withPath: url as! String).getData(maxSize: 1 * 1024 * 1024){data, error in
                                 if error != nil {
                                     // Uh-oh, an error occurred!
-                                    self.photoImage.image = UIImage(named: "defaultProfilePhoto")
+                                    debugPrint("Image couldn't retrieved")
                                 } else {
-                                     let image = UIImage(data: data!)
+                                    // To stop shimmering.
+                                    self.shimmerView.isShimmering = false
+                                    let image = UIImage(data: data!)
+                                    
                                     DispatchQueue.main.async {
                                         self.profileImage.image = image;
-                                        
                                     }
                                 }
                             }
+                        }
+                        else {
+                            // To stop shimmering.
+                            self.shimmerView.isShimmering = false
+                            self.profileImage.image = UIImage(named: "defaultProfilePhoto")
                         }
                     }
                 }
@@ -261,17 +289,17 @@ final class ProfileCell: UITableViewCell {
     // MARK: -LAYOUT
     override func layoutSubviews() {
         backGroundView
-            .anchor(top: profileImage.centerYAnchor,
+            .anchor(top: shimmerView.centerYAnchor,
                     left: contentView.leftAnchor,
                     bottom: contentView.bottomAnchor,
                     right: contentView.rightAnchor)
         
-        profileImage
+        shimmerView
             .anchor(top: contentView.topAnchor)
         
         editPhotoButton
-            .anchor(bottom: profileImage.bottomAnchor,
-                    right: profileImage.rightAnchor,
+            .anchor(bottom: shimmerView.bottomAnchor,
+                    right: shimmerView.rightAnchor,
                     paddingRight: 8)
         
         photoImage
@@ -287,7 +315,7 @@ final class ProfileCell: UITableViewCell {
                     height: 28)
         
         nameContainer
-            .anchor(top: profileImage.bottomAnchor,
+            .anchor(top: shimmerView.bottomAnchor,
                     left: contentView.leftAnchor,
                     paddingTop: 16,
                     paddingLeft: 32)
@@ -357,7 +385,7 @@ final class ProfileCell: UITableViewCell {
                     right: contentView.rightAnchor,
                     paddingRight: 32)
         
-        profileImage.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
+        shimmerView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
         nameIcon.centerYAnchor.constraint(equalTo: nameContainer.centerYAnchor).isActive = true
         nameLabel.centerYAnchor.constraint(equalTo: nameContainer.centerYAnchor).isActive = true
         nameValue.centerYAnchor.constraint(equalTo: nameContainer.centerYAnchor).isActive = true

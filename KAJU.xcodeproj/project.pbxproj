@@ -36,6 +36,7 @@
 		135435F829E497DA00A2F528 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 135435F729E497DA00A2F528 /* FirebaseStorage */; };
 		135435FA29E497DA00A2F528 /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 135435F929E497DA00A2F528 /* FirebaseStorageCombine-Community */; };
 		135435FD29E49D8B00A2F528 /* ValueStepper in Frameworks */ = {isa = PBXBuildFile; productRef = 135435FC29E49D8B00A2F528 /* ValueStepper */; };
+		1376EE6729E96DF6008E0108 /* ShimmerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 1376EE6629E96DF6008E0108 /* ShimmerSwift */; };
 		13A1FD5129BF261800FF2485 /* PasswordEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A1FD5029BF261800FF2485 /* PasswordEditor.swift */; };
 		13EAE48629E4A498001D2592 /* DropDown in Frameworks */ = {isa = PBXBuildFile; productRef = 13EAE48529E4A498001D2592 /* DropDown */; };
 		13EAE48C29E4A644001D2592 /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = 13EAE48B29E4A644001D2592 /* Toast */; };
@@ -219,6 +220,7 @@
 				135435F829E497DA00A2F528 /* FirebaseStorage in Frameworks */,
 				135435F229E497DA00A2F528 /* FirebasePerformance in Frameworks */,
 				135435DE29E497DA00A2F528 /* FirebaseFirestore in Frameworks */,
+				1376EE6729E96DF6008E0108 /* ShimmerSwift in Frameworks */,
 				135435E829E497DA00A2F528 /* FirebaseInAppMessaging-Beta in Frameworks */,
 				135435C329E4961400A2F528 /* CountdownLabel in Frameworks */,
 				135435C829E497DA00A2F528 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */,
@@ -701,6 +703,7 @@
 				135435FC29E49D8B00A2F528 /* ValueStepper */,
 				13EAE48529E4A498001D2592 /* DropDown */,
 				13EAE48B29E4A644001D2592 /* Toast */,
+				1376EE6629E96DF6008E0108 /* ShimmerSwift */,
 			);
 			productName = KAJU;
 			productReference = FEBF1DC62986BB4400FD4760 /* KAJU.app */;
@@ -738,6 +741,7 @@
 				135435FB29E49D8B00A2F528 /* XCRemoteSwiftPackageReference "ValueStepper" */,
 				13EAE48429E4A498001D2592 /* XCRemoteSwiftPackageReference "DropDown" */,
 				13EAE48A29E4A644001D2592 /* XCRemoteSwiftPackageReference "Toast-Swift" */,
+				1376EE6529E96DF6008E0108 /* XCRemoteSwiftPackageReference "ShimmerSwift" */,
 			);
 			productRefGroup = FEBF1DC72986BB4400FD4760 /* Products */;
 			projectDirPath = "";
@@ -1095,6 +1099,14 @@
 				kind = branch;
 			};
 		};
+		1376EE6529E96DF6008E0108 /* XCRemoteSwiftPackageReference "ShimmerSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/BeauNouvelle/ShimmerSwift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 		13EAE48429E4A498001D2592 /* XCRemoteSwiftPackageReference "DropDown" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/AssistoLab/DropDown.git";
@@ -1266,6 +1278,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 135435FB29E49D8B00A2F528 /* XCRemoteSwiftPackageReference "ValueStepper" */;
 			productName = ValueStepper;
+		};
+		1376EE6629E96DF6008E0108 /* ShimmerSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1376EE6529E96DF6008E0108 /* XCRemoteSwiftPackageReference "ShimmerSwift" */;
+			productName = ShimmerSwift;
 		};
 		13EAE48529E4A498001D2592 /* DropDown */ = {
 			isa = XCSwiftPackageProductDependency;
