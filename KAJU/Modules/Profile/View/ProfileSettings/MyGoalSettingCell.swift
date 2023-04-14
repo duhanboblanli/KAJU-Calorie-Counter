@@ -98,7 +98,7 @@ final class MyGoalSettingCell: UITableViewCell {
                 default: print("error happened while choosing goal type")
                 }
                 updateDBValue(key: "changeCalorieAmount", value: changeCaloryAmount)
-                updateDBValue(key: "goalType", value: item)
+                updateDBValue(key: "goalType", value: item.localized())
             }
         case "Starting Weight".localized():
             myViewController.present(Editor(textLabel: pSettingLabel, textValue: pValueLabel), animated: true)
@@ -124,7 +124,7 @@ final class MyGoalSettingCell: UITableViewCell {
                 default: print("error happened")
                 }
                 updateDBValue(key: "bmh", value: bmh)
-                updateDBValue(key: "activeness", value: item)
+                updateDBValue(key: "activeness", value: item.localized())
             }
             
         case "Weekly Goal".localized():
@@ -140,7 +140,7 @@ final class MyGoalSettingCell: UITableViewCell {
                     updateDBValue(key: "adviced", value: true)
                 case "Manuel".localized():
                     myViewController.present(Editor(textLabel: pSettingLabel, textValue: pValueLabel, zero: true), animated: true)
-                default: print("error happened")
+                default: debugPrint("error happened")
                 }
             }
         default:
@@ -193,4 +193,5 @@ extension UIView {
         }
     }
 }
+
 

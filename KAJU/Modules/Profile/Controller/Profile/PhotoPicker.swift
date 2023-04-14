@@ -19,33 +19,33 @@ final class PhotoPicker: UIViewController{
     // MARK: -UI ELEMENTS
     private var imageView: UIImageView!
     
-    private lazy var backGroundView = {
+    private var backGroundView = {
         let button = UIButton()
         button.backgroundColor = .black
         return button
         
     }()
-    private lazy var containerView = {
+    private var containerView = {
         let view = UIView()
         view.backgroundColor = ThemesOptions.backGroundColor
         view.layer.cornerRadius = 10
         return view
     }()
-    private lazy var galleryButton = {
+    private var galleryButton = {
         let button = UIButton()
         button.backgroundColor = ThemesOptions.cellBackgColor
         button.layer.cornerRadius = 10
         button.accessibilityIdentifier = "Gallery"
         return button
     }()
-    private lazy var cameraButton = {
+    private var cameraButton = {
         let button = UIButton()
         button.backgroundColor = ThemesOptions.cellBackgColor
         button.layer.cornerRadius = 10
         button.accessibilityIdentifier = "Camera"
         return button
     }()
-    private lazy var galleryIcon = {
+    private var galleryIcon = {
         let imageView = UIImageView()
         let width = CGFloat(28)
         let height = CGFloat(24)
@@ -55,7 +55,7 @@ final class PhotoPicker: UIViewController{
         imageView.image = UIImage(systemName: "photo.on.rectangle.angled")
         return imageView
     }()
-    private lazy var cameraIcon = {
+    private var cameraIcon = {
         let imageView = UIImageView()
         let width = CGFloat(28)
         let height = CGFloat(24)
@@ -65,32 +65,32 @@ final class PhotoPicker: UIViewController{
         imageView.image = UIImage(systemName: "camera")
         return imageView
     }()
-    private lazy var defaultPersonImage = {
+    private var defaultPersonImage = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "defaultProfilePhoto")
         imageView.tintColor = .systemGray
         return imageView
     }()
-    private lazy var galleryLabel = {
+    private var galleryLabel = {
         let label = UILabel()
         label.textColor = .white
         label.text = "Gallery".localized()
         return label
     }()
-    private lazy var cameraLabel = {
+    private var cameraLabel = {
         let label = UILabel()
         label.textColor = .white
         label.text = "Camera".localized()
         return label
     }()
-    private lazy var deletePPButton = {
+    private var deletePPButton = {
         let button = UIButton()
         button.setImage(UIImage(systemName: "trash"), for: .normal)
         button.tintColor = ThemesOptions.buttonBackGColor
         button.accessibilityIdentifier = "Delete"
         return button
     }()
-    private lazy var imagePickerController = {
+    private var imagePickerController = {
         let imagePickerController = UIImagePickerController()
         imagePickerController.allowsEditing = true
         return imagePickerController

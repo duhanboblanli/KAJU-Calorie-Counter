@@ -114,20 +114,23 @@ final class AccountSettingsController: UIViewController, UITableViewDelegate, UI
     }
     
     func delete(){
-        let user = Auth.auth().currentUser
-        
-        user?.delete { error in
-          if let error = error {
-            // An error happened.
-              print(error)
-          } else {
-            // Account deleted.
-              let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-              let rootViewController: UIViewController = storyboard.instantiateViewController(withIdentifier: "nRoot")
-              self.view.window?.rootViewController = rootViewController
-              self.navigationController?.popToRootViewController(animated: true)
-          }
-        }
+        self.user!.delete { error in
+            if let error = error {
+                let alert = UIAlertController(title: "Deletion unsuccessfull!".localized(), message: "Sorry for inconvenience situation. Deletion of an account is sensitive process. You should be re-signed into your account to perform this process.".localized(), preferredStyle: UIAlertController.Style.alert)
+                alert.addAction(UIAlertAction(title: "Okay".localized(), style: UIAlertAction.Style.default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+                print(error)
+            } else {
+                // Account deleted.
+                print("Account deleted.".localized())
+                self.deleteAllOnlineData()
+                self.deleteAllOfflineData()
+                let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+                let rootViewController: UIViewController = storyboard.instantiateViewController(withIdentifier: "nRoot")
+                self.view.window?.rootViewController = rootViewController
+                self.navigationController?.popToRootViewController(animated: true)
+            }
+    }
     }
     
     func logOut(){
@@ -240,6 +243,7 @@ extension AccountSettingsController {
     func fetcData() -> [SettingModel]{
         let accountSetting1 = SettingModel(textLabel: "Email Adress".localized(), textValue: userEmail ?? "")
         let accountSetting2 = SettingModel(textLabel: "Password".localized(), textValue: userPassword ?? "")
+        
         return [accountSetting1, accountSetting2]
     }
 }

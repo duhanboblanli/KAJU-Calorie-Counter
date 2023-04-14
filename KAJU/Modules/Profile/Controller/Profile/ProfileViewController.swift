@@ -47,6 +47,7 @@ final class ProfileViewController: UIViewController, UITableViewDelegate, UITabl
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "gearshape.fill"), style: .plain, target: self, action: #selector(settingsButtonTapped))
         navigationItem.rightBarButtonItem?.tintColor = .white
         navigationItem.largeTitleDisplayMode = .never
+        navigationItem.title = navigationItem.title?.localized()
     }
     
     func configureTableView(){
@@ -82,17 +83,21 @@ final class ProfileViewController: UIViewController, UITableViewDelegate, UITabl
     func checkProfileSettingsUpdate (data: Dictionary<String, Any>){
         if let name = data["name"]{self.profile?.name = name as? String ?? ""}
         if let height = data["height"]{self.profile?.height = "\(height)"}
-        if let diateryType = data["diateryType"]{self.profile?.dietaryType = diateryType as? String ?? ""}
-        if let sex = data["sex"]{self.profile?.sex = sex as? String ?? ""}
+        let diateryType: String = data["diateryType"] as? String ?? "Classic"
+        profile?.dietaryType = diateryType.localized()
+        let sex: String = data["sex"] as? String ?? "Male"
+        profile?.sex = sex.localized()
     }
     
     func checkGoalSetttingsUpdate(data: Dictionary<String, Any>){
         updateCalorie(data: data)
-        if let goalType = data["goalType"]{self.goal?.goalType = goalType as? String ?? ""}
+        let goalType: String = data["goalType"] as? String ?? "Maintain Weight"
+        goal?.goalType = goalType.localized()
         if let manuelCalorie = data["calorieGoal"]{self.goal?.manuelCalorieGoal = "\(manuelCalorie)"}
         if let advicedCalorie = data["calorie"]{self.goal?.advicedCalorieGoal = "\(advicedCalorie)"}
         if let isAdviced = data["adviced"]{self.goal?.isAdviced = isAdviced as? Bool ?? true}
-        if let activeness = data["activeness"]{self.goal?.activeness = activeness as? String ?? "Moderate"}
+        let activeness: String = data["activeness"] as? String ?? "Moderate"
+        goal?.activeness = activeness.localized()
         if let weight = data["weight"]{
             let weightWrapped = weight as? Double ?? 0
             self.goal?.weight = String(format: "%.2f", weightWrapped)
@@ -200,16 +205,17 @@ extension ProfileViewController {
                            let caloryGoal = data["calorieGoal"],
                            let height = data["height"]{
                             let weightWrapped = weight as? Double ?? 0
+                            let dietaryType: String = data["diateryType"] as? String ?? "Classic"
                             var activeness: String = "Moderate".localized()
                             switch bmh as? Float{
-                            case 1.2: activeness = "Low".localized()
-                            case 1.3: activeness = "Moderate".localized()
-                            case 1.4: activeness = "High".localized()
-                            case 1.5: activeness = "Very High".localized()
+                            case 1.2: activeness = "Low"
+                            case 1.3: activeness = "Moderate"
+                            case 1.4: activeness = "High"
+                            case 1.5: activeness = "Very High"
                             default: debugPrint("Error happened while choosing activeness")
                             }
-                            self.goal = GoalCellModel(goalType: "\(goalType)", weight: String(format: "%.2f", weightWrapped), activeness: "\(activeness)", goalWeight: "\(goalWeight)" , weeklyGoal: "\(weeklyGoal)", manuelCalorieGoal: "\(caloryGoal)", advicedCalorieGoal: "\(calorie)", isAdviced: isAdviced as! Bool)
-                            self.profile = ProfileCellModel(profileImage: UIImage(named: "defaultProfilePhoto") ?? UIImage(), name: data["name"] as? String ?? "Enter a name", sex: "\(sex)", dietaryType: data["diateryType"] as? String ?? "Classic", height: "\(height)")
+                            self.goal = GoalCellModel(goalType: "\(goalType)".localized(), weight: String(format: "%.2f", weightWrapped), activeness: "\(activeness)".localized(), goalWeight: "\(goalWeight)" , weeklyGoal: "\(weeklyGoal)", manuelCalorieGoal: "\(caloryGoal)", advicedCalorieGoal: "\(calorie)", isAdviced: isAdviced as! Bool)
+                            self.profile = ProfileCellModel(profileImage: UIImage(named: "defaultProfilePhoto") ?? UIImage(), name: data["name"] as? String ?? "Enter a name".localized(), sex: "\(sex)".localized(), dietaryType: dietaryType.localized(), height: "\(height)")
                             self.table.reloadData()
                         }
                     }

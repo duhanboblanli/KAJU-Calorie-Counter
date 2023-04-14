@@ -26,44 +26,50 @@ final class MyGoalCell: UITableViewCell {
         let label = UILabel()
         label.text = "Goal:".localized()
         label.makeLargeText(fontSize: 18)
+        label.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         label.textColor = .white
         return label
     }()
     private lazy var goalValue = {
         let label = UILabel()
         label.textColor = .systemGray
+        label.setContentHuggingPriority(.defaultLow, for: .horizontal)
         return label
     }()
     private lazy var weight = {
         let label = UILabel()
         label.text = "Weight:".localized()
         label.makeLargeText(fontSize: 18)
+        label.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         label.textColor = .white
         return label
     }()
     private lazy var weightValue = {
         let label = UILabel()
         label.textColor = .systemGray
+        label.setContentHuggingPriority(.defaultLow, for: .horizontal)
         return label
     }()
     private lazy var calories = {
         let label = UILabel()
         label.text = "Calories:".localized()
         label.makeLargeText(fontSize: 18)
+        label.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         label.textColor = .white
         return label
     }()
     private lazy var caloriesValue = {
         let label = UILabel()
         label.textColor = .systemGray
+        label.setContentHuggingPriority(.defaultLow, for: .horizontal)
         return label
     }()
     private lazy var editButton = {
         let button = UIButton()
-        button.setTitle("EDIT", for: .normal)
-        button.titleLabel?.font = .boldSystemFont(ofSize: 16)
+        button.setTitle("EDIT".localized(), for: .normal)
         button.layer.cornerRadius = 10
         button.backgroundColor = ThemesOptions.buttonBackGColor
+        button.titleLabel?.adjustsFontSizeToFitWidth = true
         return button
     }()
     
@@ -139,28 +145,26 @@ final class MyGoalCell: UITableViewCell {
             .anchor(top: title.bottomAnchor,
                     left: title.leftAnchor,
                     paddingTop: 16,
-                    paddingLeft: 0,
-                    width: 65)
+                    paddingLeft: 4)
         
         goalValue
             .anchor(top: goal.topAnchor,
                     left: goal.rightAnchor,
                     right: contentView.rightAnchor,
-                    paddingLeft: 0,
+                    paddingLeft: 8,
                     paddingRight: 8)
         
         weight
             .anchor(top: goal.bottomAnchor,
                     left: title.leftAnchor,
                     paddingTop: 8,
-                    paddingLeft: 0,
-                    width: 65)
+                    paddingLeft: 4)
         
         weightValue
             .anchor(top: weight.topAnchor,
                     left: weight.rightAnchor,
                     right: goalValue.rightAnchor,
-                    paddingLeft: 0,
+                    paddingLeft: 8,
                     paddingRight: 8)
         
         calories
@@ -168,15 +172,15 @@ final class MyGoalCell: UITableViewCell {
                     left: title.leftAnchor,
                     bottom: contentView.bottomAnchor,
                     paddingTop: 8,
-                    paddingBottom: 16,
-                    width: 65)
+                    paddingLeft: 4,
+                    paddingBottom: 16)
         
         caloriesValue
             .anchor(top: calories.topAnchor,
                     left: calories.rightAnchor,
                     bottom: calories.bottomAnchor,
                     right: goalValue.rightAnchor,
-                    paddingLeft: 0)
+                    paddingLeft: 8)
     }
 }
 

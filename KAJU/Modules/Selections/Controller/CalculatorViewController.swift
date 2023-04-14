@@ -36,7 +36,7 @@ class CalculatorViewController: UIViewController {
     var changeCalorieAmount = 0
     var goalType = ""
     var calculatorBrain = CalculatorBrain()
-    var sex = "Male".localized()
+    var sex = "Male"
     var ColorDarkGreen = ThemeColors.colorGreen.associatedColor
     
     //MARK: - View Lifecycle Functions
@@ -69,12 +69,12 @@ class CalculatorViewController: UIViewController {
         calculateButton.isEnabled = false
         calculateButton.isHighlighted = true
         if changeCalorieAmount == 400 {
-            goalType = "Build Muscle".localized()
+            goalType = "Build Muscle"
         } else if changeCalorieAmount == -400 {
-            goalType = "Lose Weight".localized()
+            goalType = "Lose Weight"
         }
         else {
-            goalType = "Maintain Weight".localized()
+            goalType = "Maintain Weight"
         }
     }
     
@@ -122,6 +122,7 @@ class CalculatorViewController: UIViewController {
         height.round()
         let weight = weightSlider.value //78.791916 kg
         
+        
         calculatorBrain.calculateBMI(BMIheight,weight)
         calculatorBrain.calculateCalorie(sex.localized(),weight,height,age,bmh,changeCalorieAmount)
         
@@ -133,13 +134,13 @@ class CalculatorViewController: UIViewController {
             db.collection("UserInformations").document("\(currentUserEmail)").setData([
                 "UserEmail": currentUserEmail,
                 "calorie": calorieInt,
-                "sex": sex.localized(),
+                "sex": sex,
                 "weight": weight,
                 "height": height,
                 "age": age,
                 "bmh": bmh,
                 "changeCalorieAmount": changeCalorieAmount,
-                "goalType": goalType.localized(),
+                "goalType": goalType,
                 "currentDay": Date().get(.minute, .day, .month, .year).day!,
                 "currentCarbs": 0.0,
                 "currentPro": 0.0,
