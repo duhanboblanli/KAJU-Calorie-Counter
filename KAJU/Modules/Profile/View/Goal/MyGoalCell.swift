@@ -68,6 +68,7 @@ final class MyGoalCell: UITableViewCell {
         let button = UIButton()
         button.setTitle("EDIT".localized(), for: .normal)
         button.layer.cornerRadius = 10
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
         button.backgroundColor = ThemesOptions.buttonBackGColor
         button.titleLabel?.adjustsFontSizeToFitWidth = true
         return button
@@ -136,10 +137,9 @@ final class MyGoalCell: UITableViewCell {
             .anchor(top: title.topAnchor,
                     bottom: title.bottomAnchor,
                     right: contentView.rightAnchor,
-                    paddingRight: 16)
-        
-        editButton
-            .widthAnchor.constraint(equalToConstant: 64).isActive = true
+                    paddingRight: 16,
+                    width: 76,
+                    height: 32)
         
         goal
             .anchor(top: title.bottomAnchor,
