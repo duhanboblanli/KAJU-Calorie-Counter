@@ -4,7 +4,7 @@
 
 
 
-KAJU is an app used to calculate BMI and daily calorie needs, tracks user calories, and offers over 600.000 foods and recipes.
+KAJU is an app used to calculate BMI and daily calorie needs, tracks user calories, and offers over 600,000 foods and recipes.
 
 ![Badge](https://img.shields.io/badge/Recipe-Application-yellowgreen)
 ![Badge](https://img.shields.io/badge/Nutrition-App-Pink)
@@ -18,7 +18,7 @@ KAJU is an app used to calculate BMI and daily calorie needs, tracks user calori
 
 # Introduction ⚒  
 
-KAJU: Calorie Counter & Recipes, basically KAJU helps the user to find 600.000+ recipes and foods with help of one key ingredient. 
+KAJU: Calorie Counter & Recipes, basically KAJU helps the user to find 600,000+ recipes and foods with help of one key ingredient. 
 Also, user can get recipes and foods with a single search. User can get the nutritional content and instructions for the food he will cook. 
 Our motive for developing this app was to help people who are pretty confused while cooking and also want to keep track of how many of their calories come from it. 
 We hope it will be useful to people who fight against unhealthy diets and waste a lot of time finding healthy recipes.
